@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="aflr_python_client",
+    name="aflr",
     version="0.1.0",
     author="Antonio Tripiana",
     author_email="antonio@aflorithmic.ai",
