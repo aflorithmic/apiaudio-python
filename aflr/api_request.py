@@ -11,7 +11,7 @@ class APIRequest:
         if self.api_key == None or self.api_key == "your-key":
             self.api_key = os.environ.get("aflr_key", None)
         if self.api_key == None or len(self.api_key) < 30:
-            raise ValueError("Please specify a valid api_key.")
+            raise ValueError("Please specify a valid api_key or create one here:\nhttps://console.api.audio")
         if not isinstance(self.api_key, str):
             raise TypeError("api_key must be of type string.")
 
