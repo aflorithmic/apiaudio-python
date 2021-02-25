@@ -16,9 +16,9 @@ class APIRequest:
             raise TypeError("api_key must be of type string.")
 
     def _build_header(self):
-         # add more headers for analytics in the future
+        # add more headers for analytics in the future
         return {"x-api-key": self.api_key}
-       
+
     def _post_request(self, json, url=None):
         url = self.url if not url else url
         headers = self._build_header()
@@ -26,10 +26,7 @@ class APIRequest:
         return r.json()
 
     def _get_request(self, url, path_param=None, request_params=None):
-        # path_param -> GET /customers/bob
-        # request_params -> GET /customers?name=bob
-        # https://stackoverflow.com/questions/3198492/rest-standard-path-parameters-or-request-parameters
-        headers = self._build_header()  # DRY.... change.
+        headers = self._build_header()  # DRY. To be changed.
         if request_params:
             r = requests.get(url=url, headers=headers, params=request_params)
         elif path_param:
@@ -39,7 +36,6 @@ class APIRequest:
         return r.json()
 
     def _download_request(self, url, destination):
-        # got some ideas from https://stackoverflow.com/questions/16694907/download-large-file-in-python-with-requests
         local_filename = f"{destination}/{url.split('/')[-1].split('?')[0]}"
         local_filename = local_filename.replace("%243ct10n", "section")
         with requests.get(url, stream=True) as r:
