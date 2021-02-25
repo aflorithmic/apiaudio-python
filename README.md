@@ -11,8 +11,7 @@ See the [Python API docs](https://docs.api.audio/reference)
 You don't need this source code unless you want to modify it. If you want to use the package, just run:
 
 ```sh
-# Please note this is under development (pypi test environment)
-pip install -i https://test.pypi.org/simple/ aflr_python_client -U
+pip install aflr -U
 ```
 
 Install from source with:
