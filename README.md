@@ -1,6 +1,6 @@
-# Aflorithmic aflr API.audio Python SDK
+# api.audio Python SDK
 
-The Aflorithmic's api.audio aflr Python SDK provides access to the api.audio API from applications written in python.
+The Aflorithmic api.audio Python SDK "aflr" provides access to the api.audio API from applications written in python.
 
 ## Documentation
 
