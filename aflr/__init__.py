@@ -7,8 +7,8 @@
 
 api_key = None
 client_id = None
-api_base = "https://api.aflr.io"
-upload_api_base = "https://files.aflr.io" # not implemented yet.
+api_base = "https://v1.api.audio"
+upload_api_base = "https://file.api.audio"  # not implemented yet.
 
 # future
 api_version = None
