@@ -19,6 +19,6 @@ class Mastering(APIRequest):
 
     # download mastering file
     def download(self, scriptId, parameters={}, destination="."):
-        url = self.retrieve(scriptId=scriptId, parameters=parameters)
+        url = self.retrieve(scriptId=scriptId, parameters=parameters).get('url')
         local_filename = self._download_request(url=url, destination=destination) 
         return local_filename
