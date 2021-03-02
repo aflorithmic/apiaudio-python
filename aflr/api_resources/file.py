@@ -17,6 +17,3 @@ class File(APIRequest):
 
     # get sound files
     # TBD
-
-    # get mastering fiels
-    # TBD
