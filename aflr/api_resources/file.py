@@ -20,13 +20,3 @@ class File(APIRequest):
     # TBD
 
 	# get mastering file
-	def retrieve_master(self, scriptId, parameters={}):
-		parameters.update({'scriptId': scriptId})
-		return self._get_request(url=self.file_master, request_params=parameters)
-
-    # download mastering file
-	def download_master(self, scriptId, parameters={}, destination="."):
-        url = self.retrieve_master(scriptId=scriptId, parameters=parameters)
-        url = url if type(url) == str else url.get('url')
-        local_filename = self._download_request(url=url, destination=destination) 
-        return local_filename
