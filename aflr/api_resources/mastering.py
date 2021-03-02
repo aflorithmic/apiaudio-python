@@ -12,12 +12,6 @@ class Mastering(APIRequest):
     def config_test(self):
         return f"Configured to transact {self.OBJECT_NAME} objects to {self.url} with api_key = {self.api_key}"
 
-    # get speech files
-    # TBD
-
-    # get sound files
-    # TBD
-
 	# get mastering file
     def retrieve_master(self, scriptId, parameters={}):
         parameters.update({'scriptId': scriptId})
