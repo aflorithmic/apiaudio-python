@@ -8,7 +8,6 @@ class Mastering(APIRequest):
     def __init__(self):
         super().__init__()
         self.url = self.api_base + "/file/mastering"
-        self.url = 'https://n4y7f73jng.execute-api.eu-west-1.amazonaws.com/staging/file/mastering'
 
     def config_test(self):
         return f"Configured to transact {self.OBJECT_NAME} objects to {self.url} with api_key = {self.api_key}"
