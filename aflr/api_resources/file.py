@@ -26,7 +26,7 @@ class File(APIRequest):
 
     # download mastering file
 	def download_master(self, scriptId, parameters={}, destination="."):
-		url = self.retrieve_master(scriptId=scriptId, parameters=parameters)
-		url = url if type(url) == str else url.get('url')
+        url = self.retrieve_master(scriptId=scriptId, parameters=parameters)
+        url = url if type(url) == str else url.get('url')
         local_filename = self._download_request(url=url, destination=destination) 
-		return local_filename
+        return local_filename
