@@ -121,6 +121,7 @@ audio_files = aflr.Speech().retrieve(scriptId=script["scriptId"])
 print(audio_files)
 
 # download all speech audio files
+aflr.Speech().download(scriptId=script["scriptId"], destination=".")
 
 # check your folder :) you should have the following audio_files
 
