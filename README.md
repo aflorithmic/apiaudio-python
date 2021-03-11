@@ -44,7 +44,7 @@ aflr.api_key = "your-key"
 script = aflr.Script().create(scriptText="Hello world")
 ```
 
-🎤 Create an audio file from the script:
+🎤 Create an speech audio file from the script:
 
 ```python
 response = aflr.Speech().create(scriptId=script["scriptId"])
