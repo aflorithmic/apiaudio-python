@@ -38,19 +38,19 @@ aflr.api_key = "your-key"
 
 ## Create Text-to-speech in 3 steps
 
-✍️ 1. Let's create a new script:
+✍️ Create a new script:
 
 ```python
 script = aflr.Script().create(scriptText="Hello world")
 ```
 
-🎤 2. Create an audio file from the script:
+🎤 Create an audio file from the script:
 
 ```python
 response = aflr.Speech().create(scriptId=script["scriptId"])
 ```
 
-🎉 3. Finally, get the urls of the audio files generated:
+🎉 Finally, get the urls of the audio files generated:
 
 ```python
 urls = aflr.Speech().retrieve(scriptId=script["scriptId"])
