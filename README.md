@@ -74,10 +74,13 @@ Easy right? Now let's add some music! 🔮
 ```python
 
 ## CREATE SCRIPT
-# Create a script item with two sections (hello, bye) and 2 personalisation parameters (username and location).
-# Scripts can have any number of sections. Every section will be a separated speech file.
+# Create a script item with two sections (hello, bye) & 2 personalisation parameters (username, location).
+# Scripts can have any number of sections.
+# Every section will be a separated speech file.
+# A script will always follow a hierarchical structure: project/module/script.
 # Only required parameter is scriptText.
-# projectName, moduleName and scriptName are optional. A script will always follow the following hierarchical structure: project/module/script. If not provided, projectName, moduleName and scriptName will be "default".
+# projectName, moduleName and scriptName are optional.
+# If not provided, projectName, moduleName and scriptName will be "default".
 # scriptId is optional.
 script = aflr.Script().create(
     scriptText="<<sectionName::hello>> Hello {{username|buddy}} <<sectionName::bye>> Good bye from {{location|barcelona}}",
