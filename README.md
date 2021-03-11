@@ -122,9 +122,9 @@ print(audio_files)
 
 # download all speech audio files
 audio_files = aflr.Speech().download(scriptId=script["scriptId"], destination=".")
-print(audio_files)
 
 # check your folder :) you should have the following audio_files
+print(audio_files)
 
 
 ```
