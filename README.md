@@ -95,7 +95,8 @@ script = aflr.Script().retrieve(scriptId=script["scriptId"])
 print(script)
 
 ## LIST SCRIPTS
-# Retrieve all scripts in your organization and print the list of scripts. List does not require any parameter.
+# Retrieve all scripts in your organization and print the list of scripts.
+# List does not require any parameter.
 # print the scriptText from the first script item found.
 scripts = aflr.Script().list()
 print(scripts)
