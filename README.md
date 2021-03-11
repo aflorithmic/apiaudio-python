@@ -1,6 +1,6 @@
 # aflr
 
-aflr is the official api.audio Python SDK. This SDK provides easy access to the api.audio API from applications written in python.
+aflr is the official [api.audio](https://www.api.audio) Python SDK. This SDK provides easy access to the api.audio API from applications written in python.
 
 ## Documentation
 
@@ -63,21 +63,49 @@ Or download the files in your current folder:
 aflr.Speech().download(scriptId=script["scriptId"], destination=".")
 ```
 
-Easy right? Now let's do something fun 🔮
+Easy right? Now let's add some music! 🔮
+
+## Create
 
 # aflr package Reference
 
-```python
-# Retrieve the script item and print the script created
+## Script
 
+```python
+
+## CREATE SCRIPT
+# Create a script item with two sections (hello, bye) and 2 personalisation parameters (username and location).
+# Scripts can have any number of sections. Every section will be a separated speech file.
+# Only required parameter is scriptText.
+# projectName, moduleName and scriptName are optional. A script will always follow the following hierarchical structure: project/module/script. If not provided, projectName, moduleName and scriptName will be "default".
+# scriptId is optional.
+script = aflr.Script().create(
+    scriptText="<<sectionName::hello>> Hello {{username|buddy}} <<sectionName::bye>> Good bye from {{location|barcelona}}",
+    projectName="myProject",
+    moduleName="myModule",
+    scriptName="myScript",
+    scriptId="id-1234"
+    )
+print(script)
+
+## RETRIEVE SCRIPT
+# Retrieve the script item and print the script created.
+# Required parameter: scriptId
 script = aflr.Script().retrieve(scriptId=script["scriptId"])
 print(script)
 
-# Retrieve all scripts and print the first's script text
-
+## LIST SCRIPTS
+# Retrieve all scripts in your organization and print the list of scripts. List does not require any parameter.
+# print the scriptText from the first script item found.
 scripts = aflr.Script().list()
+print(scripts)
 print(scripts["scripts"][0]["scriptText"])
 
+```
+
+## Speech
+
+```python
 # create a text-to-speech
 
 response = aflr.Speech().create(scriptId=script["scriptId"])
@@ -94,7 +122,11 @@ print(audio_files)
 
 audio_files = aflr.Speech().download(scriptId=script["scriptId"], destination=".")
 print(audio_files)
+```
 
+## Voice
+
+```python
 # Get all available voices and print the first one
 
 all_voices = aflr.Voice().list()
