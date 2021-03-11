@@ -53,8 +53,8 @@ response = aflr.Speech().create(scriptId=script["scriptId"])
 🎉 3. Finally, get the urls of the audio files generated:
 
 ```python
-files = aflr.Speech().retrieve(scriptId=script["scriptId"])
-print(files)
+urls = aflr.Speech().retrieve(scriptId=script["scriptId"])
+print(urls)
 ```
 
 Or download the files in your current folder:
