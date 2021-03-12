@@ -1,12 +1,33 @@
-# aflr
+<p align="center">
+<a href="https://www.api.audio/" rel="noopener">
+ <img src="https://d9hhrg4mnvzow.cloudfront.net/www.api.audio/ddeb49ef-logo-api-audio-isolines_10au02y000000000000028.png" alt="api.audio logo"></a>
+</p>
 
-aflr is the official [api.audio](https://www.api.audio) Python SDK. This SDK provides easy access to the api.audio API from applications written in python.
+<h3 align="center">aflr - python SDK</h3>
 
-## Documentation
+---
 
-For examples, recipes and api reference see the [api.audio docs](https://docs.api.audio/reference)
+<p align="center"> aflr is the official <a href="https://www.api.audio/" rel="noopener">api.audio</a> Python 3 SDK. This SDK provides easy access to the api.audio API from applications written in python. 
+    <br> 
+</p>
 
-## Installation
+## 📝 Table of Contents
+
+- [About](#about)
+- [Getting Started](#getting_started)
+- [Hello World](#hello_world)
+- [Documentation](#documentation)
+- [Reference](#reference)
+- [Authors](#authors)
+- [Acknowledgments](#acknowledgement)
+
+## 🧐 About <a name = "about"></a>
+
+This repository is actively maintained by [Aflorithmic Labs](https://www.aflorithmic.ai/). For examples, recipes and api reference see the [api.audio docs](https://docs.api.audio/reference).
+
+## 🏁 Getting Started <a name = "getting_started"></a>
+
+### Installation
 
 You don't need this source code unless you want to modify it. If you want to use the package, just run:
 
@@ -20,13 +41,19 @@ Install from source with:
 python setup.py install
 ```
 
-## Requirements
+### Prerequisites <a name = "requirements"></a>
 
 Python 3.6+
 
-# Getting started
+## 🚀 Hello World <a name = "hello_world"></a>
 
-## Setup
+Create a new python file i.e. test.py; or open the terminal and:
+
+```python
+touch hello.py
+```
+
+### Authentication
 
 The library needs to be configured with your account's secret key which is available in your [Aflorithmic Dashboard](https://console.api.audio). Set aflr.api_key to its value:
 
@@ -36,7 +63,9 @@ import aflr
 aflr.api_key = "your-key"
 ```
 
-## Create Text-to-speech in 3 steps
+### Create Text-to-speech in 3 steps
+
+Let's create our first speech from text.
 
 ✍️ Create a new script:
 
@@ -63,9 +92,47 @@ Or download the files in your current folder:
 aflr.Speech().download(scriptId=script["scriptId"], destination=".")
 ```
 
-Easy right? Now let's add some music! 🔮
+Easy right? 🔮
 
-## Create
+## 📑 Documentation <a name = "hello_world"></a>
+
+### `Script` resource
+
+The Script resource allows you to create, retrieve and list scripts. Script is a class, and have different methods you can use:
+
+- `create()` Create a new script.
+- `retrieve()` Retrieve a script by id.
+- `list()` List all scripts available in your organization.
+
+There are two approaches to use the `Script` resource.
+First approach is to get the Script class first, then use Script methods. For example, to create a `Script`, we could do:
+
+```python
+Script = aflr.Script()
+Script.create()
+```
+
+or simply:
+
+```python
+aflr.Script().create()
+```
+
+### Speech
+
+Coming soon.
+
+### Voice
+
+Coming soon.
+
+### Sound
+
+Coming soon.
+
+### File
+
+Coming soon.
 
 # aflr package Reference
 
