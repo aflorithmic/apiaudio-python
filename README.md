@@ -55,7 +55,7 @@ touch hello.py
 
 ### Authentication
 
-The library needs to be configured with your account's secret key which is available in your [Aflorithmic Dashboard](https://console.api.audio). Set aflr.api_key to its value:
+The library needs to be configured with your account's secret key which is available in your [Aflorithmic Dashboard](https://console.api.audio). Set `aflr.api_key` to its value:
 
 ```python
 import aflr
