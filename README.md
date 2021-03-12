@@ -94,7 +94,7 @@ aflr.Speech().download(scriptId=script["scriptId"], destination=".")
 
 Easy right? 🔮
 
-## 📑 Documentation <a name = "hello_world"></a>
+## 📑 Documentation <a name = "documentation"></a>
 
 ### `Script` resource
 
