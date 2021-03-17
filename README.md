@@ -17,7 +17,7 @@
 - [Getting Started](#getting_started)
 - [Hello World](#hello_world)
 - [Documentation](#documentation)
-  - [Import](###import)
+  - [Import](#import)
 - [Reference](#reference)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
@@ -137,7 +137,7 @@ First approach is to get the resource class first, then use resource methods. Fo
 Script = aflr.Script()
 Script.create()
 ```
-The second approach is to 
+The second approach is to use it directly:
 
 ```python
 aflr.Script().create()
@@ -151,20 +151,6 @@ The Script resource allows you to create, retrieve and list scripts. Script is a
 - `create()` Create a new script.
 - `retrieve()` Retrieve a script by id.
 - `list()` List all scripts available in your organization.
-
-There are two approaches to use the `Script` resource.
-First approach is to get the Script class first, then use Script methods. For example, to create a `Script`, we could do:
-
-```python
-Script = aflr.Script()
-Script.create()
-```
-
-or simply:
-
-```python
-aflr.Script().create()
-```
 
 ### Speech
 
