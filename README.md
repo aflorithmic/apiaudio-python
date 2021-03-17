@@ -17,6 +17,7 @@
 - [Getting Started](#getting_started)
 - [Hello World](#hello_world)
 - [Documentation](#documentation)
+  - [Import](###import)
 - [Reference](#reference)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
@@ -96,13 +97,52 @@ Easy right? 🔮 This is the `hello.py` final picture:
 import aflr
 aflr.api_key = "your-key"
 
+# script creation
 script = aflr.Script().create(scriptText="Hello world")
+
+# speech creation and retrieval
 response = aflr.Speech().create(scriptId=script["scriptId"])
 urls = aflr.Speech().retrieve(scriptId=script["scriptId"])
 aflr.Speech().download(scriptId=script["scriptId"], destination=".")
 ```
+Now let's run the code:
+```sh
+python hello.py
+```
+Once completed, check the files in the `hello.py` root folder - you will see a new audio file. Play it!
 
 ## 📑 Documentation <a name = "documentation"></a>
+### Import <a name = "import"></a>
+```python
+import aflr
+```
+### Authentication
+The library needs to be configured with your account's secret key which is available in your [Aflorithmic Dashboard](https://console.api.audio). Set `aflr.api_key` with the api-key you got from the dashboard:
+
+```python
+aflr.api_key = "your-key"
+```
+### Authentication with environment variable (recommended)
+You can also authenticate using `aflr_key` environment variable and the aflr SDK will automatically use it. To setup, open the terminal and type:
+```sh
+export aflr_key=<your-key>
+```
+
+If you provide both environment variable and `aflr.api_key` authentication, the `aflr.api_key` will be used.
+
+### Resource Usage
+There are two approaches to use the resources.
+First approach is to get the resource class first, then use resource methods. For example, to create a `Script`, we could do:
+```python
+Script = aflr.Script()
+Script.create()
+```
+The second approach is to 
+
+```python
+aflr.Script().create()
+```
+Same logic applies for other resources (`speech`, `voice`, `sound`...)
 
 ### `Script` resource
 
