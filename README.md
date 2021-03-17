@@ -197,7 +197,7 @@ Available soon.
 
 # Full Reference <a name = "reference"> </a>
 
-## Script
+## Script reference
 
 ```python
 
@@ -235,7 +235,7 @@ print(scripts["scripts"][0]["scriptText"])
 
 ```
 
-## Speech
+## Speech reference
 
 ```python
 # create a text-to-speech
@@ -257,7 +257,7 @@ print(audio_files)
 
 ```
 
-## Voice
+## Voice reference
 
 ```python
 # Get all available voices
