@@ -13,19 +13,8 @@ class Mastering(APIRequest):
     def config_test(self):
         return f"Configured to transact {self.OBJECT_NAME} objects to {self.url} with api_key = {self.api_key}"
 
-    def request(self, scriptId, backgroundTrackId, audience=[]):
-        if type(audience) != list:
-            raise Exception("audience needs to be a list.")
-        if type(backgroundTrackId) != str:
-            raise Exception("backgroundTrackId needs to be a string.")
-        if type(scriptId) != str:
-            raise Exception("scriptId needs to be a string.")
-        body = {
-            "scriptId": scriptId,
-            "backgroundTrackId": backgroundTrackId,
-            "audience": audience,
-        }
-        return self._post_request(url=self.url, json=body)
+    def request(self, **params):
+        return self._post_request(url=self.url, json=params)
 
     # get mastering file
     def retrieve(self, scriptId, parameters={}):
