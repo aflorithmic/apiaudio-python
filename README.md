@@ -154,7 +154,8 @@ Same logic applies for other resources (`speech`, `voice`, `sound`...)
 
 ### `Script` resource <a name = "script"> </a>
 
-The Script resource allows you to create, retrieve and list scripts. Script is a class, and have different methods you can use:
+The Script resource allows you to create, retrieve and list scripts. Find more info about scripts [here](https://docs.api.audio/docs/script-2)
+Script is a class, and have different methods you can use:
 
 - `create()` Create a new script.
 - `retrieve()` Retrieve a script by id.
@@ -255,4 +256,3 @@ print(all_voices["voices"][0])
 
 # License <a name = "license"> </a>
 This project is licensed under the terms of the MIT license.
-
