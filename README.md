@@ -47,7 +47,7 @@ Python 3.6+
 
 ## 🚀 Hello World <a name = "hello_world"></a>
 
-Create a new python file i.e. test.py; or open the terminal and:
+Create a file `hello.py`
 
 ```python
 touch hello.py
@@ -55,11 +55,10 @@ touch hello.py
 
 ### Authentication
 
-The library needs to be configured with your account's secret key which is available in your [Aflorithmic Dashboard](https://console.api.audio). Set `aflr.api_key` to its value:
+The library needs to be configured with your account's secret key which is available in your [Aflorithmic Dashboard](https://console.api.audio). Import the aflr package and set `aflr.api_key` with the api-key you got from the dashboard:
 
 ```python
 import aflr
-
 aflr.api_key = "your-key"
 ```
 
@@ -92,7 +91,16 @@ Or download the files in your current folder:
 aflr.Speech().download(scriptId=script["scriptId"], destination=".")
 ```
 
-Easy right? 🔮
+Easy right? 🔮 This is the `hello.py` final picture:
+```python
+import aflr
+aflr.api_key = "your-key"
+
+script = aflr.Script().create(scriptText="Hello world")
+response = aflr.Speech().create(scriptId=script["scriptId"])
+urls = aflr.Speech().retrieve(scriptId=script["scriptId"])
+aflr.Speech().download(scriptId=script["scriptId"], destination=".")
+```
 
 ## 📑 Documentation <a name = "documentation"></a>
 
