@@ -167,7 +167,10 @@ Speech allows you to do Text-To-Speech (TTS) with our API using all the voices a
 
 Speech methods are:
 
-- `create()` Create a Text-to-Speech
+- `create()` Send a Text-To-Speech request to our Text-To-Speech service.
+- `retrieve()` Retrieve the speech file urls.
+- `download()` Download the speech files in your preferred folder.
+
 
 ### Voice <a name = "voice"> </a>
 
