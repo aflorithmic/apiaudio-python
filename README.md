@@ -159,9 +159,38 @@ The Script resource/class allows you to create, retrieve and list scripts. Learn
 
 Script methods are:
 
-- `create()` Create a new script.
-- `retrieve()` Retrieve a script by id.
-- `list()` List all scripts available in your organization.
+- `create()` - Create a new script.
+    - Parameters:
+        - `scriptText` * [Required] (string) - Text for your script. A script can contain multiple sections and SSML tags. Learn more about scriptText details [here](https://docs.api.audio/docs/script-2)
+        - `projectName` (string) - The name of your project.
+        - `moduleName` (string) - The name of your module.
+        - `scriptName` (string) - The name of your script.
+        - `scriptId` (string) - Custom identifier for your script. If scriptId parameter is used, then projectName, moduleName and scriptName are required parameters.
+    - Example:
+        ```python
+        script = aflr.Script().create(
+            scriptText="<<sectionName::hello>> Hello {{username|buddy}} <<sectionName::bye>> Good bye from {{location|barcelona}}",
+            projectName="myProject",
+            moduleName="myModule",
+            scriptName="myScript",
+            scriptId="id-1234"
+            )
+        ```
+        
+- `retrieve()` - Retrieve a script by id.
+    - Parameters:
+        - `scriptId` * [Required] (string) - The script ID you want to retrieve.
+    - Example:
+        ```python
+        script = aflr.Script().retrieve(scriptId="id-1234")
+        ```
+- `list()` - List all scripts available in your organization.
+    - Parameters:
+        - No parameters required.
+    - Example:
+        ```python
+        scripts = aflr.Script().list()
+        ```
 
 ### `Speech` resource <a name = "speech"> </a>
 Speech allows you to do Text-To-Speech (TTS) with our API using all the voices available. Use it to create a speech audio file from your script.
@@ -169,8 +198,35 @@ Speech allows you to do Text-To-Speech (TTS) with our API using all the voices a
 Speech methods are:
 
 - `create()` Send a Text-To-Speech request to our Text-To-Speech service.
+    - Parameters:
+        - `scriptId` * [Required] (string) - The script ID
+        - `voiceName` (string) - Voice name. See the list of available voices using [Voice resource](#voice). Default voiceName is "Joanna"
+        - `voiceProvider` (string) - Voice name. See the list of available voices and voice providers using [Voice resource](#voice). Default voiceProvider is "polly"
+        - `scriptSpeed` (string) - Voice speed. Default speed is 100.
+    - Example:
+        ```python
+        response = aflr.Speech().create(
+            scriptId="id-1234",
+            voiceName="Joanna",
+            voiceProvider="polly",
+            scriptSpeed="100"
+            )
+        ```
 - `retrieve()` Retrieve the speech file urls.
+    - Parameters:
+        - `scriptId` * [Required] (string) - The script ID you want to retrieve.
+    - Example:
+        ```python
+        audio_files = aflr.Speech().retrieve(scriptId="id-1234")
+        ```
 - `download()` Download the speech files in your preferred folder.
+    - Parameters:
+        - `scriptId` * [Required] (string) - The script ID you want to download
+        - `destination` (string) - The folder destination path. Default is "." (current folder)
+    - Example:
+        ```python
+        audio_files = aflr.Speech().download(scriptId="id-1234", destination=".")
+        ```
 
 
 ### `Voice` resource <a name = "voice"> </a>
@@ -179,6 +235,12 @@ Voice allows you to retrieve a list of the available voices from our API.
 Voice methods are:
 
 - `list()` List all the available voices in our API.
+    - Parameters:
+        - No parameters required.
+    - Example:
+        ```python
+        all_voices = aflr.Voice().list()
+        ```
 
 ### `Sound` resource <a name = "sound"> </a>
 Sound allows you to design your own sound template.
