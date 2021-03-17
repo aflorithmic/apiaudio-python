@@ -154,16 +154,20 @@ Same logic applies for other resources (`speech`, `voice`, `sound`...)
 
 ### `Script` resource <a name = "script"> </a>
 
-The Script resource allows you to create, retrieve and list scripts. Find more info about scripts [here](https://docs.api.audio/docs/script-2)
-Script is a class, and have different methods you can use:
+The Script resource/class allows you to create, retrieve and list scripts. Learn more about scripts [here](https://docs.api.audio/docs/script-2).
+
+Script methods are:
 
 - `create()` Create a new script.
 - `retrieve()` Retrieve a script by id.
 - `list()` List all scripts available in your organization.
 
-### Speech <a name = "speech"> </a>
+### `Speech` resource <a name = "speech"> </a>
+Speech allows you to do Text-To-Speech (TTS) with our API using all the voices available. Use it to create a speech audio file from your script.
 
-Coming soon.
+Speech methods are:
+
+- `create()` Create a Text-to-Speech
 
 ### Voice <a name = "voice"> </a>
 
