@@ -8,7 +8,7 @@ class Mastering(APIRequest):
     def __init__(self):
         super().__init__()
         self.file_url = self.api_base + "/file/mastering"
-        self.mastering_url = self.api_base + "/mastering"
+        self.url = self.api_base + "/mastering"
 
     def config_test(self):
         return f"Configured to transact {self.OBJECT_NAME} objects to {self.url} with api_key = {self.api_key}"
@@ -25,7 +25,7 @@ class Mastering(APIRequest):
             "backgroundTrackId": backgroundTrackId,
             "audience": audience,
         }
-        return self._post_request(url=self.mastering_url, json=body)
+        return self._post_request(url=self.url, json=body)
 
     # get mastering file
     def retrieve(self, scriptId, parameters={}):
