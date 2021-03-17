@@ -180,9 +180,17 @@ Script methods are:
 - `retrieve()` Retrieve a script by id.
     - Parameters:
         - `scriptId` * [Required] (string) - The script ID you want to retrieve.
+    - Example:
+        ```python
+        script = aflr.Script().retrieve(scriptId=script["scriptId"])
+        ```
 - `list()` List all scripts available in your organization.
     - Parameters:
         - No parameters required.
+    - Example:
+        ```python
+        scripts = aflr.Script().list()
+        ```
 
 ### `Speech` resource <a name = "speech"> </a>
 Speech allows you to do Text-To-Speech (TTS) with our API using all the voices available. Use it to create a speech audio file from your script.
