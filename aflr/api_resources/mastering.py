@@ -8,17 +8,21 @@ class Mastering(APIRequest):
     def __init__(self):
         super().__init__()
         self.file_url = self.api_base + "/file/mastering"
+        self.url = self.api_base + "/mastering"
 
     def config_test(self):
         return f"Configured to transact {self.OBJECT_NAME} objects to {self.url} with api_key = {self.api_key}"
 
-	# get mastering file
+    def request(self, **params):
+        return self._post_request(url=self.url, json=params)
+
+    # get mastering file
     def retrieve(self, scriptId, parameters={}):
-        parameters.update({'scriptId': scriptId})
+        parameters.update({"scriptId": scriptId})
         return self._get_request(url=self.file_url, request_params=parameters)
 
     # download mastering file
     def download(self, scriptId, parameters={}, destination="."):
-        url = self.retrieve(scriptId=scriptId, parameters=parameters).get('url')
-        local_filename = self._download_request(url=url, destination=destination) 
+        url = self.retrieve(scriptId=scriptId, parameters=parameters).get("url")
+        local_filename = self._download_request(url=url, destination=destination)
         return local_filename
