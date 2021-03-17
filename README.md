@@ -26,6 +26,7 @@
   - [Voice](#voice)
   - [Sound](#sound)
   - [Mastering](#mastering)
+  - [File](#file)
 - [Reference](#reference)
 - [Authors](#authors)
 - [License](#license)
@@ -184,7 +185,7 @@ Sound allows you to design your own sound template.
 
 Available soon.
 
-### `Mastering` resource <a name = "sound"> </a>
+### `Mastering` resource <a name = "mastering"> </a>
 Mastering allows you to create a mastered version of your audio file.
 
 Available soon.
