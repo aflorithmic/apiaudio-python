@@ -30,3 +30,7 @@ print(audio_files)
 # Get all available voices and print the first one
 all_voices = aflr.Voice().list()
 print(all_voices["voices"][0])
+
+# Get all available voices and print the first one
+sync_tts = aflr.SyncTTS().create(text="Hello synchronous text to speech", voice="voice id")
+print(sync_tts["message"])
