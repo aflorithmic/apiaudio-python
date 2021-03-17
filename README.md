@@ -172,17 +172,27 @@ Speech methods are:
 - `download()` Download the speech files in your preferred folder.
 
 
-### Voice <a name = "voice"> </a>
+### `Voice` resource <a name = "voice"> </a>
+Voice allows you to retrieve a list of the available voices from our API.
 
-Coming soon.
+Voice methods are:
 
-### Sound <a name = "sound"> </a>
+- `list()` List all the available voices in our API.
 
-Coming soon.
+### `Sound` resource <a name = "sound"> </a>
+Sound allows you to design your own sound template.
 
-### File <a name = "file"> </a>
+Available soon.
 
-Coming soon.
+### `Mastering` resource <a name = "sound"> </a>
+Mastering allows you to create a mastered version of your audio file.
+
+Available soon.
+
+### `File` resource <a name = "file"> </a>
+File allows you to retrieve all the files available in api.audio for your organization.
+
+Available soon.
 
 # Full Reference <a name = "reference"> </a>
 
@@ -249,10 +259,10 @@ print(audio_files)
 ## Voice
 
 ```python
-# Get all available voices and print the first one
+# Get all available voices
 
 all_voices = aflr.Voice().list()
-print(all_voices["voices"][0])
+print(all_voices)
 
 ```
 
