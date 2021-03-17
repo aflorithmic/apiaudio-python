@@ -18,9 +18,17 @@
 - [Hello World](#hello_world)
 - [Documentation](#documentation)
   - [Import](#import)
+  - [Authentication](#authentication)
+  - [Authentication with environment variable](#authentication_env)
+  - [Resource usage](#resource)
+  - [Script](#script)
+  - [Speech](#speech)
+  - [Voice](#voice)
+  - [Sound](#sound)
+  - [Mastering](#mastering)
 - [Reference](#reference)
 - [Authors](#authors)
-- [Acknowledgments](#acknowledgement)
+- [License](#license)
 
 ## 🧐 About <a name = "about"></a>
 
@@ -116,13 +124,13 @@ Once completed, check the files in the `hello.py` root folder - you will see a n
 ```python
 import aflr
 ```
-### Authentication
+### Authentication <a name = "authentication"></a>
 The library needs to be configured with your account's secret key which is available in your [Aflorithmic Dashboard](https://console.api.audio). Set `aflr.api_key` with the api-key you got from the dashboard:
 
 ```python
 aflr.api_key = "your-key"
 ```
-### Authentication with environment variable (recommended)
+### Authentication with environment variable (recommended)  <a name = "authentication_env"></a>
 You can also authenticate using `aflr_key` environment variable and the aflr SDK will automatically use it. To setup, open the terminal and type:
 ```sh
 export aflr_key=<your-key>
@@ -130,7 +138,7 @@ export aflr_key=<your-key>
 
 If you provide both environment variable and `aflr.api_key` authentication, the `aflr.api_key` will be used.
 
-### Resource Usage
+### Resource Usage <a name = "resource"> </a>
 There are two approaches to use the resources.
 First approach is to get the resource class first, then use resource methods. For example, to create a `Script`, we could do:
 ```python
@@ -144,7 +152,7 @@ aflr.Script().create()
 ```
 Same logic applies for other resources (`speech`, `voice`, `sound`...)
 
-### `Script` resource
+### `Script` resource <a name = "script"> </a>
 
 The Script resource allows you to create, retrieve and list scripts. Script is a class, and have different methods you can use:
 
@@ -152,23 +160,23 @@ The Script resource allows you to create, retrieve and list scripts. Script is a
 - `retrieve()` Retrieve a script by id.
 - `list()` List all scripts available in your organization.
 
-### Speech
+### Speech <a name = "speech"> </a>
 
 Coming soon.
 
-### Voice
+### Voice <a name = "voice"> </a>
 
 Coming soon.
 
-### Sound
+### Sound <a name = "sound"> </a>
 
 Coming soon.
 
-### File
+### File <a name = "file"> </a>
 
 Coming soon.
 
-# aflr package Reference
+# Full Reference <a name = "reference"> </a>
 
 ## Script
 
@@ -239,3 +247,12 @@ all_voices = aflr.Voice().list()
 print(all_voices["voices"][0])
 
 ```
+
+# Authors <a name = "authors"> </a>
+- https://github.com/tonythree
+- https://github.com/GetOn4
+- https://github.com/zeritte
+
+# License <a name = "license"> </a>
+This project is licensed under the terms of the MIT license.
+
