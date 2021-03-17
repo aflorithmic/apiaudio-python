@@ -161,11 +161,22 @@ Script methods are:
 
 - `create()` Create a new script.
     - Parameters:
-        - `scriptText` * [Required] (string) - Text for your script 
+        - `scriptText` * [Required] (string) - Text for your script. A script can contain multiple sections and SSML tags. Learn more about scriptText details [here](https://docs.api.audio/docs/script-2)
         - `projectName` (string) - The name of your project.
-        - `moduleName` (string) - The name of your module
-        - `scriptName` (string) - The name of your script
+        - `moduleName` (string) - The name of your module.
+        - `scriptName` (string) - The name of your script.
         - `scriptId` (string) - Custom identifier for your script. If scriptId parameter is used, then projectName, moduleName and scriptName are required parameters.
+    - Example:
+        ```python
+        script = aflr.Script().create(
+            scriptText="<<sectionName::hello>> Hello {{username|buddy}} <<sectionName::bye>> Good bye from {{location|barcelona}}",
+            projectName="myProject",
+            moduleName="myModule",
+            scriptName="myScript",
+            scriptId="id-1234"
+            )
+        ```
+        
 - `retrieve()` Retrieve a script by id.
     - Parameters:
         - `scriptId` * [Required] (string) - The script ID you want to retrieve.
