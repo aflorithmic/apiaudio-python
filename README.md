@@ -160,8 +160,18 @@ The Script resource/class allows you to create, retrieve and list scripts. Learn
 Script methods are:
 
 - `create()` Create a new script.
+    - Parameters:
+        - `scriptText` * [Required] (string) - Text for your script 
+        - `projectName` (string) - The name of your project.
+        - `moduleName` (string) - The name of your module
+        - `scriptName` (string) - The name of your script
+        - `scriptId` (string) - Custom identifier for your script. If scriptId parameter is used, then projectName, moduleName and scriptName are required parameters.
 - `retrieve()` Retrieve a script by id.
+    - Parameters:
+        - `scriptId` * [Required] (string) - The script ID you want to retrieve.
 - `list()` List all scripts available in your organization.
+    - Parameters:
+        - No parameters required.
 
 ### `Speech` resource <a name = "speech"> </a>
 Speech allows you to do Text-To-Speech (TTS) with our API using all the voices available. Use it to create a speech audio file from your script.
