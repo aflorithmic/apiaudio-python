@@ -176,9 +176,9 @@ Script methods are:
 - `create()` - Create a new script.
   - Parameters:
     - `scriptText` \* [Required] (string) - Text for your script. A script can contain multiple sections and SSML tags. Learn more about scriptText details [here](https://docs.api.audio/docs/script-2)
-    - `projectName` (string) - The name of your project.
-    - `moduleName` (string) - The name of your module.
-    - `scriptName` (string) - The name of your script.
+    - `projectName` (string) - The name of your project. Default value is "default"
+    - `moduleName` (string) - The name of your module. Default value is "default"
+    - `scriptName` (string) - The name of your script. Default value is "default"
     - `scriptId` (string) - Custom identifier for your script. If scriptId parameter is used, then projectName, moduleName and scriptName are required parameters.
   - Example:
     ```python
