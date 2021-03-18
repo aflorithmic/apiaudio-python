@@ -10,5 +10,5 @@ class Sound(APIRequest):
         # good read is https://stackoverflow.com/questions/1385759/should-init-call-the-parent-classs-init
         self.url = self.api_base + "/sound"
 
-    def retrieve(self, **params):
+    def create(self, **params):
         return self._post_request(url=self.url, json=params)

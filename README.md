@@ -258,9 +258,21 @@ Voice methods are:
 
 ### `Sound` resource <a name = "sound"> </a>
 
-Sound allows you to design your own sound template.
+Sound allows you to design your own sound template from a script and a background track. In order to get a sound template, you need to do [mastering](#mastering) first.
 
-Available soon.
+Sound methods are:
+
+- `create()` Creates a sound template zip file and returns the url of the zip file.
+  - Parameters:
+    - `scriptId` \* [Required] - The [script](#script) resource ID.
+    - `backgroundTrackId` \* [Required] - The background track file ID.
+  - Example:
+    ```python
+    sound_url = aflr.Sound().create(
+        scriptId=script.get("scriptId"),
+        backgroundTrackId="full__citynights.wav",
+    )
+    ```
 
 ### `Mastering` resource <a name = "mastering"> </a>
 
