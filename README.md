@@ -305,23 +305,32 @@ Mastering methods are:
     response = aflr.Mastering().create(
         scriptId="id-1234",
         backgroundTrackId="full__citynights.wav",
-        audience = [{"username":"antonio", "location":"barcelona"}]
+        audience=[{"username":"antonio", "location":"barcelona"}]
     )
     ```
 - `retrieve()` Retrieves the mastered file urls.
   - Parameters:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
+    - `parameters` (dict) - Dictionary containing the audience item you want to retrieve.
   - Example:
     ```python
-    mastered_files = aflr.Mastering().retrieve(scriptId="id-1234")
+    mastered_files = aflr.Mastering().retrieve(
+      scriptId="id-1234",
+      parameters={"username":"antonio", "location":"barcelona"}
+    )
     ```
 - `download()` Download the mastered files in your preferred folder.
   - Parameters:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
+    - `parameters` (dict) - Dictionary containing the audience item you want to retrieve.
     - `destination` (string) - The folder destination path. Default is "." (current folder)
   - Example:
     ```python
-    mastered_files = aflr.Mastering().download(scriptId="id-1234", destination=".")
+    mastered_files = aflr.Mastering().download(
+      scriptId="id-1234",
+      parameters={"username":"antonio", "location":"barcelona"}
+      destination="."
+    )
     ```
 
 ### `File` resource <a name = "file"> </a>
@@ -335,6 +344,7 @@ Available soon.
 - https://github.com/tonythree
 - https://github.com/GetOn4
 - https://github.com/zeritte
+- https://github.com/springcoil
 
 # License <a name = "license"> </a>
 
