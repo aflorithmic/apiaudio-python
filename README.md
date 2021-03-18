@@ -264,8 +264,8 @@ Sound methods are:
 
 - `create()` Creates a sound template zip file and returns the url of the zip file.
   - Parameters:
-    - `scriptId` \* [Required] - The [script](#script) resource ID.
-    - `backgroundTrackId` \* [Required] - The background track file ID.
+    - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
+    - `backgroundTrackId` \* [Required] (string) - The background track file ID.
   - Example:
     ```python
     sound_url = aflr.Sound().create(
@@ -282,14 +282,31 @@ Mastering methods are:
 
 - `create()` Creates a mastered version of your script.
   - Parameters:
-    - `scriptId` \* [Required] - The [script](#script) resource ID.
-    - `backgroundTrackId` \* [Required] - The background track file ID.
+    - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
+    - `backgroundTrackId` \* [Required] (string) - The background track file ID.
+    - `audience` (list) - List of dicts containing the personalisation parameters. This parameter depends on the number of parameters you used in your [script](#script) resource. In the script documentation example above, we used 2 parameters: `username` and `location`, and in the following example below we want to produce the script for username `Antonio` with location `Barcelona`.
   - Example:
     ```python
     response = aflr.Mastering().create(
-        scriptId=script.get("scriptId"),
+        scriptId="id-1234",
         backgroundTrackId="full__citynights.wav",
+        audience = [{"username":"antonio", "location":"barcelona"}]
     )
+    ```
+- `retrieve()` Retrieves the mastered file urls.
+  - Parameters:
+    - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
+  - Example:
+    ```python
+    mastered_files = aflr.Mastering().retrieve(scriptId="id-1234")
+    ```
+- `download()` Download the mastered files in your preferred folder.
+  - Parameters:
+    - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
+    - `destination` (string) - The folder destination path. Default is "." (current folder)
+  - Example:
+    ```python
+    mastered_files = aflr.Mastering().download(scriptId="id-1234", destination=".")
     ```
 
 ### `File` resource <a name = "file"> </a>
