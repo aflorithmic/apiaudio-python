@@ -71,9 +71,9 @@ import aflr
 aflr.api_key = "your-key"
 ```
 
-### Create Text-to-speech in 3 steps
+### Create Text to audio in 4 steps
 
-Let's create our first speech from text.
+Let's create our first audio from text.
 
 ✍️ Create a new script:
 
@@ -87,17 +87,26 @@ script = aflr.Script().create(scriptText="Hello world")
 response = aflr.Speech().create(scriptId=script["scriptId"])
 ```
 
+🎧 Now let's master the speech file with high quality and a nice background track.
+
+```python
+aflr.Mastering().create(
+	scriptId=script.get("scriptId"),
+	backgroundTrackId="full__citynights.wav"
+	)
+```
+
 🎉 Finally, get the urls of the audio files generated:
 
 ```python
-urls = aflr.Speech().retrieve(scriptId=script["scriptId"])
+urls = aflr.Mastering().retrieve(scriptId=script["scriptId"])
 print(urls)
 ```
 
 Or download the files in your current folder:
 
 ```python
-aflr.Speech().download(scriptId=script["scriptId"], destination=".")
+aflr.Mastering().download(scriptId=script["scriptId"], destination=".")
 ```
 
 Easy right? 🔮 This is the `hello.py` final picture:
@@ -109,10 +118,21 @@ aflr.api_key = "your-key"
 # script creation
 script = aflr.Script().create(scriptText="Hello world")
 
-# speech creation and retrieval
+# speech creation
 response = aflr.Speech().create(scriptId=script["scriptId"])
-urls = aflr.Speech().retrieve(scriptId=script["scriptId"])
-aflr.Speech().download(scriptId=script["scriptId"], destination=".")
+
+# mastering process
+aflr.Mastering().create(
+	scriptId=script.get("scriptId"),
+	backgroundTrackId="full__citynights.wav"
+	)
+
+# get url of audio tracks generated
+urls = aflr.Mastering().retrieve(scriptId=script["scriptId"])
+print(urls)
+
+# or download
+aflr.Mastering().download(scriptId=script["scriptId"], destination=".")
 ```
 
 Now let's run the code:
