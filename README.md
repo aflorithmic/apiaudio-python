@@ -258,7 +258,7 @@ Voice methods are:
 
 ### `Sound` resource <a name = "sound"> </a>
 
-Sound allows you to design your own sound template from a script and a background track. In order to get a sound template, you need to do [mastering](#mastering) first.
+Sound allows you to design your own sound template from a script and a background track. In order to get a sound template, you need to make sure you requested [speech](#speech) for the script resource first.
 
 Sound methods are:
 
