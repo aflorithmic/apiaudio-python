@@ -7,13 +7,13 @@ class Mastering(APIRequest):
 
     def __init__(self):
         super().__init__()
-        self.file_url = self.api_base + "/file/mastering"
         self.url = self.api_base + "/mastering"
+        self.file_url = self.api_base + "/file/mastering"
 
     def config_test(self):
         return f"Configured to transact {self.OBJECT_NAME} objects to {self.url} with api_key = {self.api_key}"
 
-    def request(self, **params):
+    def create(self, **params):
         return self._post_request(url=self.url, json=params)
 
     # get mastering file
