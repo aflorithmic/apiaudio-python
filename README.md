@@ -258,7 +258,7 @@ Voice methods are:
 
 ### `Sound` resource <a name = "sound"> </a>
 
-Sound allows you to design your own sound template from a script and a background track. In order to get a sound template, you need to make sure you requested [speech](#speech) for the script resource first.
+Sound allows you to design your own sound template from a script and a background track. In order to get a sound template, make sure you requested [speech](#speech) for your script resource first.
 
 Sound methods are:
 
@@ -269,16 +269,28 @@ Sound methods are:
   - Example:
     ```python
     sound_url = aflr.Sound().create(
-        scriptId=script.get("scriptId"),
+        scriptId="id-1234",
         backgroundTrackId="full__citynights.wav",
     )
     ```
 
 ### `Mastering` resource <a name = "mastering"> </a>
 
-Mastering allows you to create a mastered version of your audio file.
+Mastering allows you to create and retrieve a mastered audio file of your script. A mastered version contains the speech of the script, a background track, personalised parameters for your audience and a mastering process to enhance the audio quality of the whole track. In order to get a mastered audio file, make sure you requested [speech](#speech) for your script resource first.
 
-Available soon.
+Mastering methods are:
+
+- `create()` Creates a mastered version of your script.
+  - Parameters:
+    - `scriptId` \* [Required] - The [script](#script) resource ID.
+    - `backgroundTrackId` \* [Required] - The background track file ID.
+  - Example:
+    ```python
+    response = aflr.Mastering().create(
+        scriptId=script.get("scriptId"),
+        backgroundTrackId="full__citynights.wav",
+    )
+    ```
 
 ### `File` resource <a name = "file"> </a>
 

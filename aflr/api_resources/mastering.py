@@ -13,7 +13,7 @@ class Mastering(APIRequest):
     def config_test(self):
         return f"Configured to transact {self.OBJECT_NAME} objects to {self.url} with api_key = {self.api_key}"
 
-    def request(self, **params):
+    def create(self, **params):
         return self._post_request(url=self.url, json=params)
 
     # get mastering file
