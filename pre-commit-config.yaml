@@ -1,0 +1,19 @@
+repos:
+  - repo: https://github.com/psf/black
+    rev: 19.10b0 # Replace by any tag/version: https://github.com/psf/black/tags
+    hooks:
+      - id: black
+        language_version: python3 # Should be a command that runs python3.6+
+  - repo: https://github.com/prettier/prettier
+    rev: "2.1.2" # Use the sha or tag you want to point at
+    hooks:
+      - id: prettier
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-docstring-first
+      - id: check-json
+      - id: check-added-large-files
+      - id: check-yaml
