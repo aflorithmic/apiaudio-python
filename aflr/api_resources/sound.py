@@ -13,7 +13,7 @@ class Sound(APIRequest):
 
     def create(self, **params):
         return self._post_request(url=self.url, json=params)
-    
+
     def retrieve(self, scriptId, parameters={}):
         parameters.update({"scriptId": scriptId})
         return self._get_request(url=self.file_url, request_params=parameters)
