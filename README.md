@@ -235,14 +235,12 @@ Speech methods are:
   - Parameters:
     - `scriptId` \* [Required] (string) - The script ID
     - `voiceName` (string) - Voice name. See the list of available voices using [Voice resource](#voice). Default voiceName is "Joanna"
-    - `voiceProvider` (string) - Voice name. See the list of available voices and voice providers using [Voice resource](#voice). Default voiceProvider is "polly"
     - `scriptSpeed` (string) - Voice speed. Default speed is 100.
   - Example:
     ```python
     response = aflr.Speech().create(
         scriptId="id-1234",
         voiceName="Joanna",
-        voiceProvider="polly",
         scriptSpeed="100"
         )
     ```
