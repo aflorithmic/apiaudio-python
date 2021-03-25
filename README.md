@@ -298,6 +298,13 @@ Sound methods are:
     ```python
     audio_files = aflr.Sound().retrieve(scriptId="id-1234")
     ```
+- `list()` List all the available background tracks in our API.
+  - Parameters:
+    - No parameters required.
+  - Example:
+    ```python
+    all_bg_tracks = aflr.Sound().list()
+    ```
 - `download()` Download the sound project zip file in your preferred folder.
   - Parameters:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
