@@ -19,7 +19,6 @@ class Sound(APIRequest):
         parameters.update({"scriptId": scriptId})
         return self._get_request(url=self.file_url, request_params=parameters)
 
-    # get scripts list
     def list(self):
         return self._get_request(url=self.bg_url)
 
