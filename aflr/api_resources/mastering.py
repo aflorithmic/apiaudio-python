@@ -24,5 +24,9 @@ class Mastering(APIRequest):
     # download mastering file
     def download(self, scriptId, parameters={}, destination="."):
         url = self.retrieve(scriptId=scriptId, parameters=parameters).get("url")
+        if not url:
+            raise Exception(
+                "Error: No mastered files found. Please try again in a few seconds."
+            )
         local_filename = self._download_request(url=url, destination=destination)
         return local_filename
