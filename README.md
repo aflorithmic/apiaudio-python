@@ -85,7 +85,7 @@ print(script)
 🎤 Create an speech audio file from the script using Joanna's voice:
 
 ```python
-response = aflr.Speech().create(scriptId=script["scriptId"], voice="Joanna")
+response = aflr.Speech().create(scriptId=script["scriptId"], voiceName="Joanna")
 print(response)
 ```
 
@@ -123,7 +123,7 @@ aflr.api_key = "your-key"
 script = aflr.Script().create(scriptText="Hello world", scriptName="hello")
 
 # speech creation
-response = aflr.Speech().create(scriptId=script["scriptId"], voice="Joanna")
+response = aflr.Speech().create(scriptId=script["scriptId"], voiceName="Joanna")
 print(response)
 
 # mastering process
