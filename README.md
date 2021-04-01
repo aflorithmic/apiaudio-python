@@ -78,22 +78,25 @@ Let's create our first audio from text.
 ✍️ Create a new script:
 
 ```python
-script = aflr.Script().create(scriptText="Hello world")
+script = aflr.Script().create(scriptText="Hello world", scriptName="hello")
+print(script)
 ```
 
-🎤 Create an speech audio file from the script:
+🎤 Create an speech audio file from the script using Joanna's voice:
 
 ```python
-response = aflr.Speech().create(scriptId=script["scriptId"])
+response = aflr.Speech().create(scriptId=script["scriptId"], voice="Joanna")
+print(response)
 ```
 
 🎧 Now let's master the speech file with high quality and a nice background track.
 
 ```python
-aflr.Mastering().create(
+response = aflr.Mastering().create(
 	scriptId=script.get("scriptId"),
 	backgroundTrackId="full__citynights.wav"
 	)
+print(response)
 ```
 
 🎉 Finally, get the urls of the audio files generated:
@@ -106,7 +109,8 @@ print(urls)
 Or download the files in your current folder:
 
 ```python
-aflr.Mastering().download(scriptId=script["scriptId"], destination=".")
+filepath = aflr.Mastering().download(scriptId=script["scriptId"], destination=".")
+print(filepath)
 ```
 
 Easy right? 🔮 This is the `hello.py` final picture:
@@ -116,23 +120,26 @@ import aflr
 aflr.api_key = "your-key"
 
 # script creation
-script = aflr.Script().create(scriptText="Hello world")
+script = aflr.Script().create(scriptText="Hello world", scriptName="hello")
 
 # speech creation
-response = aflr.Speech().create(scriptId=script["scriptId"])
+response = aflr.Speech().create(scriptId=script["scriptId"], voice="Joanna")
+print(response)
 
 # mastering process
-aflr.Mastering().create(
+response = aflr.Mastering().create(
 	scriptId=script.get("scriptId"),
 	backgroundTrackId="full__citynights.wav"
 	)
+print(response)
 
 # get url of audio tracks generated
 urls = aflr.Mastering().retrieve(scriptId=script["scriptId"])
 print(urls)
 
 # or download
-aflr.Mastering().download(scriptId=script["scriptId"], destination=".")
+filepath = aflr.Mastering().download(scriptId=script["scriptId"], destination=".")
+print(filepath)
 ```
 
 Now let's run the code:

@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+
 # C extensions
 *.so
 
@@ -65,3 +66,6 @@ test.py
 # build files
 build/
 dist/
+
+# mac
+.DS_Store
