@@ -60,7 +60,6 @@ class APIRequest:
             res.raise_for_status()
         except HTTPError as e:
             if res.json():
-                print(e)
                 raise HTTPError('{} \n Error Message from API: \n {}'.format(str(e), res.json()))
             else:
                raise e
