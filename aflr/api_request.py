@@ -24,23 +24,26 @@ class APIRequest:
     def _post_request(self, json, url=None):
         url = self.url if not url else url
         headers = self._build_header()
-        r = requests.post(url=url, headers=headers, json=json).raise_for_status()
+        r = requests.post(url=url, headers=headers, json=json)
+        r.raise_for_status()
         return r.json()
 
     def _get_request(self, url, path_param=None, request_params=None):
         headers = self._build_header()  # DRY. To be changed.
         if request_params:
-            r = requests.get(url=url, headers=headers, params=request_params).raise_for_status()
+            r = requests.get(url=url, headers=headers, params=request_params)
         elif path_param:
-            r = requests.get(url=f"{url}/{path_param}", headers=headers).raise_for_status()
+            r = requests.get(url=f"{url}/{path_param}", headers=headers)
         else:
-            r = requests.get(url=url, headers=headers).raise_for_status()
+            r = requests.get(url=url, headers=headers)
+        r.raise_for_status()
         return r.json()
 
     def _download_request(self, url, destination):
         local_filename = f"{destination}/{url.split('/')[-1].split('?')[0]}"
         local_filename = local_filename.replace("%243ct10n", "section")
-        with requests.get(url, stream=True).raise_for_status() as r:
+        with requests.get(url, stream=True) as r:
+            r.raise_for_status()
             with open(local_filename, "wb") as f:
                 shutil.copyfileobj(r.raw, f)
         return local_filename
