@@ -2,6 +2,8 @@ import aflr
 import requests
 import shutil
 import os
+import requests
+from requests.exceptions import HTTPError
 
 
 class APIRequest:
@@ -25,7 +27,7 @@ class APIRequest:
         url = self.url if not url else url
         headers = self._build_header()
         r = requests.post(url=url, headers=headers, json=json)
-        r.raise_for_status()
+        self._expanded_raise_for_status(r)
         return r.json()
 
     def _get_request(self, url, path_param=None, request_params=None):
@@ -36,14 +38,30 @@ class APIRequest:
             r = requests.get(url=f"{url}/{path_param}", headers=headers)
         else:
             r = requests.get(url=url, headers=headers)
-        r.raise_for_status()
+        self._expanded_raise_for_status(r)
         return r.json()
 
     def _download_request(self, url, destination):
         local_filename = f"{destination}/{url.split('/')[-1].split('?')[0]}"
         local_filename = local_filename.replace("%243ct10n", "section")
         with requests.get(url, stream=True) as r:
-            r.raise_for_status()
+            self._expanded_raise_for_status(r)
             with open(local_filename, "wb") as f:
                 shutil.copyfileobj(r.raw, f)
         return local_filename
+
+    def _expanded_raise_for_status(self, res):
+        """
+        Take a "requests" response object and expand the raise_for_status method to return errors from API
+        @param res:
+        @return: None
+        """
+        try:
+            res.raise_for_status()
+        except HTTPError as e:
+            if res.json():
+                print(e)
+                raise HTTPError('{} \n Error Message from API: \n {}'.format(str(e), res.json()))
+            else:
+               raise e
+        return
