@@ -85,7 +85,7 @@ print(script)
 🎤 Create an speech audio file from the script using Joanna's voice:
 
 ```python
-response = aflr.Speech().create(scriptId=script["scriptId"], voiceName="Joanna")
+response = aflr.Speech().create(scriptId=script["scriptId"], voice="Joanna")
 print(response)
 ```
 
@@ -123,7 +123,7 @@ aflr.api_key = "your-key"
 script = aflr.Script().create(scriptText="Hello world", scriptName="hello")
 
 # speech creation
-response = aflr.Speech().create(scriptId=script["scriptId"], voiceName="Joanna")
+response = aflr.Speech().create(scriptId=script["scriptId"], voice="Joanna")
 print(response)
 
 # mastering process
@@ -241,14 +241,16 @@ Speech methods are:
 - `create()` Send a Text-To-Speech request to our Text-To-Speech service.
   - Parameters:
     - `scriptId` \* [Required] (string) - The script ID
-    - `voiceName` (string) - Voice name. See the list of available voices using [Voice resource](#voice). Default voiceName is "Joanna"
-    - `scriptSpeed` (string) - Voice speed. Default speed is 100.
+    - `voice` (string) - Voice name. See the list of available voices using [Voice resource](#voice). Default voice is "Joanna".
+    - `speed` (string) - Voice speed. Default speed is 100.
+    - `voiceName` (DEPRECATED, use `voice` instead)
+    - `scriptSpeed`(DEPRECATED, use `speed` instead)
   - Example:
     ```python
     response = aflr.Speech().create(
         scriptId="id-1234",
-        voiceName="Joanna",
-        scriptSpeed="100"
+        voice="Joanna",
+        speed="100"
         )
     ```
 - `retrieve()` Retrieve the speech file urls.
