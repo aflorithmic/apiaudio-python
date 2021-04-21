@@ -254,15 +254,21 @@ Speech methods are:
         )
     ```
 - `retrieve()` Retrieve the speech file urls.
+
   - Parameters:
     - `scriptId` \* [Required] (string) - The script ID you want to retrieve.
+    - `section` (string) - The script section name for the first section. The default name for a script section is "default". NOTE: At the moment, Only scripts with 1 section are supported. If the scripts contain more than one section, only the first section can be retrieved.
+    - `parameters` (dict) - Dict containing the personalisation parameters for the first section of the script. This parameter depends on the parameters you used in your [script](#script)'s resource section. If this parameter is used, `section` must be specified.
   - Example:
     ```python
     audio_files = aflr.Speech().retrieve(scriptId="id-1234")
     ```
+
 - `download()` Download the speech files in your preferred folder.
   - Parameters:
     - `scriptId` \* [Required] (string) - The script ID you want to download
+    - `section` (string) - The script section name for the first section. The default name for a script section is "default". NOTE: At the moment, Only scripts with 1 section are supported. If the scripts contain more than one section, only the first section can be retrieved.
+    - `parameters` (dict) - Dict containing the personalisation parameters for the first section of the script. This parameter depends on the parameters you used in your [script](#script)'s resource section. If this parameter is used, `section` must be specified.
     - `destination` (string) - The folder destination path. Default is "." (current folder)
   - Example:
     ```python
