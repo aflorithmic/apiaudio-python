@@ -29,8 +29,8 @@ class Speech(APIRequest):
         return self._post_request(json=params)
 
     # download speech files
-    def download(self, scriptId, destination="."):
-        audio_files = self.retrieve(scriptId)
+    def download(self, scriptId, section=None, parameters={}, destination="."):
+        audio_files = self.retrieve(scriptId, section, parameters)
         local_filenames = []
         print(audio_files)
         for key, value in audio_files.items():
