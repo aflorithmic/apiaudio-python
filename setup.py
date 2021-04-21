@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="aflr",
-    version="0.3.2",
+    version="0.4.0",
     author="Antonio Tripiana",
     author_email="antonio@aflorithmic.ai",
     description="Python library for the Aflorithmic api.audio API",
