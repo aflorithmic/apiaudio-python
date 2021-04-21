@@ -14,9 +14,10 @@ class Speech(APIRequest):
         return f"Configured to transact {self.OBJECT_NAME} objects to {self.url} with api_key = {self.api_key}"
 
     # get speech url by scriptId
-    def retrieve(self, scriptId, section, parameters={}):
+    def retrieve(self, scriptId, section=None, parameters={}):
         parameters.update({"scriptId": scriptId})
-        parameters.update({"section": section})
+        if section:
+            parameters.update({"section": section})
         return self._get_request(
             url=self.file_url,
             request_params=parameters,
