@@ -283,7 +283,16 @@ Voice methods are:
 
 - `list()` List all the available voices in our API.
   - Parameters:
-    - No parameters required.
+    - `voiceProviderFullName` 
+    - `Language`
+    - `Accent`
+    - `voiceGender`
+    - `AgeBracket`
+    - `Tags`
+    - `IndustryExamples`
+
+    Language', 'voiceGender', 'Accent', 'AgeBracket', 'IndustryExamples', 'voiceProviderFullName', 'Tags'
+    
   - Example:
     ```python
     all_voices = aflr.Voice().list()
