@@ -10,5 +10,5 @@ class Voice(APIRequest):
         self.url = self.api_base + "/voice"
 
     # get voices list
-    def list(self):
-        return self._get_request(url=self.url)
+    def list(self, **params):
+        return self._get_request(url=self.url, request_params=params)
