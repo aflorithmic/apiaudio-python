@@ -281,12 +281,24 @@ Voice allows you to retrieve a list of the available voices from our API.
 
 Voice methods are:
 
-- `list()` List all the available voices in our API.
+- `list()` List all the available voices in our API. The parameters are all optional, and can be used in combination to get the perfect voice for your usecase.
   - Parameters:
-    - No parameters required.
+    - `provider` (string) - Try one of: google, polly, azure, msnr
+    - `providerFullName` (string) - Try with one of: amazon polly, google, microsoft azure, aflorithmic labs
+    - `language` (string) - Try with one of: english, spanish, french, german
+    - `accent` (string) - Try with one of: american, british, neutral, portuguese/brazilian, american soft, mexican, australian
+    - `gender` (string) - Try with one of: male, female
+    - `ageBracket` (string) - Try with one of: adult, child, senior
+    - `tags` (string) - Try with one or more (separated by commas) of: steady, confident, balanced, informative, serious, instructional, slow, storytelling, calm, clear, deep, formal, sad, thin, fast, upbeat, fun, energetic, tense, very fast, flat, low pitched, high pitched, low-pitched, sing-y, cooperative, kind, stable, monotonous, neutral, responsible, business man, straight to the point, knowledgeable, focused, newscastery, newsreader, interviewer, reliable, friendly, welcoming, good for handing out information, slightly friendly
+    - `industryExamples` (string) - Try with one or more of: fitness, business, commercial, fashion, travel, audiobook, real estate, faith, health industry, comercial, realestate, kids entertainment, games, customer service, education, storytelling, entertainment, kids, education audiobook
+    
   - Example:
     ```python
     all_voices = aflr.Voice().list()
+    ```
+  - Example:
+    ```python
+    french_voices = aflr.Voice().list(language="french",tags="steady, fun")
     ```
 
 ### `Sound` resource <a name = "sound"> </a>
