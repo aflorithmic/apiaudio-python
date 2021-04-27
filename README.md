@@ -192,7 +192,7 @@ The second approach is to use it directly:
 aflr.Script().create()
 ```
 
-Same logic applies for other resources (`speech`, `voice`, `sound`...)
+Same logic applies for other resources (`Speech`, `Voice`, `Sound`...)
 
 ### `Script` resource <a name = "script"> </a>
 
@@ -290,7 +290,7 @@ Voice methods are:
     - `gender` (string) - Try with one of: male, female
     - `ageBracket` (string) - Try with one of: adult, child, senior
     - `tags` (string) - Try with one or more (separated by commas) of: steady, confident, balanced, informative, serious, instructional, slow, storytelling, calm, clear, deep, formal, sad, thin, fast, upbeat, fun, energetic, tense, very fast, flat, low pitched, high pitched, low-pitched, sing-y, cooperative, kind, stable, monotonous, neutral, responsible, business man, straight to the point, knowledgeable, focused, newscastery, newsreader, interviewer, reliable, friendly, welcoming, good for handing out information, slightly friendly
-    - `industryExamples` (string) - Try with one or more of: fitness, business, commercial, fashion, travel, audiobook, real estate, faith, health industry, comercial, realestate, kids entertainment, games, customer service, education, storytelling, entertainment, kids, education audiobook
+    - `industryExamples` (string) - Try with one or more (separated by commas) of: fitness, business, commercial, fashion, travel, audiobook, real estate, faith, health industry, comercial, realestate, kids entertainment, games, customer service, education, storytelling, entertainment, kids, education audiobook
     
   - Example:
     ```python
