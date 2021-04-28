@@ -14,12 +14,14 @@ class Mastering(APIRequest):
         return f"Configured to transact {self.OBJECT_NAME} objects to {self.url} with api_key = {self.api_key}"
 
     def create(self, **params):
+        print(f"params {params}")
         return self._post_request(url=self.url, json=params)
 
     # get mastering file
     def retrieve(self, scriptId, parameters={}):
-        parameters.update({"scriptId": scriptId})
-        return self._get_request(url=self.file_url, request_params=parameters)
+        params = parameters.copy()
+        params.update({"scriptId": scriptId})
+        return self._get_request(url=self.file_url, request_params=params)
 
     # download mastering file
     def download(self, scriptId, parameters={}, destination="."):
