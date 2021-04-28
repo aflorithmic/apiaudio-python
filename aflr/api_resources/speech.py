@@ -15,12 +15,13 @@ class Speech(APIRequest):
 
     # get speech url by scriptId
     def retrieve(self, scriptId, section=None, parameters={}):
-        parameters.update({"scriptId": scriptId})
+        params = parameters.copy()
+        params.update({"scriptId": scriptId})
         if section:
-            parameters.update({"section": section})
+            params.update({"section": section})
         return self._get_request(
             url=self.file_url,
-            request_params=parameters,
+            request_params=params,
         )
 
     # create a new text-to-speech

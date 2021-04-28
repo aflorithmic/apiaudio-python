@@ -18,8 +18,9 @@ class Mastering(APIRequest):
 
     # get mastering file
     def retrieve(self, scriptId, parameters={}):
-        parameters.update({"scriptId": scriptId})
-        return self._get_request(url=self.file_url, request_params=parameters)
+        params = parameters.copy()
+        params.update({"scriptId": scriptId})
+        return self._get_request(url=self.file_url, request_params=params)
 
     # download mastering file
     def download(self, scriptId, parameters={}, destination="."):
