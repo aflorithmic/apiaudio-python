@@ -243,6 +243,8 @@ Speech methods are:
     - `scriptId` \* [Required] (string) - The script ID
     - `voice` (string) - Voice name. See the list of available voices using [Voice resource](#voice). Default voice is "Joanna".
     - `speed` (string) - Voice speed. Default speed is 100.
+    - `effect` (string) - Put a funny effect in your voice. You can try the following ones: `dark_father`, `chewie`, `88b`, `2r2d`
+    - `silence_padding` (integer) - Add a silence padding to your speech tracks (in milliseconds). Default is 0 (no padding)
     - `voiceName` (DEPRECATED, use `voice` instead)
     - `scriptSpeed`(DEPRECATED, use `speed` instead)
   - Example:
