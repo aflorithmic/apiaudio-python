@@ -303,6 +303,15 @@ Voice methods are:
     french_voices = aflr.Voice().list(language="french",tags="steady, fun")
     ```
 
+- `list_parameters()` This endpoint lets you see which attributes you can filter the voices by, along with the allowed values for each attribute. You can later use these parameters and values to filter the voices you wish to list.
+  - Parameters:
+    - No parameters required.
+  
+  - Example:
+    ```python
+    parameters = aflr.Voice().list_parameters()
+    ```
+
 ### `Sound` resource <a name = "sound"> </a>
 
 Sound allows you to design your own sound template from a script and a background track. In order to get a sound template/project, make sure you requested [speech](#speech) for your script resource first.
