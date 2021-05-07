@@ -245,15 +245,52 @@ Speech methods are:
     - `speed` (string) - Voice speed. Default speed is 100.
     - `effect` (string) - Put a funny effect in your voice. You can try the following ones: `dark_father`, `chewie`, `88b`, `2r2d`
     - `silence_padding` (integer) - Add a silence padding to your speech tracks (in milliseconds). Default is 0 (no padding)
+    - `audience` (dictionary) - List of dicts containing the personalisation parameters as key-value pairs. This parameter depends on the number of parameters you used in your script resource. For instance, if in the script resource you have `scriptText="Hello {{name}} {{lastname}}"`, the audience should be: `[{"username": "Elon", "lastname": "Musk"}]`
+    - `sections` (dictionary) is a dictionary (key-value pairs), where the key is a section name, and the value is another dictionary with the section configuration ( valid parameters are: voice, speed, effect, silence_padding). If a section is not found here, the section will automatically inherit the voice, speed, effect and silence_padding values you defined above (or the default ones if you don't provide them). See an example below with 2 sections and different configuration parameters being used.
+      ```python
+      sections={
+          "firstsection": {
+              "voice": "Matthew",
+              "speed": 110,
+              "silence_padding": 100,
+              "effect": "dark_father"
+          },
+          "anothersection": {
+              "voice": "en-GB-RyanNeural",
+              "speed": 100
+          }
+      }
+      ```
     - `voiceName` (DEPRECATED, use `voice` instead)
     - `scriptSpeed`(DEPRECATED, use `speed` instead)
-  - Example:
+  - Simple example:
     ```python
     response = aflr.Speech().create(
         scriptId="id-1234",
-        voice="Joanna",
-        speed="100"
+        voice="Joanna"
         )
+    ```
+  - Complete example:
+    ```python
+    response = aflr.Speech().create(
+        scriptId="id-1234",
+        voice="Matthew",
+        speed=100,
+        effect="dark_father",
+        silence_padding= 1000,
+        audience=[{"username": "Elon", "lastname": "Musk"}],
+        sections={
+            "firstsection": {
+                "voice": "Matthew",
+                "speed": 110,
+                "silence_padding": 100,
+                "effect": "dark_father"
+            },
+            "anothersection": {
+                "voice": "en-GB-RyanNeural",
+            }
+        }
+    )
     ```
 - `retrieve()` Retrieve the speech file urls.
 
