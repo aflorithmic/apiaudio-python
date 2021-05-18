@@ -7,7 +7,6 @@ class Script(listableResource):
     resource_path = "/script"
 
     def __init__(self):
-        print("script")
         super().__init__()  # add params to the init performed by the base-class
         # good read is https://stackoverflow.com/questions/1385759/should-init-call-the-parent-classs-init
         self.url = self.api_base + "/script"
