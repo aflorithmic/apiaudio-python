@@ -1,8 +1,8 @@
-from aflr.helper_classes import listableResource
+from aflr.helper_classes import ListableResource
 import aflr
 
 
-class Script(listableResource):
+class Script(ListableResource):
     OBJECT_NAME = "script"
     resource_path = "/script"
 

@@ -1,7 +1,7 @@
 from .api_request import APIRequest
 
 
-class listableResource(APIRequest):
+class ListableResource(APIRequest):
     def __init__(self):
         super().__init__()
 
