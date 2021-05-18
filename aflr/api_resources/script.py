@@ -1,8 +1,7 @@
-from aflr.helper_classes import ListableResource
-import aflr
+from aflr.helper_classes import CreatableResource, ListableResource, RetrievableResource
 
 
-class Script(ListableResource):
+class Script(ListableResource, CreatableResource, RetrievableResource):
     OBJECT_NAME = "script"
     resource_path = "/script"
 
@@ -13,11 +12,3 @@ class Script(ListableResource):
 
     def config_test(self):
         return f"Configured to transact {self.OBJECT_NAME} objects to {self.url} with api_key = {self.api_key}"
-
-    # get script by scriptId
-    def retrieve(self, scriptId):
-        return self._get_request(url=self.url, path_param=scriptId)
-
-    # create a new script
-    def create(self, **params):
-        return self._post_request(json=params)
