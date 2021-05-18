@@ -26,7 +26,7 @@ class APIRequest:
 
     @classmethod
     def _post_request(cls, json, url=None):
-        url = url or cls.url
+        url = url or f"{aflr.api_base}{cls.resource_path}"
         headers = cls._build_header()
         r = requests.post(url=url, headers=headers, json=json)
         cls._expanded_raise_for_status(r)
@@ -34,7 +34,7 @@ class APIRequest:
 
     @classmethod
     def _get_request(cls, url=None, path_param=None, request_params=None):
-        url = url or cls.url
+        url = url or f"{aflr.api_base}{cls.resource_path}"
         headers = cls._build_header()  # DRY. To be changed.
         if request_params:
             r = requests.get(url=url, headers=headers, params=request_params)
@@ -45,18 +45,19 @@ class APIRequest:
         cls._expanded_raise_for_status(r)
         return r.json()
 
-    def _download_request(self, url, destination):
+    @classmethod
+    def _download_request(cls, url, destination):
         local_filename = f"{destination}/{url.split('/')[-1].split('?')[0]}"
         local_filename = local_filename.replace("%243ct10n", "section")
         with requests.get(url, stream=True) as r:
-            self._expanded_raise_for_status(r)
+            cls._expanded_raise_for_status(r)
             with open(local_filename, "wb") as f:
                 shutil.copyfileobj(r.raw, f)
         return local_filename
 
     @classmethod
     def config_test(cls):
-        return f"Configured to transact {cls.OBJECT_NAME} objects to {cls.url} with api_key = {aflr.api_key}"
+        return f"Configured to transact {cls.OBJECT_NAME} objects to {aflr.api_base}{cls.resource_path} with api_key = {aflr.api_key}"
 
     @classmethod
     def _expanded_raise_for_status(self, res):
