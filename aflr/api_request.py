@@ -26,7 +26,7 @@ class APIRequest:
 
     @classmethod
     def _post_request(cls, json, url=None):
-        url = url or f"{aflr.api_base}{cls.resource_path}"
+        url = url or cls.url
         headers = cls._build_header()
         r = requests.post(url=url, headers=headers, json=json)
         cls._expanded_raise_for_status(r)
@@ -34,7 +34,7 @@ class APIRequest:
 
     @classmethod
     def _get_request(cls, url=None, path_param=None, request_params=None):
-        url = url or f"{aflr.api_base}{cls.resource_path}"
+        url = url or cls.url
         headers = cls._build_header()  # DRY. To be changed.
         if request_params:
             r = requests.get(url=url, headers=headers, params=request_params)
@@ -53,6 +53,10 @@ class APIRequest:
             with open(local_filename, "wb") as f:
                 shutil.copyfileobj(r.raw, f)
         return local_filename
+
+    @classmethod
+    def config_test(cls):
+        return f"Configured to transact {cls.OBJECT_NAME} objects to {cls.url} with api_key = {aflr.api_key}"
 
     @classmethod
     def _expanded_raise_for_status(self, res):
