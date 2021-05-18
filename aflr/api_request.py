@@ -8,8 +8,8 @@ from requests.exceptions import HTTPError
 
 class APIRequest:
     def __init__(self, api_key=None, api_base=None, **params):
-        self.api_key = api_key if api_key else aflr.api_key
-        self.api_base = api_base if api_base else aflr.api_base
+        self.api_key = api_key or aflr.api_key
+        self.api_base = api_base or aflr.api_base
         if self.api_key == None or self.api_key == "your-key":
             self.api_key = os.environ.get("aflr_key", None)
         if self.api_key == None or len(self.api_key) < 30:
@@ -19,26 +19,30 @@ class APIRequest:
         if not isinstance(self.api_key, str):
             raise TypeError("api_key must be of type string.")
 
+    @classmethod
     def _build_header(self):
         # add more headers for analytics in the future
-        return {"x-api-key": self.api_key}
+        return {"x-api-key": aflr.api_key}
 
-    def _post_request(self, json, url=None):
-        url = self.url if not url else url
-        headers = self._build_header()
+    @classmethod
+    def _post_request(cls, json, url=None):
+        url = url or f"{aflr.api_base}{cls.resource_path}"
+        headers = cls._build_header()
         r = requests.post(url=url, headers=headers, json=json)
-        self._expanded_raise_for_status(r)
+        cls._expanded_raise_for_status(r)
         return r.json()
 
-    def _get_request(self, url, path_param=None, request_params=None):
-        headers = self._build_header()  # DRY. To be changed.
+    @classmethod
+    def _get_request(cls, url=None, path_param=None, request_params=None):
+        url = url or f"{aflr.api_base}{cls.resource_path}"
+        headers = cls._build_header()  # DRY. To be changed.
         if request_params:
             r = requests.get(url=url, headers=headers, params=request_params)
         elif path_param:
             r = requests.get(url=f"{url}/{path_param}", headers=headers)
         else:
             r = requests.get(url=url, headers=headers)
-        self._expanded_raise_for_status(r)
+        cls._expanded_raise_for_status(r)
         return r.json()
 
     def _download_request(self, url, destination):
@@ -50,6 +54,7 @@ class APIRequest:
                 shutil.copyfileobj(r.raw, f)
         return local_filename
 
+    @classmethod
     def _expanded_raise_for_status(self, res):
         """
         Take a "requests" response object and expand the raise_for_status method to return errors from API
@@ -60,7 +65,9 @@ class APIRequest:
             res.raise_for_status()
         except HTTPError as e:
             if res.json():
-                raise HTTPError('{} \n Error Message from API: \n {}'.format(str(e), res.json()))
+                raise HTTPError(
+                    "{} \n Error Message from API: \n {}".format(str(e), res.json())
+                )
             else:
                 raise e
         return
