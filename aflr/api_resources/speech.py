@@ -4,7 +4,6 @@ from aflr.helper_classes import (
     RetrievableResource,
 )
 import aflr
-from aflr.api_request import APIRequest
 
 
 class Speech(CreatableResource, RetrievableResource, DownloadableResource):
