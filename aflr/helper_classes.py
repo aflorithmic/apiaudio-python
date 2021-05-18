@@ -29,7 +29,8 @@ class RetrievableResource(APIRequest):
         params.update({"scriptId": scriptId})
         if section:
             params.update({"section": section})
-        if cls.file_url:
+
+        if hasattr(cls, "file_url"):
             print(cls.file_url)
             return cls._get_request(
                 url=cls.file_url,
