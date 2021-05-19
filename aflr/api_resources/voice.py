@@ -4,7 +4,7 @@ from aflr.helper_classes import ListableResource
 class Voice(ListableResource):
     OBJECT_NAME = "voice"
     resource_path = "/voice"
-    list_parameters_path = "parameter"
+    list_parameters_path = "voice/parameter"
 
     @classmethod
     def list_parameters(cls):
