@@ -6,8 +6,13 @@ class ListableResource(APIRequest):
         super().__init__()
 
     @classmethod
-    def list(cls):
-        return cls._get_request()
+    def list(cls, **args):
+        if args:
+            return cls._get_request(request_params=args)
+        else:
+            return cls._get_request()
+
+
 
 
 class CreatableResource(APIRequest):
