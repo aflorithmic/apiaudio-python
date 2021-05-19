@@ -1,12 +1,11 @@
 from aflr.helper_classes import ListableResource
-import aflr
 
 
 class Voice(ListableResource):
     OBJECT_NAME = "voice"
     resource_path = "/voice"
-    parameters_url = aflr.api_base + "/voice/parameter"
+    list_parameters_path = "parameter"
 
     @classmethod
     def list_parameters(cls):
-        return cls._get_request(url=cls.parameters_url)
+        return cls._get_request(path_param=cls.list_parameters_path)
