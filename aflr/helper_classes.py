@@ -49,8 +49,12 @@ class DownloadableResource(APIRequest):
     def download(cls, scriptId, section=None, parameters=None, destination="."):
         parameters = parameters or {}
         audio_files = cls.retrieve(scriptId, section, parameters)
+        if "url" in audio_files.keys():
+            local_filename = cls._download_request(
+                url=audio_files.get("url"), destination=destination
+            )
+            return local_filename
         local_filenames = []
-        print(audio_files)
         for key, value in audio_files.items():
             # Review "value"! list of string...
             local_filename = cls._download_request(url=value, destination=destination)
