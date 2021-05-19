@@ -3,7 +3,6 @@ from aflr.helper_classes import (
     DownloadableResource,
     RetrievableResource,
 )
-import aflr
 
 
 class Speech(CreatableResource, RetrievableResource, DownloadableResource):
