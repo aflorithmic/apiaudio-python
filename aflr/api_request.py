@@ -38,6 +38,9 @@ class APIRequest:
         if hasattr(cls, "file_url"):
             url = f"{aflr.api_base}{cls.file_url}"
 
+        if hasattr(cls, "bg_url"):
+            url = f"{aflr.api_base}{cls.bg_url}"
+
         headers = cls._build_header()  # DRY. To be changed.
         if request_params:
             r = requests.get(url=url, headers=headers, params=request_params)
