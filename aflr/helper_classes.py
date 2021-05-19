@@ -13,8 +13,6 @@ class ListableResource(APIRequest):
             return cls._get_request()
 
 
-
-
 class CreatableResource(APIRequest):
     def __init__(self):
         super().__init__()
@@ -32,17 +30,15 @@ class RetrievableResource(APIRequest):
     def retrieve(cls, scriptId, section=None, parameters=None):
         params = parameters or {}
         params.update({"scriptId": scriptId})
+
         if section:
             params.update({"section": section})
 
         if hasattr(cls, "file_url"):
             print(cls.file_url)
-            return cls._get_request(
-                url=cls.file_url,
-                request_params=params,
-            )
+            return cls._get_request(path_param=cls.file_url, request_params=params)
         else:
-            return cls._get_request(path_param=scriptId)
+            return cls._get_request(request_params=params)
 
 
 class DownloadableResource(APIRequest):
