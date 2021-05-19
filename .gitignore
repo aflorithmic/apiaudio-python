@@ -69,3 +69,7 @@ dist/
 
 # mac
 .DS_Store
+
+# downloaded files
+.mp3
+.wav
