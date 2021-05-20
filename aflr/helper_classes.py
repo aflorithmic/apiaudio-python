@@ -2,9 +2,6 @@ from .api_request import APIRequest
 
 
 class ListableResource(APIRequest):
-    def __init__(self):
-        super().__init__()
-
     @classmethod
     def list(cls, **args):
         if args:
@@ -14,18 +11,12 @@ class ListableResource(APIRequest):
 
 
 class CreatableResource(APIRequest):
-    def __init__(self):
-        super().__init__()
-
     @classmethod
     def create(cls, **params):
         return cls._post_request(json=params)
 
 
 class RetrievableResource(APIRequest):
-    def __init__(self):
-        super().__init__()
-
     @classmethod
     def retrieve(cls, scriptId, section=None, parameters=None):
         params = parameters or {}
@@ -41,9 +32,6 @@ class RetrievableResource(APIRequest):
 
 
 class DownloadableResource(APIRequest):
-    def __init__(self):
-        super().__init__()
-
     @classmethod
     def download(cls, scriptId, section=None, parameters=None, destination="."):
         parameters = parameters or {}
