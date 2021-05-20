@@ -7,20 +7,19 @@ from requests.exceptions import HTTPError
 
 
 class APIRequest:
-    def __init__(self, api_key=None, api_base=None, **params):
-        self.api_key = api_key or aflr.api_key
-        self.api_base = api_base or aflr.api_base
-        if self.api_key == None or self.api_key == "your-key":
-            self.api_key = os.environ.get("aflr_key", None)
-        if self.api_key == None or len(self.api_key) < 30:
+    def _api_key_checker():
+        if aflr.api_key == None or aflr.api_key == "your-key":
+            aflr.api_key = os.environ.get("aflr_key", None)
+        if not isinstance(aflr.api_key, str):
+            raise TypeError("api_key must be of type string.")
+        if aflr.api_key == None or len(aflr.api_key) < 32:
             raise ValueError(
                 "Please specify a valid api_key or create one here:\nhttps://console.api.audio"
             )
-        if not isinstance(self.api_key, str):
-            raise TypeError("api_key must be of type string.")
 
     @classmethod
-    def _build_header(self):
+    def _build_header(cls):
+        cls._api_key_checker()
         # add more headers for analytics in the future
         return {"x-api-key": aflr.api_key}
 
