@@ -1,4 +1,3 @@
-import aflr
 from aflr.helper_classes import (
     CreatableResource,
     DownloadableResource,

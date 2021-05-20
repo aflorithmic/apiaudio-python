@@ -1,5 +1,4 @@
 from aflr.helper_classes import CreatableResource, ListableResource, RetrievableResource
-import aflr
 
 
 class Script(ListableResource, CreatableResource, RetrievableResource):
