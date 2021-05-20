@@ -71,5 +71,5 @@ dist/
 .DS_Store
 
 # downloaded files
-.mp3
-.wav
+*.mp3
+*.wav
