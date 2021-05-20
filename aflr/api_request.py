@@ -4,22 +4,24 @@ import shutil
 import os
 import requests
 from requests.exceptions import HTTPError
+from functools import lru_cache
 
 
 class APIRequest:
-    def _api_key_checker():
-        if aflr.api_key == None or aflr.api_key == "your-key":
-            aflr.api_key = os.environ.get("aflr_key", None)
-        if not isinstance(aflr.api_key, str):
+    @lru_cache
+    def _api_key_checker(api_key=None):
+        if api_key == None or api_key == "your-key":
+            api_key = os.environ.get("aflr_key", None)
+        if not isinstance(api_key, str):
             raise TypeError("api_key must be of type string.")
-        if aflr.api_key == None or len(aflr.api_key) < 32:
+        if api_key == None or len(api_key) < 32:
             raise ValueError(
                 "Please specify a valid api_key or create one here:\nhttps://console.api.audio"
             )
 
     @classmethod
     def _build_header(cls):
-        cls._api_key_checker()
+        cls._api_key_checker(aflr.api_key)
         # add more headers for analytics in the future
         return {"x-api-key": aflr.api_key}
 
