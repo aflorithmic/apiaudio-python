@@ -36,20 +36,17 @@ class APIRequest:
     @classmethod
     def _get_request(cls, url=None, path_param=None, request_params=None):
         url = url or f"{aflr.api_base}{cls.resource_path}"
-        if hasattr(cls, "file_url"):
-            url = f"{aflr.api_base}{cls.file_url}"
 
         if hasattr(cls, "bg_url"):
             url = f"{aflr.api_base}{cls.bg_url}"
 
-        headers = cls._build_header()  # DRY. To be changed.
+        headers = cls._build_header()
+
+        if path_param:
+            url = f"{aflr.api_base}{path_param}"
+
         if request_params:
             r = requests.get(url=url, headers=headers, params=request_params)
-        elif path_param:
-            r = requests.get(
-                url=f"{aflr.api_base}/{path_param}",
-                headers=headers,
-            )
         else:
             r = requests.get(url=url, headers=headers)
         cls._expanded_raise_for_status(r)
