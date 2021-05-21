@@ -45,7 +45,7 @@ class DownloadableResource(APIRequest):
         except Exception:
             print(audio_files)
             raise TypeError(
-                "Error retriving the audiofiles. The response object is not a dict"
+                "Error retrieving the audio files. Make sure you can retrieve them with the same parameters and try again."
             )
 
         if "url" in audio_files.keys():
