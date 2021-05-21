@@ -16,7 +16,7 @@ class APIRequest:
             raise TypeError("api_key must be of type string.")
         if len(api_key) < 32:
             raise ValueError(
-                "Please specify a valid api_key or create one here:\nhttps://console.api.audio"
+                "Please specify a valid api_key or create one here:\n https://console.api.audio"
             )
 
     @classmethod
