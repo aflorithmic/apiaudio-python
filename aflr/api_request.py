@@ -35,9 +35,6 @@ class APIRequest:
     def _get_request(cls, url=None, path_param=None, request_params=None):
         url = url or f"{aflr.api_base}{cls.resource_path}"
 
-        if hasattr(cls, "bg_url"):
-            url = f"{aflr.api_base}{cls.bg_url}"
-
         headers = cls._build_header()
 
         if path_param:
