@@ -11,6 +11,7 @@ class Sound(APIRequest):
         self.url = self.api_base + "/sound"
         self.file_url = self.api_base + "/file/sound"
         self.bg_url = self.api_base + "/file/bg"
+        self.soundtemplates_url = self.api_base + "/file/soundtemplates"
 
     def create(self, **params):
         return self._post_request(url=self.url, json=params)
@@ -21,6 +22,9 @@ class Sound(APIRequest):
 
     def list(self):
         return self._get_request(url=self.bg_url)
+    
+    def list_sound_templates(self):
+        return self._get_request(url=self.soundtemplates_url)
 
     def download(self, scriptId, parameters={}, destination="."):
         url = self.retrieve(scriptId=scriptId, parameters=parameters).get("url")
