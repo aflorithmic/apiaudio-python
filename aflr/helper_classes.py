@@ -25,8 +25,11 @@ class RetrievableResource(APIRequest):
         if section:
             params.update({"section": section})
 
+        if cls.OBJECT_NAME == "script":
+            return cls._get_request(path_param=f"{cls.resource_path}/{scriptId}")
+
         if hasattr(cls, "file_url"):
-            return cls._get_request(path_param=cls.file_url, request_params=params)
+            return cls._get_request(path_param=f"{cls.file_url}", request_params=params)
         else:
             return cls._get_request(request_params=params)
 
@@ -40,6 +43,7 @@ class DownloadableResource(APIRequest):
             audio_files = cls.retrieve(scriptId, section, parameters)
             audio_files.keys()
         except Exception:
+            print(audio_files)
             raise TypeError(
                 "Error retriving the audiofiles. The response object is not a dict"
             )
