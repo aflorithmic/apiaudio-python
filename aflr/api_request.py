@@ -4,11 +4,9 @@ import shutil
 import os
 import requests
 from requests.exceptions import HTTPError
-from functools import lru_cache
 
 
 class APIRequest:
-    @lru_cache(maxsize=10, typed=False)
     def _api_key_checker(api_key=None):
         if api_key == None or api_key == "your-key":
             api_key = os.environ.get("aflr_key", None)
