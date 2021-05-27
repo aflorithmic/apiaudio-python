@@ -78,21 +78,21 @@ Let's create our first audio from text.
 ✍️ Create a new script:
 
 ```python
-script = aflr.Script().create(scriptText="Hello world", scriptName="hello")
+script = aflr.Script.create(scriptText="Hello world", scriptName="hello")
 print(script)
 ```
 
 🎤 Create an speech audio file from the script using Joanna's voice:
 
 ```python
-response = aflr.Speech().create(scriptId=script["scriptId"], voice="Joanna")
+response = aflr.Speech.create(scriptId=script["scriptId"], voice="Joanna")
 print(response)
 ```
 
 🎧 Now let's master the speech file with high quality and a nice background track.
 
 ```python
-response = aflr.Mastering().create(
+response = aflr.Mastering.create(
 	scriptId=script.get("scriptId"),
 	backgroundTrackId="full__citynights.wav"
 	)
@@ -102,14 +102,14 @@ print(response)
 🎉 Finally, get the urls of the audio files generated:
 
 ```python
-urls = aflr.Mastering().retrieve(scriptId=script["scriptId"])
+urls = aflr.Mastering.retrieve(scriptId=script["scriptId"])
 print(urls)
 ```
 
 Or download the files in your current folder:
 
 ```python
-filepath = aflr.Mastering().download(scriptId=script["scriptId"], destination=".")
+filepath = aflr.Mastering.download(scriptId=script["scriptId"], destination=".")
 print(filepath)
 ```
 
@@ -120,25 +120,25 @@ import aflr
 aflr.api_key = "your-key"
 
 # script creation
-script = aflr.Script().create(scriptText="Hello world", scriptName="hello")
+script = aflr.Script.create(scriptText="Hello world", scriptName="hello")
 
 # speech creation
-response = aflr.Speech().create(scriptId=script["scriptId"], voice="Joanna")
+response = aflr.Speech.create(scriptId=script["scriptId"], voice="Joanna")
 print(response)
 
 # mastering process
-response = aflr.Mastering().create(
+response = aflr.Mastering.create(
 	scriptId=script.get("scriptId"),
 	backgroundTrackId="full__citynights.wav"
 	)
 print(response)
 
 # get url of audio tracks generated
-urls = aflr.Mastering().retrieve(scriptId=script["scriptId"])
+urls = aflr.Mastering.retrieve(scriptId=script["scriptId"])
 print(urls)
 
 # or download
-filepath = aflr.Mastering().download(scriptId=script["scriptId"], destination=".")
+filepath = aflr.Mastering.download(scriptId=script["scriptId"], destination=".")
 print(filepath)
 ```
 
@@ -189,7 +189,7 @@ Script.create()
 The second approach is to use it directly:
 
 ```python
-aflr.Script().create()
+aflr.Script.create()
 ```
 
 Same logic applies for other resources (`Speech`, `Voice`, `Sound`...)
@@ -209,7 +209,7 @@ Script methods are:
     - `scriptId` (string) - Custom identifier for your script. If scriptId parameter is used, then projectName, moduleName and scriptName are required parameters.
   - Example:
     ```python
-    script = aflr.Script().create(
+    script = aflr.Script.create(
         scriptText="<<sectionName::hello>> Hello {{username|buddy}} <<sectionName::bye>> Good bye from {{location|barcelona}}",
         projectName="myProject",
         moduleName="myModule",
@@ -222,14 +222,14 @@ Script methods are:
     - `scriptId` \* [Required] (string) - The script ID you want to retrieve.
   - Example:
     ```python
-    script = aflr.Script().retrieve(scriptId="id-1234")
+    script = aflr.Script.retrieve(scriptId="id-1234")
     ```
 - `list()` - List all scripts available in your organization.
   - Parameters:
     - No parameters required.
   - Example:
     ```python
-    scripts = aflr.Script().list()
+    scripts = aflr.Script.list()
     ```
 
 ### `Speech` resource <a name = "speech"> </a>
@@ -265,14 +265,14 @@ Speech methods are:
     - `scriptSpeed`(DEPRECATED, use `speed` instead)
   - Simple example:
     ```python
-    response = aflr.Speech().create(
+    response = aflr.Speech.create(
         scriptId="id-1234",
         voice="Joanna"
         )
     ```
   - Complete example:
     ```python
-    response = aflr.Speech().create(
+    response = aflr.Speech.create(
         scriptId="id-1234",
         voice="Matthew",
         speed=100,
@@ -300,7 +300,7 @@ Speech methods are:
     - `parameters` (dict) - Dict containing the personalisation parameters for the first section of the script. This parameter depends on the parameters you used in your [script](#script)'s resource section. If this parameter is used, `section` must be specified.
   - Example:
     ```python
-    audio_files = aflr.Speech().retrieve(scriptId="id-1234")
+    audio_files = aflr.Speech.retrieve(scriptId="id-1234")
     ```
 
 - `download()` Download the speech files in your preferred folder.
@@ -311,7 +311,7 @@ Speech methods are:
     - `destination` (string) - The folder destination path. Default is "." (current folder)
   - Example:
     ```python
-    audio_files = aflr.Speech().download(scriptId="id-1234", destination=".")
+    audio_files = aflr.Speech.download(scriptId="id-1234", destination=".")
     ```
 
 ### `Voice` resource <a name = "voice"> </a>
@@ -321,6 +321,7 @@ Voice allows you to retrieve a list of the available voices from our API.
 Voice methods are:
 
 - `list()` List all the available voices in our API. The parameters are all optional, and can be used in combination to get the perfect voice for your usecase.
+
   - Parameters:
     - `provider` (string) - Try one of: google, polly, azure, msnr
     - `providerFullName` (string) - Try with one of: amazon polly, google, microsoft azure, aflorithmic labs
@@ -330,23 +331,24 @@ Voice methods are:
     - `ageBracket` (string) - Try with one of: adult, child, senior
     - `tags` (string) - Try with one or more (separated by commas) of: steady, confident, balanced, informative, serious, instructional, slow, storytelling, calm, clear, deep, formal, sad, thin, fast, upbeat, fun, energetic, tense, very fast, flat, low pitched, high pitched, low-pitched, sing-y, cooperative, kind, stable, monotonous, neutral, responsible, business man, straight to the point, knowledgeable, focused, newscastery, newsreader, interviewer, reliable, friendly, welcoming, good for handing out information, slightly friendly
     - `industryExamples` (string) - Try with one or more (separated by commas) of: fitness, business, commercial, fashion, travel, audiobook, real estate, faith, health industry, comercial, realestate, kids entertainment, games, customer service, education, storytelling, entertainment, kids, education audiobook
-    
   - Example:
     ```python
-    all_voices = aflr.Voice().list()
+    all_voices = aflr.Voice.list()
     ```
   - Example:
     ```python
-    french_voices = aflr.Voice().list(language="french",tags="steady, fun")
+    french_voices = aflr.Voice.list(language="french",tags="steady, fun")
     ```
 
 - `list_parameters()` This endpoint lets you see which attributes you can filter the voices by, along with the allowed values for each attribute. You can later use these parameters and values to filter the voices you wish to list.
+
   - Parameters:
+
     - No parameters required.
-  
+
   - Example:
     ```python
-    parameters = aflr.Voice().list_parameters()
+    parameters = aflr.Voice.list_parameters()
     ```
 
 ### `Sound` resource <a name = "sound"> </a>
@@ -361,7 +363,7 @@ Sound methods are:
     - `backgroundTrackId` \* [Required] (string) - The background track file ID.
   - Example:
     ```python
-    sound_url = aflr.Sound().create(
+    sound_url = aflr.Sound.create(
         scriptId="id-1234",
         backgroundTrackId="full__citynights.wav",
     )
@@ -371,21 +373,21 @@ Sound methods are:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
   - Example:
     ```python
-    audio_files = aflr.Sound().retrieve(scriptId="id-1234")
+    audio_files = aflr.Sound.retrieve(scriptId="id-1234")
     ```
 - `list()` List all the available background tracks in our API.
   - Parameters:
     - No parameters required.
   - Example:
     ```python
-    all_bg_tracks = aflr.Sound().list()
+    all_bg_tracks = aflr.Sound.list()
     ```
 - `list_sound_templates()` List all the available sound templates in our api.
   - Parameters:
     - No parameters required.
   - Example:
     ```python
-    sound_templates = aflr.Sound().list_sound_templates()
+    sound_templates = aflr.Sound.list_sound_templates()
     ```
 - `download()` Download the sound project zip file in your preferred folder.
   - Parameters:
@@ -393,7 +395,7 @@ Sound methods are:
     - `destination` (string) - The folder destination path. Default is "." (current folder)
   - Example:
     ```python
-    audio_files = aflr.Sound().download(scriptId="id-1234", destination=".")
+    audio_files = aflr.Sound.download(scriptId="id-1234", destination=".")
     ```
 
 ### `Mastering` resource <a name = "mastering"> </a>
@@ -409,7 +411,7 @@ Mastering methods are:
     - `audience` (list) - List of dicts containing the personalisation parameters. This parameter depends on the number of parameters you used in your [script](#script) resource. In the script documentation example above, we used 2 parameters: `username` and `location`, and in the following example below we want to produce the script for username `Antonio` with location `Barcelona`.
   - Example:
     ```python
-    response = aflr.Mastering().create(
+    response = aflr.Mastering.create(
         scriptId="id-1234",
         backgroundTrackId="full__citynights.wav",
         audience=[{"username":"antonio", "location":"barcelona"}]
@@ -421,7 +423,7 @@ Mastering methods are:
     - `parameters` (dict) - Dictionary containing the audience item you want to retrieve.
   - Example:
     ```python
-    mastered_files = aflr.Mastering().retrieve(
+    mastered_files = aflr.Mastering.retrieve(
       scriptId="id-1234",
       parameters={"username":"antonio", "location":"barcelona"}
     )
@@ -433,7 +435,7 @@ Mastering methods are:
     - `destination` (string) - The folder destination path. Default is "." (current folder)
   - Example:
     ```python
-    mastered_files = aflr.Mastering().download(
+    mastered_files = aflr.Mastering.download(
       scriptId="id-1234",
       parameters={"username":"antonio", "location":"barcelona"}
       destination="."
