@@ -380,6 +380,13 @@ Sound methods are:
     ```python
     all_bg_tracks = aflr.Sound().list()
     ```
+- `list_sound_templates()` List all the available sound templates in our api.
+  - Parameters:
+    - No parameters required.
+  - Example:
+    ```python
+    sound_templates = aflr.Sound().list_sound_templates()
+    ```
 - `download()` Download the sound project zip file in your preferred folder.
   - Parameters:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
