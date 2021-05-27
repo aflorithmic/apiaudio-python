@@ -11,3 +11,4 @@ class Script(ListableResource, CreatableResource, RetrievableResource):
         return cls._get_request(
             path_param=cls.random_url, request_params={"randomText": randomText}
         )
+
