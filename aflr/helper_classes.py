@@ -43,7 +43,6 @@ class DownloadableResource(APIRequest):
             audio_files = cls.retrieve(scriptId, section, parameters)
             audio_files.keys()
         except Exception:
-            print(audio_files)
             raise TypeError(
                 "Error retrieving the audio files. Make sure you can retrieve them with the same parameters and try again."
             )
