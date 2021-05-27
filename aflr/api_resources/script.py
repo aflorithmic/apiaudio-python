@@ -9,6 +9,7 @@ class Script(APIRequest):
         super().__init__()  # add params to the init performed by the base-class
         # good read is https://stackoverflow.com/questions/1385759/should-init-call-the-parent-classs-init
         self.url = self.api_base + "/script"
+        self.random_url = self.api_base + "/script/random"
 
     def config_test(self):
         return f"Configured to transact {self.OBJECT_NAME} objects to {self.url} with api_key = {self.api_key}"
@@ -24,3 +25,9 @@ class Script(APIRequest):
     # create a new script
     def create(self, **params):
         return self._post_request(json=params)
+
+    # create a new script
+    def create_random(self, randomText=None):
+        return self._get_request(
+            url=self.random_url, request_params={"randomText": randomText}
+        )
