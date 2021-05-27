@@ -179,16 +179,17 @@ If you provide both environment variable and `aflr.api_key` authentication, the 
 ### Resource Usage <a name = "resource"> </a>
 
 There are two approaches to use the resources.
-First approach is to get the resource class first, then use resource methods. For example, to create a `Script`, we could do:
+First approach is to import the resource classes you want to use first, then use resource methods. For example, to use `Script`, we could do:
 
 ```python
-Script = aflr.Script()
+from aflr import Script
 Script.create()
 ```
 
-The second approach is to use it directly:
+The second approach is to use it directly from aflr:
 
 ```python
+import aflr
 aflr.Script.create()
 ```
 
