@@ -73,7 +73,7 @@ class APIRequest:
         except HTTPError as e:
             if res.json():
                 raise HTTPError(
-                    "{} \n Error Message from API: \n {}".format(str(e), res.json())
+                    "{} \n Error Message from API: \n {}".format(res.json(), str(e))
                 )
             else:
                 raise e
