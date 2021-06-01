@@ -18,6 +18,7 @@ class APIRequest:
             raise ValueError(
                 "Please specify a valid api_key or create one here:\n https://console.api.audio"
             )
+        return
 
     @classmethod
     def _build_header(cls):
