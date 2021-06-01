@@ -22,12 +22,10 @@ class File(ListableResource):
         payload = askopenfilename()
         filename = os.path.basename(payload)
         headers = {"Content-Type": "audio/mpeg"}
-        print("URL", cls.custom_audio_upload)
         url = cls._get_request(path_param=cls.custom_audio_upload + filename)
 
         mediaId = url["mediaId"]
         fileUploadUrl = url["fileUploadUrl"]
-        print("mediaId", mediaId)
 
         # Do put request with presigned URL
         response = requests.request(
