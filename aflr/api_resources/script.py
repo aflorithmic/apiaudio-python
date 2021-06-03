@@ -8,7 +8,6 @@ class Script(ListableResource, CreatableResource, RetrievableResource):
 
     @classmethod
     def get_random_text(cls, category=None):
-        return self._get_request(
+        return cls._get_request(
             path_param=cls.random_url, request_params={"category": category}
         )
-
