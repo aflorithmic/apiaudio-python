@@ -61,7 +61,7 @@ venv.bak/
 !.vscode/extensions.json
 
 # test files
-test.py
+test*
 
 # build files
 build/
@@ -69,3 +69,7 @@ dist/
 
 # mac
 .DS_Store
+
+# downloaded files
+*.mp3
+*.wav
