@@ -233,7 +233,7 @@ Script methods are:
     ```
 - `get_random_text()` - Retrieve random text from a list of categories.
   - Parameters:
-    - `category` \* (string) - The category from which the random text is retrieved. If no category is specified, the function defaults to `"FunFact"`
+    - `category` \* [Required] (string) - The category from which the random text is retrieved. If no category is specified, the function defaults to `"FunFact"`
   - Example:
     ```python
     text = aflr.Script().get_random_text(category="BibleVerse")
