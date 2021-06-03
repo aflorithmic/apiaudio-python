@@ -231,13 +231,13 @@ Script methods are:
     ```python
     scripts = aflr.Script().list()
     ```
-- `random` - Retrieve random text from a list of categories.
+- `get_random_text()` - Retrieve random text from a list of categories.
   - Parameters:
     - `category` \* (string) - The category from which the random text is retrieved. If no category is specified, the function defaults to `"FunFact"`
   - Example:
-  ```python
-  script = aflr.Script().get_random_text(category="BibleVerse")
-  ```
+    ```python
+    text = aflr.Script().get_random_text(category="BibleVerse")
+    ```
 ### `Speech` resource <a name = "speech"> </a>
 
 Speech allows you to do Text-To-Speech (TTS) with our API using all the voices available. Use it to create a speech audio file from your script.
