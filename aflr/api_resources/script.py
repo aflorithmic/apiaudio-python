@@ -26,8 +26,8 @@ class Script(APIRequest):
     def create(self, **params):
         return self._post_request(json=params)
 
-    # create a new script
-    def create_random(self, randomText=None):
+    # get a random script
+    def get_random_text(self, category=None):
         return self._get_request(
-            url=self.random_url, request_params={"randomText": randomText}
+            url=self.random_url, request_params={"category": category}
         )
