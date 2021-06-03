@@ -455,6 +455,7 @@ Available soon.
 - https://github.com/GetOn4
 - https://github.com/zeritte
 - https://github.com/springcoil
+- https://github.com/a96lex
 
 # License <a name = "license"> </a>
 
