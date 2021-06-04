@@ -1,6 +1,6 @@
 from posixpath import basename
 import aflr
-from aflr.helper_classes import APIRequest
+from aflr.api_request import APIRequest
 import os
 
 
