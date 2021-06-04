@@ -239,7 +239,7 @@ Script methods are:
     ```python
     text = aflr.Script().get_random_text(category="BibleVerse")
     ```
-    - Categories currently available: `"BibleVerse"`, `"FunFact"`, `"Inspirationalquote"`, `"Joke"`, `"MovieSynopsis"`, `"Poem"`, `"PhilosophicalQuestion"`, `"Recipe"`, `"TriviaQuestion"`.
+    - Categories currently available: `"BibleVerse"`, `"FunFact"`, `"InspirationalQuote"`, `"Joke"`, `"MovieSynopsis"`, `"Poem"`, `"PhilosophicalQuestion"`, `"Recipe"`, `"TriviaQuestion"`.
     
 ### `Speech` resource <a name = "speech"> </a>
 
