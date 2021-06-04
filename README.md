@@ -239,6 +239,8 @@ Script methods are:
     ```python
     text = aflr.Script().get_random_text(category="BibleVerse")
     ```
+    - Categories currently available: `"BibleVerse"`, `"FunFact"`, `"Inspirationalquote"`, `"Joke"`, `"MovieSynopsis"`, `"Poem"`, `"PhilosophicalQuestion"`, `"Recipe"`, `"TriviaQuestion"`.
+    
 ### `Speech` resource <a name = "speech"> </a>
 
 Speech allows you to do Text-To-Speech (TTS) with our API using all the voices available. Use it to create a speech audio file from your script.
