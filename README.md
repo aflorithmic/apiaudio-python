@@ -237,7 +237,7 @@ Script methods are:
     - `category` (string) - The category from which the random text is retrieved. If no category is specified, the function defaults to `"FunFact"`
   - Example:
     ```python
-    text = aflr.Script().get_random_text(category="BibleVerse")
+    text = aflr.Script.get_random_text(category="BibleVerse")
     ```
     - Categories currently available: `"BibleVerse"`, `"FunFact"`, `"Inspirationalquote"`, `"Joke"`, `"MovieSynopsis"`, `"Poem"`, `"PhilosophicalQuestion"`, `"Recipe"`, `"TriviaQuestion"`.
     
