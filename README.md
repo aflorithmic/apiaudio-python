@@ -384,6 +384,13 @@ Sound methods are:
     ```python
     audio_files = aflr.Sound.retrieve(scriptId="id-1234")
     ```
+- `list_sound_templates()` List all the available sound templates in our api.
+  - Parameters:
+    - No parameters required.
+  - Example:
+    ```python
+    sound_templates = aflr.Sound.list_sound_templates()
+    ```
 - `list()` List all the available background tracks in our API.
   - Parameters:
     - No parameters required.
@@ -391,12 +398,12 @@ Sound methods are:
     ```python
     all_bg_tracks = aflr.Sound.list()
     ```
-- `list_sound_templates()` List all the available sound templates in our api.
+- `list_v2()` List all the available background tracks in our API including a 15 seconds audio snippet.
   - Parameters:
     - No parameters required.
   - Example:
     ```python
-    sound_templates = aflr.Sound.list_sound_templates()
+    all_bg_tracks = aflr.Sound.list_v2()
     ```
 - `download()` Download the sound project zip file in your preferred folder.
   - Parameters:
