@@ -1,5 +1,4 @@
 import os
-from posixpath import basename
 
 from .api_request import APIRequest
 
@@ -73,13 +72,15 @@ class DownloadableResource(APIRequest):
 
 class UploadableResource(APIRequest):
     @classmethod
-    def upload_audiofile(cls, file_path):
-        # get presigned URL
+    def upload(cls, file_path):
         payload = open(file_path, "rb")
         filename = os.path.basename(file_path)
         headers = {"Content-Type": "audio/mpeg"}
+
+        # get presigned URL
         url = cls._get_request(
-            path_param=cls.custom_audio_resource_path + "uploadurl?filename=" + filename
+            path_param=cls.audio_resource_path + "uploadurl?",
+            request_params={"filename": filename},
         )
 
         mediaId = url["mediaId"]
@@ -88,7 +89,7 @@ class UploadableResource(APIRequest):
         response = cls._put_request_fileupload(
             url=fileUploadUrl, headers=headers, data=payload
         )
-
+        payload.close()
         response = {
             "message": f"Success. Please make sure to save this mediaId : {mediaId}"
         }
