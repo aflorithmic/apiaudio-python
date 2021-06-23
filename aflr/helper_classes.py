@@ -18,12 +18,18 @@ class CreatableResource(APIRequest):
 
 class RetrievableResource(APIRequest):
     @classmethod
-    def retrieve(cls, scriptId, section=None, parameters=None):
+    def retrieve(cls, scriptId, section=None, parameters=None, public=None, vast=None):
         params = parameters or {}
         params.update({"scriptId": scriptId})
 
         if section:
             params.update({"section": section})
+        
+        if public is not None:
+            params.update({"public": public})
+        
+        if vast is not None:
+            params.update({"vast": vast})
 
         if cls.OBJECT_NAME == "script":
             return cls._get_request(path_param=f"{cls.resource_path}/{scriptId}")
