@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://www.api.audio/" rel="noopener">
- <img src="https://d9hhrg4mnvzow.cloudfront.net/www.api.audio/ddeb49ef-logo-api-audio-isolines_10au02y000000000000028.png" alt="api.audio logo"></a>
+ <img src="https://uploads-ssl.webflow.com/60b89b300a9c71a64936aafd/60c1d07f4fd2c92916129788_logoAudio.svg" alt="api.audio logo"></a>
 </p>
 
 <h3 align="center">aflr - python SDK</h3>
