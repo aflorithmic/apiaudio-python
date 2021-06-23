@@ -425,6 +425,8 @@ Mastering methods are:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
     - `backgroundTrackId` \* [Required] (string) - The background track file ID.
     - `audience` (list) - List of dicts containing the personalisation parameters. This parameter depends on the number of parameters you used in your [script](#script) resource. In the script documentation example above, we used 2 parameters: `username` and `location`, and in the following example below we want to produce the script for username `Antonio` with location `Barcelona`.
+    - `public` (boolean) - Boolean flag that allows to store the mastered file in a public s3 folder. Default value is `False`. Warning - This will cause your mastered files to be public to anyone in the internet. Use this at your own risk.
+    - `vast` (boolean) - Boolean flag that allows to create a VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
   - Example:
     ```python
     response = aflr.Mastering.create(
@@ -437,6 +439,8 @@ Mastering methods are:
   - Parameters:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
     - `parameters` (dict) - Dictionary containing the audience item you want to retrieve.
+    - `public` (boolean) - Boolean flag that allows to retrieve the mastered file from the public bucket. Use this if you want to retrieve a mastered file created using `public=True`. Default value is `False`.
+    - `vast` (boolean) - Boolean flag that allows to retrieve the VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
   - Example:
     ```python
     mastered_files = aflr.Mastering.retrieve(
