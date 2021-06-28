@@ -453,6 +453,8 @@ Mastering methods are:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
     - `parameters` (dict) - Dictionary containing the audience item you want to retrieve.
     - `destination` (string) - The folder destination path. Default is "." (current folder)
+    - `public` (boolean) - Boolean flag that allows to retrieve the mastered file from the public bucket. Use this if you want to retrieve a mastered file created using `public=True`. Default value is `False`.
+    - `vast` (boolean) - Boolean flag that allows to retrieve the VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
   - Example:
     ```python
     mastered_files = aflr.Mastering.download(

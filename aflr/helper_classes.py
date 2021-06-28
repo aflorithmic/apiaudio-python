@@ -42,11 +42,11 @@ class RetrievableResource(APIRequest):
 
 class DownloadableResource(APIRequest):
     @classmethod
-    def download(cls, scriptId, section=None, parameters=None, destination="."):
+    def download(cls, scriptId, section=None, parameters=None, public=None, vast=None, destination="."):
         parameters = parameters or {}
 
         try:
-            audio_files = cls.retrieve(scriptId, section, parameters)
+            audio_files = cls.retrieve(scriptId, section, parameters, public, vast)
             audio_files.keys()
         except Exception:
             raise TypeError(
