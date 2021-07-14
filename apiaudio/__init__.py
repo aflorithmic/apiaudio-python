@@ -23,4 +23,4 @@ max_network_retries = 0
 log = None
 
 # API resources
-from aflr.api_resources import *
+from apiaudio.api_resources import *

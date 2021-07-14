@@ -1,4 +1,4 @@
-from aflr.helper_classes import (
+from apiaudio.helper_classes import (
     CreatableResource,
     DownloadableResource,
     ListableResource,

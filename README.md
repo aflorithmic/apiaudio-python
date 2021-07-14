@@ -1,13 +1,17 @@
+# SDK Rename notice 👉 `aflr` is now `apiaudio`
+[14th July 2021]
+The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not be maintained with this name. Please start using `apiaudio` instead 👉 `pip install apiaudio`, and change the name from `aflr` to `apiaudio` in your requirements file. 
+
 <p align="center">
 <a href="https://www.api.audio/" rel="noopener">
  <img src="https://uploads-ssl.webflow.com/60b89b300a9c71a64936aafd/60c1d07f4fd2c92916129788_logoAudio.svg" alt="api.audio logo"></a>
 </p>
 
-<h3 align="center">aflr - python SDK</h3>
+<h3 align="center">apiaudio - python SDK</h3>
 
 ---
 
-<p align="center"> aflr is the official <a href="https://www.api.audio/" rel="noopener">api.audio</a> Python 3 SDK. This SDK provides easy access to the api.audio API from applications written in python. 
+<p align="center"> apiaudio is the official <a href="https://www.api.audio/" rel="noopener">api.audio</a> Python 3 SDK. This SDK provides easy access to the api.audio API from applications written in python. 
     <br> 
 </p>
 
@@ -41,7 +45,7 @@ This repository is actively maintained by [Aflorithmic Labs](https://www.aflorit
 You don't need this source code unless you want to modify it. If you want to use the package, just run:
 
 ```sh
-pip install aflr -U
+pip install apiaudio -U
 ```
 
 Install from source with:
@@ -64,11 +68,11 @@ touch hello.py
 
 ### Authentication
 
-The library needs to be configured with your account's secret key which is available in your [Aflorithmic Dashboard](https://console.api.audio). Import the aflr package and set `aflr.api_key` with the api-key you got from the dashboard:
+The library needs to be configured with your account's secret key which is available in your [api.audio Console](https://console.api.audio). Import the apiaudio package and set `apiaudio.api_key` with the api-key you got from the console:
 
 ```python
-import aflr
-aflr.api_key = "your-key"
+import apiaudio
+apiaudio.api_key = "your-key"
 ```
 
 ### Create Text to audio in 4 steps
@@ -78,21 +82,21 @@ Let's create our first audio from text.
 ✍️ Create a new script:
 
 ```python
-script = aflr.Script.create(scriptText="Hello world", scriptName="hello")
+script = apiaudio.Script.create(scriptText="Hello world", scriptName="hello")
 print(script)
 ```
 
 🎤 Create an speech audio file from the script using Joanna's voice:
 
 ```python
-response = aflr.Speech.create(scriptId=script["scriptId"], voice="Joanna")
+response = apiaudio.Speech.create(scriptId=script["scriptId"], voice="Joanna")
 print(response)
 ```
 
 🎧 Now let's master the speech file with high quality and a nice background track.
 
 ```python
-response = aflr.Mastering.create(
+response = apiaudio.Mastering.create(
 	scriptId=script.get("scriptId"),
 	backgroundTrackId="full__citynights.wav"
 	)
@@ -102,43 +106,43 @@ print(response)
 🎉 Finally, get the urls of the audio files generated:
 
 ```python
-urls = aflr.Mastering.retrieve(scriptId=script["scriptId"])
+urls = apiaudio.Mastering.retrieve(scriptId=script["scriptId"])
 print(urls)
 ```
 
 Or download the files in your current folder:
 
 ```python
-filepath = aflr.Mastering.download(scriptId=script["scriptId"], destination=".")
+filepath = apiaudio.Mastering.download(scriptId=script["scriptId"], destination=".")
 print(filepath)
 ```
 
 Easy right? 🔮 This is the `hello.py` final picture:
 
 ```python
-import aflr
-aflr.api_key = "your-key"
+import apiaudio
+apiaudio.api_key = "your-key"
 
 # script creation
-script = aflr.Script.create(scriptText="Hello world", scriptName="hello")
+script = apiaudio.Script.create(scriptText="Hello world", scriptName="hello")
 
 # speech creation
-response = aflr.Speech.create(scriptId=script["scriptId"], voice="Joanna")
+response = apiaudio.Speech.create(scriptId=script["scriptId"], voice="Joanna")
 print(response)
 
 # mastering process
-response = aflr.Mastering.create(
+response = apiaudio.Mastering.create(
 	scriptId=script.get("scriptId"),
 	backgroundTrackId="full__citynights.wav"
 	)
 print(response)
 
 # get url of audio tracks generated
-urls = aflr.Mastering.retrieve(scriptId=script["scriptId"])
+urls = apiaudio.Mastering.retrieve(scriptId=script["scriptId"])
 print(urls)
 
 # or download
-filepath = aflr.Mastering.download(scriptId=script["scriptId"], destination=".")
+filepath = apiaudio.Mastering.download(scriptId=script["scriptId"], destination=".")
 print(filepath)
 ```
 
@@ -155,26 +159,26 @@ Once completed, check the files in the `hello.py` root folder - you will see a n
 ### Import <a name = "import"></a>
 
 ```python
-import aflr
+import apiaudio
 ```
 
 ### Authentication <a name = "authentication"></a>
 
-The library needs to be configured with your account's secret key which is available in your [Aflorithmic Dashboard](https://console.api.audio). Set `aflr.api_key` with the api-key you got from the dashboard:
+The library needs to be configured with your account's secret key which is available in your [Aflorithmic Dashboard](https://console.api.audio). Set `apiaudio.api_key` with the api-key you got from the dashboard:
 
 ```python
-aflr.api_key = "your-key"
+apiaudio.api_key = "your-key"
 ```
 
 ### Authentication with environment variable (recommended) <a name = "authentication_env"></a>
 
-You can also authenticate using `aflr_key` environment variable and the aflr SDK will automatically use it. To setup, open the terminal and type:
+You can also authenticate using `apiaudio_key` environment variable and the apiaudio SDK will automatically use it. To setup, open the terminal and type:
 
 ```sh
-export aflr_key=<your-key>
+export apiaudio_key=<your-key>
 ```
 
-If you provide both environment variable and `aflr.api_key` authentication, the `aflr.api_key` will be used.
+If you provide both environment variable and `apiaudio.api_key` authentication, the `apiaudio.api_key` will be used.
 
 ### Resource Usage <a name = "resource"> </a>
 
@@ -182,15 +186,15 @@ There are two approaches to use the resources.
 First approach is to import the resource classes you want to use first, then use resource methods. For example, to use `Script`, we could do:
 
 ```python
-from aflr import Script
+from apiaudio import Script
 Script.create()
 ```
 
-The second approach is to use it directly from aflr:
+The second approach is to use it directly from apiaudio:
 
 ```python
-import aflr
-aflr.Script.create()
+import apiaudio
+apiaudio.Script.create()
 ```
 
 Same logic applies for other resources (`Speech`, `Voice`, `Sound`...)
@@ -210,7 +214,7 @@ Script methods are:
     - `scriptId` (string) - Custom identifier for your script. If scriptId parameter is used, then projectName, moduleName and scriptName are required parameters.
   - Example:
     ```python
-    script = aflr.Script.create(
+    script = apiaudio.Script.create(
         scriptText="<<sectionName::hello>> Hello {{username|buddy}} <<sectionName::bye>> Good bye from {{location|barcelona}}",
         projectName="myProject",
         moduleName="myModule",
@@ -223,21 +227,21 @@ Script methods are:
     - `scriptId` \* [Required] (string) - The script ID you want to retrieve.
   - Example:
     ```python
-    script = aflr.Script.retrieve(scriptId="id-1234")
+    script = apiaudio.Script.retrieve(scriptId="id-1234")
     ```
 - `list()` - List all scripts available in your organization.
   - Parameters:
     - No parameters required.
   - Example:
     ```python
-    scripts = aflr.Script.list()
+    scripts = apiaudio.Script.list()
     ```
 - `get_random_text()` - Retrieve random text from a list of categories.
   - Parameters:
     - `category` (string) - The category from which the random text is retrieved. If no category is specified, the function defaults to `"FunFact"`
   - Example:
     ```python
-    text = aflr.Script.get_random_text(category="BibleVerse")
+    text = apiaudio.Script.get_random_text(category="BibleVerse")
     ```
     - Categories currently available: `"BibleVerse"`, `"FunFact"`, `"InspirationalQuote"`, `"Joke"`, `"MovieSynopsis"`, `"Poem"`, `"PhilosophicalQuestion"`, `"Recipe"`, `"TriviaQuestion"`.
     
@@ -274,14 +278,14 @@ Speech methods are:
     - `scriptSpeed`(DEPRECATED, use `speed` instead)
   - Simple example:
     ```python
-    response = aflr.Speech.create(
+    response = apiaudio.Speech.create(
         scriptId="id-1234",
         voice="Joanna"
         )
     ```
   - Complete example:
     ```python
-    response = aflr.Speech.create(
+    response = apiaudio.Speech.create(
         scriptId="id-1234",
         voice="Matthew",
         speed=100,
@@ -309,7 +313,7 @@ Speech methods are:
     - `parameters` (dict) - Dict containing the personalisation parameters for the first section of the script. This parameter depends on the parameters you used in your [script](#script)'s resource section. If this parameter is used, `section` must be specified.
   - Example:
     ```python
-    audio_files = aflr.Speech.retrieve(scriptId="id-1234")
+    audio_files = apiaudio.Speech.retrieve(scriptId="id-1234")
     ```
 
 - `download()` Download the speech files in your preferred folder.
@@ -320,7 +324,7 @@ Speech methods are:
     - `destination` (string) - The folder destination path. Default is "." (current folder)
   - Example:
     ```python
-    audio_files = aflr.Speech.download(scriptId="id-1234", destination=".")
+    audio_files = apiaudio.Speech.download(scriptId="id-1234", destination=".")
     ```
 
 ### `Voice` resource <a name = "voice"> </a>
@@ -342,11 +346,11 @@ Voice methods are:
     - `industryExamples` (string) - Try with one or more (separated by commas) of: fitness, business, commercial, fashion, travel, audiobook, real estate, faith, health industry, comercial, realestate, kids entertainment, games, customer service, education, storytelling, entertainment, kids, education audiobook
   - Example:
     ```python
-    all_voices = aflr.Voice.list()
+    all_voices = apiaudio.Voice.list()
     ```
   - Example:
     ```python
-    french_voices = aflr.Voice.list(language="french",tags="steady, fun")
+    french_voices = apiaudio.Voice.list(language="french",tags="steady, fun")
     ```
 
 - `list_parameters()` This endpoint lets you see which attributes you can filter the voices by, along with the allowed values for each attribute. You can later use these parameters and values to filter the voices you wish to list.
@@ -357,7 +361,7 @@ Voice methods are:
 
   - Example:
     ```python
-    parameters = aflr.Voice.list_parameters()
+    parameters = apiaudio.Voice.list_parameters()
     ```
 
 ### `Sound` resource <a name = "sound"> </a>
@@ -372,7 +376,7 @@ Sound methods are:
     - `backgroundTrackId` \* [Required] (string) - The background track file ID.
   - Example:
     ```python
-    sound_url = aflr.Sound.create(
+    sound_url = apiaudio.Sound.create(
         scriptId="id-1234",
         backgroundTrackId="full__citynights.wav",
     )
@@ -382,28 +386,28 @@ Sound methods are:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
   - Example:
     ```python
-    audio_files = aflr.Sound.retrieve(scriptId="id-1234")
+    audio_files = apiaudio.Sound.retrieve(scriptId="id-1234")
     ```
 - `list_sound_templates()` List all the available sound templates in our api.
   - Parameters:
     - No parameters required.
   - Example:
     ```python
-    sound_templates = aflr.Sound.list_sound_templates()
+    sound_templates = apiaudio.Sound.list_sound_templates()
     ```
 - `list()` List all the available background tracks in our API.
   - Parameters:
     - No parameters required.
   - Example:
     ```python
-    all_bg_tracks = aflr.Sound.list()
+    all_bg_tracks = apiaudio.Sound.list()
     ```
 - `list_v2()` List all the available background tracks in our API including a 15 seconds audio snippet.
   - Parameters:
     - No parameters required.
   - Example:
     ```python
-    all_bg_tracks = aflr.Sound.list_v2()
+    all_bg_tracks = apiaudio.Sound.list_v2()
     ```
 - `download()` Download the sound project zip file in your preferred folder.
   - Parameters:
@@ -411,7 +415,7 @@ Sound methods are:
     - `destination` (string) - The folder destination path. Default is "." (current folder)
   - Example:
     ```python
-    audio_files = aflr.Sound.download(scriptId="id-1234", destination=".")
+    audio_files = apiaudio.Sound.download(scriptId="id-1234", destination=".")
     ```
 
 ### `Mastering` resource <a name = "mastering"> </a>
@@ -430,7 +434,7 @@ Mastering methods are:
     - `vast` (boolean) - Boolean flag that allows to create a VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
   - Example:
     ```python
-    response = aflr.Mastering.create(
+    response = apiaudio.Mastering.create(
         scriptId="id-1234",
         backgroundTrackId="full__citynights.wav",
         audience=[{"username":"antonio", "location":"barcelona"}]
@@ -444,7 +448,7 @@ Mastering methods are:
     - `vast` (boolean) - Boolean flag that allows to retrieve the VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
   - Example:
     ```python
-    mastered_files = aflr.Mastering.retrieve(
+    mastered_files = apiaudio.Mastering.retrieve(
       scriptId="id-1234",
       parameters={"username":"antonio", "location":"barcelona"}
     )
@@ -458,7 +462,7 @@ Mastering methods are:
     - `vast` (boolean) - Boolean flag that allows to retrieve the VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
   - Example:
     ```python
-    mastered_files = aflr.Mastering.download(
+    mastered_files = apiaudio.Mastering.download(
       scriptId="id-1234",
       parameters={"username":"antonio", "location":"barcelona"}
       destination="."

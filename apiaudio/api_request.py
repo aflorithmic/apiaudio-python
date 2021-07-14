@@ -1,4 +1,4 @@
-import aflr
+import apiaudio
 import requests
 import shutil
 import os
@@ -9,8 +9,7 @@ from requests.exceptions import HTTPError
 class APIRequest:
     def _api_key_checker(api_key=None):
         if api_key == None or api_key == "your-key":
-            api_key = os.environ.get("aflr_key", None)
-
+            api_key = os.environ.get("apiaudio_key", None)
         if not isinstance(api_key, str):
             raise TypeError("api_key must be of type string.")
 
@@ -18,21 +17,22 @@ class APIRequest:
             raise ValueError(
                 "Please specify a valid api_key or create one here:\n https://console.api.audio"
             )
-
+        apiaudio.api_key = api_key
         return
 
     @classmethod
     def _build_header(cls):
-        cls._api_key_checker(aflr.api_key)
-
-        return {"x-api-key": aflr.api_key}
+        print(apiaudio.api_key)
+        cls._api_key_checker(apiaudio.api_key)
+        print(apiaudio.api_key)
+        return {"x-api-key": apiaudio.api_key}
 
     @classmethod
     def _post_request(cls, json, url=None):
-        url = url or f"{aflr.api_base}{cls.resource_path}"
+        url = url or f"{apiaudio.api_base}{cls.resource_path}"
 
         headers = cls._build_header()
-
+        print(url, json)
         r = requests.post(url=url, headers=headers, json=json)
 
         cls._expanded_raise_for_status(r)
@@ -41,12 +41,12 @@ class APIRequest:
 
     @classmethod
     def _get_request(cls, url=None, path_param=None, request_params=None):
-        url = url or f"{aflr.api_base}{cls.resource_path}"
+        url = url or f"{apiaudio.api_base}{cls.resource_path}"
 
         headers = cls._build_header()
 
         if path_param:
-            url = f"{aflr.api_base}{path_param}"
+            url = f"{apiaudio.api_base}{path_param}"
 
         if request_params:
             r = requests.get(url=url, headers=headers, params=request_params)
@@ -72,7 +72,7 @@ class APIRequest:
 
     @classmethod
     def config_test(cls):
-        return f"Configured to transact {cls.OBJECT_NAME} objects to {aflr.api_base}{cls.resource_path} with api_key = {aflr.api_key}"
+        return f"Configured to transact {cls.OBJECT_NAME} objects to {apiaudio.api_base}{cls.resource_path} with api_key = {apiaudio.api_key}"
 
     @classmethod
     def _expanded_raise_for_status(self, res):

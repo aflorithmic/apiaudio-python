@@ -1,0 +1,5 @@
+from apiaudio.api_resources.script import Script
+from apiaudio.api_resources.speech import Speech
+from apiaudio.api_resources.voice import Voice
+from apiaudio.api_resources.mastering import Mastering
+from apiaudio.api_resources.sound import Sound
