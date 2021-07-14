@@ -22,9 +22,7 @@ class APIRequest:
 
     @classmethod
     def _build_header(cls):
-        print(apiaudio.api_key)
         cls._api_key_checker(apiaudio.api_key)
-        print(apiaudio.api_key)
         return {"x-api-key": apiaudio.api_key}
 
     @classmethod
@@ -32,7 +30,6 @@ class APIRequest:
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
 
         headers = cls._build_header()
-        print(url, json)
         r = requests.post(url=url, headers=headers, json=json)
 
         cls._expanded_raise_for_status(r)
