@@ -1,5 +1,5 @@
-import aflr
-from aflr.api_request import APIRequest
+import apiaudio
+from apiaudio.api_request import APIRequest
 
 
 class File(APIRequest):

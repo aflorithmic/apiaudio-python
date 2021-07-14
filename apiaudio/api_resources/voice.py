@@ -1,4 +1,4 @@
-from aflr.helper_classes import ListableResource
+from apiaudio.helper_classes import ListableResource
 
 
 class Voice(ListableResource):

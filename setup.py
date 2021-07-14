@@ -4,11 +4,11 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="aflr",
+    name="apiaudio",
     version="0.8.1",
     author="Antonio Tripiana",
     author_email="antonio@aflorithmic.ai",
-    description="Python library for the Aflorithmic api.audio API",
+    description="Python SDK for api.audio API",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/aflorithmic/aflr_python",
