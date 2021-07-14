@@ -19,7 +19,7 @@ class CreatableResource(APIRequest):
 class RetrievableResource(APIRequest):
     @classmethod
     def retrieve(cls, scriptId, section=None, parameters=None, public=None, vast=None):
-        params = parameters.copy() or {}
+        params = parameters.copy() if parameters else {}
         params.update({"scriptId": scriptId})
 
         if section:
