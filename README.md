@@ -1,4 +1,4 @@
-# 👉 *aflr* is now *apiaudio*
+# SDK Rename notice 👉 `aflr` is now `apiaudio`
 [14th July 2021]
 The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not be maintained with this name. Please start using `apiaudio` instead 👉 `pip install apiaudio`, and change the name from `aflr` to `apiaudio` in your requirements file. 
 
