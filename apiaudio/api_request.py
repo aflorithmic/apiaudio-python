@@ -10,10 +10,8 @@ class APIRequest:
     def _api_key_checker(api_key=None):
         PLACEHOLDERS = ["your-key", "APIKEY", "API_KEY"]
         if api_key == None or api_key in PLACEHOLDERS:
-            api_key = os.environ.get("apiaudio_key", None)
-        # backwards compatibility with aflr env variables
-        if api_key == None:
-                api_key = os.environ.get("aflr_key", None)
+            # aflr_key is for backward compatibility with the old name of env vars.
+            api_key = os.environ.get("apiaudio_key", os.environ.get("aflr_key", None))
         if not isinstance(api_key, str):
             raise TypeError("api_key must be of type string.")
 
