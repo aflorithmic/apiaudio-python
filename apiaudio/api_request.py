@@ -8,8 +8,10 @@ from requests.exceptions import HTTPError
 
 class APIRequest:
     def _api_key_checker(api_key=None):
-        if api_key == None or api_key == "your-key":
-            api_key = os.environ.get("apiaudio_key", None)
+        PLACEHOLDERS = ["your-key", "APIKEY", "API_KEY"]
+        if api_key == None or api_key in PLACEHOLDERS:
+            # aflr_key is for backward compatibility with the old name of env vars.
+            api_key = os.environ.get("apiaudio_key", os.environ.get("aflr_key", None))
         if not isinstance(api_key, str):
             raise TypeError("api_key must be of type string.")
 
