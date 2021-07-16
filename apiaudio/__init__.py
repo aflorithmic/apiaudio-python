@@ -22,5 +22,11 @@ max_network_retries = 0
 # Set to either 'debug' or 'info', controls console logging
 log = None
 
+
+def use_staging(debug=True):
+    global api_base
+    api_base = f"https://{'staging-' if debug else ''}v1.api.audio"
+
+
 # API resources
 from apiaudio.api_resources import *
