@@ -1,6 +1,7 @@
 # SDK Rename notice 👉 `aflr` is now `apiaudio`
+
 [14th July 2021]
-The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not be maintained with this name. Please start using `apiaudio` instead 👉 `pip install apiaudio`, and change the name from `aflr` to `apiaudio` in your requirements file. 
+The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not be maintained with this name. Please start using `apiaudio` instead 👉 `pip install apiaudio`, and change the name from `aflr` to `apiaudio` in your requirements file.
 
 <p align="center">
 <a href="https://www.api.audio/" rel="noopener">
@@ -31,6 +32,7 @@ The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not 
   - [Sound](#sound)
   - [Mastering](#mastering)
   - [File](#file)
+  - [SyncTTS](#synctts)
 - [Authors](#authors)
 - [License](#license)
 
@@ -244,7 +246,7 @@ Script methods are:
     text = apiaudio.Script.get_random_text(category="BibleVerse")
     ```
     - Categories currently available: `"BibleVerse"`, `"FunFact"`, `"InspirationalQuote"`, `"Joke"`, `"MovieSynopsis"`, `"Poem"`, `"PhilosophicalQuestion"`, `"Recipe"`, `"TriviaQuestion"`.
-    
+
 ### `Speech` resource <a name = "speech"> </a>
 
 Speech allows you to do Text-To-Speech (TTS) with our API using all the voices available. Use it to create a speech audio file from your script.
@@ -256,7 +258,7 @@ Speech methods are:
     - `scriptId` \* [Required] (string) - The script ID
     - `voice` (string) - Voice name. See the list of available voices using [Voice resource](#voice). Default voice is "Joanna".
     - `speed` (string) - Voice speed. Default speed is 100.
-    - `effect` (string) - Put a funny effect in your voice. You can try the following ones: `dark_father`, `chewie`, `88b`, `2r2d`, `volume_boost_low` `volume_boost_middle` `volume_boost_high` (Volume boost allows you to adjust the volume of speech. NOTE! Volume boost effect only applies to speech creation and will be overwritten by the mastering process) 
+    - `effect` (string) - Put a funny effect in your voice. You can try the following ones: `dark_father`, `chewie`, `88b`, `2r2d`, `volume_boost_low` `volume_boost_middle` `volume_boost_high` (Volume boost allows you to adjust the volume of speech. NOTE! Volume boost effect only applies to speech creation and will be overwritten by the mastering process)
     - `silence_padding` (integer) - Add a silence padding to your speech tracks (in milliseconds). Default is 0 (no padding)
     - `audience` (dictionary) - List of dicts containing the personalisation parameters as key-value pairs. This parameter depends on the number of parameters you used in your script resource. For instance, if in the script resource you have `scriptText="Hello {{name}} {{lastname}}"`, the audience should be: `[{"username": "Elon", "lastname": "Musk"}]`
     - `sections` (dictionary) is a dictionary (key-value pairs), where the key is a section name, and the value is another dictionary with the section configuration ( valid parameters are: voice, speed, effect, silence_padding). If a section is not found here, the section will automatically inherit the voice, speed, effect and silence_padding values you defined above (or the default ones if you don't provide them). See an example below with 2 sections and different configuration parameters being used.
@@ -474,6 +476,29 @@ Mastering methods are:
 File allows you to retrieve all the files available in api.audio for your organization.
 
 Available soon.
+
+### `SyncTTS` resource <a name = "synctts"> </a>
+
+**Warning:** Please request access if you want to test this resource.
+
+SyncTTS allows you to do Synchronous Text-To-Speech (TTS) with our API using all the voices available. Use it to create a speech audio file from a text and a voice name.
+
+SyncTTS methods are:
+
+- `create()` Create a TTS speech file.
+
+  - Parameters:
+
+    - `voice` \* [Required] (string) - Voice name. See the list of available voices using [Voice resource](#voice).
+    - `text` \* [Required] (string) - The text you want to do TTS with.
+
+  - Example:
+    ```python
+    sync_tts = apiaudio.SyncTTS.create(
+      voice="salih",
+      text="This is me creating synchronous text to speech"
+    )
+    ```
 
 # Authors <a name = "authors"> </a>
 
