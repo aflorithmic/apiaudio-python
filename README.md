@@ -1,6 +1,7 @@
 # SDK Rename notice 👉 `aflr` is now `apiaudio`
+
 [14th July 2021]
-The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not be maintained with this name. Please start using `apiaudio` instead 👉 `pip install apiaudio`, and change the name from `aflr` to `apiaudio` in your requirements file. 
+The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not be maintained with this name. Please start using `apiaudio` instead 👉 `pip install apiaudio`, and change the name from `aflr` to `apiaudio` in your requirements file.
 
 <p align="center">
 <a href="https://www.api.audio/" rel="noopener">
@@ -244,7 +245,7 @@ Script methods are:
     text = apiaudio.Script.get_random_text(category="BibleVerse")
     ```
     - Categories currently available: `"BibleVerse"`, `"FunFact"`, `"InspirationalQuote"`, `"Joke"`, `"MovieSynopsis"`, `"Poem"`, `"PhilosophicalQuestion"`, `"Recipe"`, `"TriviaQuestion"`.
-    
+
 ### `Speech` resource <a name = "speech"> </a>
 
 Speech allows you to do Text-To-Speech (TTS) with our API using all the voices available. Use it to create a speech audio file from your script.
@@ -256,7 +257,7 @@ Speech methods are:
     - `scriptId` \* [Required] (string) - The script ID
     - `voice` (string) - Voice name. See the list of available voices using [Voice resource](#voice). Default voice is "Joanna".
     - `speed` (string) - Voice speed. Default speed is 100.
-    - `effect` (string) - Put a funny effect in your voice. You can try the following ones: `dark_father`, `chewie`, `88b`, `2r2d`, `volume_boost_low` `volume_boost_middle` `volume_boost_high` (Volume boost allows you to adjust the volume of speech. NOTE! Volume boost effect only applies to speech creation and will be overwritten by the mastering process) 
+    - `effect` (string) - Put a funny effect in your voice. You can try the following ones: `dark_father`, `chewie`, `88b`, `2r2d`, `volume_boost_low` `volume_boost_middle` `volume_boost_high` (Volume boost allows you to adjust the volume of speech. NOTE! Volume boost effect only applies to speech creation and will be overwritten by the mastering process)
     - `silence_padding` (integer) - Add a silence padding to your speech tracks (in milliseconds). Default is 0 (no padding)
     - `audience` (dictionary) - List of dicts containing the personalisation parameters as key-value pairs. This parameter depends on the number of parameters you used in your script resource. For instance, if in the script resource you have `scriptText="Hello {{name}} {{lastname}}"`, the audience should be: `[{"username": "Elon", "lastname": "Musk"}]`
     - `sections` (dictionary) is a dictionary (key-value pairs), where the key is a section name, and the value is another dictionary with the section configuration ( valid parameters are: voice, speed, effect, silence_padding). If a section is not found here, the section will automatically inherit the voice, speed, effect and silence_padding values you defined above (or the default ones if you don't provide them). See an example below with 2 sections and different configuration parameters being used.
@@ -388,27 +389,30 @@ Sound methods are:
     ```python
     audio_files = apiaudio.Sound.retrieve(scriptId="id-1234")
     ```
-- `list_sound_templates()` List all the available sound templates in our api.
+- `list()` List all the available sound templates in our api. The parameters are all optional, and can be used in combination to get the perfect sound for your usecase.
+
   - Parameters:
-    - No parameters required.
+    - `industryExamples` (string) - Try with one or more (separated by commas) of: news, travel, business, relaxation, fitness, relax, children stories
+    - `contents` (string) - Try with one or more (separated by commas) of: intro, main, outro, effect1, effect2, main outro, droid_main, chewie_main, effect3, ambience, only effects
+    - `genre` (string) - Try with one of: electronic, acoustic, atmospheric, abstract, rock
+    - `tempo` (string) - Try with one of: mid, up, down, uptempo
+    - `tags` (string) - Try with one or more (separated by commas) of: intense, minimal, reflective, melodic, happy, nostalgic, focus, energetic, uplifting, active, relaxed, ambience, mysterious, positive, informative, workout, work, meditation, travel, full silence
   - Example:
     ```python
-    sound_templates = apiaudio.Sound.list_sound_templates()
+    sound_templates = apiaudio.Sound.list()
     ```
-- `list()` List all the available background tracks in our API.
+
+- `list_parameters()` This endpoint lets you see which attributes you can filter the sound templates by, along with the allowed values for each attribute. You can later use these parameters and values to filter the sound templates you wish to list.
+
   - Parameters:
+
     - No parameters required.
+
   - Example:
     ```python
-    all_bg_tracks = apiaudio.Sound.list()
+    parameters = apiaudio.Sound.list_parameters()
     ```
-- `list_v2()` List all the available background tracks in our API including a 15 seconds audio snippet.
-  - Parameters:
-    - No parameters required.
-  - Example:
-    ```python
-    all_bg_tracks = apiaudio.Sound.list_v2()
-    ```
+
 - `download()` Download the sound project zip file in your preferred folder.
   - Parameters:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
