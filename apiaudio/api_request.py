@@ -15,13 +15,15 @@ class APIRequest:
             api_key = os.environ.get("apiaudio_key", os.environ.get("aflr_key"))
 
             if api_key == None:
-                raise TypeError(f"No api key has been found. {api_key_error_message}")
+                raise TypeError(f"No api_key has been found. {api_key_error_message}")
 
         if not isinstance(api_key, str):
             raise TypeError("api_key must be of type string.")
 
         if len(api_key) < 32:
-            raise ValueError(api_key_error_message)
+            raise ValueError(
+                f"api_key has less than 32 characters. {api_key_error_message}"
+            )
         apiaudio.api_key = api_key
         return
 
