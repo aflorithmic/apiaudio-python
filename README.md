@@ -392,11 +392,11 @@ Sound methods are:
 - `list()` List all the available sound templates in our api. The parameters are all optional, and can be used in combination to get the perfect sound for your usecase.
 
   - Parameters:
-    - `industryExamples` (string) - Try with one or more of (separated by commas): news, travel, business, relaxation, fitness, relax, children stories
-    - `contents` (string) - Try with one or more of (separated by commas): intro, main, outro, effect1, effect2, main outro, droid_main, chewie_main, effect3, ambience, only effects
+    - `industryExamples` (string) - Try with one or more (separated by commas) of: news, travel, business, relaxation, fitness, relax, children stories
+    - `contents` (string) - Try with one or more (separated by commas) of: intro, main, outro, effect1, effect2, main outro, droid_main, chewie_main, effect3, ambience, only effects
     - `genre` (string) - Try with one of: electronic, acoustic, atmospheric, abstract, rock
     - `tempo` (string) - Try with one of: mid, up, down, uptempo
-    - `tags` (string) - Try with one or more of (separated by commas): intense, minimal, reflective, melodic, happy, nostalgic, focus, energetic, uplifting, active, relaxed, ambience, mysterious, positive, informative, workout, work, meditation, travel, full silence
+    - `tags` (string) - Try with one or more (separated by commas) of: intense, minimal, reflective, melodic, happy, nostalgic, focus, energetic, uplifting, active, relaxed, ambience, mysterious, positive, informative, workout, work, meditation, travel, full silence
   - Example:
     ```python
     sound_templates = apiaudio.Sound.list()
