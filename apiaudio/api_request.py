@@ -8,17 +8,20 @@ from requests.exceptions import HTTPError
 
 class APIRequest:
     def _api_key_checker(api_key=None):
+        api_key_error_message = "Please specify a valid api_key or create one here:\n https://console.api.audio"
         PLACEHOLDERS = ["your-key", "APIKEY", "API_KEY"]
         if api_key == None or api_key in PLACEHOLDERS:
             # aflr_key is for backward compatibility with the old name of env vars.
-            api_key = os.environ.get("apiaudio_key", os.environ.get("aflr_key", None))
+            api_key = os.environ.get("apiaudio_key", os.environ.get("aflr_key"))
+
+            if api_key == None:
+                raise TypeError(f"No api key has been found. {api_key_error_message}")
+
         if not isinstance(api_key, str):
             raise TypeError("api_key must be of type string.")
 
         if len(api_key) < 32:
-            raise ValueError(
-                "Please specify a valid api_key or create one here:\n https://console.api.audio"
-            )
+            raise ValueError(api_key_error_message)
         apiaudio.api_key = api_key
         return
 
