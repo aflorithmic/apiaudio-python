@@ -21,4 +21,4 @@ class Sound(
 
     @classmethod
     def list(cls, **args):
-        return cls._get_request(path_param=cls.list_path, **args)
+        return cls._get_request(path_param=cls.list_path, request_params=args)
