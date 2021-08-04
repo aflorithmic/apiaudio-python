@@ -32,6 +32,7 @@ The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not 
   - [Sound](#sound)
   - [Mastering](#mastering)
   - [File](#file)
+  - [SyncTTS](#synctts)
 - [Authors](#authors)
 - [License](#license)
 
@@ -478,6 +479,29 @@ Mastering methods are:
 File allows you to retrieve all the files available in api.audio for your organization.
 
 Available soon.
+
+### `SyncTTS` resource <a name = "synctts"> </a>
+
+**Warning:** Please request access if you want to test this resource.
+
+SyncTTS allows you to do Synchronous Text-To-Speech (TTS) with our API using all the voices available. Use it to create a speech audio file from a text and a voice name.
+
+SyncTTS methods are:
+
+- `create()` Create a TTS speech file.
+
+  - Parameters:
+
+    - `voice` \* [Required] (string) - Voice name. See the list of available voices using [Voice resource](#voice).
+    - `text` \* [Required] (string) - The text you want to do TTS with.
+
+  - Example:
+    ```python
+    sync_tts = apiaudio.SyncTTS.create(
+      voice="salih",
+      text="This is me creating synchronous text to speech"
+    )
+    ```
 
 # Authors <a name = "authors"> </a>
 
