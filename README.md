@@ -492,7 +492,7 @@ SyncTTS methods are:
 
   - Parameters:
 
-    - `voice` \* [Required] (string) - Voice name. See the list of available voices using [Voice resource](#voice).
+    - `voice` \* [Required] (string) - Voice id. See the list of available voices using [Voice resource](#voice).
     - `text` \* [Required] (string) - The text you want to do TTS with.
 
   - Example:
