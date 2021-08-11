@@ -23,7 +23,9 @@ class Sound(
     @classmethod
     def list(cls):
         return cls._get_request(path_param=cls.bg_url)
-    
+
     @classmethod
     def list_v2(cls):
-        return cls._get_request(path_param=cls.bg_url_v2, request_params={"snippet": "true"})
+        return cls._get_request(
+            path_param=cls.bg_url_v2, request_params={"snippet": "true"}
+        )

@@ -1,4 +1,8 @@
-from apiaudio.helper_classes import CreatableResource, ListableResource, RetrievableResource
+from apiaudio.helper_classes import (
+    CreatableResource,
+    ListableResource,
+    RetrievableResource,
+)
 
 
 class Script(ListableResource, CreatableResource, RetrievableResource):
