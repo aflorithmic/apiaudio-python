@@ -26,10 +26,10 @@ class RetrievableResource(APIRequest):
 
         if section:
             params.update({"section": section})
-        
+
         if public is not None:
             params.update({"public": public})
-        
+
         if vast is not None:
             params.update({"vast": vast})
 
@@ -44,7 +44,15 @@ class RetrievableResource(APIRequest):
 
 class DownloadableResource(APIRequest):
     @classmethod
-    def download(cls, scriptId, section=None, parameters=None, public=None, vast=None, destination="."):
+    def download(
+        cls,
+        scriptId,
+        section=None,
+        parameters=None,
+        public=None,
+        vast=None,
+        destination=".",
+    ):
         parameters = parameters or {}
 
         try:
@@ -86,9 +94,7 @@ class UploadableResource(APIRequest):
         mediaId = url["mediaId"]
         fileUploadUrl = url["fileUploadUrl"]
 
-        response = cls._put_request_fileupload(
-            url=fileUploadUrl, headers=headers, data=payload
-        )
+        response = cls._put_request(url=fileUploadUrl, headers=headers, data=payload)
         payload.close()
         response = {
             "message": f"Success. Please make sure to save this mediaId : {mediaId}"

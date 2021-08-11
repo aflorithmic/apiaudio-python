@@ -39,14 +39,7 @@ class APIRequest:
         return r.json()
 
     @classmethod
-    def _put_request_fileupload(cls, data, url=None, headers=None):
-        url = url or f"{aflr.api_base}{cls.resource_path}"
-        r = requests.put(url=url, headers=headers, data=data)
-        cls._expanded_raise_for_status(r)
-        return r
-
-    @classmethod
-    def _get_request(cls, url=None, path_param=None, request_params=None):
+    def _put_request(cls, data, url=None, headers=None):
         url = url or f"{aflr.api_base}{cls.resource_path}"
         r = requests.put(url=url, headers=headers, data=data)
         cls._expanded_raise_for_status(r)
