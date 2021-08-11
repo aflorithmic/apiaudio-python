@@ -80,15 +80,20 @@ class DownloadableResource(APIRequest):
 
 class UploadableResource(APIRequest):
     @classmethod
-    def upload(cls, file_path):
+    def upload(cls, file_path: str = "", tags: str = None):
         payload = open(file_path, "rb")
         filename = os.path.basename(file_path)
         headers = {"Content-Type": "audio/mpeg"}
 
+        request_params = {"filename": filename}
+
+        if tags:
+            request_params["tags"] = tags
+
         # get presigned URL
         url = cls._get_request(
             path_param=cls.audio_resource_path + "uploadurl?",
-            request_params={"filename": filename},
+            request_params=request_params,
         )
 
         mediaId = url["mediaId"]
