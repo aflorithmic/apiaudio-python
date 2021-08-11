@@ -1,7 +1,7 @@
 from apiaudio.helper_classes import UploadableResource
 
 
-class File(UploadableResource):
+class Media(UploadableResource):
     audio_resource_path = "/file/customaudio/"
     OBJECT_NAME = "file"
     resource_path = "/file"
