@@ -1,4 +1,4 @@
-from aflr.helper_classes import UploadableResource
+from apiaudio.helper_classes import UploadableResource
 
 
 class File(UploadableResource):
