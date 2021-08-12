@@ -63,6 +63,9 @@ class APIRequest:
 
     @classmethod
     def _download_request(cls, url, destination):
+        if type(url) is not str:
+            raise TypeError("Error retrieving the audio files.")
+
         local_filename = f"{destination}/{url.split('/')[-1].split('?')[0]}"
         local_filename = local_filename.replace("%243ct10n", "section")
 
