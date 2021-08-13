@@ -11,21 +11,14 @@ class Sound(
 ):
     OBJECT_NAME = "sound"
     resource_path = "/sound"
+    list_path = "/sound/template"
     file_url = "/file/sound"
-    bg_url = "/file/bg"
-    bg_url_v2 = "/file/background_track"
-    soundtemplates_url = "/file/soundtemplates"
+    list_parameters_path = "/sound/parameter"
 
     @classmethod
-    def list_sound_templates(cls):
-        return cls._get_request(path_param=cls.soundtemplates_url)
+    def list_parameters(cls):
+        return cls._get_request(path_param=cls.list_parameters_path)
 
     @classmethod
-    def list(cls):
-        return cls._get_request(path_param=cls.bg_url)
-
-    @classmethod
-    def list_v2(cls):
-        return cls._get_request(
-            path_param=cls.bg_url_v2, request_params={"snippet": "true"}
-        )
+    def list(cls, **args):
+        return cls._get_request(path_param=cls.list_path, request_params=args)
