@@ -64,7 +64,7 @@ class APIRequest:
         return r.json()
 
     @classmethod
-    def _download_request(cls, url, destination):
+    def _download_request(cls, url:str, destination):
         local_filename = f"{destination}/{url.split('/')[-1].split('?')[0]}"
         local_filename = local_filename.replace("%243ct10n", "section")
 
