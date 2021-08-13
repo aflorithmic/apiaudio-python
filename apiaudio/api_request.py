@@ -60,11 +60,11 @@ class APIRequest:
             r = requests.get(url=url, headers=headers)
 
         cls._expanded_raise_for_status(r)
-        
+
         return r.json()
 
     @classmethod
-    def _download_request(cls, url:str, destination):
+    def _download_request(cls, url: str, destination):
         local_filename = f"{destination}/{url.split('/')[-1].split('?')[0]}"
         local_filename = local_filename.replace("%243ct10n", "section")
 

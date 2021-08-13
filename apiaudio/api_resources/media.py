@@ -14,7 +14,7 @@ class Media(UploadableResource):
         )
 
     @classmethod
-    def list(cls, tags=None, mediaId= None):
+    def list(cls, tags=None, mediaId=None):
         if mediaId:
             return cls._get_request(
                 path_param=cls.audio_resource_path,
@@ -30,4 +30,3 @@ class Media(UploadableResource):
     @classmethod
     def list_tags(cls):
         return cls._get_request(path_param=f"{cls.audio_resource_path}/tags")
-        
