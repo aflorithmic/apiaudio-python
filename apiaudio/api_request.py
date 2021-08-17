@@ -50,8 +50,11 @@ class APIRequest:
         r = requests.put(url=url, headers=headers, data=data)
 
         cls._expanded_raise_for_status(r)
+        
+        if r.status_code != 200:
+            raise ValueError("Error performing the PUT request")
 
-        return r.json()
+        return r
 
     @classmethod
     def _get_request(cls, url=None, path_param=None, request_params=None):
