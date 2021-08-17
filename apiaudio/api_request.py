@@ -41,15 +41,16 @@ class APIRequest:
 
         cls._expanded_raise_for_status(r)
 
-        return r.json() 
+        return r.json()
 
     @classmethod
     def _put_request(cls, data, url=None, headers=None):
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
 
         r = requests.put(url=url, headers=headers, data=data)
-        
+
         cls._expanded_raise_for_status(r)
+
         return r.json()
 
     @classmethod
