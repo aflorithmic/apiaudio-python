@@ -92,7 +92,7 @@ class UploadableResource(APIRequest):
 
         # get presigned URL
         url = cls._get_request(
-            path_param=cls.audio_resource_path + "uploadurl?",
+            path_param=f"{cls.audio_resource_path}/uploadurl",
             request_params=request_params,
         )
 
@@ -100,8 +100,12 @@ class UploadableResource(APIRequest):
         fileUploadUrl = url["fileUploadUrl"]
 
         response = cls._put_request(url=fileUploadUrl, headers=headers, data=payload)
+
         payload.close()
+
         response = {
-            "message": f"Success. Please make sure to save this mediaId : {mediaId}"
+            "message": f"Success. Use mediaId to retrieve this file",
+            "mediaId": mediaId,
         }
+
         return response
