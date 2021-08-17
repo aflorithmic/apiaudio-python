@@ -80,7 +80,7 @@ class DownloadableResource(APIRequest):
 
 class UploadableResource(APIRequest):
     @classmethod
-    def upload(cls, file_path: str = "", tags: str = None):
+    def upload(cls, file_path: str = "", tags: str = ""):
         payload = open(file_path, "rb")
         filename = os.path.basename(file_path)
         headers = {"Content-Type": "audio/mpeg"}
