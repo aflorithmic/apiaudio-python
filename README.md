@@ -544,7 +544,10 @@ Media methods are:
 
   - Example
     ```python
-    apiaudio.Media.download(mediaId="some_mediaId",destination="/my_destination_folder")
+    apiaudio.Media.download(
+      mediaId="some_mediaId",
+      destination="/my_destination_folder"
+    )
     ```
 
 
