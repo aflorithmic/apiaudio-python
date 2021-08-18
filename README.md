@@ -480,7 +480,7 @@ Media allows you to retrieve all the files available in api.audio for your organ
 
 Media methods are:
 
-- `create()` Upload files to our databases.
+- `upload()` - Upload files to our databases.
 
   - Parameters:
 
@@ -495,7 +495,7 @@ Media methods are:
     )
     ```
 
-- `list()` List all files within an org.
+- `list()` - List all files within an org.
 
   - Parameters:
 
@@ -529,7 +529,7 @@ Media methods are:
     print(tags)
     ```
 
- - `get_download_url()` This method returns a presigned url for downloading a specific audio file
+ - `get_download_url()` - This method returns a presigned url for downloading a specific audio file
     - params:
         - `mediaId` \* [required] (string): media id for the file to be downloaded
   - Example
@@ -537,7 +537,7 @@ Media methods are:
     url = apiaudio.Media.get_download_url(mediaId="some-mediaId")
     print(url)
     ```
- - `download()` This method downloads a specific audio file
+ - `download()` - This method downloads a specific audio file
     - params:
         - `mediaId` \* [required] (string): media id for the file to be downloaded
         - `destination` (string): path to the directory where the file will be downloaded. Default is "."
