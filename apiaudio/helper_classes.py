@@ -1,3 +1,5 @@
+import os
+
 from .api_request import APIRequest
 
 
@@ -74,3 +76,36 @@ class DownloadableResource(APIRequest):
             local_filenames.append(local_filename)
 
         return local_filenames
+
+
+class UploadableResource(APIRequest):
+    @classmethod
+    def upload(cls, file_path: str = "", tags: str = ""):
+        payload = open(file_path, "rb")
+        filename = os.path.basename(file_path)
+        headers = {"Content-Type": "audio/mpeg"}
+
+        request_params = {"filename": filename}
+
+        if tags:
+            request_params["tags"] = tags
+
+        # get presigned URL
+        url = cls._get_request(
+            path_param=f"{cls.audio_resource_path}/uploadurl",
+            request_params=request_params,
+        )
+
+        mediaId = url["mediaId"]
+        fileUploadUrl = url["fileUploadUrl"]
+
+        response = cls._put_request(url=fileUploadUrl, headers=headers, data=payload)
+
+        payload.close()
+
+        response = {
+            "message": f"Success. Use mediaId to retrieve this file",
+            "mediaId": mediaId,
+        }
+
+        return response

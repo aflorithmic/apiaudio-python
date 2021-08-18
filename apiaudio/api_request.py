@@ -44,6 +44,21 @@ class APIRequest:
         return r.json()
 
     @classmethod
+    def _put_request(cls, data, url=None, headers=None):
+        url = url or f"{apiaudio.api_base}{cls.resource_path}"
+
+        r = requests.put(url=url, headers=headers, data=data)
+
+        cls._expanded_raise_for_status(r)
+        
+        if r.status_code != 200:
+            raise ValueError("Error performing the PUT request")
+
+        # since aws s3 does not return a body on PUT requests, 
+        # r.json() does not work here
+        return r
+
+    @classmethod
     def _get_request(cls, url=None, path_param=None, request_params=None):
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
 

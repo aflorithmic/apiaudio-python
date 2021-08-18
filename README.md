@@ -31,7 +31,7 @@ The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not 
   - [Voice](#voice)
   - [Sound](#sound)
   - [Mastering](#mastering)
-  - [File](#file)
+  - [Media](#media)
   - [SyncTTS](#synctts)
 - [Authors](#authors)
 - [License](#license)
@@ -355,7 +355,7 @@ Voice methods are:
     french_voices = apiaudio.Voice.list(language="french",tags="steady, fun")
     ```
 
-- `list_parameters()` This endpoint lets you see which attributes you can filter the voices by, along with the allowed values for each attribute. You can later use these parameters and values to filter the voices you wish to list.
+- `list_parameters()` This method lets you see which attributes you can filter the voices by, along with the allowed values for each attribute. You can later use these parameters and values to filter the voices you wish to list.
 
   - Parameters:
 
@@ -403,7 +403,7 @@ Sound methods are:
     sound_templates = apiaudio.Sound.list()
     ```
 
-- `list_parameters()` This endpoint lets you see which attributes you can filter the sound templates by, along with the allowed values for each attribute. You can later use these parameters and values to filter the sound templates you wish to list.
+- `list_parameters()` This method lets you see which attributes you can filter the sound templates by, along with the allowed values for each attribute. You can later use these parameters and values to filter the sound templates you wish to list.
 
   - Parameters:
 
@@ -474,11 +474,82 @@ Mastering methods are:
     )
     ```
 
-### `File` resource <a name = "file"> </a>
+### `Media` resource <a name = "media"> </a>
 
-File allows you to retrieve all the files available in api.audio for your organization.
+Media allows you to retrieve all the files available in api.audio for your organization.
 
-Available soon.
+Media methods are:
+
+- `create()` Upload files to our databases.
+
+  - Parameters:
+
+    - `file_path` \* [Required] (string) - Relative path to the audio file.
+    - `tags` (string) - Comma separated tags you want to add to your uploaded file. This will make retrieval easier.
+
+  - Example:
+    ```python
+    apiaudio.Media.upload(
+      file_path="./my_file.mp3",
+      tags="tag1,tag2,tag3"
+    )
+    ```
+
+- `list()` List all files within an org.
+
+  - Parameters:
+
+    - `mediaId` (string) - If passed, will only return that file, or an empty object if it does not exist.
+    - `tags` (string) - Comma separated tags you want to add to your uploaded file. If passed, will return all files that at least contain those tags.
+    - `downloadUrl` (boolean): if True, a presigned url is added to each item on the array. This is slow for large amount of files (around 1s each).
+
+
+  - Examples:
+    ```python
+    # lists all files
+    files = apiaudio.Media.list()
+
+    # lists files with tag="tag1"
+    files = apiaudio.Media.list(tags="tag1")
+
+    # lists file with specific id
+    files = apiaudio.Media.list(mediaId="some_mediaId")
+
+    # lists files with tag="tag1" and with a downloadurl
+    files = apiaudio.Media.list(tags="tag1", downloadUrl=True)
+    ```
+ - `list_tags()` This returns a list with all unique user defined tags.
+
+    - Parameters:
+      - No parameters required.
+
+  - Example:
+    ```python
+    tags = apiaudio.Media.list_tags()
+    print(tags)
+    ```
+
+ - `get_download_url()` This method returns a presigned url for downloading a specific audio file
+    - params:
+        - `mediaId` \* [required] (string): media id for the file to be downloaded
+  - Example
+    ```python
+    url = apiaudio.Media.get_download_url(mediaId="some-mediaId")
+    print(url)
+    ```
+ - `download()` This method downloads a specific audio file
+    - params:
+        - `mediaId` \* [required] (string): media id for the file to be downloaded
+        - `destination` (string): path to the directory where the file will be downloaded. Default is "."
+
+  - Example
+    ```python
+    apiaudio.Media.download(
+      mediaId="some_mediaId",
+      destination="/my_destination_folder"
+    )
+    ```
+
 
 ### `SyncTTS` resource <a name = "synctts"> </a>
 
