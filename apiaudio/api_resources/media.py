@@ -19,7 +19,7 @@ class Media(UploadableResource):
 
         if not url:
             raise ValueError("url could not be retrieved")
-        
+
         return url
 
     @classmethod
@@ -50,6 +50,5 @@ class Media(UploadableResource):
     @classmethod
     def download(cls, mediaId: str = "", destination: str = "."):
         url = cls.get_download_url(mediaId=mediaId)
-
 
         return cls._download_request(url=url, destination=destination)
