@@ -48,6 +48,7 @@ class Media(UploadableResource):
             .get("savedAudioFiles", [{}])[0]
             .get("downloadUrl", None)
         )
+
         if not url:
             raise ValueError("url could not be retrieved")
 
