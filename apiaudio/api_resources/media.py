@@ -37,3 +37,14 @@ class Media(UploadableResource):
     @classmethod
     def list_tags(cls):
         return cls._get_request(path_param=f"{cls.audio_resource_path}/tags")
+
+    @classmethod
+    def download(cls,mediaId: str="",destination:str="."):
+        if not mediaId:
+            raise ValueError("please specify a mediaId")
+
+        url = cls.list(mediaId=mediaId,downloadUrl=True).get("savedAudioFiles",[{}])[0].get("downloadUrl",None)
+        if not url:
+            raise ValueError("url could not be retrieved")
+        
+        return cls._download_request(url=url,destination=destination)
