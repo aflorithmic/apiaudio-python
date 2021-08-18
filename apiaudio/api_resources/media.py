@@ -7,7 +7,7 @@ class Media(UploadableResource):
     audio_resource_path = "/file/customaudio"
 
     @classmethod
-    def get_download_url(cls, mediaId):
+    def get_download_url(cls, mediaId: str = ""):
         if not mediaId:
             raise ValueError("please specify a mediaId")
 
