@@ -54,6 +54,8 @@ class APIRequest:
         if r.status_code != 200:
             raise ValueError("Error performing the PUT request")
 
+        # since aws s3 does not return a body on PUT requests, 
+        # r.json() does not work here
         return r
 
     @classmethod
