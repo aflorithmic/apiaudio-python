@@ -513,7 +513,7 @@ Media methods are:
     files = apiaudio.Media.list(tags="tag1")
 
     # lists file with specific id
-    files = apiaudio.Media.list(mediaId="some-id")
+    files = apiaudio.Media.list(mediaId="some_mediaId")
 
     # lists files with tag="tag1" and with a downloadurl
     files = apiaudio.Media.list(tags="tag1", downloadUrl=True)
@@ -535,6 +535,7 @@ Media methods are:
   - Example
     ```python
     url = apiaudio.Media.get_download_url(mediaId="some-mediaId")
+    print(url)
     ```
  - `download()` This method downloads a specific audio file
     - params:
@@ -543,7 +544,7 @@ Media methods are:
 
   - Example
     ```python
-    url = apiaudio.Media.download(mediaId="some-mediaId",destination="/my_destination_folder")
+    apiaudio.Media.download(mediaId="some_mediaId",destination="/my_destination_folder")
     ```
 
 
