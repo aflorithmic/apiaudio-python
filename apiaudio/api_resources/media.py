@@ -8,10 +8,19 @@ class Media(UploadableResource):
 
     @classmethod
     def get_download_url(cls, mediaId):
-        return cls._get_request(
-            path_param=cls.audio_resource_path,
-            request_params={"mediaId": mediaId},
+        if not mediaId:
+            raise ValueError("please specify a mediaId")
+
+        url = (
+            cls.list(mediaId=mediaId, downloadUrl=True)
+            .get("savedAudioFiles", [{}])[0]
+            .get("downloadUrl", None)
         )
+
+        if not url:
+            raise ValueError("url could not be retrieved")
+        
+        return url
 
     @classmethod
     def list(cls, tags: str = "", mediaId: str = "", downloadUrl: bool = False) -> dict:
@@ -40,16 +49,7 @@ class Media(UploadableResource):
 
     @classmethod
     def download(cls, mediaId: str = "", destination: str = "."):
-        if not mediaId:
-            raise ValueError("please specify a mediaId")
+        url = cls.get_download_url(mediaId=mediaId)
 
-        url = (
-            cls.list(mediaId=mediaId, downloadUrl=True)
-            .get("savedAudioFiles", [{}])[0]
-            .get("downloadUrl", None)
-        )
-
-        if not url:
-            raise ValueError("url could not be retrieved")
 
         return cls._download_request(url=url, destination=destination)
