@@ -100,7 +100,7 @@ print(response)
 ```python
 response = apiaudio.Mastering.create(
 	scriptId=script.get("scriptId"),
-	backgroundTrackId="full__citynights.wav"
+	soundTemplate="parisianmorning"
 	)
 print(response)
 ```
@@ -135,7 +135,7 @@ print(response)
 # mastering process
 response = apiaudio.Mastering.create(
 	scriptId=script.get("scriptId"),
-	backgroundTrackId="full__citynights.wav"
+	soundTemplate="parisianmorning"
 	)
 print(response)
 
