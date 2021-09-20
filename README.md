@@ -375,12 +375,12 @@ Sound methods are:
 - `create()` Creates a sound template, compresses the sound project into a zip file and returns the url.
   - Parameters:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
-    - `backgroundTrackId` \* [Required] (string) - The background track file ID.
+    - `soundTemplate` \ Optional (string) - The sound template name (string)
   - Example:
     ```python
     sound_url = apiaudio.Sound.create(
         scriptId="id-1234",
-        backgroundTrackId="full__citynights.wav",
+        soundTemplate="parisianmorning",
     )
     ```
 - `retrieve()` Retrieve the url of the sound project zip file.
@@ -441,7 +441,7 @@ Mastering methods are:
     ```python
     response = apiaudio.Mastering.create(
         scriptId="id-1234",
-        backgroundTrackId="full__citynights.wav",
+        soundTemplate="parisianmorning",
         audience=[{"username":"antonio", "location":"barcelona"}]
     )
     ```
