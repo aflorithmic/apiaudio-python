@@ -432,9 +432,8 @@ Mastering methods are:
 - `create()` Creates a mastered version of your script.
   - Parameters:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
-    - `backgroundTrackId` (string) - The background track file ID. Deprecated, use soundTemplate parameter instead.
-    - `soundTemplate` (string) - The sound template name. For the list of available sound templates check `aflr.Sound.list_sound_templates()` call.
-    - `audience` (list) - List of dicts containing the personalisation parameters. This parameter depends on the number of parameters you used in your [script](#script) resource. In the script documentation example above, we used 2 parameters: `username` and `location`, and in the following example below we want to produce the script for username `Antonio` with location `Barcelona`.
+    - `soundTemplate` (string) - The sound template name. For the list of available sound templates check `apiaudio.Sound.list_sound_templates()` call.
+    - `audience` (list) - List of dicts containing the personalisation parameters. This parameter depends on the number of parameters you used in your [script](#script) resource. In the script documentation example above, we used 2 parameters: `username` and `location`, and in the following example below we want to produce the script for username `Antonio` with location `Barcelona`. If audience is not provided, the fallback track will be created.
     - `public` (boolean) - Boolean flag that allows to store the mastered file in a public s3 folder. Default value is `False`. Warning - This will cause your mastered files to be public to anyone in the internet. Use this at your own risk.
     - `vast` (boolean) - Boolean flag that allows to create a VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
   - Example:
@@ -448,7 +447,7 @@ Mastering methods are:
 - `retrieve()` Retrieves the mastered file urls.
   - Parameters:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
-    - `parameters` (dict) - Dictionary containing the audience item you want to retrieve.
+    - `parameters` (dict) - Dictionary containing the audience item you want to retrieve. If parameters are not provided, the fallback track will be created.
     - `public` (boolean) - Boolean flag that allows to retrieve the mastered file from the public bucket. Use this if you want to retrieve a mastered file created using `public=True`. Default value is `False`.
     - `vast` (boolean) - Boolean flag that allows to retrieve the VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
   - Example:
@@ -461,7 +460,7 @@ Mastering methods are:
 - `download()` Download the mastered files in your preferred folder.
   - Parameters:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
-    - `parameters` (dict) - Dictionary containing the audience item you want to retrieve.
+    - `parameters` (dict) - Dictionary containing the audience item you want to retrieve. If parameters are not provided, the fallback track will be created.
     - `destination` (string) - The folder destination path. Default is "." (current folder)
     - `public` (boolean) - Boolean flag that allows to retrieve the mastered file from the public bucket. Use this if you want to retrieve a mastered file created using `public=True`. Default value is `False`.
     - `vast` (boolean) - Boolean flag that allows to retrieve the VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
