@@ -260,7 +260,7 @@ Speech methods are:
     - `speed` (string) - Voice speed. Default speed is 100.
     - `effect` (string) - Put a funny effect in your voice. You can try the following ones: `dark_father`, `chewie`, `88b`, `2r2d`, `volume_boost_low` `volume_boost_middle` `volume_boost_high` (Volume boost allows you to adjust the volume of speech. NOTE! Volume boost effect only applies to speech creation and will be overwritten by the mastering process)
     - `silence_padding` (integer) - Add a silence padding to your speech tracks (in milliseconds). Default is 0 (no padding)
-    - `audience` (dictionary) - List of dicts containing the personalisation parameters as key-value pairs. This parameter depends on the number of parameters you used in your script resource. For instance, if in the script resource you have `scriptText="Hello {{name}} {{lastname}}"`, the audience should be: `[{"username": "Elon", "lastname": "Musk"}]`
+    - `audience` (list of dicts) - List of dicts containing the personalisation parameters as key-value pairs. This parameter depends on the number of parameters you used in your script resource. For instance, if in the script resource you have `scriptText="Hello {{name}} {{lastname}}, welcome to {{location}}"`, the audience should be: `[{"name": "Elon", "lastname": "Musk", "location": "Istanbul"}]`. If not provided, the fallback track will be created.
     - `sections` (dictionary) is a dictionary (key-value pairs), where the key is a section name, and the value is another dictionary with the section configuration ( valid parameters are: voice, speed, effect, silence_padding). If a section is not found here, the section will automatically inherit the voice, speed, effect and silence_padding values you defined above (or the default ones if you don't provide them). See an example below with 2 sections and different configuration parameters being used.
       ```python
       sections={
@@ -311,8 +311,8 @@ Speech methods are:
 
   - Parameters:
     - `scriptId` \* [Required] (string) - The script ID you want to retrieve.
-    - `section` (string) - The script section name for the first section. The default name for a script section is "default". NOTE: At the moment, Only scripts with 1 section are supported. If the scripts contain more than one section, only the first section can be retrieved.
-    - `parameters` (dict) - Dict containing the personalisation parameters for the first section of the script. This parameter depends on the parameters you used in your [script](#script)'s resource section. If this parameter is used, `section` must be specified.
+    - `section` (string) - The script section name you want to retrieve. If not provided, all the script sections will be returned.
+    - `parameters` (dict) - Dict containing the personalisation parameters of your script. If not provided, the fallback track will be retrieved. This field depends on the parameters you used in your [script](#script)'s resource section. In order to retrieve a specific set of parameters, you need to create the speech with the same set of parameters.
   - Example:
     ```python
     audio_files = apiaudio.Speech.retrieve(scriptId="id-1234")
@@ -321,8 +321,8 @@ Speech methods are:
 - `download()` Download the speech files in your preferred folder.
   - Parameters:
     - `scriptId` \* [Required] (string) - The script ID you want to download
-    - `section` (string) - The script section name for the first section. The default name for a script section is "default". NOTE: At the moment, Only scripts with 1 section are supported. If the scripts contain more than one section, only the first section can be retrieved.
-    - `parameters` (dict) - Dict containing the personalisation parameters for the first section of the script. This parameter depends on the parameters you used in your [script](#script)'s resource section. If this parameter is used, `section` must be specified.
+    - `section` (string) - The script section name you want to retrieve. If not provided, all the script sections will be returned.
+    - `parameters` (dict) - Dict containing the personalisation parameters of your script. If not provided, the fallback track will be retrieved. This field depends on the parameters you used in your [script](#script)'s resource section. In order to retrieve a specific set of parameters, you need to create the speech with the same set of parameters.
     - `destination` (string) - The folder destination path. Default is "." (current folder)
   - Example:
     ```python
