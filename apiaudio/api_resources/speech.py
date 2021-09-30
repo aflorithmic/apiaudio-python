@@ -8,4 +8,3 @@ from apiaudio.helper_classes import (
 class Speech(CreatableResource, RetrievableResource, DownloadableResource):
     OBJECT_NAME = "speech"
     resource_path = "/speech"
-    file_url = "/file/speech"
