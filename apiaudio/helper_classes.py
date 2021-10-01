@@ -54,12 +54,13 @@ class DownloadableResource(APIRequest):
         parameters=None,
         public=None,
         vast=None,
+        endFormat=None,
         destination=".",
     ):
         parameters = parameters or {}
 
         try:
-            audio_files = cls.retrieve(scriptId, section, parameters, public, vast)
+            audio_files = cls.retrieve(scriptId, section, parameters, public, vast, endFormat)
             audio_files.keys()
         except Exception:
             raise TypeError(
