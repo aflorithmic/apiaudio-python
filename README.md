@@ -261,6 +261,7 @@ Speech methods are:
     - `effect` (string) - Put a funny effect in your voice. You can try the following ones: `dark_father`, `chewie`, `88b`, `2r2d`, `volume_boost_low` `volume_boost_middle` `volume_boost_high` (Volume boost allows you to adjust the volume of speech. NOTE! Volume boost effect only applies to speech creation and will be overwritten by the mastering process)
     - `silence_padding` (integer) - Add a silence padding to your speech tracks (in milliseconds). Default is 0 (no padding)
     - `audience` (list of dicts) - List of dicts containing the personalisation parameters as key-value pairs. This parameter depends on the number of parameters you used in your script resource. For instance, if in the script resource you have `scriptText="Hello {{name}} {{lastname}}, welcome to {{location}}"`, the audience should be: `[{"name": "Elon", "lastname": "Musk", "location": "Istanbul"}]`. If not provided, the fallback track will be created.
+    - `async` (bool) - Create speech in asynchronous mode.
     - `sections` (dictionary) is a dictionary (key-value pairs), where the key is a section name, and the value is another dictionary with the section configuration ( valid parameters are: voice, speed, effect, silence_padding). If a section is not found here, the section will automatically inherit the voice, speed, effect and silence_padding values you defined above (or the default ones if you don't provide them). See an example below with 2 sections and different configuration parameters being used.
       ```python
       sections={
@@ -436,6 +437,9 @@ Mastering methods are:
     - `audience` (list) - List of dicts containing the personalisation parameters. This parameter depends on the number of parameters you used in your [script](#script) resource. In the script documentation example above, we used 2 parameters: `username` and `location`, and in the following example below we want to produce the script for username `Antonio` with location `Barcelona`. If audience is not provided, the fallback track will be created.
     - `public` (boolean) - Boolean flag that allows to store the mastered file in a public s3 folder. Default value is `False`. Warning - This will cause your mastered files to be public to anyone in the internet. Use this at your own risk.
     - `vast` (boolean) - Boolean flag that allows to create a VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
+    - `endFormat` (list) - List of audio formats to be produced. Valid formats are: `["wav", "mp3", "mp3_c_128", "flac", "ogg"]`
+    - `forceLength` (int) - force the audio length of the mastered track (in seconds).
+
   - Example:
     ```python
     response = apiaudio.Mastering.create(
@@ -450,6 +454,7 @@ Mastering methods are:
     - `parameters` (dict) - Dictionary containing the audience item you want to retrieve. If parameters are not provided, the fallback track will be retrieved.
     - `public` (boolean) - Boolean flag that allows to retrieve the mastered file from the public bucket. Use this if you want to retrieve a mastered file created using `public=True`. Default value is `False`.
     - `vast` (boolean) - Boolean flag that allows to retrieve the VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
+    - `endFormat` (list) - List of audio formats to be retrieved. Valid formats are: `["wav", "mp3", "mp3_c_128", "flac", "ogg"]`
   - Example:
     ```python
     mastered_files = apiaudio.Mastering.retrieve(
