@@ -40,7 +40,7 @@ class APIRequest:
         r = requests.post(url=url, headers=headers, json=json)
 
         # speech timeouts
-        if r.status_code == 408:
+        if r.status_code == 504:
             r = requests.get(url=url, headers=headers, params=json)
 
         cls._expanded_raise_for_status(r)
