@@ -35,9 +35,13 @@ class APIRequest:
     @classmethod
     def _post_request(cls, json, url=None):
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
-
+        
         headers = cls._build_header()
         r = requests.post(url=url, headers=headers, json=json)
+
+        # speech timeouts
+        if r.status_code == 408:
+            r = requests.get(url=url, headers=headers, params=json)
 
         cls._expanded_raise_for_status(r)
 

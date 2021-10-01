@@ -436,6 +436,9 @@ Mastering methods are:
     - `audience` (list) - List of dicts containing the personalisation parameters. This parameter depends on the number of parameters you used in your [script](#script) resource. In the script documentation example above, we used 2 parameters: `username` and `location`, and in the following example below we want to produce the script for username `Antonio` with location `Barcelona`. If audience is not provided, the fallback track will be created.
     - `public` (boolean) - Boolean flag that allows to store the mastered file in a public s3 folder. Default value is `False`. Warning - This will cause your mastered files to be public to anyone in the internet. Use this at your own risk.
     - `vast` (boolean) - Boolean flag that allows to create a VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
+    - `endFormat` (list) - List of audio formats to be produced. Valid formats are: `["wav", "mp3", "mp3_c_128", "flac", "ogg"]`
+    - `forceLength` (int) - force the audio length of the mastered track (in seconds).
+
   - Example:
     ```python
     response = apiaudio.Mastering.create(
@@ -450,6 +453,7 @@ Mastering methods are:
     - `parameters` (dict) - Dictionary containing the audience item you want to retrieve. If parameters are not provided, the fallback track will be retrieved.
     - `public` (boolean) - Boolean flag that allows to retrieve the mastered file from the public bucket. Use this if you want to retrieve a mastered file created using `public=True`. Default value is `False`.
     - `vast` (boolean) - Boolean flag that allows to retrieve the VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
+    - `endFormat` (list) - List of audio formats to be retrieved. Valid formats are: `["wav", "mp3", "mp3_c_128", "flac", "ogg"]`
   - Example:
     ```python
     mastered_files = apiaudio.Mastering.retrieve(
