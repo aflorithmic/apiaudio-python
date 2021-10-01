@@ -41,6 +41,9 @@ class APIRequest:
 
         cls._expanded_raise_for_status(r)
 
+        if r.status_code == 408:
+            r = requests.post(url=url, headers=headers, json=json)
+
         return r.json()
 
     @classmethod
