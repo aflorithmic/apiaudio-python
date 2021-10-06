@@ -277,8 +277,6 @@ Speech methods are:
           }
       }
       ```
-    - `voiceName` (DEPRECATED, use `voice` instead)
-    - `scriptSpeed`(DEPRECATED, use `speed` instead)
   - Simple example:
     ```python
     response = apiaudio.Speech.create(
