@@ -568,7 +568,7 @@ SyncTTS methods are:
 
     - `voice` \* [Required] (string) - Voice id. See the list of available voices using [Voice resource](#voice).
     - `text` \* [Required] (string) - The text you want to do TTS with.
-    - `metadata` \* [Optional] ("full" or "none") - The level of metadata you want
+    - `metadata` [Optional] ("full" or "none") - The level of metadata you want
 
   - Example:
     ```python
