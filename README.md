@@ -294,7 +294,7 @@ Speech methods are:
         speed=100,
         effect="dark_father",
         silence_padding= 1000,
-	sync=True,
+        sync=True,
         audience=[{"username": "Elon", "lastname": "Musk"}],
         sections={
             "firstsection": {
