@@ -23,11 +23,14 @@ class Media(UploadableResource):
         return url
 
     @classmethod
-    def list(cls, tags: str = "", mediaId: str = "", downloadUrl: bool = False) -> dict:
+    def list(cls, tags: str = "", mediaId: str = "", downloadUrl: bool = False, public: bool = False) -> dict:
         request_params = {}
 
         if downloadUrl:
             request_params["target"] = "download"
+        
+        if public:
+            request_params["public"] = public
 
         if mediaId:
             return cls._get_request(
