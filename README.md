@@ -439,6 +439,7 @@ Mastering methods are:
     - `forceLength` (int) - force the audio length of the mastered track (in seconds).
     - `audience` (list) - List of dicts containing the personalisation parameters. This parameter depends on the number of parameters you used in your [script](#script) resource. In the script documentation example above, we used 2 parameters: `username` and `location`, and in the following example below we want to produce the script for username `Antonio` with location `Barcelona`. If audience is not provided, the fallback track will be created.
     - `mediaFiles` (list) - List of dicts containing the media files. This parameter depends on the media file tags used in the [script](#script) resource and the media files you have in your account. For example, if the script contains `<<media::myrecording>>` plus `<<media::mysong>>`, and you want to attach myrecording to mediaId = "12345", and mysong to mediaId = "67890" then `mediaFiles = [{"myrecording":"12345", "mysong":"67890"}]`.
+    - `mediaVolumeTrim` (float) - Floating point varible that allows you to trim the volume of uploaded media files in db. This attribute has a valid range of -12 to 12 and applies to all media files included in a single mastering call. Clipping protection is not provided so only make incremental adjustments.
 
   - Example:
     ```python
