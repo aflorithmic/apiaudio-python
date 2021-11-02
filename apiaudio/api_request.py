@@ -35,10 +35,8 @@ class APIRequest:
     @classmethod
     def _post_request(cls, json, url=None):
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
-        
         headers = cls._build_header()
         r = requests.post(url=url, headers=headers, json=json)
-
         # speech timeouts
         if r.status_code == 504:
             r = requests.get(url=url, headers=headers, params=json)
@@ -46,6 +44,19 @@ class APIRequest:
         cls._expanded_raise_for_status(r)
 
         return r.json()
+
+    @classmethod
+    def _post_request_raw(cls, json, url=None, istype="wav"):
+        url = url or cls.resource_path
+        url = f"{apiaudio.api_base}{url}"
+        headers = cls._build_header()
+        if istype == "wav":
+            headers["Accept"] = "audio/wav"
+        r = requests.post(url=url, headers=headers, json=json)
+
+        cls._expanded_raise_for_status(r)
+
+        return r.content
 
     @classmethod
     def _put_request(cls, data, url=None, headers=None):
