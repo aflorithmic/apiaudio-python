@@ -110,10 +110,11 @@ class APIRequest:
         try:
             res.raise_for_status()
         except HTTPError as e:
-            if res.json():
-                raise HTTPError(
-                    "{} \n Error Message from API: \n {}".format(res.json(), str(e))
-                )
-            else:
-                raise e
+            try:
+                error = res.json()
+            except:
+                error = vars(res)
+            raise HTTPError(
+                "\n {} \n Error Message from API: \n {}".format(error, str(e))
+            )
         return
