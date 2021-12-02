@@ -33,6 +33,7 @@ The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not 
   - [Mastering](#mastering)
   - [Media](#media)
   - [SyncTTS](#synctts)
+  - [Birdcache](#birdcache)
 - [Authors](#authors)
 - [License](#license)
 
