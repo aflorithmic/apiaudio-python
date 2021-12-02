@@ -430,7 +430,9 @@ Mastering allows you to create and retrieve a mastered audio file of your script
 Mastering methods are:
 
 - `create()` Creates a mastered version of your script.
+
   - Parameters:
+
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
     - `soundTemplate` (string) - The sound template name. For the list of available sound templates check `apiaudio.Sound.list_sound_templates()` call.
     - `public` (boolean) - Boolean flag that allows to store the mastered file in a public s3 folder. Default value is `False`. Warning - This will cause your mastered files to be public to anyone in the internet. Use this at your own risk.
@@ -449,6 +451,7 @@ Mastering methods are:
         audience=[{"username":"antonio", "location":"barcelona"}]
     )
     ```
+
 - `retrieve()` Retrieves the mastered file urls.
   - Parameters:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
@@ -509,8 +512,8 @@ Media methods are:
     - `downloadUrl` (boolean): if True, a presigned url is added to each item on the array. This is slow for large amount of files (around 1s each).
     - `public` (boolean): If True, the media files listed will be the public media files provided by api.audio. Default is False.
 
-
   - Examples:
+
     ```python
     # lists all files
     files = apiaudio.Media.list()
@@ -524,38 +527,40 @@ Media methods are:
     # lists files with tag="tag1" and with a downloadurl
     files = apiaudio.Media.list(tags="tag1", downloadUrl=True)
     ```
- - `list_tags()` This returns a list with all unique user defined tags.
 
-    - Parameters:
-      - No parameters required.
+- `list_tags()` This returns a list with all unique user defined tags.
 
-  - Example:
-    ```python
-    tags = apiaudio.Media.list_tags()
-    print(tags)
-    ```
+  - Parameters:
+    - No parameters required.
 
- - `get_download_url()` - This method returns a presigned url for downloading a specific audio file
-    - params:
-        - `mediaId` \* [required] (string): media id for the file to be downloaded
-  - Example
-    ```python
-    url = apiaudio.Media.get_download_url(mediaId="some-mediaId")
-    print(url)
-    ```
- - `download()` - This method downloads a specific audio file
-    - params:
-        - `mediaId` \* [required] (string): media id for the file to be downloaded
-        - `destination` (string): path to the directory where the file will be downloaded. Default is "."
+- Example:
 
-  - Example
-    ```python
-    apiaudio.Media.download(
-      mediaId="some_mediaId",
-      destination="/my_destination_folder"
-    )
-    ```
+  ```python
+  tags = apiaudio.Media.list_tags()
+  print(tags)
+  ```
 
+- `get_download_url()` - This method returns a presigned url for downloading a specific audio file
+  - params:
+    - `mediaId` \* [required] (string): media id for the file to be downloaded
+- Example
+  ```python
+  url = apiaudio.Media.get_download_url(mediaId="some-mediaId")
+  print(url)
+  ```
+- `download()` - This method downloads a specific audio file
+
+  - params:
+    - `mediaId` \* [required] (string): media id for the file to be downloaded
+    - `destination` (string): path to the directory where the file will be downloaded. Default is "."
+
+- Example
+  ```python
+  apiaudio.Media.download(
+    mediaId="some_mediaId",
+    destination="/my_destination_folder"
+  )
+  ```
 
 ### `SyncTTS` resource <a name = "synctts"> </a>
 
@@ -579,6 +584,33 @@ SyncTTS methods are:
       voice="salih",
       text="This is me creating synchronous text to speech",
       metadata="full"
+    )
+    ```
+
+### `Birdcache` resource <a name = "birdcache"> </a>
+
+Birdcache allows you to do a single production request to have mastering or speech from text with personalisation parameters with ease.
+
+Birdcache methods are:
+
+- `create()` Create a TTS speech file.
+
+  - Parameters:
+
+    - `type` \* [Required] (string) - Type of the event. Supported types are `mastering` and `speech`.
+    - `text` \* [Required] (string) - The text you want to do speech/mastering with. See the example for personalisation parameters.
+    - `voice` \* [Required] (string) - The voice for speech creation.
+    - `audience` \* [Optional] (dict) - The key pair object for personalisation parameters. See the example below.
+    - `soundTemplate` [Optional] (string) - The sound template for mastering creation. Only needed when the type is mastering.
+
+  - Example:
+    ```python
+    birdcache = apiaudio.Birdcache.create(
+      type="mastering",
+      voice="linda",
+      text="This is {{username|me}} creating synchronous text to speech",
+      audience={"username": ["salih", "sam", "timo"]},
+      soundTemplate="openup"
     )
     ```
 
