@@ -1,7 +1,7 @@
-from apiaudio.helper_classes import UploadableResource
+from apiaudio.helper_classes import DeletableResource, UploadableResource
 
 
-class Media(UploadableResource):
+class Media(UploadableResource, DeletableResource):
     OBJECT_NAME = "media"
     resource_path = "/file"
     audio_resource_path = "/file/customaudio"
