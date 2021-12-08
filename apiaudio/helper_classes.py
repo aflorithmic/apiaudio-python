@@ -17,6 +17,17 @@ class CreatableResource(APIRequest):
     def create(cls, **params):
         return cls._post_request(json=params)
 
+class DeletableResource(APIRequest):
+    @classmethod
+    def delete(cls, **args):
+
+        if cls.OBJECT_NAME == 'media':
+            if not 'mediaId' in args:
+                raise Exception('mediaId parameter is required')
+            
+            return cls._delete_request(path_param=cls.audio_resource_path, request_params=args)
+
+        raise cls._delete_request(request_params=args)
 
 class RetrievableResource(APIRequest):
     @classmethod
