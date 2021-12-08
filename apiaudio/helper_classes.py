@@ -27,7 +27,7 @@ class DeletableResource(APIRequest):
             
             return cls._delete_request(path_param=cls.audio_resource_path, request_params=args)
 
-        raise cls._delete_request(request_params=args)
+        return cls._delete_request(request_params=args)
 
 class RetrievableResource(APIRequest):
     @classmethod
