@@ -41,6 +41,8 @@ The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not 
 
 This repository is actively maintained by [Aflorithmic Labs](https://www.aflorithmic.ai/). For examples, recipes and api reference see the [api.audio docs](https://docs.api.audio/reference).
 
+To publish a new version, please run `bash publish.sh`.
+
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
 ### Installation
