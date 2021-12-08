@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="apiaudio",
-    version="0.12.0",
+    version="0.12.1",
     author="Antonio Tripiana",
     author_email="antonio@aflorithmic.ai",
     description="Python SDK for api.audio API",
