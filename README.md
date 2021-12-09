@@ -446,7 +446,7 @@ Mastering methods are:
     - `mediaFiles` (list) - List of dicts containing the media files. This parameter depends on the media file tags used in the [script](#script) resource and the media files you have in your account. For example, if the script contains `<<media::myrecording>>` plus `<<media::mysong>>`, and you want to attach myrecording to mediaId = "12345", and mysong to mediaId = "67890" then `mediaFiles = [{"myrecording":"12345", "mysong":"67890"}]`.
     - `sectionProperties` (dict) - This variable takes a dict as its input, whereby each key has the name of the *section* and its *value* is another dict with the properties corresponding to that section. We currently support two properties per section; endAt: (float) the time in seconds that this section should end at, and justify: (str) [optional] how the audio content of this section should be justified. This feature is explained in depth [here.](https://anvilproject.org/guides/content/creating-links) 
 
-    - `chanels` (int) - Specifies the number of channels in the mastered file. You can either use 1 for mono or 2 for stereo (default)
+    - `channels` (int) - Specifies the number of channels in the mastered file. You can either use 1 for mono or 2 for stereo (default)
     - `mediaVolumeTrim` (float) - Floating point varible that allows you to trim the volume of uploaded media files (in dB). This attribute has a valid range of -12 to 12 dB and applies to all media files included in a single mastering call. Clipping protection is not provided so only make incremental adjustments.
 
   - Example 1:
