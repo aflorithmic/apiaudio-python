@@ -444,14 +444,33 @@ Mastering methods are:
     - `forceLength` (int) - force the audio length of the mastered track (in seconds).
     - `audience` (list) - List of dicts containing the personalisation parameters. This parameter depends on the number of parameters you used in your [script](#script) resource. In the script documentation example above, we used 2 parameters: `username` and `location`, and in the following example below we want to produce the script for username `Antonio` with location `Barcelona`. If audience is not provided, the fallback track will be created.
     - `mediaFiles` (list) - List of dicts containing the media files. This parameter depends on the media file tags used in the [script](#script) resource and the media files you have in your account. For example, if the script contains `<<media::myrecording>>` plus `<<media::mysong>>`, and you want to attach myrecording to mediaId = "12345", and mysong to mediaId = "67890" then `mediaFiles = [{"myrecording":"12345", "mysong":"67890"}]`.
+    - `sectionProperties` (dict) - This variable takes a dict as its input, whereby each key has the name of the *section* and its *value* is another dict with the properties corresponding to that section. We currently support two properties per section; endAt: (float) the time in seconds that this section should end at, and justify: (str) [optional] how the audio content of this section should be justified. This feature is explained in depth [here.](https://anvilproject.org/guides/content/creating-links) 
+
+    - `chanels` (int) - Specifies the number of channels in the mastered file. You can either use 1 for mono or 2 for stereo (default)
     - `mediaVolumeTrim` (float) - Floating point varible that allows you to trim the volume of uploaded media files (in dB). This attribute has a valid range of -12 to 12 dB and applies to all media files included in a single mastering call. Clipping protection is not provided so only make incremental adjustments.
 
-  - Example:
+  - Example 1:
     ```python
     response = apiaudio.Mastering.create(
         scriptId="id-1234",
         soundTemplate="parisianmorning",
         audience=[{"username":"antonio", "location":"barcelona"}]
+    )
+    ```
+  - Example 2:
+    ```python
+    # forces the 3 sections defined in the script to be 10 seconds long
+    sectionProperties = {
+		'first': {'endAt': 10, 'justify': 'flex-end'}, 
+		'second': {'endAt': 20, 'justify': 'centre'}, 
+		'third': {'endAt': 30, 'justify': 'flex-start'} 
+    }
+    
+    
+    response = apiaudio.Mastering.create(
+		scriptId="id-1234",
+		soundTemplate="parisianmorning",
+		sectionProperties=sectionProperties
     )
     ```
 
@@ -491,11 +510,11 @@ Media allows you to retrieve all the files available in api.audio for your organ
 
 Media methods are:
 
-- `upload()` - Upload files to our databases.
+- `upload()` - Upload files to our database.
 
   - Parameters:
 
-    - `file_path` \* [Required] (string) - Relative path to the audio file.
+    - `file_path` \* [Required] (string) - Relative path to the audio file. **Note that we only support wav and mp3 files, it is recommended that you upload your files in 44.1 kHz wav.**
     - `tags` (string) - Comma separated tags you want to add to your uploaded file. This will make retrieval easier.
 
   - Example:
@@ -503,6 +522,19 @@ Media methods are:
     apiaudio.Media.upload(
       file_path="./my_file.mp3",
       tags="tag1,tag2,tag3"
+    )
+    ```
+
+- `delete()` - Deletes a file from our database.
+
+  - Parameters:
+
+    - `mediaId` \* [Required] (string) - The mediaId of the file you want to delete.
+
+  - Example:
+    ```python
+    apiaudio.Media.delete(
+      mediaId="a45ef2"
     )
     ```
 
