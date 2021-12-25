@@ -1,7 +1,5 @@
 # Aflorithmic Python bindings
 # API docs at https://docs.api.audio/
-# Authors:
-# Antonio Tripiana <antonio@aflorithmic.ai>
 
 # Configuration variables
 
