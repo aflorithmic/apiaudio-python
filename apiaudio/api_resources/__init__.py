@@ -5,3 +5,5 @@ from apiaudio.api_resources.mastering import Mastering
 from apiaudio.api_resources.sound import Sound
 from apiaudio.api_resources.syncTTS import SyncTTS
 from apiaudio.api_resources.media import Media
+from apiaudio.api_resources.birdcache import Birdcache
+from apiaudio.api_resources.connector import Connector

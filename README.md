@@ -33,12 +33,15 @@ The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not 
   - [Mastering](#mastering)
   - [Media](#media)
   - [SyncTTS](#synctts)
+  - [Birdcache](#birdcache)
 - [Authors](#authors)
 - [License](#license)
 
 ## 🧐 About <a name = "about"></a>
 
 This repository is actively maintained by [Aflorithmic Labs](https://www.aflorithmic.ai/). For examples, recipes and api reference see the [api.audio docs](https://docs.api.audio/reference).
+
+To publish a new version, please run `bash publish.sh`.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
@@ -430,14 +433,16 @@ Mastering allows you to create and retrieve a mastered audio file of your script
 Mastering methods are:
 
 - `create()` Creates a mastered version of your script.
+
   - Parameters:
+
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
     - `soundTemplate` (string) - The sound template name. For the list of available sound templates check `apiaudio.Sound.list_sound_templates()` call.
     - `public` (boolean) - Boolean flag that allows to store the mastered file in a public s3 folder. Default value is `False`. Warning - This will cause your mastered files to be public to anyone in the internet. Use this at your own risk.
     - `vast` (boolean) - Boolean flag that allows to create a VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
     - `endFormat` (list) - List of audio formats to be produced. Valid formats are: `["wav", "mp3" (default), "flac", "ogg", "mp3_very_low", "mp3_low", "mp3_medium", "mp3_high", "mp3_very_high"]`
     - `forceLength` (int) - force the audio length of the mastered track (in seconds).
-    - `audience` (list) - List of dicts containing the personalisation parameters. This parameter depends on the number of parameters you used in your [script](#script) resource. In the script documentation example above, we used 2 parameters: `username` and `location`, and in the following example below we want to produce the script for username `Antonio` with location `Barcelona`. If audience is not provided, the fallback track will be created.
+    - `audience` (list) - List of dicts containing the personalisation parameters. This parameter depends on the number of parameters you used in your [script](#script) resource. In the script documentation example above, we used 2 parameters: `username` and `location`, and in the following example below we want to produce the script for username `salih` with location `Barcelona`. If audience is not provided, the fallback track will be created.
     - `mediaFiles` (list) - List of dicts containing the media files. This parameter depends on the media file tags used in the [script](#script) resource and the media files you have in your account. For example, if the script contains `<<media::myrecording>>` plus `<<media::mysong>>`, and you want to attach myrecording to mediaId = "12345", and mysong to mediaId = "67890" then `mediaFiles = [{"myrecording":"12345", "mysong":"67890"}]`.
     - `mediaVolumeTrim` (float) - Floating point varible that allows you to trim the volume of uploaded media files (in dB). This attribute has a valid range of -12 to 12 dB and applies to all media files included in a single mastering call. Clipping protection is not provided so only make incremental adjustments.
 
@@ -446,9 +451,10 @@ Mastering methods are:
     response = apiaudio.Mastering.create(
         scriptId="id-1234",
         soundTemplate="parisianmorning",
-        audience=[{"username":"antonio", "location":"barcelona"}]
+        audience=[{"username":"salih", "location":"barcelona"}]
     )
     ```
+
 - `retrieve()` Retrieves the mastered file urls.
   - Parameters:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
@@ -460,7 +466,7 @@ Mastering methods are:
     ```python
     mastered_files = apiaudio.Mastering.retrieve(
       scriptId="id-1234",
-      parameters={"username":"antonio", "location":"barcelona"}
+      parameters={"username":"salih", "location":"barcelona"}
     )
     ```
 - `download()` Download the mastered files in your preferred folder.
@@ -474,7 +480,7 @@ Mastering methods are:
     ```python
     mastered_files = apiaudio.Mastering.download(
       scriptId="id-1234",
-      parameters={"username":"antonio", "location":"barcelona"}
+      parameters={"username":"salih", "location":"barcelona"}
       destination="."
     )
     ```
@@ -509,8 +515,8 @@ Media methods are:
     - `downloadUrl` (boolean): if True, a presigned url is added to each item on the array. This is slow for large amount of files (around 1s each).
     - `public` (boolean): If True, the media files listed will be the public media files provided by api.audio. Default is False.
 
-
   - Examples:
+
     ```python
     # lists all files
     files = apiaudio.Media.list()
@@ -524,38 +530,40 @@ Media methods are:
     # lists files with tag="tag1" and with a downloadurl
     files = apiaudio.Media.list(tags="tag1", downloadUrl=True)
     ```
- - `list_tags()` This returns a list with all unique user defined tags.
 
-    - Parameters:
-      - No parameters required.
+- `list_tags()` This returns a list with all unique user defined tags.
 
-  - Example:
-    ```python
-    tags = apiaudio.Media.list_tags()
-    print(tags)
-    ```
+  - Parameters:
+    - No parameters required.
 
- - `get_download_url()` - This method returns a presigned url for downloading a specific audio file
-    - params:
-        - `mediaId` \* [required] (string): media id for the file to be downloaded
-  - Example
-    ```python
-    url = apiaudio.Media.get_download_url(mediaId="some-mediaId")
-    print(url)
-    ```
- - `download()` - This method downloads a specific audio file
-    - params:
-        - `mediaId` \* [required] (string): media id for the file to be downloaded
-        - `destination` (string): path to the directory where the file will be downloaded. Default is "."
+- Example:
 
-  - Example
-    ```python
-    apiaudio.Media.download(
-      mediaId="some_mediaId",
-      destination="/my_destination_folder"
-    )
-    ```
+  ```python
+  tags = apiaudio.Media.list_tags()
+  print(tags)
+  ```
 
+- `get_download_url()` - This method returns a presigned url for downloading a specific audio file
+  - params:
+    - `mediaId` \* [required] (string): media id for the file to be downloaded
+- Example
+  ```python
+  url = apiaudio.Media.get_download_url(mediaId="some-mediaId")
+  print(url)
+  ```
+- `download()` - This method downloads a specific audio file
+
+  - params:
+    - `mediaId` \* [required] (string): media id for the file to be downloaded
+    - `destination` (string): path to the directory where the file will be downloaded. Default is "."
+
+- Example
+  ```python
+  apiaudio.Media.download(
+    mediaId="some_mediaId",
+    destination="/my_destination_folder"
+  )
+  ```
 
 ### `SyncTTS` resource <a name = "synctts"> </a>
 
@@ -579,6 +587,33 @@ SyncTTS methods are:
       voice="salih",
       text="This is me creating synchronous text to speech",
       metadata="full"
+    )
+    ```
+
+### `Birdcache` resource <a name = "birdcache"> </a>
+
+Birdcache allows you to do a single production request to have mastering or speech from text with personalisation parameters with ease.
+
+Birdcache methods are:
+
+- `create()` Create a TTS speech file.
+
+  - Parameters:
+
+    - `type` \* [Required] (string) - Type of the event. Supported types are `mastering` and `speech`.
+    - `text` \* [Required] (string) - The text you want to do speech/mastering with. See the example for personalisation parameters.
+    - `voice` \* [Required] (string) - The voice for speech creation.
+    - `audience` \* [Optional] (dict) - The key pair object for personalisation parameters. See the example below.
+    - `soundTemplate` [Optional] (string) - The sound template for mastering creation. Only needed when the type is mastering.
+
+  - Example:
+    ```python
+    birdcache = apiaudio.Birdcache.create(
+      type="mastering",
+      voice="linda",
+      text="This is {{username|me}} creating synchronous text to speech",
+      audience={"username": ["salih", "sam", "timo"]},
+      soundTemplate="openup"
     )
     ```
 
