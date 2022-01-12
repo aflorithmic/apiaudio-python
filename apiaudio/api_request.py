@@ -38,7 +38,7 @@ class APIRequest:
         
         headers = cls._build_header()
         r = requests.post(url=url, headers=headers, json=json)
-
+        
         # speech timeouts
         if r.status_code == 504:
             r = requests.get(url=url, headers=headers, params=json)
@@ -59,7 +59,7 @@ class APIRequest:
             r = requests.delete(url=url, headers=headers, params=request_params)
         else:
             r = requests.delete(url=url, headers=headers)
-
+            
         cls._expanded_raise_for_status(r)
 
         return r.json()
@@ -98,12 +98,15 @@ class APIRequest:
         return r.json()
 
     @classmethod
-    def _download_request(cls, url, destination):
+    def _download_request(cls, url, destination, version=""):
         if type(url) is not str:
             raise TypeError("Error retrieving the audio files.")
-
-        local_filename = f"{destination}/{url.split('/')[-1].split('?')[0]}"
+        
+        
+        remote_filename = url.split('/')[-1].split('?')[0]
+        local_filename = f"{destination}/{remote_filename}"
         local_filename = local_filename.replace("%243ct10n", "section")
+        local_filename = local_filename.replace("%7C", "|")
 
         with requests.get(url, stream=True) as r:
             cls._expanded_raise_for_status(r)

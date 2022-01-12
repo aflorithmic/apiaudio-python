@@ -100,20 +100,21 @@ class DownloadableResource(APIRequest):
             raise TypeError(
                 "Error retrieving the audio files. Make sure you can retrieve them with the same parameters and try again."
             )
-
+        
         if "url" in audio_files.keys():
             local_filename = cls._download_request(
                 url=audio_files.get("url"), destination=destination
             )
             return local_filename
 
-        local_filenames = []
-        for key, value in audio_files.items():
-            # Review "value"! list of string...
-            local_filename = cls._download_request(url=value, destination=destination)
-            local_filenames.append(local_filename)
+        else: # else unpack list of files
+            local_filenames = []
+            for key, value in audio_files.items():
+                # Review "value"! list of string...
+                local_filename = cls._download_request(url=value, destination=destination)
+                local_filenames.append(local_filename)
 
-        return local_filenames
+            return local_filenames
 
 
 class UploadableResource(APIRequest):
