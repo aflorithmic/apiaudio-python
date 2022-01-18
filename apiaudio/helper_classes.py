@@ -106,16 +106,15 @@ class DownloadableResource(APIRequest):
                 url=audio_files.get("url"), destination=destination
             )
             return local_filename
-
-        else: # else unpack list of files
+        
+        else: 
             local_filenames = []
             for key, value in audio_files.items():
-                # Review "value"! list of string...
-                if key == "url":
-                    local_filename = cls._download_request(url=value, destination=destination)
-                    local_filenames.append(local_filename)
+                #if key == "url": # placeholder for future versions
+                local_filename = cls._download_request(url=value, destination=destination)
+                local_filenames.append(local_filename)
 
-            return local_filenames
+        return local_filenames
 
 
 class UploadableResource(APIRequest):
