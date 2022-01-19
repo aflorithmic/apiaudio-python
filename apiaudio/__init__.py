@@ -1,10 +1,9 @@
 # Aflorithmic Python bindings
 # API docs at https://docs.api.audio/
-# Authors:
-# Antonio Tripiana <antonio@aflorithmic.ai>
 
 # Configuration variables
 
+sdk_version = "0.12.3"
 api_key = None
 client_id = None
 api_base = "https://v1.api.audio"

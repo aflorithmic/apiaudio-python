@@ -4,6 +4,7 @@ import shutil
 import os
 import requests
 from requests.exceptions import HTTPError
+from . import sdk_version
 
 
 class APIRequest:
@@ -30,15 +31,14 @@ class APIRequest:
     @classmethod
     def _build_header(cls):
         cls._api_key_checker(apiaudio.api_key)
-        return {"x-api-key": apiaudio.api_key}
+        return {"x-api-key": apiaudio.api_key, "x-sdk-version": sdk_version}
 
     @classmethod
     def _post_request(cls, json, url=None):
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
-        
         headers = cls._build_header()
         r = requests.post(url=url, headers=headers, json=json)
-        
+
         # speech timeouts
         if r.status_code == 504:
             r = requests.get(url=url, headers=headers, params=json)
@@ -46,6 +46,19 @@ class APIRequest:
         cls._expanded_raise_for_status(r)
 
         return r.json()
+
+    @classmethod
+    def _post_request_raw(cls, json, url=None, istype="wav"):
+        url = url or cls.resource_path
+        url = f"{apiaudio.api_base}{url}"
+        headers = cls._build_header()
+        if istype == "wav":
+            headers["Accept"] = "audio/wav"
+        r = requests.post(url=url, headers=headers, json=json)
+
+        cls._expanded_raise_for_status(r)
+
+        return r.content
 
     @classmethod
     def _delete_request(cls, url=None, path_param=None, request_params=None):
@@ -71,11 +84,11 @@ class APIRequest:
         r = requests.put(url=url, headers=headers, data=data)
 
         cls._expanded_raise_for_status(r)
-        
+
         if r.status_code != 200:
             raise ValueError("Error performing the PUT request")
 
-        # since aws s3 does not return a body on PUT requests, 
+        # since aws s3 does not return a body on PUT requests,
         # r.json() does not work here
         return r
 
