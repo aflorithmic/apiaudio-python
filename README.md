@@ -217,6 +217,7 @@ Script methods are:
     - `moduleName` (string) - The name of your module. Default value is "default"
     - `scriptName` (string) - The name of your script. Default value is "default"
     - `scriptId` (string) - Custom identifier for your script. If scriptId parameter is used, then projectName, moduleName and scriptName are required parameters.
+    - `versions` (dictionary) - A dictionary containing different versions of your script text, whereby the key is the version name, and its value is the associated `scriptText`. Version name `v0` is reserved as the default `scriptText`. Default value is "{}"
   - Example:
     ```python
     script = apiaudio.Script.create(
@@ -226,6 +227,10 @@ Script methods are:
         scriptName="myScript",
         scriptId="id-1234"
         )
+    script = apiaudio.Script.create(
+        scriptText="Default text",
+        versions={"es" : "Hola", "en" : "hello"}
+        )
     ```
 - `retrieve()` - Retrieve a script by id.
   - Parameters:
@@ -234,12 +239,24 @@ Script methods are:
     ```python
     script = apiaudio.Script.retrieve(scriptId="id-1234")
     ```
-- `list()` - List all scripts available in your organization.
+- `list()` - List all scripts available in your organization. This method supports filtering.
   - Parameters:
-    - No parameters required.
+    - `projectName` (string) - Return any scripts with this projectName.
+    - `moduleName` (string) - Return any scripts with this moduleName.
+    - `scriptName` (string) - Return any scripts with this scriptName.
+    - `scriptId` (string) - Return any scripts with this scriptId.
   - Example:
     ```python
     scripts = apiaudio.Script.list()
+    ```
+- `delete()` - Deletes a script. By default this will delete all versions of the script.
+  - Parameters:
+    - `scriptId` (string) - The id of the script to be deleted
+    - `version` (string) - Delete a specific version. 
+  - Example:
+    ```python
+    #deletes version 'en' from scriptId 'myworkout'
+    scripts = apiaudio.Script.delete(scriptId="myworkout", version="en")
     ```
 - `get_random_text()` - Retrieve random text from a list of categories.
   - Parameters:
@@ -266,6 +283,7 @@ Speech methods are:
     - `audience` (list of dicts) - List of dicts containing the personalisation parameters as key-value pairs. This parameter depends on the number of parameters you used in your script resource. For instance, if in the script resource you have `scriptText="Hello {{name}} {{lastname}}, welcome to {{location}}"`, the audience should be: `[{"name": "Elon", "lastname": "Musk", "location": "Istanbul"}]`. If not provided, the fallback track will be created.
     - `sync` (boolean) - Allow sync or async speech creation. Default is `True`. If `sync=False`, speech create call will return a success message when the speech creation is triggered. To retrieve the files, check `Speech.retrieve()` method.
     - `sections` (dictionary) is a dictionary (key-value pairs), where the key is a section name, and the value is another dictionary with the section configuration ( valid parameters are: voice, speed, effect, silence_padding). If a section is not found here, the section will automatically inherit the voice, speed, effect and silence_padding values you defined above (or the default ones if you don't provide them). See an example below with 2 sections and different configuration parameters being used.
+    - `version` (string) - The version to be produced. Default is "".
       ```python
       sections={
           "firstsection": {
@@ -316,6 +334,7 @@ Speech methods are:
     - `scriptId` \* [Required] (string) - The script ID you want to retrieve.
     - `section` (string) - The script section name you want to retrieve. If not provided, all the script sections will be returned.
     - `parameters` (dict) - Dict containing the personalisation parameters of your script. If not provided, the fallback track will be retrieved. This field depends on the parameters you used in your [script](#script)'s resource section. In order to retrieve a specific set of parameters, you need to create the speech with the same set of parameters.
+   - `version` (string) - The version to be retrieved. Default is "".
   - Example:
     ```python
     audio_files = apiaudio.Speech.retrieve(scriptId="id-1234")
@@ -327,6 +346,8 @@ Speech methods are:
     - `section` (string) - The script section name you want to retrieve. If not provided, all the script sections will be returned.
     - `parameters` (dict) - Dict containing the personalisation parameters of your script. If not provided, the fallback track will be retrieved. This field depends on the parameters you used in your [script](#script)'s resource section. In order to retrieve a specific set of parameters, you need to create the speech with the same set of parameters.
     - `destination` (string) - The folder destination path. Default is "." (current folder)
+    - `version` (string) - The version to be downloaded. Default is "".
+
   - Example:
     ```python
     audio_files = apiaudio.Speech.download(scriptId="id-1234", destination=".")
@@ -445,6 +466,7 @@ Mastering methods are:
     - `audience` (list) - List of dicts containing the personalisation parameters. This parameter depends on the number of parameters you used in your [script](#script) resource. In the script documentation example above, we used 2 parameters: `username` and `location`, and in the following example below we want to produce the script for username `Antonio` with location `Barcelona`. If audience is not provided, the fallback track will be created.
     - `mediaFiles` (list) - List of dicts containing the media files. This parameter depends on the media file tags used in the [script](#script) resource and the media files you have in your account. For example, if the script contains `<<media::myrecording>>` plus `<<media::mysong>>`, and you want to attach myrecording to mediaId = "12345", and mysong to mediaId = "67890" then `mediaFiles = [{"myrecording":"12345", "mysong":"67890"}]`.
     - `mediaVolumeTrim` (float) - Floating point varible that allows you to trim the volume of uploaded media files (in dB). This attribute has a valid range of -12 to 12 dB and applies to all media files included in a single mastering call. Clipping protection is not provided so only make incremental adjustments.
+    - `version` (string) - The version to be produced. Default is "".
 
   - Example:
     ```python
@@ -461,7 +483,8 @@ Mastering methods are:
     - `parameters` (dict) - Dictionary containing the audience item you want to retrieve. If parameters are not provided, the fallback track will be retrieved.
     - `public` (boolean) - Boolean flag that allows to retrieve the mastered file from the public bucket. Use this if you want to retrieve a mastered file created using `public=True`. Default value is `False`.
     - `vast` (boolean) - Boolean flag that allows to retrieve the VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
-    - `endFormat` (list) - List of audio formats to be retrieved. Valid formats are: `["wav", "mp3", "mp3_c_128", "flac", "ogg"]`
+    - `endFormat` (list) - List of audio formats to be retrieved. Valid formats are:`["wav", "mp3" (default), "flac", "ogg", "mp3_very_low", "mp3_low", "mp3_medium", "mp3_high", "mp3_very_high"]`
+     `versions` (string) - The version to be retrieved. Default is "".
   - Example:
     ```python
     mastered_files = apiaudio.Mastering.retrieve(
@@ -476,6 +499,7 @@ Mastering methods are:
     - `destination` (string) - The folder destination path. Default is "." (current folder)
     - `public` (boolean) - Boolean flag that allows to retrieve the mastered file from the public bucket. Use this if you want to retrieve a mastered file created using `public=True`. Default value is `False`.
     - `vast` (boolean) - Boolean flag that allows to retrieve the VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
+    - `version` (string) - The version to be downloaded. Default is "".
   - Example:
     ```python
     mastered_files = apiaudio.Mastering.download(
