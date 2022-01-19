@@ -14,7 +14,8 @@ class Sound(
     list_path = "/sound/template"
     file_url = "/file/sound"
     list_parameters_path = "/sound/parameter"
-
+    api_redirect = ""
+    
     @classmethod
     def list_parameters(cls):
         return cls._get_request(path_param=cls.list_parameters_path)

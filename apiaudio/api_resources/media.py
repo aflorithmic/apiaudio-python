@@ -5,7 +5,8 @@ class Media(UploadableResource, DeletableResource):
     OBJECT_NAME = "media"
     resource_path = "/file"
     audio_resource_path = "/file/customaudio"
-
+    api_redirect = ""
+    
     @classmethod
     def get_download_url(cls, mediaId: str = ""):
         if not mediaId:

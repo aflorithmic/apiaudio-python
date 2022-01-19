@@ -12,6 +12,7 @@ class Script(
     OBJECT_NAME = "script"
     resource_path = "/script"
     random_url = "/script/random"
+    api_redirect = ""
 
     @classmethod
     def get_random_text(cls, category=None):

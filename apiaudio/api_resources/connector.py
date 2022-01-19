@@ -5,7 +5,8 @@ class Connector(APIRequest):
     OBJECT_NAME = "connector"
     resource_path = "/connector/"
     connection_path = "/connection/"
-
+    api_redirect = ""
+    
     @classmethod
     def retrieve(cls, name):
         if not name:

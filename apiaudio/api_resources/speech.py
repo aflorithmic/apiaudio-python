@@ -8,4 +8,6 @@ from apiaudio.helper_classes import (
 class Speech(CreatableResource, RetrievableResource, DownloadableResource):
     OBJECT_NAME = "speech"
     resource_path = "/speech"
+    api_redirect = ""
+    
     loop_status_code = 202

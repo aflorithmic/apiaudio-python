@@ -1,6 +1,6 @@
 import os
-
 from .api_request import APIRequest
+
 
 
 class ListableResource(APIRequest):

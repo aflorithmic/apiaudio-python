@@ -8,6 +8,18 @@ import re
 from requests.exceptions import HTTPError
 from . import sdk_version
 
+def custom_redirects(func):
+    def inner(*args, **kwargs):
+        old = apiaudio.api_base
+        if args[0].api_redirect:
+             apiaudio.api_base = args[0].api_redirect
+             print("Redirecting to: ", apiaudio.api_base)
+
+        ob = func(*args, **kwargs)
+        apiaudio.api_base = old
+        return ob
+        
+    return inner
 
 class APIRequest:
     def _api_key_checker(api_key=None):
@@ -36,6 +48,7 @@ class APIRequest:
         return {"x-api-key": apiaudio.api_key, "x-python-sdk-version": sdk_version}
 
     @classmethod
+    @custom_redirects
     def _post_request(cls, json, url=None):
         loop_status_code = cls.__dict__.get("loop_status_code")
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
@@ -67,6 +80,7 @@ class APIRequest:
         return r.content
 
     @classmethod
+    @custom_redirects
     def _delete_request(cls, url=None, path_param=None, request_params=None):
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
 
@@ -84,6 +98,7 @@ class APIRequest:
         return r.json()
 
     @classmethod
+    @custom_redirects
     def _put_request(cls, data, url=None, headers=None):
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
 
@@ -99,6 +114,7 @@ class APIRequest:
         return r
 
     @classmethod
+    @custom_redirects
     def _get_request(cls, url=None, path_param=None, request_params=None):
         loop_status_code = cls.__dict__.get("loop_status_code")
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
@@ -128,6 +144,7 @@ class APIRequest:
         return r.json()
 
     @classmethod
+    @custom_redirects
     def _download_request(cls, url, destination, version=""):
         loop_status_code = cls.__dict__.get("loop_status_code")
         if type(url) is not str:

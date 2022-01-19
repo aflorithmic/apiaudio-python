@@ -8,6 +8,7 @@ from apiaudio.helper_classes import (
 class Mastering(CreatableResource, RetrievableResource, DownloadableResource):
     OBJECT_NAME = "mastering"
     resource_path = "/mastering"
+    api_redirect = ""
     mastering_preset_list_path = resource_path + "-presets"
 
     loop_status_code = 202
