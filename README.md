@@ -251,7 +251,7 @@ Script methods are:
     ```
 - `delete()` - Deletes a script. By default this will delete all versions of the script.
   - Parameters:
-    - `scriptId` (string) - The id of the script to be deleted
+    - `scriptId` \* [Required] (string) - The id of the script to be deleted
     - `version` (string) - Delete a specific version. 
   - Example:
     ```python

@@ -68,7 +68,7 @@ class RetrievableResource(APIRequest):
                 return cls._get_request(path_param=f"{cls.resource_path}/{scriptId}")
 
         if hasattr(cls, "file_url"):
-            return cls._get_request(path_param=f"{cls.file_url}", )
+            return cls._get_request(path_param=f"{cls.file_url}")
         else:
             return cls._get_request(request_params=params)
 
