@@ -17,11 +17,6 @@ class CreatableResource(APIRequest):
     def create(cls, **params):
         return cls._post_request(json=params)
 
-class UpdateableResource(APIRequest):
-    @classmethod
-    def update(cls, **params):
-        return cls._put_request(json=params)
-
 class DeletableResource(APIRequest):
     @classmethod
     def delete(cls, **args):
