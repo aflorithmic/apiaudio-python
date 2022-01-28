@@ -144,7 +144,7 @@ class APIRequest:
         """
         try:
             if res.headers.get("Warning"):
-                for warn in res.json().get("warnings"):
+                for warn in res.json().get("warnings", []):
                     self.logger.warning(warn)
             
             res.raise_for_status()
