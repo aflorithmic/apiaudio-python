@@ -5,9 +5,11 @@ import os
 import requests
 from requests.exceptions import HTTPError
 from . import sdk_version
+from apiaudio.logging import SDKLogger
 
 
 class APIRequest:
+
     def _api_key_checker(api_key=None):
         api_key_error_message = "Please specify a valid api_key or create one here:\n https://console.api.audio"
         PLACEHOLDERS = ["your-key", "APIKEY", "API_KEY"]
@@ -142,7 +144,13 @@ class APIRequest:
         """
         try:
             if res.headers.get("Warning"):
-                print(res.json().get("warnings"))
+                for warn in res.json().get("warnings"):
+                    SDKLogger(self.OBJECT_NAME).warning(warn)
+            
+            latest = res.headers.get("x-latest-python", sdk_version)
+            if latest != sdk_version:
+                SDKLogger("apiaudio").warning(f"You are using version {sdk_version} of the SDK, the latest version is {latest}. Update recommended; pip3 install --upgrade apiaudio")
+
             res.raise_for_status()
         except HTTPError as e:
             if res.json():

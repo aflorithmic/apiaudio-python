@@ -2,7 +2,6 @@
 # API docs at https://docs.api.audio/
 
 # Configuration variables
-
 sdk_version = "0.13.0"
 api_key = None
 client_id = None
@@ -17,9 +16,6 @@ default_http_client = None
 app_info = None
 enable_telemetry = True
 max_network_retries = 0
-
-# Set to either 'debug' or 'info', controls console logging
-log = None
 
 # API resources
 from apiaudio.api_resources import *
