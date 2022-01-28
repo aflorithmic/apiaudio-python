@@ -1,16 +1,18 @@
 import logging
 
+active_logers = []
+
 class CustomFormatter(logging.Formatter):
 
     # For debugging: "%(asctime)s - %(name)s - %(levelname)s - %(message)s (%(filename)s:%(lineno)d)"
     def string_format(color):
         ANSI = {
-            "grey":"\x1b[38;20m",
-            "yellow": "\x1b[33;20m",
-            "red": "\x1b[31;20m",
-            "bold_red": "\x1b[31;1m",
-            "bold": "\033[1m",
-            "reset": "\x1b[0m"
+        "grey":"\x1b[38;20m",
+        "yellow": "\x1b[33;20m",
+        "red": "\x1b[31;20m",
+        "bold_red": "\x1b[31;1m",
+        "bold": "\033[1m",
+        "reset": "\x1b[0m"
         }
         return f"{ANSI[color]}[%(levelname)s] {ANSI['bold']}%(name)s{ANSI['reset'] + ANSI[color]}: %(message)s{ANSI['reset']}"
 

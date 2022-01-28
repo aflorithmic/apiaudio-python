@@ -19,3 +19,7 @@ max_network_retries = 0
 
 # API resources
 from apiaudio.api_resources import *
+
+# logging
+from apiaudio.logging import SDKLogger
+APILogger = SDKLogger("apiaudio")

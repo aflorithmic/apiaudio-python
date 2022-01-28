@@ -4,13 +4,13 @@ from apiaudio.helper_classes import (
     ListableResource,
     RetrievableResource,
 )
-
+from apiaudio.logging import SDKLogger
 
 class Script(ListableResource, CreatableResource, RetrievableResource, DeletableResource):
     OBJECT_NAME = "script"
     resource_path = "/script"
     random_url = "/script/random"
-
+    logger = SDKLogger(OBJECT_NAME)
 
     @classmethod
     def get_random_text(cls, category=None):

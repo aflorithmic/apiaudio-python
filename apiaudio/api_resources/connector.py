@@ -1,10 +1,12 @@
 from apiaudio.api_request import APIRequest
+from apiaudio.logging import SDKLogger
 
 
 class Connector(APIRequest):
     OBJECT_NAME = "connector"
     resource_path = "/connector/"
     connection_path = "/connection/"
+    logger = SDKLogger(OBJECT_NAME)
 
     @classmethod
     def retrieve(cls, name):

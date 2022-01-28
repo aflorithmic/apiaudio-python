@@ -143,9 +143,9 @@ class APIRequest:
         @return: None
         """
         try:
-            if res.headers.get("Warning"):
-                for warn in res.json().get("warnings", []):
-                    SDKLogger(self.OBJECT_NAME).warning(warn)
+            if res.headers.get("Warning", "e"):
+                for warn in res.json().get("warnings", ["e"]):
+                    self.logger.warning(warn)
             
             latest = res.headers.get("x-latest-python", sdk_version)
             if latest != sdk_version:
