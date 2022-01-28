@@ -143,8 +143,8 @@ class APIRequest:
         @return: None
         """
         try:
-            if res.headers.get("Warning", "e"):
-                for warn in res.json().get("warnings", ["e"]):
+            if res.headers.get("Warning"):
+                for warn in res.json().get("warnings"):
                     self.logger.warning(warn)
             
             res.raise_for_status()
