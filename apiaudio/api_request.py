@@ -147,10 +147,6 @@ class APIRequest:
                 for warn in res.json().get("warnings", ["e"]):
                     self.logger.warning(warn)
             
-            latest = res.headers.get("x-latest-python", sdk_version)
-            if latest != sdk_version:
-                SDKLogger("apiaudio").warning(f"You are using version {sdk_version} of the SDK, the latest version is {latest}. Update recommended; pip3 install --upgrade apiaudio")
-
             res.raise_for_status()
         except HTTPError as e:
             if res.json():
