@@ -1,7 +1,5 @@
 import logging
 
-active_logers = []
-
 class CustomFormatter(logging.Formatter):
 
     # For debugging: "%(asctime)s - %(name)s - %(levelname)s - %(message)s (%(filename)s:%(lineno)d)"
