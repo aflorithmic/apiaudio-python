@@ -31,13 +31,14 @@ class APIRequest:
     @classmethod
     def _build_header(cls):
         cls._api_key_checker(apiaudio.api_key)
-        return {"x-api-key": apiaudio.api_key, "x-sdk-version": sdk_version}
+        return {"x-api-key": apiaudio.api_key, "x-python-sdk-version": sdk_version}
 
     @classmethod
     def _post_request(cls, json, url=None):
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
         headers = cls._build_header()
         r = requests.post(url=url, headers=headers, json=json)
+
         # speech timeouts
         if r.status_code == 504:
             r = requests.get(url=url, headers=headers, params=json)
@@ -62,14 +63,16 @@ class APIRequest:
     @classmethod
     def _delete_request(cls, url=None, path_param=None, request_params=None):
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
-
+        
         headers = cls._build_header()
         if path_param:
             url = f"{apiaudio.api_base}{path_param}"
 
         if request_params:
             r = requests.delete(url=url, headers=headers, params=request_params)
-
+        else:
+            r = requests.delete(url=url, headers=headers)
+            
         cls._expanded_raise_for_status(r)
 
         return r.json()
@@ -108,12 +111,15 @@ class APIRequest:
         return r.json()
 
     @classmethod
-    def _download_request(cls, url, destination):
+    def _download_request(cls, url, destination, version=""):
         if type(url) is not str:
             raise TypeError("Error retrieving the audio files.")
-
-        local_filename = f"{destination}/{url.split('/')[-1].split('?')[0]}"
+        
+        
+        remote_filename = url.split('/')[-1].split('?')[0]
+        local_filename = f"{destination}/{remote_filename}"
         local_filename = local_filename.replace("%243ct10n", "section")
+        local_filename = local_filename.replace("%7C", "|")
 
         with requests.get(url, stream=True) as r:
             cls._expanded_raise_for_status(r)

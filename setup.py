@@ -17,8 +17,8 @@ def get_version():
 setup(
     name="apiaudio",
     version=get_version(),
-    author="salih",
-    author_email="salih@aflorithmic.ai",
+    author="Samuel Hunt",
+    author_email="sam@aflorithmic.ai",
     description="Python SDK for api.audio API",
     long_description=long_description,
     long_description_content_type="text/markdown",

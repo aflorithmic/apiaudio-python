@@ -22,16 +22,27 @@ class DeletableResource(APIRequest):
     def delete(cls, **args):
 
         if cls.OBJECT_NAME == 'media':
-            if not 'mediaId' in args:
+            if 'mediaId' not in args:
                 raise Exception('mediaId parameter is required')
             
             return cls._delete_request(path_param=cls.audio_resource_path, request_params=args)
+
+        if cls.OBJECT_NAME == "script":
+            if 'scriptId' not in args:
+                raise Exception('scriptId parameter is required')
+            else:
+                scriptId = args['scriptId']
+            if 'version' in args:
+                version = args["version"]
+                return cls._delete_request(path_param=f"{cls.resource_path}/{scriptId}/{version}") 
+            else:   
+                return cls._delete_request(path_param=f"{cls.resource_path}/{scriptId}")
 
         return cls._delete_request(request_params=args)
 
 class RetrievableResource(APIRequest):
     @classmethod
-    def retrieve(cls, scriptId, section=None, parameters=None, public=None, vast=None, endFormat=None):
+    def retrieve(cls, scriptId, version=None, section=None, parameters=None, public=None, vast=None, endFormat=None, requestId=None):
         params = parameters.copy() if parameters else {}
         params.update({"scriptId": scriptId})
 
@@ -47,11 +58,20 @@ class RetrievableResource(APIRequest):
         if endFormat is not None:
             params.update({"endFormat": endFormat})
 
+        if version is not None:
+            params.update({"version": version})
+
+        if requestId is not None:
+            params.update({"requestId": requestId})
+
         if cls.OBJECT_NAME == "script":
-            return cls._get_request(path_param=f"{cls.resource_path}/{scriptId}")
+            if version is not None:
+                return cls._get_request(path_param=f"{cls.resource_path}/{scriptId}", request_params=params)
+            else:
+                return cls._get_request(path_param=f"{cls.resource_path}/{scriptId}")
 
         if hasattr(cls, "file_url"):
-            return cls._get_request(path_param=f"{cls.file_url}", request_params=params)
+            return cls._get_request(path_param=f"{cls.file_url}")
         else:
             return cls._get_request(request_params=params)
 
@@ -61,6 +81,7 @@ class DownloadableResource(APIRequest):
     def download(
         cls,
         scriptId,
+        version=None,
         section=None,
         parameters=None,
         public=None,
@@ -71,24 +92,25 @@ class DownloadableResource(APIRequest):
         parameters = parameters or {}
 
         try:
-            audio_files = cls.retrieve(scriptId, section, parameters, public, vast, endFormat)
+            audio_files = cls.retrieve(scriptId, version, section, parameters, public, vast, endFormat)
             audio_files.keys()
         except Exception:
             raise TypeError(
                 "Error retrieving the audio files. Make sure you can retrieve them with the same parameters and try again."
             )
-
+        
         if "url" in audio_files.keys():
             local_filename = cls._download_request(
                 url=audio_files.get("url"), destination=destination
             )
             return local_filename
-
-        local_filenames = []
-        for key, value in audio_files.items():
-            # Review "value"! list of string...
-            local_filename = cls._download_request(url=value, destination=destination)
-            local_filenames.append(local_filename)
+        
+        else: 
+            local_filenames = []
+            for key, value in audio_files.items():
+                #if key == "url": # placeholder for future versions
+                local_filename = cls._download_request(url=value, destination=destination)
+                local_filenames.append(local_filename)
 
         return local_filenames
 
