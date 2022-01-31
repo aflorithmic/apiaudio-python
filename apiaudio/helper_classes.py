@@ -42,7 +42,7 @@ class DeletableResource(APIRequest):
 
 class RetrievableResource(APIRequest):
     @classmethod
-    def retrieve(cls, scriptId, version=None, section=None, parameters=None, public=None, vast=None, endFormat=None):
+    def retrieve(cls, scriptId, version=None, section=None, parameters=None, public=None, vast=None, endFormat=None, requestId=None):
         params = parameters.copy() if parameters else {}
         params.update({"scriptId": scriptId})
 
@@ -60,6 +60,9 @@ class RetrievableResource(APIRequest):
 
         if version is not None:
             params.update({"version": version})
+
+        if requestId is not None:
+            params.update({"requestId": requestId})
 
         if cls.OBJECT_NAME == "script":
             if version is not None:
