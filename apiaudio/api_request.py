@@ -141,8 +141,6 @@ class APIRequest:
         @return: None
         """
         try:
-            if res.headers.get("Warning"):
-                print(res.json().get("warnings"))
             res.raise_for_status()
         except HTTPError as e:
             if res.json():
