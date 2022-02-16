@@ -1,6 +1,7 @@
 from apiaudio.helper_classes import ListableResource
 from apiaudio.logging import SDKLogger
 
+
 class Voice(ListableResource):
     OBJECT_NAME = "voice"
     resource_path = "/voice"
