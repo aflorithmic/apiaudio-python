@@ -23,3 +23,5 @@ from apiaudio.api_resources import *
 # logging
 from apiaudio.logging import SDKLogger
 APILogger = SDKLogger("apiaudio")
+
+version_warning_issued = False
