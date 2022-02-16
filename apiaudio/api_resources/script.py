@@ -10,7 +10,6 @@ class Script(ListableResource, CreatableResource, RetrievableResource, Deletable
     OBJECT_NAME = "script"
     resource_path = "/script"
     random_url = "/script/random"
-    logger = SDKLogger(OBJECT_NAME)
 
     @classmethod
     def get_random_text(cls, category=None):

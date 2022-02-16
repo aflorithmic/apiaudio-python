@@ -6,7 +6,6 @@ class Media(UploadableResource, DeletableResource):
     OBJECT_NAME = "media"
     resource_path = "/file"
     audio_resource_path = "/file/customaudio"
-    logger = SDKLogger(OBJECT_NAME)
 
     @classmethod
     def get_download_url(cls, mediaId: str = ""):

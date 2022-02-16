@@ -28,7 +28,7 @@ class CustomFormatter(logging.Formatter):
         return formatter.format(record)
 
 
-def SDKLogger(name="apiaudio", level=logging.WARNING):
+def SDKLogger(level=logging.WARNING):
     """
     Add a stream handler for the given name and level to the logging module.
     By default, this logs all apiaudio messages to ``stdout``.
@@ -40,7 +40,7 @@ def SDKLogger(name="apiaudio", level=logging.WARNING):
     :type level: int
     :param level: Logging level, e.g. ``logging.INFO``
     """
-    logger = logging.getLogger(name)
+    logger = logging.getLogger("apiaudio")
     logger.setLevel(level)
 
     # create console handler with a higher log level

@@ -15,7 +15,6 @@ class Sound(
     list_path = "/sound/template"
     file_url = "/file/sound"
     list_parameters_path = "/sound/parameter"
-    logger = SDKLogger(OBJECT_NAME)
 
     @classmethod
     def list_parameters(cls):

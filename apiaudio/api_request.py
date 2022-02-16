@@ -148,15 +148,15 @@ class APIRequest:
         @return: None
         """
         try:
-            if res.headers.get("Warning") and apiaudio.log_warnings:
-                for warn in re.findall(r'\"(.*?)\"', res.headers["Warning"]):  # get all messages in between ""
-                    if apiaudio.sdk_version in warn:
-                        if apiaudio._version_warning_issued:
-                            continue
-                        apiaudio._version_warning_issued = True
-                        apiaudio._APILogger.warning(warn)
-                        continue
-                    self.logger.warning(warn) 
+            if apiaudio.log_warnings:
+                latest_version = res.headers.get("x-sdk-latest", apiaudio.sdk_version)
+                if latest_version != apiaudio.sdk_version and not apiaudio._version_warning_issued:
+                    apiaudio._logger.warning(f"The latest version of apiaudio is {latest_version} and the version you're using is {apiaudio.sdk_version}. Consider upgrading, as you might be missing out on new features and bug fixes.")
+                    apiaudio._version_warning_issued = True
+
+                if res.headers.get("Warning") and apiaudio.log_warnings:
+                    for warn in re.findall(r'\"(.*?)\"', res.headers["Warning"]):  # get all messages in between ""
+                        apiaudio._logger.warning(f"{self.OBJECT_NAME.upper()}: {warn}") 
             
             res.raise_for_status()
         except HTTPError as e:
