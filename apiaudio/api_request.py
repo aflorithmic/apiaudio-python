@@ -3,6 +3,8 @@ import requests
 import shutil
 import os
 import requests
+import re
+
 from requests.exceptions import HTTPError
 from . import sdk_version
 from apiaudio.logging import SDKLogger
@@ -144,8 +146,8 @@ class APIRequest:
         """
         try:
             if res.headers.get("Warning"):
-                for warn in res.json().get("warnings", []):
-                    self.logger.warning(warn)
+                for warn in re.findall(r'(?<=\").*(?=\")', res.headers["Warning"]):  # get all messages in between ""
+                    self.logger.warning(warn) 
             
             res.raise_for_status()
         except HTTPError as e:
