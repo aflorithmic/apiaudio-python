@@ -1,24 +1,52 @@
 from apiaudio.helper_classes import (
     CreatableResource,
-    DownloadableResource,
     ListableResource,
     RetrievableResource,
+    DeletableResource
 )
 
-
-class Sound(
-    CreatableResource, DownloadableResource, RetrievableResource, ListableResource
+# These 3 classes are hidden from the user and are not included directly
+#--
+class SoundTemplate(
+    CreatableResource, RetrievableResource, ListableResource, DeletableResource
 ):
-    OBJECT_NAME = "sound"
-    resource_path = "/sound"
-    list_path = "/sound/template"
-    file_url = "/file/sound"
-    list_parameters_path = "/sound/parameter"
+    OBJECT_NAME = "soundTemplate"
+    resource_path = "/sound/template"
+    
+class SoundSegment(
+    CreatableResource, DeletableResource
+):
+    OBJECT_NAME = "soundSegment"
+    resource_path = "/sound/segment"
 
+class SoundParameter(
+    ListableResource
+):
+    OBJECT_NAME = "soundParameter"
+    resource_path = "/sound/parameter"
+
+
+# --
+
+
+# this class is included and wraps the above classes
+class Sound():
+    OBJECT_NAME = "sound"
+    
     @classmethod
     def list_parameters(cls):
-        return cls._get_request(path_param=cls.list_parameters_path)
+        return SoundParameter.list()
 
     @classmethod
     def list(cls, **args):
-        return cls._get_request(path_param=cls.list_path, request_params=args)
+        return SoundTemplate().list(**args)
+
+    @classmethod
+    def create(cls, **params):
+        return SoundTemplate.create(**params)
+    
+    @classmethod
+    def add_segment(cls, **params):
+        return SoundSegment.create(**params)
+    
+    
