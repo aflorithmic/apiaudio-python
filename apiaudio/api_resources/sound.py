@@ -4,7 +4,6 @@ from apiaudio.helper_classes import (
     ListableResource,
     RetrievableResource,
 )
-from apiaudio.logging import SDKLogger
 
 
 class Sound(

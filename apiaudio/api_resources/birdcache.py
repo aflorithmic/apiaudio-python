@@ -1,5 +1,4 @@
 from apiaudio.helper_classes import CreatableResource
-from apiaudio.logging import SDKLogger
 
 
 class Birdcache(CreatableResource):

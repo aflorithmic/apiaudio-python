@@ -1,5 +1,4 @@
 from apiaudio.api_request import APIRequest
-from apiaudio.logging import SDKLogger
 
 
 class Connector(APIRequest):

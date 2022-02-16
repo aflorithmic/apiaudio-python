@@ -1,5 +1,4 @@
 from apiaudio.helper_classes import DeletableResource, UploadableResource
-from apiaudio.logging import SDKLogger
 
 
 class Media(UploadableResource, DeletableResource):

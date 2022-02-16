@@ -3,7 +3,6 @@ from apiaudio.helper_classes import (
     DownloadableResource,
     RetrievableResource,
 )
-from apiaudio.logging import SDKLogger
 
 
 class Speech(CreatableResource, RetrievableResource, DownloadableResource):
