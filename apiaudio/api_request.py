@@ -125,11 +125,14 @@ class APIRequest:
         local_filename = local_filename.replace("%243ct10n", "section")
         local_filename = local_filename.replace("%7C", "|")
 
-        with requests.get(url, stream=True) as r:
-            cls._expanded_raise_for_status(r)
+        response = requests.get(url, stream=True)
+        while response.status_code == 202:  # keep the retrieval going if 202 returned
+            response = requests.get(url, stream=True)
+        
+        cls._expanded_raise_for_status(response)
 
-            with open(local_filename, "wb") as f:
-                shutil.copyfileobj(r.raw, f)
+        with open(local_filename, "wb") as f:
+            shutil.copyfileobj(response.raw, f)
 
         return local_filename
 
