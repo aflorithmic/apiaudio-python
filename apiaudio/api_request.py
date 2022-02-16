@@ -146,7 +146,7 @@ class APIRequest:
         """
         try:
             if res.headers.get("Warning") and apiaudio.log_warnings:
-                for warn in re.findall(r'(?<=\").*(?=\")', res.headers["Warning"]):  # get all messages in between ""
+                for warn in re.findall(r'\"(.*?)\"', res.headers["Warning"]):  # get all messages in between ""
                     if apiaudio.sdk_version in warn:
                         if apiaudio._version_warning_issued:
                             continue
