@@ -145,13 +145,13 @@ class APIRequest:
         @return: None
         """
         try:
-            if res.headers.get("Warning"):
+            if res.headers.get("Warning") and apiaudio.log_warnings:
                 for warn in re.findall(r'(?<=\").*(?=\")', res.headers["Warning"]):  # get all messages in between ""
                     if apiaudio.sdk_version in warn:
-                        if apiaudio.version_warning_issued:
+                        if apiaudio._version_warning_issued:
                             continue
-                        apiaudio.version_warning_issued = True
-                        apiaudio.APILogger.warning(warn)
+                        apiaudio._version_warning_issued = True
+                        apiaudio._APILogger.warning(warn)
                         continue
                     self.logger.warning(warn) 
             

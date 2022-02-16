@@ -7,6 +7,7 @@ api_key = None
 client_id = None
 api_base = "https://v1.api.audio"
 upload_api_base = "https://file.api.audio"  # not implemented yet.
+log_warnings = True
 
 # future
 api_version = None
@@ -22,6 +23,5 @@ from apiaudio.api_resources import *
 
 # logging
 from apiaudio.logging import SDKLogger
-APILogger = SDKLogger("apiaudio")
-
-version_warning_issued = False
+_APILogger = SDKLogger("apiaudio")
+_version_warning_issued = False
