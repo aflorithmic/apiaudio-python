@@ -6,11 +6,12 @@ from apiaudio.helper_classes import (
 )
 
 
-class Script(ListableResource, CreatableResource, RetrievableResource, DeletableResource):
+class Script(
+    ListableResource, CreatableResource, RetrievableResource, DeletableResource
+):
     OBJECT_NAME = "script"
     resource_path = "/script"
     random_url = "/script/random"
-
 
     @classmethod
     def get_random_text(cls, category=None):
