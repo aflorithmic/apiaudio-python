@@ -7,53 +7,19 @@ from apiaudio.helper_classes import (
 class Lexi(ListableResource):
     OBJECT_NAME = "diction"
     resource_path = "/diction"
-    list_path = resource_path + "/get_dicts_all"
 
     list_words_path = resource_path + "/list/"
-
-    get_dicts_path = resource_path + "/get_dicts"
-    get_dict_path = resource_path + "/get_dict"
-    search = resource_path + "/search"
-    type = resource_path + "/get_type"
-    api_redirect = ""
-
-
-    # @classmethod
-    # def list(cls, **args):
-    #     return cls._get_request(path_param=cls.resource_path, request_params=args)
-
+    list_types_path = resource_path + "/list_types"
+    search_for_word_path = resource_path + "/search/"
+    
     @classmethod
     def list_types(cls):
-        return cls._get_request(path_param=cls.resource_path +"/" + "list_types")
+        return cls._get_request(path_param=cls.list_types_path)
 
     @classmethod
     def list_words(cls, dictId):
         return cls._get_request(path_param=cls.list_words_path + dictId)
     
     @classmethod
-    def search_for_word(cls, word):
-        return cls._get_request(path_param=cls.list_words_path + dictId)
-    
-    
-    @classmethod
-    def get_dicts_by_language(cls, language):
-         return cls._get_request(path_param=cls.get_dicts_path + "/" + language)#, request_params={"lang":language})
-
-    @classmethod
-    def get_dict_by_id(cls, dictId):
-        return cls._get_request(path_param=cls.get_dict_path + "/id/" + dictId)
-
-    @classmethod
-    def get_dict_by_type(cls, type, language):
-        return cls._get_request(path_param=cls.type + f"/{type}/{language}")
-
-    @classmethod
     def search_for_word(cls, word, language):
-        return cls._get_request(path_param=cls.search + f"/{word}/{language}")
-
-    # def retrieve(name):
-    #     if name == "ukcities":
-    #         return {"reading", "manchester", "liverpool", "cardiff", "edinburgh"}
-    #     if name == "uknames":
-    #         return {"sam", "anne", "timo", "peadar", "marcin"}
-    #     return {}
+        return cls._get_request(path_param=cls.search_for_word_path + f"{word}/{language}")
