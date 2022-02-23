@@ -3,8 +3,11 @@ import requests
 import shutil
 import os
 import requests
+import re
+
 from requests.exceptions import HTTPError
 from . import sdk_version
+from apiaudio.logging import SDKLogger
 
 
 class APIRequest:
@@ -63,7 +66,7 @@ class APIRequest:
     @classmethod
     def _delete_request(cls, url=None, path_param=None, request_params=None):
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
-        
+
         headers = cls._build_header()
         if path_param:
             url = f"{apiaudio.api_base}{path_param}"
@@ -72,7 +75,7 @@ class APIRequest:
             r = requests.delete(url=url, headers=headers, params=request_params)
         else:
             r = requests.delete(url=url, headers=headers)
-            
+
         cls._expanded_raise_for_status(r)
 
         return r.json()
@@ -114,18 +117,20 @@ class APIRequest:
     def _download_request(cls, url, destination, version=""):
         if type(url) is not str:
             raise TypeError("Error retrieving the audio files.")
-        
-        
-        remote_filename = url.split('/')[-1].split('?')[0]
+
+        remote_filename = url.split("/")[-1].split("?")[0]
         local_filename = f"{destination}/{remote_filename}"
         local_filename = local_filename.replace("%243ct10n", "section")
         local_filename = local_filename.replace("%7C", "|")
 
-        with requests.get(url, stream=True) as r:
-            cls._expanded_raise_for_status(r)
+        response = requests.get(url, stream=True)
+        while response.status_code == 202:  # keep the retrieval going if 202 returned
+            response = requests.get(url, stream=True)
 
-            with open(local_filename, "wb") as f:
-                shutil.copyfileobj(r.raw, f)
+        cls._expanded_raise_for_status(response)
+
+        with open(local_filename, "wb") as f:
+            shutil.copyfileobj(response.raw, f)
 
         return local_filename
 
@@ -141,6 +146,23 @@ class APIRequest:
         @return: None
         """
         try:
+            if apiaudio.log_warnings:
+                latest_version = res.headers.get("x-sdk-latest", apiaudio.sdk_version)
+                if (
+                    latest_version != apiaudio.sdk_version
+                    and not apiaudio._version_warning_issued
+                ):
+                    apiaudio._logger.warning(
+                        f"The latest version of apiaudio is {latest_version} and the version you're using is {apiaudio.sdk_version}. Consider upgrading, as you might be missing out on new features and bug fixes."
+                    )
+                    apiaudio._version_warning_issued = True
+
+                if res.headers.get("Warning") and apiaudio.log_warnings:
+                    for warn in re.findall(
+                        r"\"(.*?)\"", res.headers["Warning"]
+                    ):  # get all messages in between ""
+                        apiaudio._logger.warning(f"{self.OBJECT_NAME.upper()}: {warn}")
+
             res.raise_for_status()
         except HTTPError as e:
             if res.json():
