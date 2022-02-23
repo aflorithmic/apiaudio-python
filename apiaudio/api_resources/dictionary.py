@@ -21,5 +21,5 @@ class Lexi(ListableResource):
         return cls._get_request(path_param=cls.list_words_path + dictId)
     
     @classmethod
-    def search_for_word(cls, word, language):
-        return cls._get_request(path_param=cls.search_for_word_path + f"{word}/{language}")
+    def search_for_word(cls, word, lang):
+        return cls._get_request(path_param=cls.search_for_word_path + f"{word}/{lang}")
