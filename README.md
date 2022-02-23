@@ -617,13 +617,12 @@ Birdcache methods are:
 
 # Authors <a name = "authors"> </a>
 
-- https://github.com/Sjhunt93
 - https://github.com/tonythree
 - https://github.com/GetOn4
 - https://github.com/zeritte
 - https://github.com/springcoil
 - https://github.com/a96lex
-
+- https://github.com/Sjhunt93
 
 # License <a name = "license"> </a>
 
