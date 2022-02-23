@@ -27,7 +27,8 @@ class DeletableResource(APIRequest):
             
             return cls._delete_request(path_param=cls.audio_resource_path, request_params=args)
 
-        if cls.OBJECT_NAME == 'sound':
+        if cls.OBJECT_NAME == 'soundTemplate':
+            print(args)
             if 'templateName' not in args:
                 raise Exception('name parameter is required')
             templateName = args['templateName']

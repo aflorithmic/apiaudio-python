@@ -44,6 +44,10 @@ class Sound():
     @classmethod
     def create(cls, **params):
         return SoundTemplate.create(**params)
+
+    @classmethod
+    def delete(cls, **params):
+        return SoundTemplate.delete(**params)
     
     @classmethod
     def add_segment(cls, **params):
