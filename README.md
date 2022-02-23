@@ -617,30 +617,90 @@ SyncTTS methods are:
 
 ### `Birdcache` resource <a name = "birdcache"> </a>
 
-Birdcache allows you to do a single production request to have mastering or speech from text with personalisation parameters with ease.
+Lexi is a dictionary that will replace problematic words with phonetic spellings. For example,ensuring the city name `reading` is pronounced correctly. Dictionaries are split into languages and types. For example, the city `reading` would be of type `location` with language `en-gb` and in this case in the `UkCities69` dictionary.
 
-Birdcache methods are:
+To use this feature words in the script should be marked up with the `<!'type'>` flag, whereby type is the type of dictionary to use. The dictionary flag that precedes the word should contain the type, and the one following should be empty `<!>`. In the example shown below, the second occurrence of the word **reading** will be pronounced as the city name.
 
-- `create()` Create a TTS speech file.
+  Example:
+
+    ```python
+    scriptText = "Hello I am reading a book in the city of <!location>reading<!> today"
+    ```
+
+Lexi methods are:
+
+- `list()` List the available dictionaries
 
   - Parameters:
 
-    - `type` \* [Required] (string) - Type of the event. Supported types are `mastering` and `speech`.
-    - `text` \* [Required] (string) - The text you want to do speech/mastering with. See the example for personalisation parameters.
-    - `voice` \* [Required] (string) - The voice for speech creation.
-    - `audience` \* [Optional] (dict) - The key pair object for personalisation parameters. See the example below.
-    - `soundTemplate` [Optional] (string) - The sound template for mastering creation. Only needed when the type is mastering.
+    - `lang`  [Optional] (string) - Filter by language code, e.g. `en-gb` or `es`.
+    - `type`  [Optional] (string) - Filter by type e.g. `location`.
 
   - Example:
     ```python
-    birdcache = apiaudio.Birdcache.create(
-      type="mastering",
-      voice="linda",
-      text="This is {{username|me}} creating synchronous text to speech",
-      audience={"username": ["salih", "sam", "timo"]},
-      soundTemplate="openup"
+    # returns all english gb dictionaries of type name
+    dictionaries = apiaudio.Lexi.list(lang="en-gb", type="name") 
+
+    ```
+
+
+### `Lexi` resource <a name = "lexi"> </a>
+
+Sound allows you to design your own sound template from a script and a background track. In order to get a sound template/project, make sure you requested [speech](#speech) for your script resource first.
+
+Sound methods are:
+
+- `create()` Creates a sound template, compresses the sound project into a zip file and returns the url.
+  - Parameters:
+    - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
+    - `soundTemplate` \ Optional (string) - The sound template name (string)
+  - Example:
+    ```python
+    sound_url = apiaudio.Sound.create(
+        scriptId="id-1234",
+        soundTemplate="parisianmorning",
     )
     ```
+- `retrieve()` Retrieve the url of the sound project zip file.
+  - Parameters:
+    - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
+  - Example:
+    ```python
+    audio_files = apiaudio.Sound.retrieve(scriptId="id-1234")
+    ```
+- `list()` List all the available sound templates in our api. The parameters are all optional, and can be used in combination to get the perfect sound for your usecase.
+
+  - Parameters:
+    - `industryExamples` (string) - Try with one or more (separated by commas) of: news, travel, business, relaxation, fitness, relax, children stories
+    - `contents` (string) - Try with one or more (separated by commas) of: intro, main, outro, effect1, effect2, main outro, droid_main, chewie_main, effect3, ambience, only effects
+    - `genre` (string) - Try with one of: electronic, acoustic, atmospheric, abstract, rock
+    - `tempo` (string) - Try with one of: mid, up, down, uptempo
+    - `tags` (string) - Try with one or more (separated by commas) of: intense, minimal, reflective, melodic, happy, nostalgic, focus, energetic, uplifting, active, relaxed, ambience, mysterious, positive, informative, workout, work, meditation, travel, full silence
+  - Example:
+    ```python
+    sound_templates = apiaudio.Sound.list()
+    ```
+
+- `list_parameters()` This method lets you see which attributes you can filter the sound templates by, along with the allowed values for each attribute. You can later use these parameters and values to filter the sound templates you wish to list.
+
+  - Parameters:
+
+    - No parameters required.
+
+  - Example:
+    ```python
+    parameters = apiaudio.Sound.list_parameters()
+    ```
+
+- `download()` Download the sound project zip file in your preferred folder.
+  - Parameters:
+    - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
+    - `destination` (string) - The folder destination path. Default is "." (current folder)
+  - Example:
+    ```python
+    audio_files = apiaudio.Sound.download(scriptId="id-1234", destination=".")
+    ```
+
 
 # Authors <a name = "authors"> </a>
 
