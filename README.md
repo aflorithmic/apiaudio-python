@@ -396,24 +396,6 @@ Sound allows you to design your own sound template from a script and a backgroun
 
 Sound methods are:
 
-- `create()` Creates a sound template, compresses the sound project into a zip file and returns the url.
-  - Parameters:
-    - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
-    - `soundTemplate` \ Optional (string) - The sound template name (string)
-  - Example:
-    ```python
-    sound_url = apiaudio.Sound.create(
-        scriptId="id-1234",
-        soundTemplate="parisianmorning",
-    )
-    ```
-- `retrieve()` Retrieve the url of the sound project zip file.
-  - Parameters:
-    - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
-  - Example:
-    ```python
-    audio_files = apiaudio.Sound.retrieve(scriptId="id-1234")
-    ```
 - `list()` List all the available sound templates in our api. The parameters are all optional, and can be used in combination to get the perfect sound for your usecase.
 
   - Parameters:
@@ -438,14 +420,6 @@ Sound methods are:
     parameters = apiaudio.Sound.list_parameters()
     ```
 
-- `download()` Download the sound project zip file in your preferred folder.
-  - Parameters:
-    - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
-    - `destination` (string) - The folder destination path. Default is "." (current folder)
-  - Example:
-    ```python
-    audio_files = apiaudio.Sound.download(scriptId="id-1234", destination=".")
-    ```
 
 ### `Mastering` resource <a name = "mastering"> </a>
 
@@ -648,6 +622,7 @@ Birdcache methods are:
 - https://github.com/zeritte
 - https://github.com/springcoil
 - https://github.com/a96lex
+- https://github.com/Sjhunt93
 
 # License <a name = "license"> </a>
 
