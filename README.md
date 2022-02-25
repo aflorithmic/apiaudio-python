@@ -662,7 +662,7 @@ Birdcache methods are:
 
 ### `Lexi` resource <a name = "lexi"> </a>
 
-Lexi is a dictionary that will replace problematic words with phonetic spellings. For example,ensuring the city name `reading` is pronounced correctly. Dictionaries are split into languages and types. For example, the city `reading` would be of type `location` with language `en-gb` and in this case in the `UkCities69` dictionary.
+Lexi is an engine for enhancing the pronunciation of troublesome words. For example,ensuring the city name `reading` is pronounced correctly. Dictionaries are split into languages and types. For example, the city `reading` would be of type `location` with language `en-gb` and in this case in the `UkCities69` dictionary.
 
 To use this feature words in the script should be marked up with the `<!'type'>` flag, whereby type is the type of dictionary to use. The dictionary flag that precedes the word should contain the type, and the one following should be empty `<!>`. In the example shown below, the second occurrence of the word **reading** will be pronounced as the city name.
 
@@ -721,7 +721,7 @@ Lexi methods are:
 
 #### Preview
 
-The effect of applying a dictionary can be seen with the `script.preview()` method. See [Script](#script) documentation for more details.
+The effect of applying Lexi can be seen with the `script.preview()` method. See [Script](#script) documentation for more details.
   - Example:
     ```python
       text = """ 
@@ -740,7 +740,7 @@ The effect of applying a dictionary can be seen with the `script.preview()` meth
     ```python
     "The author of this repo has lived in two places in the UK, bude and [<!>bristol]<!>".
     ```
-    In this example Bristol is in a location dictionary, but Bude is not. Words marked between `[<!>....<!>]` will be replaced with a correct phonetic spelling.
+    In this example Bristol is in a location dictionary, but Bude is not. Lexi will ensure words marked between `[<!>....<!>]` will be pronounced correctly.
     
 # Authors <a name = "authors"> </a>
 
