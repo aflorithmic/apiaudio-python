@@ -2,7 +2,9 @@
 # API docs at https://docs.api.audio/
 
 # Configuration variables
-sdk_version = "0.13.0"
+
+sdk_version = "0.14.0"
+
 api_key = None
 client_id = None
 api_base = "https://v1.api.audio"

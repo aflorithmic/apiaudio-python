@@ -34,6 +34,7 @@ The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not 
   - [Media](#media)
   - [SyncTTS](#synctts)
   - [Birdcache](#birdcache)
+  - [Lexi](#lexi)
 - [Authors](#authors)
 - [License](#license)
 
@@ -239,6 +240,25 @@ Script methods are:
     ```python
     script = apiaudio.Script.retrieve(scriptId="id-1234")
     ```
+- `preview` - return a script with the dictionary highlighting applied. see [Lexi](#lexi) for more examples of how to use the dictionary feature.
+  - Parameters:
+    - `scriptId` \* [Required] (string) - The script ID you want to use.
+     - `lang`  \* [Required] (string) Determines which dictionary language should be used.
+  
+   - Example:
+    ```python
+      text = """ 
+        The author of this repo has lived in two places in the 
+        UK, <!location>Bude<!> and <!location>Bristol<!>.
+      """
+    
+    r = apiaudio.Script.create(scriptText=text)
+    scriptId = r["scriptId"]
+    
+    preview = apiaudio.Script.preview(scriptId=scriptId, language="en-gb")
+    ```
+
+
 - `list()` - List all scripts available in your organization. This method supports filtering.
   - Parameters:
     - `projectName` (string) - Return any scripts with this projectName.
@@ -613,8 +633,89 @@ Birdcache methods are:
       audience={"username": ["salih", "sam", "timo"]},
       soundTemplate="openup"
     )
+
+### `Lexi` resource <a name = "lexi"> </a>
+
+Lexi is an engine for enhancing the pronunciation of troublesome words. For example, ensuring the city name `reading` is pronounced correctly. Dictionaries are split into languages and types. For example, the city `reading` would be of type `location` with language `en-gb` and in this case in the `UkCities69` dictionary.
+
+To use this feature words in the script should be marked up with the `<!'type'>` flag, whereby type is the type of dictionary to use. The dictionary flag that precedes the word should contain the type, and the one following should be empty `<!>`. In the example shown below, the second occurrence of the word **reading** will be pronounced as the city name.
+
+  Example:
+
+    ```python
+    scriptText = "Hello I am reading a book in the city of <!location>reading<!> today"
     ```
 
+Lexi methods are:
+
+- `list()` List the available dictionaries
+
+  - Parameters:
+
+    - `lang`  [Optional] (string) - Filter by language code, e.g. `en-gb` or `es`.
+    - `type`  [Optional] (string) - Filter by type e.g. `location`.
+
+  - Example:
+    ```python
+    # returns all english gb dictionaries of type name
+    dictionaries = apiaudio.Lexi.list(lang="en-gb", type="name") 
+
+    ```
+- `list_types()` List the available types
+  - Parameters:
+    - `none`
+  - Example:
+    ```python
+    # returns the valid flag types, i.e location, name, brand
+    types = apiaudio.Lexi.list_types() 
+
+    ```
+- `list_words()` Lists all the words contained in a dictionary.
+    - Parameters:
+
+    - `dictId`  \* [Required] (string) - The id of the dictionary.
+  - Example:
+    ```python
+    # lists all words in the dictionary
+    words = apiaudio.Lexi.list_words(dictId="100uk_cities")
+    ```
+- `search_for_word()` Searches to see if a word is in any of the dictionaries.
+
+  - Parameters:
+
+    - `word`  \* [Required] (string) - Word to look for.
+    - `language`  \* [Required] (string) - language code to use e.g. `en-gb`.
+
+  - Example:
+    ```python
+    # Checks if the word bristol exists
+    result = apiaudio.Lexi.search_for_word(word="bristol", lang="en-gb")
+
+    ```
+
+#### Preview
+
+The effect of applying Lexi can be seen with the `script.preview()` method. See [Script](#script) documentation for more details.
+  - Example:
+    ```python
+      text = """ 
+        The author of this repo has lived in two places in the 
+        UK, <!location>Bude<!> and <!location>Bristol<!>.
+      """
+    
+    r = apiaudio.Script.create(scriptText=text)
+    scriptId = r["scriptId"]
+    
+    # preview the script in en-gb
+    preview = apiaudio.Script.preview(scriptId=scriptId, language="en-gb")
+    print(preview)
+    ```
+  - Response:
+    ```python
+    "The author of this repo has lived in two places in the UK, bude and [<!>bristol<!>]".
+    ```
+    In this example Bristol is in a location dictionary, but Bude is not. Lexi will ensure words marked between `[<!>....<!>]` will be pronounced correctly.
+    
 # Authors <a name = "authors"> </a>
 
 - https://github.com/tonythree
