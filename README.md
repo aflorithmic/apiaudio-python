@@ -717,14 +717,11 @@ The effect of applying Lexi can be seen with the `script.preview()` method. See 
     ```
     In this example Bristol is in a location dictionary, but Bude is not. Lexi will ensure words marked between `[<!>....<!>]` will be pronounced correctly.
     
-# Authors <a name = "authors"> </a>
+# Maintainers <a name = "maintainers"> </a>
 
-- https://github.com/tonythree
-- https://github.com/GetOn4
 - https://github.com/zeritte
-- https://github.com/springcoil
-- https://github.com/a96lex
 - https://github.com/Sjhunt93
+- https://github.com/martinezpl
 
 # License <a name = "license"> </a>
 
