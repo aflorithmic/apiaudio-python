@@ -735,7 +735,7 @@ Available methods:
 
   - Example:
     ```python
-    sync_tts = apiaudio.Connector.retrieve(
+    status = apiaudio.Connector.retrieve(
       name="julep"
     )
 
@@ -747,7 +747,7 @@ Available methods:
 
   - Example:
     ```python
-    sync_tts = apiaudio.Connector.connection(
+    status = apiaudio.Connector.connection(
       connection_id="af2fe14a-aa6b-4a97-b430-a072c38b11ff"
     )
     
