@@ -35,6 +35,7 @@ The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not 
   - [SyncTTS](#synctts)
   - [Birdcache](#birdcache)
   - [Lexi](#lexi)
+  - [Connector](#connector)
 - [Authors](#authors)
 - [License](#license)
 
@@ -462,6 +463,7 @@ Mastering methods are:
     - `audience` (list) - List of dicts containing the personalisation parameters. This parameter depends on the number of parameters you used in your [script](#script) resource. In the script documentation example above, we used 2 parameters: `username` and `location`, and in the following example below we want to produce the script for username `salih` with location `Barcelona`. If audience is not provided, the fallback track will be created.
     - `mediaFiles` (list) - List of dicts containing the media files. This parameter depends on the media file tags used in the [script](#script) resource and the media files you have in your account. For example, if the script contains `<<media::myrecording>>` plus `<<media::mysong>>`, and you want to attach myrecording to mediaId = "12345", and mysong to mediaId = "67890" then `mediaFiles = [{"myrecording":"12345", "mysong":"67890"}]`.
     - `mediaVolumeTrim` (float) - Floating point varible that allows you to trim the volume of uploaded media files (in dB). This attribute has a valid range of -12 to 12 dB and applies to all media files included in a single mastering call. Clipping protection is not provided so only make incremental adjustments.
+    - `connectors` (list) - List of dicts specifying configuration for particular 3rd party connection. For guidelines in context of supported 3rd party application, see [connectors documentation](https://docs.api.audio/docs/what-are-connectors).
 
   - Example:
     ```python
@@ -716,6 +718,38 @@ The effect of applying Lexi can be seen with the `script.preview()` method. See 
     "The author of this repo has lived in two places in the UK, bude and [<!>bristol<!>]".
     ```
     In this example Bristol is in a location dictionary, but Bude is not. Lexi will ensure words marked between `[<!>....<!>]` will be pronounced correctly.
+    
+### `Connector` resource <a name = "connector"> </a>
+
+Resource used for monitoring 3rd paty integrations. End results of [Mastering](#mastering) resource can be distributed into external applications through `connectors` field. See [connectors documentation](https://docs.api.audio/docs/what-are-connectors).
+List of currently supported applications: 
+- [julep.de](https://www.julep.de)
+
+Available methods:
+
+- `retrieve()` After registering a connector in the [api.console](https://console.api.audio/), use this method to check whether a connection was succesful using provided credentials.
+
+  - Parameters:
+
+    - `name` \* [Required] (string) - The name of the connector specified in console.
+
+  - Example:
+    ```python
+    status = apiaudio.Connector.retrieve(
+      name="julep"
+    )
+
+- `connection()` Check the status of the connection by providing `connectionId` returned in a Mastering response.
+
+  - Parameters:
+
+    - `connection_id` \* [Required] (string) - The connectionId returned by Mastering resource.
+
+  - Example:
+    ```python
+    status = apiaudio.Connector.connection(
+      connection_id="af2fe14a-aa6b-4a97-b430-a072c38b11ff"
+    )
     
 # Maintainers <a name = "maintainers"> </a>
 
