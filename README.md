@@ -36,6 +36,7 @@ The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not 
   - [Birdcache](#birdcache)
   - [Lexi](#lexi)
   - [Connector](#connector)
+  - [Logging](#logging)
 - [Authors](#authors)
 - [License](#license)
 
@@ -750,7 +751,18 @@ Available methods:
     status = apiaudio.Connector.connection(
       connection_id="af2fe14a-aa6b-4a97-b430-a072c38b11ff"
     )
-    
+
+### Logging <a name = "logging"></a>
+
+By default, warnings issued by API are logged in the console output. Additionally, some behaviors are logged on informational level (e.g. "In progress..." indicators during longer processing times). 
+The level of logging can be controlled choosing from the standard levels in Python's `logging` library.
+
+  - Decreasing logging level for more detailed logs:
+    ```python
+    apiaudio.set_logger_level("INFO")
+    # apiaudio.set_logger_level("CRITICAL") - set the highest level to disable logs
+    ```
+
 # Maintainers <a name = "maintainers"> </a>
 
 - https://github.com/zeritte
