@@ -613,7 +613,7 @@ SyncTTS methods are:
 
 ### `Birdcache` resource <a name = "birdcache"> </a>
 
-Birdcache allows you to do a single production request to have mastering or speech from text with personalisation parameters with ease.
+Birdcache is a caching service provided by API.audio that provides the caching layer for the customer by storing data in API.audio servers for future use. This allows you to retrieve your speech files on the fly.
 
 Birdcache methods are:
 
