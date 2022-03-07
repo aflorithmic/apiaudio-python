@@ -2,9 +2,19 @@ import apiaudio
 import pprint
 import pytest
 import os 
+import logging
 
 apiaudio.api_key = os.environ["AFLR_API_KEY"]
 #apiaudio.api_base="https://staging-v1.api.audio"
+
+def test_level_setting():
+    assert apiaudio._logger.level is logging.WARNING
+    apiaudio.set_logger_level("DEBUG")
+    assert apiaudio._logger.level is logging.DEBUG
+
+def test_processing_loop():
+    speech = apiaudio.Speech.create(scriptId="longProcessing", voice="Dieter")
+    assert len(speech) == 3  # number of sections in the script
 
 def test_list_parameters():
     assert len(apiaudio.Voice.list_parameters()) > 0 
