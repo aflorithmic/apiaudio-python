@@ -649,6 +649,10 @@ To use this feature words in the script should be marked up with the `<!'type'>`
     scriptText = "Hello I am reading a book in the city of <!location>reading<!> today"
     ```
 
+Available dictionaries are:
+
+`['uk_brands', 'uk_cities', 'uk_boy_names', 'uk_girl_names', 'uk_last_names']`
+
 Lexi methods are:
 
 - `list()` List the available dictionaries
