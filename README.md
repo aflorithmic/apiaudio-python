@@ -639,7 +639,7 @@ Birdcache methods are:
 
 ### `Lexi` resource <a name = "lexi"> </a>
 
-Lexi is an engine for enhancing the pronunciation of troublesome words. For example, ensuring the city name `reading` is pronounced correctly. Dictionaries are split into languages and types. For example, the city `reading` would be of type `location` with language `en-gb` and in this case in the `UkCities69` dictionary.
+Lexi is an engine for enhancing the pronunciation of troublesome words. For example, ensuring the city name `reading` is pronounced correctly. Dictionaries are split into languages and types. For example, the city `reading` would be of type `location` with language `en-gb` and in this case in the `UkCities` dictionary.
 
 To use this feature words in the script should be marked up with the `<!'type'>` flag, whereby type is the type of dictionary to use. The dictionary flag that precedes the word should contain the type, and the one following should be empty `<!>`. In the example shown below, the second occurrence of the word **reading** will be pronounced as the city name.
 
@@ -680,7 +680,7 @@ Lexi methods are:
   - Example:
     ```python
     # lists all words in the dictionary
-    words = apiaudio.Lexi.list_words(dictId="100uk_cities")
+    words = apiaudio.Lexi.list_words(dictId="uk_cities")
     ```
 - `search_for_word()` Searches to see if a word is in any of the dictionaries.
 
