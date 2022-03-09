@@ -3,7 +3,7 @@
 
 # Configuration variables
 
-sdk_version = "0.14.1"
+sdk_version = "0.15.0"
 
 api_key = None
 client_id = None
