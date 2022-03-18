@@ -8,3 +8,4 @@ from apiaudio.helper_classes import (
 class Mastering(CreatableResource, RetrievableResource, DownloadableResource):
     OBJECT_NAME = "mastering"
     resource_path = "/mastering"
+    loop_status_code = 202
