@@ -754,8 +754,8 @@ Available methods:
 
 ### Logging <a name = "logging"></a>
 
-By default, warnings issued by API are logged in the console output. Additionally, some behaviors are logged on informational level (e.g. "In progress..." indicators during longer processing times). 
-The level of logging can be controlled choosing from the standard levels in Python's `logging` library.
+By default, warnings issued by the API are logged in the console output. Additionally, some behaviors are logged on the informational level (e.g. "In progress..." indicators during longer processing times).
+The level of logging can be controlled by choosing from the standard levels in Python's `logging` library.
 
   - Decreasing logging level for more detailed logs:
     ```python
