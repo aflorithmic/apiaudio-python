@@ -36,6 +36,7 @@ The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not 
   - [Birdcache](#birdcache)
   - [Lexi](#lexi)
   - [Connector](#connector)
+  - [Logging](#logging)
 - [Authors](#authors)
 - [License](#license)
 
@@ -460,7 +461,7 @@ Mastering methods are:
     - `vast` (boolean) - Boolean flag that allows to create a VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
     - `endFormat` (list) - List of audio formats to be produced. Valid formats are: `["wav", "mp3" (default), "flac", "ogg", "mp3_very_low", "mp3_low", "mp3_medium", "mp3_high", "mp3_very_high"]`
     - `forceLength` (int) - force the audio length of the mastered track (in seconds).
-    - `audience` (list) - List of dicts containing the personalisation parameters. This parameter depends on the number of parameters you used in your [script](#script) resource. In the script documentation example above, we used 2 parameters: `username` and `location`, and in the following example below we want to produce the script for username `salih` with location `Barcelona`. If audience is not provided, the fallback track will be created.
+    - `audience` (dict) - Dictionary containing the personalisation parameters. This parameter depends on the number of parameters you used in your [script](#script) resource. In the script documentation example above, we used 2 parameters: `username` and `location`, and in the following example below we want to produce the script for username `salih` with location `Barcelona`. If audience is not provided, the fallback track will be created.
     - `mediaFiles` (list) - List of dicts containing the media files. This parameter depends on the media file tags used in the [script](#script) resource and the media files you have in your account. For example, if the script contains `<<media::myrecording>>` plus `<<media::mysong>>`, and you want to attach myrecording to mediaId = "12345", and mysong to mediaId = "67890" then `mediaFiles = [{"myrecording":"12345", "mysong":"67890"}]`.
     - `mediaVolumeTrim` (float) - Floating point varible that allows you to trim the volume of uploaded media files (in dB). This attribute has a valid range of -12 to 12 dB and applies to all media files included in a single mastering call. Clipping protection is not provided so only make incremental adjustments.
     - `connectors` (list) - List of dicts specifying configuration for particular 3rd party connection. For guidelines in context of supported 3rd party application, see [connectors documentation](https://docs.api.audio/docs/what-are-connectors).
@@ -470,7 +471,7 @@ Mastering methods are:
     response = apiaudio.Mastering.create(
         scriptId="id-1234",
         soundTemplate="parisianmorning",
-        audience=[{"username":"salih", "location":"barcelona"}]
+        audience={"username":"salih", "location":"barcelona"}
     )
     ```
 
@@ -751,7 +752,18 @@ Available methods:
     status = apiaudio.Connector.connection(
       connection_id="af2fe14a-aa6b-4a97-b430-a072c38b11ff"
     )
-    
+
+### Logging <a name = "logging"></a>
+
+By default, warnings issued by the API are logged in the console output. Additionally, some behaviors are logged on the informational level (e.g. "In progress..." indicators during longer processing times).
+The level of logging can be controlled by choosing from the standard levels in Python's `logging` library.
+
+  - Decreasing logging level for more detailed logs:
+    ```python
+    apiaudio.set_logger_level("INFO")
+    # apiaudio.set_logger_level("CRITICAL") - set the highest level to disable logs
+    ```
+
 # Maintainers <a name = "maintainers"> </a>
 
 - https://github.com/zeritte

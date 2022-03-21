@@ -7,8 +7,6 @@ import re
 
 from requests.exceptions import HTTPError
 from . import sdk_version
-from apiaudio.logging import SDKLogger
-
 
 class APIRequest:
     def _api_key_checker(api_key=None):
@@ -38,13 +36,15 @@ class APIRequest:
 
     @classmethod
     def _post_request(cls, json, url=None):
+        loop_status_code = cls.__dict__.get("loop_status_code")
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
         headers = cls._build_header()
         r = requests.post(url=url, headers=headers, json=json)
 
-        # speech timeouts
-        if r.status_code == 504:
-            r = requests.get(url=url, headers=headers, params=json)
+        if loop_status_code:
+            while r.status_code == loop_status_code:
+                apiaudio._logger.info(f"{cls.OBJECT_NAME.upper()}: Creation in progress...")
+                r = requests.get(url=url, headers=headers, params=json)
 
         cls._expanded_raise_for_status(r)
 
@@ -97,6 +97,7 @@ class APIRequest:
 
     @classmethod
     def _get_request(cls, url=None, path_param=None, request_params=None):
+        loop_status_code = cls.__dict__.get("loop_status_code")
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
 
         headers = cls._build_header()
@@ -109,12 +110,21 @@ class APIRequest:
         else:
             r = requests.get(url=url, headers=headers)
 
+        if loop_status_code:
+            while r.status_code == loop_status_code:
+                apiaudio._logger.info(f"{cls.OBJECT_NAME.upper()}: Waiting for resource to be retrieved...")
+                if request_params:
+                    r = requests.get(url=url, headers=headers, params=request_params)
+                else:
+                    r = requests.get(url=url, headers=headers)
+
         cls._expanded_raise_for_status(r)
 
         return r.json()
 
     @classmethod
     def _download_request(cls, url, destination, version=""):
+        loop_status_code = cls.__dict__.get("loop_status_code")
         if type(url) is not str:
             raise TypeError("Error retrieving the audio files.")
 
@@ -123,14 +133,16 @@ class APIRequest:
         local_filename = local_filename.replace("%243ct10n", "section")
         local_filename = local_filename.replace("%7C", "|")
 
-        response = requests.get(url, stream=True)
-        while response.status_code == 202:  # keep the retrieval going if 202 returned
-            response = requests.get(url, stream=True)
+        r = requests.get(url, stream=True)
+        if loop_status_code:
+            while r.status_code == loop_status_code:
+                apiaudio._logger.info(f"{cls.OBJECT_NAME.upper()}: Waiting for resource to be downloaded...")
+                r = requests.get(url, stream=True)
 
-        cls._expanded_raise_for_status(response)
+        cls._expanded_raise_for_status(r)
 
         with open(local_filename, "wb") as f:
-            shutil.copyfileobj(response.raw, f)
+            shutil.copyfileobj(r.raw, f)
 
         return local_filename
 
@@ -146,22 +158,21 @@ class APIRequest:
         @return: None
         """
         try:
-            if apiaudio.log_warnings:
-                latest_version = res.headers.get("x-sdk-latest", apiaudio.sdk_version)
-                if (
-                    latest_version != apiaudio.sdk_version
-                    and not apiaudio._version_warning_issued
-                ):
-                    apiaudio._logger.warning(
-                        f"The latest version of apiaudio is {latest_version} and the version you're using is {apiaudio.sdk_version}. Consider upgrading, as you might be missing out on new features and bug fixes."
-                    )
-                    apiaudio._version_warning_issued = True
+            latest_version = res.headers.get("x-sdk-latest", apiaudio.sdk_version)
+            if (
+                latest_version != apiaudio.sdk_version
+                and not apiaudio._version_warning_issued
+            ):
+                apiaudio._logger.warning(
+                    f"The latest version of apiaudio is {latest_version} and the version you're using is {apiaudio.sdk_version}. Consider upgrading, as you might be missing out on new features and bug fixes."
+                )
+                apiaudio._version_warning_issued = True
 
-                if res.headers.get("Warning") and apiaudio.log_warnings:
-                    for warn in re.findall(
-                        r"\"(.*?)\"", res.headers["Warning"]
-                    ):  # get all messages in between ""
-                        apiaudio._logger.warning(f"{self.OBJECT_NAME.upper()}: {warn}")
+            if res.headers.get("Warning"):
+                for warn in re.findall(
+                    r"\"(.*?)\"", res.headers["Warning"]
+                ):  # get all messages in between ""
+                    apiaudio._logger.warning(f"{self.OBJECT_NAME.upper()}: {warn}")
 
             res.raise_for_status()
         except HTTPError as e:
