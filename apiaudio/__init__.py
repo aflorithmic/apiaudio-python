@@ -3,13 +3,12 @@
 
 # Configuration variables
 
-sdk_version = "0.14.0"
+sdk_version = "0.15.0"
 
 api_key = None
 client_id = None
 api_base = "https://v1.api.audio"
 upload_api_base = "https://file.api.audio"  # not implemented yet.
-log_warnings = True
 
 # future
 api_version = None
@@ -28,3 +27,10 @@ from apiaudio.logging import SDKLogger
 
 _logger = SDKLogger()
 _version_warning_issued = False
+
+def set_logger_level(level):
+    available_levels = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
+    level = level.upper()
+    assert level in available_levels, f"Available logging levels: {available_levels}"
+    
+    _logger = SDKLogger(level=level)

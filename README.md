@@ -35,7 +35,9 @@ The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not 
   - [SyncTTS](#synctts)
   - [Birdcache](#birdcache)
   - [Lexi](#lexi)
-- [Authors](#authors)
+  - [Connector](#connector)
+  - [Logging](#logging)
+- [Maintainers](#maintainers)
 - [License](#license)
 
 ## 🧐 About <a name = "about"></a>
@@ -235,17 +237,31 @@ Script methods are:
     ```
 - `retrieve()` - Retrieve a script by id.
   - Parameters:
-    - `scriptId` \* [Required] (string) - The script ID you want to retrieve.
+    - `scriptId` \* [Required] (string) - The script ID you want to retrieve. By default retrieves the main version (v0).
+    - `version` (string) - The script version you want to retrieve.
   - Example:
     ```python
-    script = apiaudio.Script.retrieve(scriptId="id-1234")
+    script = apiaudio.Script.retrieve(scriptId="id-1234", version="abc")
     ```
 - `preview` - return a script with the dictionary highlighting applied. see [Lexi](#lexi) for more examples of how to use the dictionary feature.
 
   - Parameters:
 
     - `scriptId` \* [Required] (string) - The script ID you want to use.
-    - `lang` \* [Required] (string) Determines which dictionary language should be used.
+    - `lang`  \* [Required] (string) Determines which dictionary language should be used. The format should be compliant with ISO Language Code standard (e.g. en-GB)
+  
+   - Example:
+    ```python
+      text = """ 
+        The author of this repo has lived in two places in the 
+        UK, <!location>Bude<!> and <!location>Bristol<!>.
+      """
+    
+    r = apiaudio.Script.create(scriptText=text)
+    scriptId = r["scriptId"]
+    
+    preview = apiaudio.Script.preview(scriptId=scriptId, language="en-gb")
+    ```
 
   - Example:
 
@@ -298,14 +314,14 @@ Speech methods are:
 - `create()` Send a Text-To-Speech request to our Text-To-Speech service.
   - Parameters:
     - `scriptId` \* [Required] (string) - The script ID
+    - `version` (string) - The version of the script to be produced. Default is "".
     - `voice` (string) - Voice name. See the list of available voices using [Voice resource](#voice). Default voice is "Joanna".
     - `speed` (string) - Voice speed. Default speed is 100.
     - `effect` (string) - Put a funny effect in your voice. You can try the following ones: `dark_father`, `chewie`, `88b`, `2r2d`, `volume_boost_low` `volume_boost_middle` `volume_boost_high` (Volume boost allows you to adjust the volume of speech. NOTE! Volume boost effect only applies to speech creation and will be overwritten by the mastering process)
-    - `silence_padding` (integer) - Add a silence padding to your speech tracks (in milliseconds). Default is 0 (no padding)
-    - `audience` (list of dicts) - List of dicts containing the personalisation parameters as key-value pairs. This parameter depends on the number of parameters you used in your script resource. For instance, if in the script resource you have `scriptText="Hello {{name}} {{lastname}}, welcome to {{location}}"`, the audience should be: `[{"name": "Elon", "lastname": "Musk", "location": "Istanbul"}]`. If not provided, the fallback track will be created.
+    - `silencePadding` (integer) - Add a silence padding to your speech tracks (in milliseconds). Default is 0 (no padding)
+    - `audience` (dict) - Specify the values of parameters in your script. For instance, if in the script resource you have `scriptText="Hello {{name}} {{lastname}}, welcome to {{location}}"`, the audience should be: `{"name": "Elon", "lastname": "Musk", "location": "Istanbul"}`. If not provided, the fallback track will be created.
     - `sync` (boolean) - Allow sync or async speech creation. Default is `True`. If `sync=False`, speech create call will return a success message when the speech creation is triggered. To retrieve the files, check `Speech.retrieve()` method.
-    - `sections` (dictionary) is a dictionary (key-value pairs), where the key is a section name, and the value is another dictionary with the section configuration ( valid parameters are: voice, speed, effect, silence_padding). If a section is not found here, the section will automatically inherit the voice, speed, effect and silence_padding values you defined above (or the default ones if you don't provide them). See an example below with 2 sections and different configuration parameters being used.
-    - `version` (string) - The version to be produced. Default is "".
+    - `sections` (dict) - Specify parameters for specific sections in the script. The key is a section name, and the value is another dictionary with the section configuration ( valid parameters are: voice, speed, effect, silence_padding). If a section is not found here, the section will automatically inherit the voice, speed, effect and silence_padding values you defined above (or the default ones if you don't provide them). See an example below with 2 sections and different configuration parameters being used.
       ```python
       sections={
           "firstsection": {
@@ -331,12 +347,13 @@ Speech methods are:
     ```python
     response = apiaudio.Speech.create(
         scriptId="id-1234",
+	version="abc",
         voice="Matthew",
         speed=100,
         effect="dark_father",
-        silence_padding= 1000,
+        silencePadding= 1000,
         sync=True,
-        audience=[{"username": "Elon", "lastname": "Musk"}],
+        audience={"username": "Elon", "lastname": "Musk"},
         sections={
             "firstsection": {
                 "voice": "Matthew",
@@ -354,9 +371,10 @@ Speech methods are:
 
   - Parameters:
     - `scriptId` \* [Required] (string) - The script ID you want to retrieve.
+    - `version` (string) - The version of the script to be retrieved. Default is "".
     - `section` (string) - The script section name you want to retrieve. If not provided, all the script sections will be returned.
     - `parameters` (dict) - Dict containing the personalisation parameters of your script. If not provided, the fallback track will be retrieved. This field depends on the parameters you used in your [script](#script)'s resource section. In order to retrieve a specific set of parameters, you need to create the speech with the same set of parameters.
-  - `version` (string) - The version to be retrieved. Default is "".
+
   - Example:
     ```python
     audio_files = apiaudio.Speech.retrieve(scriptId="id-1234")
@@ -367,10 +385,10 @@ Speech methods are:
   - Parameters:
 
     - `scriptId` \* [Required] (string) - The script ID you want to download
+    - `version` (string) - The version of the script to be downloaded. Default is "".
     - `section` (string) - The script section name you want to retrieve. If not provided, all the script sections will be returned.
     - `parameters` (dict) - Dict containing the personalisation parameters of your script. If not provided, the fallback track will be retrieved. This field depends on the parameters you used in your [script](#script)'s resource section. In order to retrieve a specific set of parameters, you need to create the speech with the same set of parameters.
     - `destination` (string) - The folder destination path. Default is "." (current folder)
-    - `version` (string) - The version to be downloaded. Default is "".
 
   - Example:
     ```python
@@ -386,10 +404,9 @@ Voice methods are:
 - `list()` List all the available voices in our API. The parameters are all optional, and can be used in combination to get the perfect voice for your usecase.
 
   - Parameters:
-    - `provider` (string) - Try one of: google, polly, azure, msnr
-    - `providerFullName` (string) - Try with one of: amazon polly, google, microsoft azure, aflorithmic labs
-    - `language` (string) - Try with one of: english, spanish, french, german
-    - `accent` (string) - Try with one of: american, british, neutral, portuguese/brazilian, american soft, mexican, australian
+    - `provider` (string) - Try one of: google, polly, azure, msnr (aflorithmic), ibm, yandex, retro (aflorithmic), vocalid, resemble
+    - `language` (string) - e.g. english, spanish, french, german, etc.
+    - `accent` (string) - e.g. american, british, neutral, portuguese/brazilian, american soft, mexican, australian
     - `gender` (string) - Try with one of: male, female
     - `ageBracket` (string) - Try with one of: adult, child, senior
     - `tags` (string) - Try with one or more (separated by commas) of: steady, confident, balanced, informative, serious, instructional, slow, storytelling, calm, clear, deep, formal, sad, thin, fast, upbeat, fun, energetic, tense, very fast, flat, low pitched, high pitched, low-pitched, sing-y, cooperative, kind, stable, monotonous, neutral, responsible, business man, straight to the point, knowledgeable, focused, newscastery, newsreader, interviewer, reliable, friendly, welcoming, good for handing out information, slightly friendly
@@ -455,33 +472,35 @@ Mastering methods are:
   - Parameters:
 
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
+    - `version` (string) - The version of the script to be produced. Default is "".
     - `soundTemplate` (string) - The sound template name. For the list of available sound templates check `apiaudio.Sound.list_sound_templates()` call.
     - `public` (boolean) - Boolean flag that allows to store the mastered file in a public s3 folder. Default value is `False`. Warning - This will cause your mastered files to be public to anyone in the internet. Use this at your own risk.
     - `vast` (boolean) - Boolean flag that allows to create a VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
     - `endFormat` (list) - List of audio formats to be produced. Valid formats are: `["wav", "mp3" (default), "flac", "ogg", "mp3_very_low", "mp3_low", "mp3_medium", "mp3_high", "mp3_very_high"]`
     - `forceLength` (int) - force the audio length of the mastered track (in seconds).
-    - `audience` (list) - List of dicts containing the personalisation parameters. This parameter depends on the number of parameters you used in your [script](#script) resource. In the script documentation example above, we used 2 parameters: `username` and `location`, and in the following example below we want to produce the script for username `salih` with location `Barcelona`. If audience is not provided, the fallback track will be created.
+    - `audience` (dict) - Dictionary containing the personalisation parameters. This parameter depends on the number of parameters you used in your [script](#script) resource. In the script documentation example above, we used 2 parameters: `username` and `location`, and in the following example below we want to produce the script for username `salih` with location `Barcelona`. If audience is not provided, the fallback track will be created.
     - `mediaFiles` (list) - List of dicts containing the media files. This parameter depends on the media file tags used in the [script](#script) resource and the media files you have in your account. For example, if the script contains `<<media::myrecording>>` plus `<<media::mysong>>`, and you want to attach myrecording to mediaId = "12345", and mysong to mediaId = "67890" then `mediaFiles = [{"myrecording":"12345", "mysong":"67890"}]`.
     - `mediaVolumeTrim` (float) - Floating point varible that allows you to trim the volume of uploaded media files (in dB). This attribute has a valid range of -12 to 12 dB and applies to all media files included in a single mastering call. Clipping protection is not provided so only make incremental adjustments.
-    - `version` (string) - The version to be produced. Default is "".
+    - `connectors` (list) - List of dicts specifying configuration for particular 3rd party connection. For guidelines in context of supported 3rd party application, see [connectors documentation](https://docs.api.audio/docs/what-are-connectors).
 
   - Example:
     ```python
     response = apiaudio.Mastering.create(
         scriptId="id-1234",
         soundTemplate="parisianmorning",
-        audience=[{"username":"salih", "location":"barcelona"}]
+        audience={"username":"salih", "location":"barcelona"}
     )
     ```
 
 - `retrieve()` Retrieves the mastered file urls.
   - Parameters:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
+    - `versions` (string) - The version of the script to be retrieved. Default is "".
     - `parameters` (dict) - Dictionary containing the audience item you want to retrieve. If parameters are not provided, the fallback track will be retrieved.
     - `public` (boolean) - Boolean flag that allows to retrieve the mastered file from the public bucket. Use this if you want to retrieve a mastered file created using `public=True`. Default value is `False`.
     - `vast` (boolean) - Boolean flag that allows to retrieve the VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
     - `endFormat` (list) - List of audio formats to be retrieved. Valid formats are:`["wav", "mp3" (default), "flac", "ogg", "mp3_very_low", "mp3_low", "mp3_medium", "mp3_high", "mp3_very_high"]`
-      `versions` (string) - The version to be retrieved. Default is "".
+
   - Example:
     ```python
     mastered_files = apiaudio.Mastering.retrieve(
@@ -492,11 +511,12 @@ Mastering methods are:
 - `download()` Download the mastered files in your preferred folder.
   - Parameters:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
+    - `version` (string) - The version of the script to be downloaded. Default is "".
     - `parameters` (dict) - Dictionary containing the audience item you want to retrieve. If parameters are not provided, the fallback track will be downloaded.
     - `destination` (string) - The folder destination path. Default is "." (current folder)
     - `public` (boolean) - Boolean flag that allows to retrieve the mastered file from the public bucket. Use this if you want to retrieve a mastered file created using `public=True`. Default value is `False`.
     - `vast` (boolean) - Boolean flag that allows to retrieve the VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
-    - `version` (string) - The version to be downloaded. Default is "".
+    
   - Example:
     ```python
     mastered_files = apiaudio.Mastering.download(
@@ -588,9 +608,7 @@ Media methods are:
 
 ### `SyncTTS` resource <a name = "synctts"> </a>
 
-**Warning:** Please request access if you want to test this resource.
-
-SyncTTS allows you to do Synchronous Text-To-Speech (TTS) with our API using all the voices available. Use it to create a speech audio file from a text and a voice name.
+SyncTTS allows you to do Synchronous Text-To-Speech (TTS) with our API using all the voices available. Use it to create a speech audio file from a text and a voice name. The response contains wave bytes ready to be played or written to a file. 
 
 SyncTTS methods are:
 
@@ -598,14 +616,14 @@ SyncTTS methods are:
 
   - Parameters:
 
-    - `voice` \* [Required] (string) - Voice id. See the list of available voices using [Voice resource](#voice).
-    - `text` \* [Required] (string) - The text you want to do TTS with.
-    - `metadata` [Optional] ("full" or "none") - The level of metadata you want
+    - `voice` \* [Required] (string) - The voice name. See the list of available voices using [Voice resource](#voice).
+    - `text` \* [Required] (string) - The text you want to do TTS with. The limit is 800 characters for wave files.
+    - `metadata` [Optional] ("full" or "none") - The level of metadata you want. Returns phoneme lists (only available for some msnr voices)
 
   - Example:
     ```python
     sync_tts = apiaudio.SyncTTS.create(
-      voice="salih",
+      voice="joanna",
       text="This is me creating synchronous text to speech",
       metadata="full"
     )
@@ -613,7 +631,7 @@ SyncTTS methods are:
 
 ### `Birdcache` resource <a name = "birdcache"> </a>
 
-Birdcache allows you to do a single production request to have mastering or speech from text with personalisation parameters with ease.
+Birdcache is a caching service provided by API.audio that provides the caching layer for the customer by storing data in API.audio servers for future use. This allows you to retrieve your speech files on the fly.
 
 Birdcache methods are:
 
@@ -640,7 +658,7 @@ Birdcache methods are:
 
 ### `Lexi` resource <a name = "lexi"> </a>
 
-Lexi is an engine for enhancing the pronunciation of troublesome words. For example, ensuring the city name `reading` is pronounced correctly. Dictionaries are split into languages and types. For example, the city `reading` would be of type `location` with language `en-gb` and in this case in the `UkCities69` dictionary.
+Lexi is an engine for enhancing the pronunciation of troublesome words. For example, ensuring the city name `reading` is pronounced correctly. Dictionaries are split into languages and types. For example, the city `reading` would be of type `location` with language `en-gb` and in this case in the `UkCities` dictionary.
 
 To use this feature words in the script should be marked up with the `<!'type'>` flag, whereby type is the type of dictionary to use. The dictionary flag that precedes the word should contain the type, and the one following should be empty `<!>`. In the example shown below, the second occurrence of the word **reading** will be pronounced as the city name.
 
@@ -649,6 +667,7 @@ Example:
     ```python
     scriptText = "Hello I am reading a book in the city of <!location>reading<!> today"
     ```
+
 
 Lexi methods are:
 
@@ -687,7 +706,7 @@ Lexi methods are:
   - Example:
     ```python
     # lists all words in the dictionary
-    words = apiaudio.Lexi.list_words(dictId="100uk_cities")
+    words = apiaudio.Lexi.list_words(dictId="uk_cities")
     ```
 
 - `search_for_word()` Searches to see if a word is in any of the dictionaries.
@@ -709,36 +728,74 @@ Lexi methods are:
 
 The effect of applying Lexi can be seen with the `script.preview()` method. See [Script](#script) documentation for more details.
 
-- Example:
+  - Example:
+    ```python
+      text = """ 
+        The author of this repo has lived in two places in the 
+        UK, <!location>Bude<!> and <!location>Bristol<!>.
+      """
+    
+    r = apiaudio.Script.create(scriptText=text)
+    scriptId = r["scriptId"]
+    
+    # preview the script in en-gb
+    preview = apiaudio.Script.preview(scriptId=scriptId, language="en-gb")
+    print(preview)
+    ```
+  - Response:
+    ```python
+    "The author of this repo has lived in two places in the UK, bude and [<!>bristol<!>]".
+    ```
+    In this example Bristol is in a location dictionary, but Bude is not. Lexi will ensure words marked between `[<!>....<!>]` will be pronounced correctly.
+    
+### `Connector` resource <a name = "connector"> </a>
 
-  ```python
-    text = """
-      The author of this repo has lived in two places in the
-      UK, <!location>Bude<!> and <!location>Bristol<!>.
-    """
+Resource used for monitoring 3rd paty integrations. End results of [Mastering](#mastering) resource can be distributed into external applications through `connectors` field. See [connectors documentation](https://docs.api.audio/docs/what-are-connectors).
+List of currently supported applications: 
+- [julep.de](https://www.julep.de)
 
-  r = apiaudio.Script.create(scriptText=text)
-  scriptId = r["scriptId"]
+Available methods:
 
-  # preview the script in en-gb
-  preview = apiaudio.Script.preview(scriptId=scriptId, language="en-gb")
-  print(preview)
-  ```
+- `retrieve()` After registering a connector in the [api.console](https://console.api.audio/), use this method to check whether a connection was succesful using provided credentials.
 
-- Response:
-  ```python
-  "The author of this repo has lived in two places in the UK, bude and [<!>bristol<!>]".
-  ```
-  In this example Bristol is in a location dictionary, but Bude is not. Lexi will ensure words marked between `[<!>....<!>]` will be pronounced correctly.
+  - Parameters:
 
-# Authors <a name = "authors"> </a>
+    - `name` \* [Required] (string) - The name of the connector specified in console.
 
-- https://github.com/tonythree
-- https://github.com/GetOn4
+  - Example:
+    ```python
+    status = apiaudio.Connector.retrieve(
+      name="julep"
+    )
+
+- `connection()` Check the status of the connection by providing `connectionId` returned in a Mastering response.
+
+  - Parameters:
+
+    - `connection_id` \* [Required] (string) - The connectionId returned by Mastering resource.
+
+  - Example:
+    ```python
+    status = apiaudio.Connector.connection(
+      connection_id="af2fe14a-aa6b-4a97-b430-a072c38b11ff"
+    )
+
+### Logging <a name = "logging"></a>
+
+By default, warnings issued by the API are logged in the console output. Additionally, some behaviors are logged on the informational level (e.g. "In progress..." indicators during longer processing times).
+The level of logging can be controlled by choosing from the standard levels in Python's `logging` library.
+
+  - Decreasing logging level for more detailed logs:
+    ```python
+    apiaudio.set_logger_level("INFO")
+    # apiaudio.set_logger_level("CRITICAL") - set the highest level to disable logs
+    ```
+
+# Maintainers <a name = "maintainers"> </a>
+
 - https://github.com/zeritte
-- https://github.com/springcoil
-- https://github.com/a96lex
 - https://github.com/Sjhunt93
+- https://github.com/martinezpl
 
 # Development
 
