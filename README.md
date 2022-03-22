@@ -248,20 +248,7 @@ Script methods are:
   - Parameters:
 
     - `scriptId` \* [Required] (string) - The script ID you want to use.
-    - `lang`  \* [Required] (string) Determines which dictionary language should be used. The format should be compliant with ISO Language Code standard (e.g. en-GB)
-  
-   - Example:
-    ```python
-      text = """ 
-        The author of this repo has lived in two places in the 
-        UK, <!location>Bude<!> and <!location>Bristol<!>.
-      """
-    
-    r = apiaudio.Script.create(scriptText=text)
-    scriptId = r["scriptId"]
-    
-    preview = apiaudio.Script.preview(scriptId=scriptId, language="en-gb")
-    ```
+    - `lang` \* [Required] (string) Determines which dictionary language should be used. The format should be compliant with ISO Language Code standard (e.g. en-GB)
 
   - Example:
 
@@ -347,7 +334,7 @@ Speech methods are:
     ```python
     response = apiaudio.Speech.create(
         scriptId="id-1234",
-	version="abc",
+    version="abc",
         voice="Matthew",
         speed=100,
         effect="dark_father",
@@ -370,6 +357,7 @@ Speech methods are:
 - `retrieve()` Retrieve the speech file urls.
 
   - Parameters:
+
     - `scriptId` \* [Required] (string) - The script ID you want to retrieve.
     - `version` (string) - The version of the script to be retrieved. Default is "".
     - `section` (string) - The script section name you want to retrieve. If not provided, all the script sections will be returned.
@@ -493,7 +481,9 @@ Mastering methods are:
     ```
 
 - `retrieve()` Retrieves the mastered file urls.
+
   - Parameters:
+
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
     - `versions` (string) - The version of the script to be retrieved. Default is "".
     - `parameters` (dict) - Dictionary containing the audience item you want to retrieve. If parameters are not provided, the fallback track will be retrieved.
@@ -508,6 +498,7 @@ Mastering methods are:
       parameters={"username":"salih", "location":"barcelona"}
     )
     ```
+
 - `download()` Download the mastered files in your preferred folder.
   - Parameters:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
@@ -516,7 +507,6 @@ Mastering methods are:
     - `destination` (string) - The folder destination path. Default is "." (current folder)
     - `public` (boolean) - Boolean flag that allows to retrieve the mastered file from the public bucket. Use this if you want to retrieve a mastered file created using `public=True`. Default value is `False`.
     - `vast` (boolean) - Boolean flag that allows to retrieve the VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
-    
   - Example:
     ```python
     mastered_files = apiaudio.Mastering.download(
@@ -608,7 +598,7 @@ Media methods are:
 
 ### `SyncTTS` resource <a name = "synctts"> </a>
 
-SyncTTS allows you to do Synchronous Text-To-Speech (TTS) with our API using all the voices available. Use it to create a speech audio file from a text and a voice name. The response contains wave bytes ready to be played or written to a file. 
+SyncTTS allows you to do Synchronous Text-To-Speech (TTS) with our API using all the voices available. Use it to create a speech audio file from a text and a voice name. The response contains wave bytes ready to be played or written to a file.
 
 SyncTTS methods are:
 
@@ -667,7 +657,6 @@ Example:
     ```python
     scriptText = "Hello I am reading a book in the city of <!location>reading<!> today"
     ```
-
 
 Lexi methods are:
 
@@ -728,30 +717,33 @@ Lexi methods are:
 
 The effect of applying Lexi can be seen with the `script.preview()` method. See [Script](#script) documentation for more details.
 
-  - Example:
-    ```python
-      text = """ 
-        The author of this repo has lived in two places in the 
-        UK, <!location>Bude<!> and <!location>Bristol<!>.
-      """
-    
-    r = apiaudio.Script.create(scriptText=text)
-    scriptId = r["scriptId"]
-    
-    # preview the script in en-gb
-    preview = apiaudio.Script.preview(scriptId=scriptId, language="en-gb")
-    print(preview)
-    ```
-  - Response:
-    ```python
-    "The author of this repo has lived in two places in the UK, bude and [<!>bristol<!>]".
-    ```
-    In this example Bristol is in a location dictionary, but Bude is not. Lexi will ensure words marked between `[<!>....<!>]` will be pronounced correctly.
-    
+- Example:
+
+  ```python
+    text = """
+      The author of this repo has lived in two places in the
+      UK, <!location>Bude<!> and <!location>Bristol<!>.
+    """
+
+  r = apiaudio.Script.create(scriptText=text)
+  scriptId = r["scriptId"]
+
+  # preview the script in en-gb
+  preview = apiaudio.Script.preview(scriptId=scriptId, language="en-gb")
+  print(preview)
+  ```
+
+- Response:
+  ```python
+  "The author of this repo has lived in two places in the UK, bude and [<!>bristol<!>]".
+  ```
+  In this example Bristol is in a location dictionary, but Bude is not. Lexi will ensure words marked between `[<!>....<!>]` will be pronounced correctly.
+
 ### `Connector` resource <a name = "connector"> </a>
 
 Resource used for monitoring 3rd paty integrations. End results of [Mastering](#mastering) resource can be distributed into external applications through `connectors` field. See [connectors documentation](https://docs.api.audio/docs/what-are-connectors).
-List of currently supported applications: 
+List of currently supported applications:
+
 - [julep.de](https://www.julep.de)
 
 Available methods:
@@ -767,6 +759,7 @@ Available methods:
     status = apiaudio.Connector.retrieve(
       name="julep"
     )
+    ```
 
 - `connection()` Check the status of the connection by providing `connectionId` returned in a Mastering response.
 
@@ -779,17 +772,18 @@ Available methods:
     status = apiaudio.Connector.connection(
       connection_id="af2fe14a-aa6b-4a97-b430-a072c38b11ff"
     )
+    ```
 
 ### Logging <a name = "logging"></a>
 
 By default, warnings issued by the API are logged in the console output. Additionally, some behaviors are logged on the informational level (e.g. "In progress..." indicators during longer processing times).
 The level of logging can be controlled by choosing from the standard levels in Python's `logging` library.
 
-  - Decreasing logging level for more detailed logs:
-    ```python
-    apiaudio.set_logger_level("INFO")
-    # apiaudio.set_logger_level("CRITICAL") - set the highest level to disable logs
-    ```
+- Decreasing logging level for more detailed logs:
+  ```python
+  apiaudio.set_logger_level("INFO")
+  # apiaudio.set_logger_level("CRITICAL") - set the highest level to disable logs
+  ```
 
 # Maintainers <a name = "maintainers"> </a>
 

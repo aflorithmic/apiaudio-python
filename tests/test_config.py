@@ -1,12 +1,13 @@
 import apiaudio
 import pprint
 import pytest
-import os 
+import os
 import logging
 from time import time
 
 apiaudio.api_key = os.environ["AFLR_API_KEY"]
-apiaudio.api_base="https://staging-v1.api.audio"
+apiaudio.api_base = "https://staging-v1.api.audio"
+
 
 def test_level_setting():
     assert apiaudio._logger.level is logging.WARNING
@@ -72,15 +73,20 @@ def test_script_versions():
         assert key in speech.keys()
         assert speech[key]["status_code"] == "201"
 
+
 def test_processing_loop_speech():
     t0 = time()
     speech = apiaudio.Speech.create(scriptId="longProcessing", voice="Dieter")
     assert len(speech) == 3  # number of sections in the script
     assert time() - t0 > 30
 
+
 def test_processing_loop_mastering():
     t0 = time()
-    apiaudio.Script.create(scriptId="test_sdk", scriptText="<<sectionName::question>> Hey! Do you know we support multiple voices from different providers in the same script? I am a polly voice from Amazon. <<sectionName::answer>> I am Azure voice from Microsoft. I think Azure voices sound awesome.")
+    apiaudio.Script.create(
+        scriptId="test_sdk",
+        scriptText="<<sectionName::question>> Hey! Do you know we support multiple voices from different providers in the same script? I am a polly voice from Amazon. <<sectionName::answer>> I am Azure voice from Microsoft. I think Azure voices sound awesome.",
+    )
     apiaudio.Speech.create(scriptId="test_sdk", voice="brandon")
     mastering = apiaudio.Mastering.create(scriptId="test_sdk", forceLength=700)
     print(mastering)

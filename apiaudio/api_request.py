@@ -8,6 +8,7 @@ import re
 from requests.exceptions import HTTPError
 from . import sdk_version
 
+
 class APIRequest:
     def _api_key_checker(api_key=None):
         api_key_error_message = "Please specify a valid api_key or create one here:\n https://console.api.audio"
@@ -43,7 +44,9 @@ class APIRequest:
 
         if loop_status_code:
             while r.status_code == loop_status_code:
-                apiaudio._logger.info(f"{cls.OBJECT_NAME.upper()}: Creation in progress...")
+                apiaudio._logger.info(
+                    f"{cls.OBJECT_NAME.upper()}: Creation in progress..."
+                )
                 r = requests.get(url=url, headers=headers, params=json)
 
         cls._expanded_raise_for_status(r)
@@ -112,7 +115,9 @@ class APIRequest:
 
         if loop_status_code:
             while r.status_code == loop_status_code:
-                apiaudio._logger.info(f"{cls.OBJECT_NAME.upper()}: Waiting for resource to be retrieved...")
+                apiaudio._logger.info(
+                    f"{cls.OBJECT_NAME.upper()}: Waiting for resource to be retrieved..."
+                )
                 if request_params:
                     r = requests.get(url=url, headers=headers, params=request_params)
                 else:
@@ -136,7 +141,9 @@ class APIRequest:
         r = requests.get(url, stream=True)
         if loop_status_code:
             while r.status_code == loop_status_code:
-                apiaudio._logger.info(f"{cls.OBJECT_NAME.upper()}: Waiting for resource to be downloaded...")
+                apiaudio._logger.info(
+                    f"{cls.OBJECT_NAME.upper()}: Waiting for resource to be downloaded..."
+                )
                 r = requests.get(url, stream=True)
 
         cls._expanded_raise_for_status(r)
