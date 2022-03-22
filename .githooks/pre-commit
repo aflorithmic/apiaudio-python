@@ -1,0 +1,15 @@
+IS_PIP3=$(which pip3)
+IS_PIP=$(which pip)
+if [ -z "$IS_PIP3" ]
+then
+    if [ -z "$(pip --disable-pip-version-check list | grep -F pre-commit)" ]
+    then
+        pip --disable-pip-version-check install pre-commit
+    fi
+else
+    if [ -z "$(pip3 --disable-pip-version-check list | grep -F pre-commit)" ]
+    then
+        pip3 --disable-pip-version-check install pre-commit
+    fi
+fi
+pre-commit run
