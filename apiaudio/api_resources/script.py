@@ -21,9 +21,11 @@ class Script(
 
     @classmethod
     def preview(cls, scriptId, language):
-        params = {"preview": True, "lang" : language}
-        r = cls._get_request(path_param=cls.resource_path + f"/{scriptId}", request_params=params)
+        params = {"preview": True, "lang": language}
+        r = cls._get_request(
+            path_param=cls.resource_path + f"/{scriptId}", request_params=params
+        )
         if "scriptText" in r:
             return "Script Text Preview: " + r["scriptText"]
-        else: # in practice this won't happen as _get_request raises an exception
+        else:  # in practice this won't happen as _get_request raises an exception
             return "PREVIEW FAILED"

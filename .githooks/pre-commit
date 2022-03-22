@@ -12,4 +12,4 @@ else
         pip3 --disable-pip-version-check install pre-commit
     fi
 fi
-pre-commit run
+pre-commit run --all-files
