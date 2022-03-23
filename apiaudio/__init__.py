@@ -28,9 +28,10 @@ from apiaudio.logging import SDKLogger
 _logger = SDKLogger()
 _version_warning_issued = False
 
+
 def set_logger_level(level):
     available_levels = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
     level = level.upper()
     assert level in available_levels, f"Available logging levels: {available_levels}"
-    
+
     _logger = SDKLogger(level=level)

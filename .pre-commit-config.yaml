@@ -1,7 +1,15 @@
 repos:
-- repo: https://github.com/returntocorp/semgrep
-  rev: 'v0.37.0'
-  hooks:
-    - id: semgrep
-      # See semgrep.dev/rulesets to select a ruleset and copy its URL
-      args: ['--config', 'p/r2c-best-practices', '--error']
+  - repo: https://github.com/psf/black
+    rev: 19.10b0 # Replace by any tag/version: https://github.com/psf/black/tags
+    hooks:
+      - id: black
+        language_version: python3 # Should be a command that runs python3.6+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.1.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-docstring-first
+      - id: check-json
+      - id: check-added-large-files
+      - id: check-yaml

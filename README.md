@@ -12,8 +12,8 @@ The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not 
 
 ---
 
-<p align="center"> apiaudio is the official <a href="https://www.api.audio/" rel="noopener">api.audio</a> Python 3 SDK. This SDK provides easy access to the api.audio API from applications written in python. 
-    <br> 
+<p align="center"> apiaudio is the official <a href="https://www.api.audio/" rel="noopener">api.audio</a> Python 3 SDK. This SDK provides easy access to the api.audio API from applications written in python.
+    <br>
 </p>
 
 ## 📝 Table of Contents
@@ -37,7 +37,7 @@ The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not 
   - [Lexi](#lexi)
   - [Connector](#connector)
   - [Logging](#logging)
-- [Authors](#authors)
+- [Maintainers](#maintainers)
 - [License](#license)
 
 ## 🧐 About <a name = "about"></a>
@@ -244,23 +244,25 @@ Script methods are:
     script = apiaudio.Script.retrieve(scriptId="id-1234", version="abc")
     ```
 - `preview` - return a script with the dictionary highlighting applied. see [Lexi](#lexi) for more examples of how to use the dictionary feature.
-  - Parameters:
-    - `scriptId` \* [Required] (string) - The script ID you want to use.
-    - `lang`  \* [Required] (string) Determines which dictionary language should be used. The format should be compliant with ISO Language Code standard (e.g. en-GB)
-  
-   - Example:
-    ```python
-      text = """ 
-        The author of this repo has lived in two places in the 
-        UK, <!location>Bude<!> and <!location>Bristol<!>.
-      """
-    
-    r = apiaudio.Script.create(scriptText=text)
-    scriptId = r["scriptId"]
-    
-    preview = apiaudio.Script.preview(scriptId=scriptId, language="en-gb")
-    ```
 
+  - Parameters:
+
+    - `scriptId` \* [Required] (string) - The script ID you want to use.
+    - `lang` \* [Required] (string) Determines which dictionary language should be used. The format should be compliant with ISO Language Code standard (e.g. en-GB)
+
+  - Example:
+
+  ```python
+    text = """
+      The author of this repo has lived in two places in the
+      UK, <!location>Bude<!> and <!location>Bristol<!>.
+    """
+
+  r = apiaudio.Script.create(scriptText=text)
+  scriptId = r["scriptId"]
+
+  preview = apiaudio.Script.preview(scriptId=scriptId, language="en-gb")
+  ```
 
 - `list()` - List all scripts available in your organization. This method supports filtering.
   - Parameters:
@@ -275,7 +277,7 @@ Script methods are:
 - `delete()` - Deletes a script. By default this will delete all versions of the script.
   - Parameters:
     - `scriptId` \* [Required] (string) - The id of the script to be deleted
-    - `version` (string) - Delete a specific version. 
+    - `version` (string) - Delete a specific version.
   - Example:
     ```python
     #deletes version 'en' from scriptId 'myworkout'
@@ -332,7 +334,7 @@ Speech methods are:
     ```python
     response = apiaudio.Speech.create(
         scriptId="id-1234",
-	version="abc",
+    version="abc",
         voice="Matthew",
         speed=100,
         effect="dark_father",
@@ -355,17 +357,21 @@ Speech methods are:
 - `retrieve()` Retrieve the speech file urls.
 
   - Parameters:
+
     - `scriptId` \* [Required] (string) - The script ID you want to retrieve.
     - `version` (string) - The version of the script to be retrieved. Default is "".
     - `section` (string) - The script section name you want to retrieve. If not provided, all the script sections will be returned.
     - `parameters` (dict) - Dict containing the personalisation parameters of your script. If not provided, the fallback track will be retrieved. This field depends on the parameters you used in your [script](#script)'s resource section. In order to retrieve a specific set of parameters, you need to create the speech with the same set of parameters.
+
   - Example:
     ```python
     audio_files = apiaudio.Speech.retrieve(scriptId="id-1234")
     ```
 
 - `download()` Download the speech files in your preferred folder.
+
   - Parameters:
+
     - `scriptId` \* [Required] (string) - The script ID you want to download
     - `version` (string) - The version of the script to be downloaded. Default is "".
     - `section` (string) - The script section name you want to retrieve. If not provided, all the script sections will be returned.
@@ -443,7 +449,6 @@ Sound methods are:
     parameters = apiaudio.Sound.list_parameters()
     ```
 
-
 ### `Mastering` resource <a name = "mastering"> </a>
 
 Mastering allows you to create and retrieve a mastered audio file of your script. A mastered version contains the speech of the script, a background track, personalised parameters for your audience and a mastering process to enhance the audio quality of the whole track. In order to get a mastered audio file, make sure you requested [speech](#speech) for your script resource first.
@@ -476,14 +481,16 @@ Mastering methods are:
     ```
 
 - `retrieve()` Retrieves the mastered file urls.
+
   - Parameters:
+
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
     - `versions` (string) - The version of the script to be retrieved. Default is "".
     - `parameters` (dict) - Dictionary containing the audience item you want to retrieve. If parameters are not provided, the fallback track will be retrieved.
     - `public` (boolean) - Boolean flag that allows to retrieve the mastered file from the public bucket. Use this if you want to retrieve a mastered file created using `public=True`. Default value is `False`.
     - `vast` (boolean) - Boolean flag that allows to retrieve the VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
     - `endFormat` (list) - List of audio formats to be retrieved. Valid formats are:`["wav", "mp3" (default), "flac", "ogg", "mp3_very_low", "mp3_low", "mp3_medium", "mp3_high", "mp3_very_high"]`
-     
+
   - Example:
     ```python
     mastered_files = apiaudio.Mastering.retrieve(
@@ -491,6 +498,7 @@ Mastering methods are:
       parameters={"username":"salih", "location":"barcelona"}
     )
     ```
+
 - `download()` Download the mastered files in your preferred folder.
   - Parameters:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
@@ -499,7 +507,6 @@ Mastering methods are:
     - `destination` (string) - The folder destination path. Default is "." (current folder)
     - `public` (boolean) - Boolean flag that allows to retrieve the mastered file from the public bucket. Use this if you want to retrieve a mastered file created using `public=True`. Default value is `False`.
     - `vast` (boolean) - Boolean flag that allows to retrieve the VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
-    
   - Example:
     ```python
     mastered_files = apiaudio.Mastering.download(
@@ -591,7 +598,7 @@ Media methods are:
 
 ### `SyncTTS` resource <a name = "synctts"> </a>
 
-SyncTTS allows you to do Synchronous Text-To-Speech (TTS) with our API using all the voices available. Use it to create a speech audio file from a text and a voice name. The response contains wave bytes ready to be played or written to a file. 
+SyncTTS allows you to do Synchronous Text-To-Speech (TTS) with our API using all the voices available. Use it to create a speech audio file from a text and a voice name. The response contains wave bytes ready to be played or written to a file.
 
 SyncTTS methods are:
 
@@ -637,6 +644,7 @@ Birdcache methods are:
       audience={"username": ["salih", "sam", "timo"]},
       soundTemplate="openup"
     )
+    ```
 
 ### `Lexi` resource <a name = "lexi"> </a>
 
@@ -644,12 +652,11 @@ Lexi is an engine for enhancing the pronunciation of troublesome words. For exam
 
 To use this feature words in the script should be marked up with the `<!'type'>` flag, whereby type is the type of dictionary to use. The dictionary flag that precedes the word should contain the type, and the one following should be empty `<!>`. In the example shown below, the second occurrence of the word **reading** will be pronounced as the city name.
 
-  Example:
+Example:
 
     ```python
     scriptText = "Hello I am reading a book in the city of <!location>reading<!> today"
     ```
-
 
 Lexi methods are:
 
@@ -657,41 +664,49 @@ Lexi methods are:
 
   - Parameters:
 
-    - `lang`  [Optional] (string) - Filter by language code, e.g. `en-gb` or `es`.
-    - `type`  [Optional] (string) - Filter by type e.g. `location`.
+    - `lang` [Optional] (string) - Filter by language code, e.g. `en-gb` or `es`.
+    - `type` [Optional] (string) - Filter by type e.g. `location`.
 
   - Example:
+
     ```python
     # returns all english gb dictionaries of type name
-    dictionaries = apiaudio.Lexi.list(lang="en-gb", type="name") 
+    dictionaries = apiaudio.Lexi.list(lang="en-gb", type="name")
 
     ```
+
 - `list_types()` List the available types
+
   - Parameters:
     - `none`
   - Example:
+
     ```python
     # returns the valid flag types, i.e location, name, brand
-    types = apiaudio.Lexi.list_types() 
+    types = apiaudio.Lexi.list_types()
 
     ```
-- `list_words()` Lists all the words contained in a dictionary.
-    - Parameters:
 
-    - `dictId`  \* [Required] (string) - The id of the dictionary.
+- `list_words()` Lists all the words contained in a dictionary.
+
+  - Parameters:
+
+  - `dictId` \* [Required] (string) - The id of the dictionary.
   - Example:
     ```python
     # lists all words in the dictionary
     words = apiaudio.Lexi.list_words(dictId="uk_cities")
     ```
+
 - `search_for_word()` Searches to see if a word is in any of the dictionaries.
 
   - Parameters:
 
-    - `word`  \* [Required] (string) - Word to look for.
-    - `language`  \* [Required] (string) - language code to use e.g. `en-gb`.
+    - `word` \* [Required] (string) - Word to look for.
+    - `language` \* [Required] (string) - language code to use e.g. `en-gb`.
 
   - Example:
+
     ```python
     # Checks if the word bristol exists
     result = apiaudio.Lexi.search_for_word(word="bristol", lang="en-gb")
@@ -701,30 +716,34 @@ Lexi methods are:
 #### Preview
 
 The effect of applying Lexi can be seen with the `script.preview()` method. See [Script](#script) documentation for more details.
-  - Example:
-    ```python
-      text = """ 
-        The author of this repo has lived in two places in the 
-        UK, <!location>Bude<!> and <!location>Bristol<!>.
-      """
-    
-    r = apiaudio.Script.create(scriptText=text)
-    scriptId = r["scriptId"]
-    
-    # preview the script in en-gb
-    preview = apiaudio.Script.preview(scriptId=scriptId, language="en-gb")
-    print(preview)
-    ```
-  - Response:
-    ```python
-    "The author of this repo has lived in two places in the UK, bude and [<!>bristol<!>]".
-    ```
-    In this example Bristol is in a location dictionary, but Bude is not. Lexi will ensure words marked between `[<!>....<!>]` will be pronounced correctly.
-    
+
+- Example:
+
+  ```python
+    text = """
+      The author of this repo has lived in two places in the
+      UK, <!location>Bude<!> and <!location>Bristol<!>.
+    """
+
+  r = apiaudio.Script.create(scriptText=text)
+  scriptId = r["scriptId"]
+
+  # preview the script in en-gb
+  preview = apiaudio.Script.preview(scriptId=scriptId, language="en-gb")
+  print(preview)
+  ```
+
+- Response:
+  ```python
+  "The author of this repo has lived in two places in the UK, bude and [<!>bristol<!>]".
+  ```
+  In this example Bristol is in a location dictionary, but Bude is not. Lexi will ensure words marked between `[<!>....<!>]` will be pronounced correctly.
+
 ### `Connector` resource <a name = "connector"> </a>
 
 Resource used for monitoring 3rd paty integrations. End results of [Mastering](#mastering) resource can be distributed into external applications through `connectors` field. See [connectors documentation](https://docs.api.audio/docs/what-are-connectors).
-List of currently supported applications: 
+List of currently supported applications:
+
 - [julep.de](https://www.julep.de)
 
 Available methods:
@@ -740,6 +759,7 @@ Available methods:
     status = apiaudio.Connector.retrieve(
       name="julep"
     )
+    ```
 
 - `connection()` Check the status of the connection by providing `connectionId` returned in a Mastering response.
 
@@ -752,23 +772,34 @@ Available methods:
     status = apiaudio.Connector.connection(
       connection_id="af2fe14a-aa6b-4a97-b430-a072c38b11ff"
     )
+    ```
 
 ### Logging <a name = "logging"></a>
 
 By default, warnings issued by the API are logged in the console output. Additionally, some behaviors are logged on the informational level (e.g. "In progress..." indicators during longer processing times).
 The level of logging can be controlled by choosing from the standard levels in Python's `logging` library.
 
-  - Decreasing logging level for more detailed logs:
-    ```python
-    apiaudio.set_logger_level("INFO")
-    # apiaudio.set_logger_level("CRITICAL") - set the highest level to disable logs
-    ```
+- Decreasing logging level for more detailed logs:
+  ```python
+  apiaudio.set_logger_level("INFO")
+  # apiaudio.set_logger_level("CRITICAL") - set the highest level to disable logs
+  ```
 
 # Maintainers <a name = "maintainers"> </a>
 
 - https://github.com/zeritte
 - https://github.com/Sjhunt93
 - https://github.com/martinezpl
+
+# Development
+
+There is a pre-commit hook that will run before you commit a file. This is to keep the code standards high. To enable it, you should run `make`. Then it will set up the pre-commit hook for git. Thats all! Now every time before you commit, it will run to tell you about the standards.
+
+If you use VSCode for committing files, you may bump into `pre-commit command not found` error. That is ok, just run `brew install pre-commit` or your fave package manager [from the list here](https://pre-commit.com/#installation).
+
+If you bump into `your pip version is old` error, just ignore it and use the terminal.
+
+If there is a problem and you are in a rush, you can add `--no-verify` at the end of the commit command, it will skip the pre-commit hooks, e.g `git commit -m 'your commit message' --no-verify`
 
 # License <a name = "license"> </a>
 
