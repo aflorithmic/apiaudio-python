@@ -470,6 +470,7 @@ Mastering methods are:
     - `mediaFiles` (list) - List of dicts containing the media files. This parameter depends on the media file tags used in the [script](#script) resource and the media files you have in your account. For example, if the script contains `<<media::myrecording>>` plus `<<media::mysong>>`, and you want to attach myrecording to mediaId = "12345", and mysong to mediaId = "67890" then `mediaFiles = [{"myrecording":"12345", "mysong":"67890"}]`.
     - `mediaVolumeTrim` (float) - Floating point varible that allows you to trim the volume of uploaded media files (in dB). This attribute has a valid range of -12 to 12 dB and applies to all media files included in a single mastering call. Clipping protection is not provided so only make incremental adjustments.
     - `connectors` (list) - List of dicts specifying configuration for particular 3rd party connection. For guidelines in context of supported 3rd party application, see [connectors documentation](https://docs.api.audio/docs/what-are-connectors).
+    - `masteringPreset` (string) - The mastering preset to use, this enables features such as sidechain compression 'i.e. ducking' See `apiaudio.Mastering.list_presets()` for a list of presets and their descriptions.
 
   - Example:
     ```python
@@ -514,6 +515,16 @@ Mastering methods are:
       parameters={"username":"salih", "location":"barcelona"}
       destination="."
     )
+    ```
+  - `list_presets()` List the available mastering presets.
+    - Parameters:
+      - No parameters required.
+
+  - Example:
+
+    ```python
+    presets = apiaudio.Mastering.list_presets()
+    print(presets)
     ```
 
 ### `Media` resource <a name = "media"> </a>
