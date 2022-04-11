@@ -49,7 +49,7 @@ def test_script_versions():
 
     script = apiaudio.Script.create(
         scriptId="test_sdk",
-        scriptText="...",
+        scriptText="hello...",
         versions=test_versions
     )
     
