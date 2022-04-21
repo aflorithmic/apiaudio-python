@@ -36,6 +36,7 @@ The SDK has been renamed. `aflr` v0.8.1 is still up in pip (pypi), but will not 
   - [Birdcache](#birdcache)
   - [Lexi](#lexi)
   - [Connector](#connector)
+  - [Orchestrator](#orchestrator)
   - [Logging](#logging)
 - [Maintainers](#maintainers)
 - [License](#license)
@@ -784,6 +785,44 @@ Available methods:
       connection_id="af2fe14a-aa6b-4a97-b430-a072c38b11ff"
     )
     ```
+
+### `Orchestrator` resource <a name = "Orchestrator"> </a>
+
+The orchestrator is used to make working with a range of audio services as easy as sending a single API request. Each route here is carefully configured to produce high-quality and easy to access audio assets.
+
+Orchestrator methods are:
+
+- `create_audio()` Creates a simple TTS speech request and adds a sound template to it through mastering.
+
+	- Parameters:
+
+		- `scriptText` \* [Required] (str) - Text to synthesize (TTS).
+		- `soundTemplate` (str) - Sound template to use.
+		- `voice` \* [Required] (str) - Name of voice to use.
+  
+
+
+- `create_three_sections()` Creates a TTS speech request with 3 sections and adds a sound template to it through mastering.
+
+  - Parameters:
+
+    - `introText` \* [Required] (str) - Text to synthesize in the intro section.
+    - `mainText` \* [Required] (str) - Text to synthesize in the main section.
+    - `outroText` \* [Required] (str) - Text to synthesize in the outro section.
+    - `soundTemplate` (str) - Sound template to use.
+    - `voice` \* [Required] (str) - Name of voice to use.
+
+
+- `media_with_sound()` Combines a pre-existing media file (i.e. pre-recorded voice) with a sound template
+
+	- Parameters:
+
+		- `mediaId` \* [Required] (str) - MediaId of the media file to use as input.
+		- `soundTemplate` \* [Required] (str) - Sound template to use.
+
+
+
+
 
 ### Logging <a name = "logging"></a>
 
