@@ -219,7 +219,7 @@ Script methods are:
     - `scriptText` \* [Required] (string) - Text for your script. A script can contain multiple sections and SSML tags. Learn more about scriptText details [here](https://docs.api.audio/docs/script-2)
     - `projectName` (string) - The name of your project. Default value is "default"
     - `moduleName` (string) - The name of your module. Default value is "default"
-    - `scriptName` (string) - The name of your script. Default value is "default"
+    - `scriptName` (string) - The name of your script. Default value is "default" (max 60 characters) 
     - `scriptId` (string) - Custom identifier for your script. If scriptId parameter is used, then projectName, moduleName and scriptName are required parameters.
     - `versions` (dictionary) - A dictionary containing different versions of your script text, whereby the key is the version name, and its value is the associated `scriptText`. Version name `v0` is reserved as the default `scriptText`. Default value is "{}"
   - Example:
