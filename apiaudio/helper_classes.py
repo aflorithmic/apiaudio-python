@@ -12,6 +12,11 @@ class ListableResource(APIRequest):
             return cls._get_request()
 
 
+class HelpResource(APIRequest):
+    @classmethod
+    def help(cls, **params):
+        return cls._options_request()
+
 class CreatableResource(APIRequest):
     @classmethod
     def create(cls, **params):
