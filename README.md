@@ -95,31 +95,24 @@ script = apiaudio.Script.create(scriptText="Hello world", scriptName="hello")
 print(script)
 ```
 
-🎤 Create an speech audio file from the script using Joanna's voice:
+🎤 Create a speech audio file from the script using Aria's voice:
 
 ```python
-response = apiaudio.Speech.create(scriptId=script["scriptId"], voice="Joanna")
+response = apiaudio.Speech.create(scriptId=script["scriptId"], voice="Aria")
 print(response)
 ```
 
-🎧 Now let's master the speech file with high quality and a nice background track.
+🎧 Now let's master the speech file with high quality and a nice soundtemplate.
 
 ```python
 response = apiaudio.Mastering.create(
 	scriptId=script.get("scriptId"),
-	soundTemplate="parisianmorning"
+	soundTemplate="jakarta"
 	)
 print(response)
 ```
 
-🎉 Finally, get the urls of the audio files generated:
-
-```python
-urls = apiaudio.Mastering.retrieve(scriptId=script["scriptId"])
-print(urls)
-```
-
-Or download the files in your current folder:
+Download the files in your current folder:
 
 ```python
 filepath = apiaudio.Mastering.download(scriptId=script["scriptId"], destination=".")
@@ -145,10 +138,6 @@ response = apiaudio.Mastering.create(
 	soundTemplate="parisianmorning"
 	)
 print(response)
-
-# get url of audio tracks generated
-urls = apiaudio.Mastering.retrieve(scriptId=script["scriptId"])
-print(urls)
 
 # or download
 filepath = apiaudio.Mastering.download(scriptId=script["scriptId"], destination=".")
@@ -315,8 +304,7 @@ Speech methods are:
           "firstsection": {
               "voice": "Matthew",
               "speed": 110,
-              "silence_padding": 100,
-              "effect": "dark_father"
+              "silence_padding": 100
           },
           "anothersection": {
               "voice": "en-GB-RyanNeural",
@@ -347,10 +335,9 @@ Speech methods are:
                 "voice": "Matthew",
                 "speed": 110,
                 "silence_padding": 100,
-                "effect": "dark_father"
             },
             "anothersection": {
-                "voice": "en-GB-RyanNeural",
+                "voice": "Liam",
             }
         }
     )
@@ -477,7 +464,7 @@ Mastering methods are:
     ```python
     response = apiaudio.Mastering.create(
         scriptId="id-1234",
-        soundTemplate="parisianmorning",
+        soundTemplate="jakarta",
         audience={"username":"salih", "location":"barcelona"}
     )
     ```
@@ -654,7 +641,7 @@ Birdcache methods are:
       voice="linda",
       text="This is {{username|me}} creating synchronous text to speech",
       audience={"username": ["salih", "sam", "timo"]},
-      soundTemplate="openup"
+      soundTemplate="electronic"
     )
     ```
 
