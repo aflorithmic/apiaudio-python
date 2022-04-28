@@ -387,6 +387,8 @@ Voice methods are:
     - `ageBracket` (string) - Try with one of: adult, child, senior
     - `tags` (string) - Try with one or more (separated by commas) of: steady, confident, balanced, informative, serious, instructional, slow, storytelling, calm, clear, deep, formal, sad, thin, fast, upbeat, fun, energetic, tense, very fast, flat, low pitched, high pitched, low-pitched, sing-y, cooperative, kind, stable, monotonous, neutral, responsible, business man, straight to the point, knowledgeable, focused, newscastery, newsreader, interviewer, reliable, friendly, welcoming, good for handing out information, slightly friendly
     - `industryExamples` (string) - Try with one or more (separated by commas) of: fitness, business, commercial, fashion, travel, audiobook, real estate, faith, health industry, comercial, realestate, kids entertainment, games, customer service, education, storytelling, entertainment, kids, education audiobook
+    - `timePerformance` (string) - The time performance of the voice. There are three categories: slow, medium, fast.
+    - `sectionCharacterLimit` (string) - The maximum amount of characters that the voice can process per Script section.
   - Example:
     ```python
     all_voices = apiaudio.Voice.list()
