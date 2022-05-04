@@ -64,6 +64,7 @@ jobs:
           name: update SSM parameter with latest SDK version
           command: |
             aws ssm get-parameter --name /sdk/latest_versions > ssm.json
+            cat ssm.json
 #            NEW_VALUE=$(cat ssm.json | python3 -c 'import json,sys,os;obj=json.loads(sys.stdin.read());obj=json.loads(obj["Parameter"]["Value"]);obj["python"]=os.environ["TRIGGER_TAG"];print(obj)')
 #            aws ssm put-parameter --name /sdk/latest_versions --type "String" --value $NEW_VALUE --overwrite
 
