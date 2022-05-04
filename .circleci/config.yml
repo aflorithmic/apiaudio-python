@@ -1,5 +1,16 @@
 version: 2.1
 
+config_blocks:
+  only_tags: &only_tags
+    filters:
+      branches:
+        ignore: /.*/
+      tags:
+        only: /^v[0-9]+(\.[0-9]+)*$/
+
+orbs:
+  aws-cli: circleci/aws-cli@3.1
+
 jobs:
   semgrep-scan:
     parameters:
@@ -24,10 +35,48 @@ jobs:
               --publish-deployment << parameters.semgrep_deployment_id >> \
               --publish-token $SEMGREP_APP_TOKEN
 
+  pip-publish:
+    docker:
+      - image: cimg/python:3.8
+    environment:
+      TRIGGER_TAG: << pipeline.git.tag >>
+    steps:
+      - run:
+          name: clone main repo, publish tag that triggered the pipeline
+          command: |
+            git clone git@github.com:aflorithmic/apiaudio-python.git
+            cd apiaudio-python
+            git checkout $TRIGGER_TAG
+            pip3 install twine wheel
+            python3 setup.py sdist bdist_wheel
+#            python3 -m twine upload --username $PIPY_USERNAME --password $PIPY_PASSWORD dist/*
 
+  update-ssm:
+    environment:
+      TRIGGER_TAG: << pipeline.git.tag >>
+    executor: aws-cli/default
+    steps:
+      - aws-cli/setup:
+          profile-name: versionUpdate
+      - run:
+          name: update SSM parameter with latest SDK version
+          command: |
+            aws ssm get-parameter --name /sdk/latest_versions > ssm.json
+#            NEW_VALUE=$(cat ssm.json | python3 -c 'import json,sys,os;obj=json.loads(sys.stdin.read());obj=json.loads(obj["Parameter"]["Value"]);obj["python"]=os.environ["TRIGGER_TAG"];print(obj)')
+#            aws ssm put-parameter --name /sdk/latest_versions --type "String" --value $NEW_VALUE --overwrite
 
 workflows:
   semgrep-scan:
     jobs:
       - semgrep-scan:
           context: aws
+
+  version-update:
+    jobs:
+      - pip-publish:
+          <<: *only_tags
+
+      - update-ssm:
+          context: aws
+          requires:
+            - pip-publish
