@@ -60,9 +60,7 @@ def test_script_versions():
     from .assets import test_versions
 
     script = apiaudio.Script.create(
-        scriptId="test_sdk",
-        scriptText="hello...",
-        versions=test_versions
+        scriptId="test_sdk", scriptText="hello...", versions=test_versions
     )
 
     assert script.get("availableVersions") == ["v0"] + [
