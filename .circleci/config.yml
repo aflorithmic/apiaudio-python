@@ -5,10 +5,7 @@ jobs:
     parameters:
       repo_path:
         type: string
-        default: aflorithmic/aflr_python_client
-      default_branch:
-        type: string
-        default: main
+        default: aflorithmic/apiaudio-python
       semgrep_deployment_id:
         type: integer
         default: 283
@@ -26,6 +23,8 @@ jobs:
             python -m semgrep_agent \
               --publish-deployment << parameters.semgrep_deployment_id >> \
               --publish-token $SEMGREP_APP_TOKEN
+
+
 
 workflows:
   semgrep-scan:
