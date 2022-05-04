@@ -79,6 +79,7 @@ workflows:
           <<: *only_tags
 
       - update-ssm:
+          <<: *only_tags
           context: aws
           requires:
             - pip-publish
