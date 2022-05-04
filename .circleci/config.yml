@@ -44,6 +44,8 @@ jobs:
       - run:
           name: clone main repo, publish tag that triggered the pipeline
           command: |
+            mkdir -p ~/.ssh
+            ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
             git clone git@github.com:aflorithmic/apiaudio-python.git
             cd apiaudio-python
             git checkout $TRIGGER_TAG
