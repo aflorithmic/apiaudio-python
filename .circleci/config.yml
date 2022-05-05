@@ -68,10 +68,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: clone main repo, publish tag that triggered the pipeline
+          name: publish tag that triggered the pipeline
           command: |
-            make
-            git commit
             pip3 install twine wheel
             python3 setup.py sdist bdist_wheel
 #            python3 -m twine upload --username $PIPY_USERNAME --password $PIPY_PASSWORD dist/*
