@@ -195,9 +195,9 @@ class APIRequest:
     def _options_request(cls, url=None):
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
         headers = cls._build_header()
-        
+
         r = requests.options(url=url, headers=headers)
-        
+
         cls._expanded_raise_for_status(r)
-        
+
         return r.json()

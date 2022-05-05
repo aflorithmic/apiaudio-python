@@ -12,7 +12,6 @@ class Mastering(CreatableResource, RetrievableResource, DownloadableResource):
 
     loop_status_code = 202
 
-    
     @classmethod
     def list_presets(cls):
         return cls._get_request(path_param=cls.mastering_preset_list_path)

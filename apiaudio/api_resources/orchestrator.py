@@ -1,15 +1,15 @@
-from apiaudio.helper_classes import (
-    CreatableResource,
-    HelpResource
-)
+from apiaudio.helper_classes import CreatableResource, HelpResource
+
 
 class CreateMediaWithSound(CreatableResource):
     OBJECT_NAME = "orchestrator"
     resource_path = "/orchestrator/media_with_sound"
 
+
 class CreateAudio(CreatableResource):
     OBJECT_NAME = "orchestrator"
     resource_path = "/orchestrator/create_audio"
+
 
 class CreateThreeSections(CreatableResource):
     OBJECT_NAME = "orchestrator"
@@ -31,10 +31,7 @@ class Orchestrator(CreatableResource, HelpResource):
     @classmethod
     def create_three_sections(cls, **args):
         return cls.download(cls, CreateThreeSections.create(**args))
-        
 
     def download(cls, response):
-        local_filename = cls._download_request(
-            url=response.get("url"), destination="."
-        )
+        local_filename = cls._download_request(url=response.get("url"), destination=".")
         return local_filename
