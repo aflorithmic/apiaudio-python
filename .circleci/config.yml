@@ -7,9 +7,31 @@ config_blocks:
         ignore: /.*/
       tags:
         only: /^v[0-9]+(\.[0-9]+)*$/
+#  ---------------- SLACK CONFIG BLOCK ----------------
+  slack_channel: &slack_channel deployments #slack channel for notifications 
+
+  slack_basic_fail: &slack_basic_fail #on fail 
+    - slack/notify:
+        channel: *slack_channel
+        event: fail
+        template: basic_fail_1
+
+  slack_basic_success: &slack_basic_success #on success 
+    - slack/notify:
+        channel: *slack_channel
+        event: pass
+        template: basic_success_1
+ 
+  slack_success_deploy: &slack_success_deploy #success tag deploy
+    - slack/notify:
+        channel: *slack_channel
+        event: pass
+        template: success_tagged_deploy_1
+# -----------------------------------------------------------------
 
 orbs:
   aws-cli: circleci/aws-cli@3.1
+  slack: circleci/slack@4.9.3
 
 jobs:
   semgrep-scan:
@@ -34,6 +56,9 @@ jobs:
             python -m semgrep_agent \
               --publish-deployment << parameters.semgrep_deployment_id >> \
               --publish-token $SEMGREP_APP_TOKEN
+      #  It runs on every commit and probably will annoy us too much. 
+      # - <<: *slack_basic_fail
+      # - <<: *slack_success_deploy
 
   pip-publish:
     docker:
@@ -52,6 +77,8 @@ jobs:
             pip3 install twine wheel
             python3 setup.py sdist bdist_wheel
             python3 -m twine upload --username $PIPY_USERNAME --password $PIPY_PASSWORD dist/*
+      - <<: *slack_basic_fail
+      - <<: *slack_success_deploy
 
   update-ssm:
     environment:
@@ -67,6 +94,8 @@ jobs:
             cat ssm.json
             NEW_VALUE=$(cat ssm.json | python3 -c 'import json,sys,os;obj=json.loads(sys.stdin.read());obj=json.loads(obj["Parameter"]["Value"]);obj["python"]=os.environ["TRIGGER_TAG"];print(obj)')
             aws ssm put-parameter --name /sdk/latest_versions --type "String" --value $NEW_VALUE --overwrite
+      - <<: *slack_basic_fail
+      - <<: *slack_success_deploy
 
 workflows:
   semgrep-scan:
