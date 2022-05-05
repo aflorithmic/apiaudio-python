@@ -56,8 +56,9 @@ jobs:
             python -m semgrep_agent \
               --publish-deployment << parameters.semgrep_deployment_id >> \
               --publish-token $SEMGREP_APP_TOKEN
-      - <<: *slack_basic_fail
-      - <<: *slack_success_deploy
+      #  It runs on every commit and probably will annoy us too much. 
+      # - <<: *slack_basic_fail
+      # - <<: *slack_success_deploy
 
   pip-publish:
     docker:
