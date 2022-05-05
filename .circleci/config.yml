@@ -71,7 +71,7 @@ jobs:
           name: clone main repo, publish tag that triggered the pipeline
           command: |
             make
-            pre-commit run --all-files
+            git commit
             pip3 install twine wheel
             python3 setup.py sdist bdist_wheel
 #            python3 -m twine upload --username $PIPY_USERNAME --password $PIPY_PASSWORD dist/*
@@ -104,6 +104,7 @@ workflows:
   version-update:
     jobs:
       - pip-publish:
+          context: aws
           <<: *only_tags
 
       - update-ssm:
