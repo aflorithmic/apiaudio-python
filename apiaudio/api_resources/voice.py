@@ -5,6 +5,7 @@ class Voice(ListableResource):
     OBJECT_NAME = "voice"
     resource_path = "/voice"
     list_parameters_path = "/voice/parameter"
+    api_redirect = ""
 
     @classmethod
     def list_parameters(cls):

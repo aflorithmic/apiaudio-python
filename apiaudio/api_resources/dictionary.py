@@ -4,7 +4,8 @@ from apiaudio.helper_classes import ListableResource, RetrievableResource
 class Lexi(ListableResource):
     OBJECT_NAME = "diction"
     resource_path = "/diction"
-
+    api_redirect = ""
+    
     list_words_path = resource_path + "/list/"
     list_types_path = resource_path + "/list_types"
     search_for_word_path = resource_path + "/search/"

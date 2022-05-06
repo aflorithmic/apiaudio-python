@@ -19,7 +19,9 @@ class CreateThreeSections(CreatableResource):
 class Orchestrator(CreatableResource, HelpResource):
     OBJECT_NAME = "orchestrator"
     resource_path = "/orchestrator"
+    api_redirect = ""
 
+    
     @classmethod
     def create_media_with_sound(cls, **args):
         return cls.download(cls, CreateMediaWithSound.create(**args))
