@@ -9,6 +9,9 @@
 `code m = apiaudio.Mastering().create(scriptId=GLOBAL_SCRIPT_ID, endFormat="mp3_alexa")`
 * As a developer user I want to share my audio with my team/bosses/business person so they can try and test the wonders of api.audio. We call this *virality link* and it's available in the console now. 
 
+## Enterprise features
+* For our enterprise users we've enabled `sandboxing` this allows you to test safely API requests without using up credits. Please contact your account manager for further details. 
+
 ## Enhancements
 * Improved pronunciation of our custom voices. We had some pronunctuation issues reported by customers, this adds more natural sounding pauses to our voices.
 
