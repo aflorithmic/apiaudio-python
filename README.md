@@ -667,7 +667,7 @@ Example:
   print(speech)
   ```
 
-Lexi methods are:
+Prononciation dictionary methods are:
 
 - `list()` List the available dictionaries
 
