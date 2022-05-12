@@ -656,7 +656,7 @@ Lexi is an engine for enhancing the pronunciation of troublesome words. For exam
 
 To use this feature words in the script should be marked up with the `<!'type'>` flag, whereby type is the type of dictionary to use. The dictionary flag that precedes the word should contain the type, and the one following should be empty `<!>`. In the example shown below, the second occurrence of the word **reading** will be pronounced as the city name.
 
-To use lexi end-to-end ensure that you supply a voice whose language matches that of the language of the dictionary you wish to use, and then supply `useDictionary=true` to the speech create call (see the example below). See the [Voice](#voice) resource to get a list of voices and their corresponding language code, or browse our available voices [here](#https://library.api.audio/voices)
+To use the pronunciation dictionary end-to-end ensure that you supply a voice whose language matches that of the language of the dictionary you wish to use, and then supply `useDictionary=true` to the speech create call (see the example below). See the [Voice](#voice) resource to get a list of voices and their corresponding language code, or browse our available voices [here](#https://library.api.audio/voices)
 
 Example:
 
