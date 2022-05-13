@@ -47,6 +47,9 @@ This repository is actively maintained by [Aflorithmic Labs](https://www.aflorit
 
 To publish a new version, please run `bash publish.sh`.
 
+## Changelog
+You can view [here](CHANGELOG.md) our updated Changelog. 
+
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
 ### Installation
