@@ -2,7 +2,6 @@
 
 * Friday 13th May 2022
 
-`Users needs are our strategy and our tactics` 
 v0.6.0
 ## Features
 * We added new endFormat (for making sure your audio is the correct format for a target audience) this week we added Alexa preset 
