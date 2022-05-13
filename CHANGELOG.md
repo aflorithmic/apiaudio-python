@@ -35,5 +35,5 @@ The addition of useDictionary and the change in behaviour is likely to present s
 We had some third party downtime with some voices from one provider. We notified them and fixed this issue. 
 
 ## Maintenance
-We removed old code and streamlined some code with our Mastering engine. This will help us add features more easily and remove unnecessary complexity. 
-We also did various performance improvements and work in the background, not much of this will be customer facing but incremental improvements are important. 
+We have removed old code and streamlined other code using our Mastering engine. This will allow us to add features more easily whilst removing unnecessary complexity.
+We also made various performance improvements and work in the background. Although not all of this will be customer facing, these incremental improvements are very important. 
