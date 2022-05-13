@@ -10,8 +10,6 @@ v0.6.0
  ```
 In the future we will add other endFormats - please tell us which ones you'd like. 
 
-* As a developer user I want to share my audio with my team/bosses/business person so they can try and test the wonders of api.audio. We call this *virality link* and it's available in the console now. 
-
 * To continue to be able to offer free content to those of you still getting to know API.audio, we have added a watermark to our files.
 
 
@@ -41,4 +39,4 @@ We also made various performance improvements and work in the background. Althou
 (These are features that aren't added yet, but will be released next week)
 * Enhancements of voices. We've been testing with some users a more natural pauses to our custom voices. We contacted customers affected and some requested to not have this feature enabled please contact us if you want to use the old voices. We do feel that these voices are more natural and our beta testing was positive. These will be available soon under `msnr` voices in our API. 
 
-
+* As a developer user I want to share my audio with my team/bosses/business person so they can try and test the wonders of api.audio. We call this *virality link* and it's available in the console soon. 
