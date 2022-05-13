@@ -14,8 +14,6 @@ v0.6.0
 ## Enterprise features
 * For our enterprise users we've enabled `sandboxing` this allows you to test safely API requests without using up credits. Please contact your account manager for further details. 
 
-## Enhancements
-* Improved pronunciation of our custom voices. We had some pronunctuation issues reported by customers, this adds more natural sounding pauses to our voices.
 
 ## BreakingChanges
 * Our feature (pronunciation dictionary) has had some usability enhancements. The biggest change is adding `useDictionary` as a boolean. 
