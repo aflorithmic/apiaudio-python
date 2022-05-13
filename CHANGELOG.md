@@ -6,7 +6,8 @@ v0.6.0
 ## Features
 * We added new endFormat (for making sure your audio is the correct format for a target audience) this week we added Alexa preset 
 ```python
- m = apiaudio.Mastering().create(scriptId=GLOBAL_SCRIPT_ID, endFormat="mp3_alexa")```
+ m = apiaudio.Mastering().create(scriptId=GLOBAL_SCRIPT_ID, endFormat="mp3_alexa")
+ ```
 
 * As a developer user I want to share my audio with my team/bosses/business person so they can try and test the wonders of api.audio. We call this *virality link* and it's available in the console now. 
 
