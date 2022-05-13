@@ -16,8 +16,8 @@ In the future we will add other endFormats - please tell us which ones you'd lik
 
 * Enhancements of voices. We've rolled out to some users a more natural pauses to our custom voices. We contacted customers affected and some requested to not have this feature enabled please contact us if you want to use the old voices. We do feel that these voices are more natural and our beta testing was positive. These are all available under `msnr` voices in our API. Let us know what you think. 
 
-### Enterprise features
-* For our enterprise users we've enabled `sandboxing` this allows you to test safely API requests without using up credits. Please contact your account manager for further details. 
+### Corporate features
+* For our corporate plan users we've enabled `sandboxing` this allows you to test safely API requests without using up credits. Please contact your account manager for further details. 
 
 
 ## BreakingChanges
