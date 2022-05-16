@@ -18,6 +18,7 @@
 
 ## 📝 Table of Contents
 
+- [Changelog](CHANGELOG.md)
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Hello World](#hello_world)
