@@ -19,6 +19,7 @@
 ## 📝 Table of Contents
 
 - [About](#about)
+- [Changelog](#changelog)
 - [Getting Started](#getting_started)
 - [Hello World](#hello_world)
 - [Documentation](#documentation)
