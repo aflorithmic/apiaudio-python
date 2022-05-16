@@ -72,7 +72,7 @@ jobs:
           command: |
             pip3 install twine wheel
             python3 setup.py sdist bdist_wheel
-            python3 -m twine upload --username $PIPY_USERNAME --password $PIPY_PASSWORD dist/*
+            python3 -m twine upload --username $PIPY_USERNAME --password $PIPY_PASSWORD dist/* --verbose
       - <<: *slack_basic_fail
       - <<: *slack_success_deploy
 
