@@ -20,7 +20,7 @@
 
 - [About](#about)
 - [Changelog](#changelog)
-- [Quickstarts] (#quickstarts)
+- [Quickstarts](#quickstarts)
 - [Getting Started](#getting_started)
 - [Hello World](#hello_world)
 - [Documentation](#documentation)
