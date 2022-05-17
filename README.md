@@ -20,6 +20,7 @@
 
 - [About](#about)
 - [Changelog](#changelog)
+- [Quickstarts] (#quickstarts)
 - [Getting Started](#getting_started)
 - [Hello World](#hello_world)
 - [Documentation](#documentation)
@@ -50,6 +51,9 @@ To publish a new version, please run `bash publish.sh`.
 
 ## Changelog
 You can view [here](CHANGELOG.md) our updated Changelog. 
+
+## Quickstarts <a name = "quickstarts"></a>
+Get started with our [quickstart recipes](https://github.com/aflorithmic/examples).
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
