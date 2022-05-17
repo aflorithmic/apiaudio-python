@@ -728,7 +728,7 @@ Prononciation dictionary methods are:
 
 #### Preview
 
-The effect of applying Lexi can be seen with the `script.preview()` method. See [Script](#script) documentation for more details.
+The effect of applying Pronunciation Dictionary can be seen with the `script.preview()` method. See [Script](#script) documentation for more details.
 
 - Example:
 
