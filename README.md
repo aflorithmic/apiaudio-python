@@ -303,6 +303,9 @@ Speech methods are:
     - `audience` (dict) - Specify the values of parameters in your script. For instance, if in the script resource you have `scriptText="Hello {{name}} {{lastname}}, welcome to {{location}}"`, the audience should be: `{"name": "Elon", "lastname": "Musk", "location": "Istanbul"}`. If not provided, the fallback track will be created.
     - `sync` (boolean) - Allow sync or async speech creation. Default is `True`. If `sync=False`, speech create call will return a success message when the speech creation is triggered. To retrieve the files, check `Speech.retrieve()` method.
     - `sections` (dict) - Specify parameters for specific sections in the script. The key is a section name, and the value is another dictionary with the section configuration ( valid parameters are: voice, speed, effect, silence_padding). If a section is not found here, the section will automatically inherit the voice, speed, effect and silence_padding values you defined above (or the default ones if you don't provide them). See an example below with 2 sections and different configuration parameters being used.
+    - `useDictionary` (bool) - Applies pronunciation dictionary to the script text.
+
+
       ```python
       sections={
           "firstsection": {
@@ -657,13 +660,18 @@ Lexi is an engine for enhancing the pronunciation of troublesome words. For exam
 
 To use this feature words in the script should be marked up with the `<!'type'>` flag, whereby type is the type of dictionary to use. The dictionary flag that precedes the word should contain the type, and the one following should be empty `<!>`. In the example shown below, the second occurrence of the word **reading** will be pronounced as the city name.
 
+To use the pronunciation dictionary end-to-end ensure that you supply a voice whose language matches that of the language of the dictionary you wish to use, and then supply `useDictionary=true` to the speech create call (see the example below). See the [Voice](#voice) resource to get a list of voices and their corresponding language code, or browse our available voices [here](#https://library.api.audio/voices)
+
 Example:
 
-    ```python
-    scriptText = "Hello I am reading a book in the city of <!location>reading<!> today"
-    ```
+  ```python
+  scriptText = """Hello I am reading a book in the city of <!location>reading<!> today"""
+  script = apiaudio.Script.create(scriptText=scriptText)
+  speech = apiaudio.Speech.create(scriptId=script["scriptId"], voice="Ryan", useDictionary=True)
+  print(speech)
+  ```
 
-Lexi methods are:
+Prononciation dictionary methods are:
 
 - `list()` List the available dictionaries
 
@@ -740,7 +748,7 @@ The effect of applying Lexi can be seen with the `script.preview()` method. See 
 
 - Response:
   ```python
-  "The author of this repo has lived in two places in the UK, bude and [<!>bristol<!>]".
+  {"preview" : "The author of this repo has lived in two places in the UK, bude and [<!>bristol<!>]". "wordsNotInDict" : ["bude"]}
   ```
   In this example Bristol is in a location dictionary, but Bude is not. Lexi will ensure words marked between `[<!>....<!>]` will be pronounced correctly.
 
