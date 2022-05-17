@@ -750,7 +750,7 @@ The effect of applying Pronunciation Dictionary can be seen with the `script.pre
   ```python
   {"preview" : "The author of this repo has lived in two places in the UK, bude and [<!>bristol<!>]". "wordsNotInDict" : ["bude"]}
   ```
-  In this example Bristol is in a location dictionary, but Bude is not. Lexi will ensure words marked between `[<!>....<!>]` will be pronounced correctly.
+  In this example Bristol is in a location dictionary, but Bude is not. Pronunciation Dictionary will ensure words marked between `[<!>....<!>]` will be pronounced correctly.
 
 ### `Connector` resource <a name = "connector"> </a>
 
