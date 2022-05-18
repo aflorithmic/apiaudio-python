@@ -472,6 +472,7 @@ Mastering methods are:
     - `mediaVolumeTrim` (float) - Floating point varible that allows you to trim the volume of uploaded media files (in dB). This attribute has a valid range of -12 to 12 dB and applies to all media files included in a single mastering call. Clipping protection is not provided so only make incremental adjustments.
     - `connectors` (list) - List of dicts specifying configuration for particular 3rd party connection. For guidelines in context of supported 3rd party application, see [connectors documentation](https://docs.api.audio/docs/what-are-connectors).
     - `masteringPreset` (string) - The mastering preset to use, this enables features such as sidechain compression 'i.e. ducking' See `apiaudio.Mastering.list_presets()` for a list of presets and their descriptions.
+    - `share` (boolean) - If you would like to have a sharable link created with your audio file, use this flag. If you put `share: True` the response will have `shareUrl` parameter returned. (Note: If you put this flag, your private files will be converted to public files.)
 
   - Example:
     ```python
