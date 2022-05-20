@@ -18,6 +18,7 @@
 
 ## 📝 Table of Contents
 
+- [Changelog](CHANGELOG.md)
 - [About](#about)
 - [Changelog](#changelog)
 - [Quickstarts](#quickstarts)
