@@ -6,7 +6,7 @@ v0.16.2
 * We noticed in testing some additional latency caused by our feature flag implementation - so we refactored this to make it much faster. This was mostly visible in our custom voice implementations. 
 
 
-###Enhancements
+### Enhancements
 * We added the ability to share audio with other users. It's a magic link feature. 
 For example
 ```shell
