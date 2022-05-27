@@ -1,4 +1,14 @@
 # Changelog
+* WIP - Friday 27th May 2022
+We didn't release any new version this week as a lot of features are unfinished and we're polishing them off. Nevertheless we have been working hard. 
+
+### Enhancements
+We've been working hard on our reliability and performance. This includes updating our CI/CD and adding more testing to our workflows and improving the quality of our code base. We've also been working hard on improving our underlying product.
+
+## Documentation updates
+* https://docs.api.audio/docs/hello-world (We improved the Hello World) reducing the lines of code from 20 lines of code to 5 lines of code
+* https://docs.api.audio/docs/welcome We also updated the welcome page more in accordance with our updated branding
+
 * Friday 20th May 2022
 v0.16.2
 
