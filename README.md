@@ -466,7 +466,7 @@ Mastering methods are:
     - `soundTemplate` (string) - The sound template name. For the list of available sound templates check `apiaudio.Sound.list_sound_templates()` call.
     - `public` (boolean) - Boolean flag that allows to store the mastered file in a public s3 folder. Default value is `False`. Warning - This will cause your mastered files to be public to anyone in the internet. Use this at your own risk.
     - `vast` (boolean) - Boolean flag that allows to create a VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
-    - `endFormat` (list) - List of audio formats to be produced. Valid formats are: `["wav", "mp3" (default), "flac", "ogg", "mp3_very_low", "mp3_low", "mp3_medium", "mp3_high", "mp3_very_high"]`
+    - `endFormat` (list) - List of audio formats to be produced. Valid formats are: `["wav", "mp3" (default), "flac", "ogg", "mp3_very_low", "mp3_low", "mp3_medium", "mp3_high", "mp3_very_high", "mp3_alexa"]`
     - `forceLength` (int) - force the audio length of the mastered track (in seconds).
     - `audience` (dict) - Dictionary containing the personalisation parameters. This parameter depends on the number of parameters you used in your [script](#script) resource. In the script documentation example above, we used 2 parameters: `username` and `location`, and in the following example below we want to produce the script for username `salih` with location `Barcelona`. If audience is not provided, the fallback track will be created.
     - `mediaFiles` (list) - List of dicts containing the media files. This parameter depends on the media file tags used in the [script](#script) resource and the media files you have in your account. For example, if the script contains `<<media::myrecording>>` plus `<<media::mysong>>`, and you want to attach myrecording to mediaId = "12345", and mysong to mediaId = "67890" then `mediaFiles = [{"myrecording":"12345", "mysong":"67890"}]`.
@@ -493,7 +493,7 @@ Mastering methods are:
     - `parameters` (dict) - Dictionary containing the audience item you want to retrieve. If parameters are not provided, the fallback track will be retrieved.
     - `public` (boolean) - Boolean flag that allows to retrieve the mastered file from the public bucket. Use this if you want to retrieve a mastered file created using `public=True`. Default value is `False`.
     - `vast` (boolean) - Boolean flag that allows to retrieve the VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
-    - `endFormat` (list) - List of audio formats to be retrieved. Valid formats are:`["wav", "mp3" (default), "flac", "ogg", "mp3_very_low", "mp3_low", "mp3_medium", "mp3_high", "mp3_very_high"]`
+    - `endFormat` (list) - List of audio formats to be retrieved. Valid formats are:`["wav", "mp3" (default), "flac", "ogg", "mp3_very_low", "mp3_low", "mp3_medium", "mp3_high", "mp3_very_high", "mp3_alexa"]`
 
   - Example:
     ```python
