@@ -457,7 +457,7 @@ Mastering allows you to create and retrieve a mastered audio file of your script
 
 Mastering methods are:
 
-- `create()` Creates a mastered version of your script.
+- `create()` Creates a mastered version of your script and choose the audio format. 
 
   - Parameters:
 
