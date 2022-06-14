@@ -191,10 +191,15 @@ If you provide both environment variable and `apiaudio.api_key` authentication, 
 
 In order to control a child organization of yours, please use the following method to assume that organization id.
 
+Set your child organization id to `None` to stop assuming an organization.
+
 ```python
 import apiaudio
 
 apiaudio.set_assume_org_id('child_org_id')
+
+# Stop using
+apiaudio.set_assume_org_id(None)
 ```
 
 ### Resource Usage <a name = "resource"> </a>
