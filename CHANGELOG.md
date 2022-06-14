@@ -3,11 +3,11 @@
 v0.16.2
 
 ## Bug fixing
-* We noticed in testing some additional latency caused by our feature flag implementation - so we refactored this to make it much faster. This was mostly visible in our custom voice implementations. 
+* We noticed in testing some additional latency caused by our feature flag implementation - so we refactored this to make it much faster. This was mostly visible in our custom voice implementations.
 
 
 ### Enhancements
-* We added the ability to share audio with other users. It's a magic link feature. 
+* We added the ability to share audio with other users. It's a magic link feature.
 For example
 ```shell
 curl -X POST \
@@ -19,19 +19,19 @@ curl -X POST \
     "share": true
 }'
 ```
-This returns a url - if you goto 
- 
- https://console-api.audio/share?id=your_id
- 
- You'll get a page that you can share with your organisation and via Whatsapp and other social 
- networks. 
+This returns a url - if you goto
 
-* We've updated our [voice library page](https://library.api.audio/voices) to have faster loading and we've added some other improvements in the GET request for voices so you can have a better voice discovery experience. Most of this is backend and performance enhancements. 
+ https://console-api.audio/share?id=your_id
+
+ You'll get a page that you can share with your organisation and via Whatsapp and other social
+ networks.
+
+* We've updated our [voice library page](https://library.api.audio/voices) to have faster loading and we've added some other improvements in the GET request for voices so you can have a better voice discovery experience. Most of this is backend and performance enhancements.
 * Enhanced query parameters for voice discoverability
 
 `GET https://v1.api.audio/voice?tags=upbeat,storytelling`
 
-Will voices that have both of these tags. We also introduced pagination as well. 
+Will voices that have both of these tags. We also introduced pagination as well.
 
 **Pagination**
 (Not yet available in the SDK)
@@ -48,7 +48,7 @@ E.g.
 
 **Query body in POST /voice**
 
-A `query` JSON is available in POST method. 
+A `query` JSON is available in POST method.
 
 **Supported operators:**
 
@@ -99,12 +99,12 @@ A `query` JSON is available in POST method.
     }
 }
 ```
-There's a lot you can do with this so we hope this makes your develper experience easier. 
+There's a lot you can do with this so we hope this makes your develper experience easier.
 
 ## New released features
-* Enhancements of voices. We've been testing with some users a more natural pauses to our custom voices. We contacted customers affected and some requested to not have this feature enabled please contact us if you want to use the old voices. We do feel that these voices are more natural and our beta testing was positive. These will be available soon under `msnr` voices in our API. 
+* Enhancements of voices. We've been testing with some users a more natural pauses to our custom voices. We contacted customers affected and some requested to not have this feature enabled please contact us if you want to use the old voices. We do feel that these voices are more natural and our beta testing was positive. These will be available soon under `msnr` voices in our API.
 
-* As a developer user I want to share my audio with my team/bosses/business person so they can try and test the wonders of api.audio. We call this *virality link* and it's available in the console soon. 
+* As a developer user I want to share my audio with my team/bosses/business person so they can try and test the wonders of api.audio. We call this *virality link* and it's available in the console soon.
 
 * Friday 13th May 2022
 
