@@ -7,6 +7,8 @@
 
 - We introduced a new function called `set_assume_org_id` for incoming super organization feature. By using this method, you can assume the id of a child organization as their super organization, and make your calls on behalf of them.
 
+A super organization is loosely modelled on superuser. So you can as a company ACME have specific criteria and permissions - and then you can share these with your child organisations. This allows you fine grained 
+
 - Friday 20th May 2022
   v0.16.1
 
