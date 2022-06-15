@@ -30,10 +30,17 @@ class APIRequest:
         apiaudio.api_key = api_key
         return
 
+    def set_assume_org_id(org_id):
+        apiaudio.assume_org_id = org_id
+
     @classmethod
     def _build_header(cls):
         cls._api_key_checker(apiaudio.api_key)
-        return {"x-api-key": apiaudio.api_key, "x-python-sdk-version": sdk_version}
+        return {
+            "x-api-key": apiaudio.api_key,
+            "x-python-sdk-version": sdk_version,
+            "x-assume-org": apiaudio.assume_org_id,
+        }
 
     @classmethod
     def _post_request(cls, json, url=None):

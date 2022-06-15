@@ -187,6 +187,21 @@ export apiaudio_key=<your-key>
 
 If you provide both environment variable and `apiaudio.api_key` authentication, the `apiaudio.api_key` will be used.
 
+### Super Organizations
+
+In order to control a child organization of yours, please use the following method to assume that organization id.
+
+Set your child organization id to `None` to stop assuming an organization.
+
+```python
+import apiaudio
+
+apiaudio.set_assume_org_id('child_org_id')
+
+# Stop using
+apiaudio.set_assume_org_id(None)
+```
+
 ### Resource Usage <a name = "resource"> </a>
 
 There are two approaches to use the resources.
@@ -303,7 +318,7 @@ Speech methods are:
     - `version` (string) - The version of the script to be produced. Default is "".
     - `voice` (string) - Voice name. See the list of available voices using [Voice resource](#voice). Default voice is "Joanna".
     - `speed` (string) - Voice speed. Default speed is 100.
-    - `effect` (string) - Put a funny effect in your voice. You can try the following ones: `dark_father`, `chewie`, `88b`, `2r2d`, 
+    - `effect` (string) - Put a funny effect in your voice. You can try the following ones: `dark_father`, `chewie`, `88b`, `2r2d`,
     - `silencePadding` (integer) - Add a silence padding to your speech tracks (in milliseconds). Default is 0 (no padding)
     - `audience` (dict) - Specify the values of parameters in your script. For instance, if in the script resource you have `scriptText="Hello {{name}} {{lastname}}, welcome to {{location}}"`, the audience should be: `{"name": "Elon", "lastname": "Musk", "location": "Istanbul"}`. If not provided, the fallback track will be created.
     - `sync` (boolean) - Allow sync or async speech creation. Default is `True`. If `sync=False`, speech create call will return a success message when the speech creation is triggered. To retrieve the files, check `Speech.retrieve()` method.
@@ -457,7 +472,7 @@ Mastering allows you to create and retrieve a mastered audio file of your script
 
 Mastering methods are:
 
-- `create()` Create a mastered version of your script and choose the audio format. 
+- `create()` Create a mastered version of your script and choose the audio format.
 
   - Parameters:
 
