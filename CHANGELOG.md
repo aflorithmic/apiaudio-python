@@ -7,6 +7,50 @@
 
 - We introduced a new function called `set_assume_org_id` for incoming super organization feature. By using this method, you can assume the id of a child organization as their super organization, and make your calls on behalf of them.
 
+A super organization is loosely modelled on superuser. So you can as a company ACME have specific criteria and permissions - and then you can share these with your child organisations. This allows you fine grained control of users and their roles and permissions and the ability to share settings and voices across orgs. We were informed by IAM from AWS in our design. If you want access let us know, we're working hard on this. This is part of a whole 
+
+- *Voices* We have some great partnerships coming up with 2 new voice providers. Reach out to us if you want to know more :) 
+## Coming soon 
+Under msnr we will soon have another german voice. We're testing this with some beta customers the `margareta-v1` voice. 
+
+```python
+# script text
+text = text = """
+<<soundSegment::main>><<sectionName::MAIN>>
+<<soundEffect::effect1>>
+Durch die heftigen Angriffe auf die ukrainische Stadt Irpin nahe Kiew, trifft die junge Pferdewirtin Julia eine schwere Entscheidung. Sie lässt ihre geliebten Tiere frei, um sie vor Explosionen zu schützen. Ihr emotionaler Facebook-Post geht im Netz viral. Viele Nutzer fühlen mit der jungen Ukrainerin.
+<<soundSegment::main>><<sectionName::MAIN2>>
+<<soundEffect::effect1>>
+Tränen, Beschimpfungen, und Verzweiflung. ein privater Nachrichtendienst aus Großbritannien zeichnet die Funksprüche von russischen Soldaten auf. Sie belegen, was die Berichte erahnen lassen: Die Moral bröckelt. und Putin hat sich möglicherweise fer-kalkuliert.
+"""
+# script creation
+script = apiaudio.Script.create(scriptText=text, scriptName="breaking_news")
+
+sectionProperties = {
+    'MAIN': {'endAt': 23.4, 'justify': 'flex-start'},
+    'MAIN2': {'endAt': 43.5, 'justify': 'flex-start'},
+}
+
+r = apiaudio.Speech().create(
+    scriptId=script.get("scriptId"),
+    voice="margareta-v1",
+    speed=110,
+)
+
+template = "breakingnews"
+response = apiaudio.Mastering().create(
+    scriptId=script.get("scriptId"),
+    soundTemplate=template,
+    sectionProperties=sectionProperties
+)
+
+print(response)
+
+file = apiaudio.Mastering().download(
+    scriptId=script.get("scriptId"), destination=".")
+print(file)
+```
+
 - Friday 20th May 2022
   v0.16.1
 
