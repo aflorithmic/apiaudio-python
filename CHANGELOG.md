@@ -1,6 +1,6 @@
 # Changelog
 
-- Friday 16th June 2022
+- Friday 17th June 2022
   v0.16.2
 
 ## Enhancements
