@@ -1,6 +1,6 @@
 # Changelog
 
-- Friday \*\* June 2022
+- Friday 17th June 2022
   v0.16.2
 
 ## Enhancements
@@ -50,6 +50,8 @@ file = apiaudio.Mastering().download(
     scriptId=script.get("scriptId"), destination=".")
 print(file)
 ```
+
+We've also improved our performance and invested more in 
 
 - Friday 20th May 2022
   v0.16.1
