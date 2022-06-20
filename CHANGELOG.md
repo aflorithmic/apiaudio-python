@@ -2,31 +2,15 @@
 - Friday 26th June 2022
 v.0.16.3 
 ## SuperOrg
-- We'll ship new iterations of superorg. 
+- Listing superorgs - the abiltiy to list these organisations. `list_org_id` 
+- Billing integration so each superorg and child org is charged correctly. 
 
 ## Voice Cloner
 - We're embarking on sprints to improve our voice cloning app based upon feedback from our customers :). Most of these will be performance enhancements and fixing some user experience bugs. 
 
 ## German Voice
-- We'll ship the stuff that's coming soon from last week. Into production - reach out to us if you want a demo :) 
-- We're also shipping in our new models up to 10x faster inference speed this should make your text to audio even faster. 
-
-## New partnerships
-- We have new partnerships for our beta customers please reach out to us to learn more to try out new voices. 
-
-- Friday 17th June 2022
-  v0.16.2
-
-## Enhancements
-
-- We introduced a new function called `set_assume_org_id` for incoming super organization feature. By using this method, you can assume the id of a child organization as their super organization, and make your calls on behalf of them.
-
-A super organization is loosely modelled on superuser. So you can as a company ACME have specific criteria and permissions - and then you can share these with your child organisations. This allows you fine grained control of users and their roles and permissions and the ability to share settings and voices across orgs. We were informed by IAM from AWS in our design. If you want access let us know, we're working hard on this. This is part of a whole 
-
-- *Voices* We have some great partnerships coming up with 2 new voice providers. Reach out to us if you want to know more :) 
-## Coming soon 
-Under msnr we will soon have another german voice. We're testing this with some beta customers the `margareta-v1` voice. 
-
+- We've shipped the following to select Beta customers. If you want access let us know and we'll give you access. 
+It's our best voice ever created by our internal TTS research team - it's called `margareta-v1`
 ```python
 # script text
 text = text = """
@@ -64,6 +48,28 @@ file = apiaudio.Mastering().download(
     scriptId=script.get("scriptId"), destination=".")
 print(file)
 ```
+
+- We're also shipping in our new models up to 2x faster inference speed this should make your text to audio even faster. 
+## Bug fixing
+- We discovered an incorrect billing issue with some voices on our platform (only affecting IBM voices). This only impacted some customers all customers have been informed and refunded. We've added alarms and detection mechanisms and enhanced quality control to fix this going forward. We're sorry for any inconvenience. 
+
+## New partnerships
+- We have new partnerships for our beta customers please reach out to us to learn more to try out new voices. 
+
+- Friday 17th June 2022
+  v0.16.2
+
+## Enhancements
+
+- We introduced a new function called `set_assume_org_id` for incoming super organization feature. By using this method, you can assume the id of a child organization as their super organization, and make your calls on behalf of them.
+
+A super organization is loosely modelled on superuser. So you can as a company ACME have specific criteria and permissions - and then you can share these with your child organisations. This allows you fine grained control of users and their roles and permissions and the ability to share settings and voices across orgs. We were informed by IAM from AWS in our design. If you want access let us know, we're working hard on this. This is part of a whole 
+
+- *Voices* We have some great partnerships coming up with 2 new voice providers. Reach out to us if you want to know more :) 
+## Coming soon 
+Under msnr we will soon have another german voice. We're testing this with some beta customers the `margareta-v1` voice. 
+(Updated above)
+
 
 We've also improved our performance and invested more in 
 
