@@ -1,4 +1,18 @@
 # Changelog
+- Friday 26th June 2022
+v.0.16.3 
+## SuperOrg
+- We'll ship new iterations of superorg. 
+
+## Voice Cloner
+- We're embarking on sprints to improve our voice cloning app based upon feedback from our customers :). Most of these will be performance enhancements and fixing some user experience bugs. 
+
+## German Voice
+- We'll ship the stuff that's coming soon from last week. Into production - reach out to us if you want a demo :) 
+- We're also shipping in our new models up to 10x faster inference speed this should make your text to audio even faster. 
+
+## New partnerships
+- We have new partnerships for our beta customers please reach out to us to learn more to try out new voices. 
 
 - Friday 17th June 2022
   v0.16.2
