@@ -71,7 +71,7 @@ file = apiaudio.Mastering().download(
     scriptId=script.get("scriptId"), destination=".")
 print(file)
 ```
-You can listen to an example [here](audio/margareta-v1-example.wav)
+You can listen to an example [here](audio/margareta-v1-example.mp4)
 
 ## Bug fixing
 - We discovered an incorrect billing issue with some voices on our platform (only affecting IBM voices). This only impacted some customers all customers have been informed and refunded. We've added alarms and detection mechanisms and enhanced quality control to fix this going forward. We're sorry for any inconvenience. 
