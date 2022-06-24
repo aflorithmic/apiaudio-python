@@ -1,8 +1,3 @@
-
-
-
-
-
 <p align="center">
 <a href="https://www.api.audio/" rel="noopener">
  <img src="https://uploads-ssl.webflow.com/60b89b300a9c71a64936aafd/60c1d07f4fd2c92916129788_logoAudio.svg" alt="api.audio logo"></a>
@@ -28,6 +23,7 @@
   - [Import](#import)
   - [Authentication](#authentication)
   - [Authentication with environment variable](#authentication_env)
+  - [Super Organizations](#super-organizations)
   - [Resource usage](#resource)
   - [Script](#script)
   - [Speech](#speech)
@@ -40,6 +36,7 @@
   - [Pronunciation Dictionary](#pronunciationdictionary)
   - [Connector](#connector)
   - [Orchestrator](#orchestrator)
+  - [Webhooks](#webhooks)
   - [Logging](#logging)
 - [Maintainers](#maintainers)
 - [License](#license)
@@ -51,9 +48,11 @@ This repository is actively maintained by [Aflorithmic Labs](https://www.aflorit
 To publish a new version, please run `bash publish.sh`.
 
 ## Changelog
+
 You can view [here](CHANGELOG.md) our updated Changelog.
 
 ## Quickstarts <a name = "quickstarts"></a>
+
 Get started with our [quickstart recipes](https://github.com/aflorithmic/examples).
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
@@ -313,7 +312,9 @@ Speech allows you to do Text-To-Speech (TTS) with our API using all the voices a
 Speech methods are:
 
 - `create()` Send a Text-To-Speech request to our Text-To-Speech service.
+
   - Parameters:
+
     - `scriptId` \* [Required] (string) - The script ID
     - `version` (string) - The version of the script to be produced. Default is "".
     - `voice` (string) - Voice name. See the list of available voices using [Voice resource](#voice). Default voice is "Joanna".
@@ -324,7 +325,6 @@ Speech methods are:
     - `sync` (boolean) - Allow sync or async speech creation. Default is `True`. If `sync=False`, speech create call will return a success message when the speech creation is triggered. To retrieve the files, check `Speech.retrieve()` method.
     - `sections` (dict) - Specify parameters for specific sections in the script. The key is a section name, and the value is another dictionary with the section configuration ( valid parameters are: voice, speed, effect, silence_padding). If a section is not found here, the section will automatically inherit the voice, speed, effect and silence_padding values you defined above (or the default ones if you don't provide them). See an example below with 2 sections and different configuration parameters being used.
     - `useDictionary` (bool) - Applies pronunciation dictionary to the script text.
-
 
       ```python
       sections={
@@ -339,6 +339,7 @@ Speech methods are:
           }
       }
       ```
+
   - Simple example:
     ```python
     response = apiaudio.Speech.create(
@@ -369,6 +370,7 @@ Speech methods are:
         }
     )
     ```
+
 - `retrieve()` Retrieve the speech file urls.
 
   - Parameters:
@@ -519,6 +521,7 @@ Mastering methods are:
     ```
 
 - `download()` Download the mastered files in your preferred folder.
+
   - Parameters:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
     - `version` (string) - The version of the script to be downloaded. Default is "".
@@ -535,6 +538,7 @@ Mastering methods are:
     )
     ```
   - `list_presets()` List the available mastering presets.
+
     - Parameters:
       - No parameters required.
 
@@ -685,12 +689,12 @@ To use the pronunciation dictionary end-to-end ensure that you supply a voice wh
 
 Example:
 
-  ```python
-  scriptText = """Hello I am reading a book in the city of <!location>reading<!> today"""
-  script = apiaudio.Script.create(scriptText=scriptText)
-  speech = apiaudio.Speech.create(scriptId=script["scriptId"], voice="Ryan", useDictionary=True)
-  print(speech)
-  ```
+```python
+scriptText = """Hello I am reading a book in the city of <!location>reading<!> today"""
+script = apiaudio.Script.create(scriptText=scriptText)
+speech = apiaudio.Speech.create(scriptId=script["scriptId"], voice="Ryan", useDictionary=True)
+print(speech)
+```
 
 Prononciation dictionary methods are:
 
@@ -816,13 +820,11 @@ Orchestrator methods are:
 
 - `create_audio()` Creates a simple TTS speech request and adds a sound template to it through mastering.
 
-	- Parameters:
+  - Parameters:
 
-		- `scriptText` \* [Required] (str) - Text to synthesize (TTS).
-		- `soundTemplate` (str) - Sound template to use.
-		- `voice` \* [Required] (str) - Name of voice to use.
-
-
+    - `scriptText` \* [Required] (str) - Text to synthesize (TTS).
+    - `soundTemplate` (str) - Sound template to use.
+    - `voice` \* [Required] (str) - Name of voice to use.
 
 - `create_three_sections()` Creates a TTS speech request with 3 sections and adds a sound template to it through mastering.
 
@@ -834,17 +836,25 @@ Orchestrator methods are:
     - `soundTemplate` (str) - Sound template to use.
     - `voice` \* [Required] (str) - Name of voice to use.
 
-
 - `media_with_sound()` Combines a pre-existing media file (i.e. pre-recorded voice) with a sound template
 
-	- Parameters:
+  - Parameters:
 
-		- `mediaId` \* [Required] (str) - MediaId of the media file to use as input.
-		- `soundTemplate` \* [Required] (str) - Sound template to use.
+    - `mediaId` \* [Required] (str) - MediaId of the media file to use as input.
+    - `soundTemplate` \* [Required] (str) - Sound template to use.
 
+### Webhooks
 
+This SDK provides an easy way of verifying apiaudio webhook call security headers. It is highly recommended for you to verify the headers in order to protect your server from any malicious attack.
 
+The method is:
 
+```python
+apiaudio.Webhooks.verify(payload, sig_header, secret, tolerance)
+```
+
+It will return true if the header is valid, otherwise it will raise an error.
+The parameters to pass are; `payload` being the body object sent by apiaudio, `sig_header` being `X-Aflr-Secret` in the request headers sent by apiaudio, `secret` being your webhook secret (you can get it in apiaudio console) and `tolerance` being the tolerance in seconds for the header checks, which defaults to 300 seconds.
 
 ### Logging <a name = "logging"></a>
 
