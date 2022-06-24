@@ -7,7 +7,7 @@ class Webhooks(object):
     DEFAULT_TOLERANCE = 300
 
     @staticmethod
-    def construct_event(payload, sig_header, secret, tolerance=DEFAULT_TOLERANCE):
+    def verify(payload, sig_header, secret, tolerance=DEFAULT_TOLERANCE):
         if hasattr(payload, "decode"):
             payload = payload.decode("utf-8")
 
