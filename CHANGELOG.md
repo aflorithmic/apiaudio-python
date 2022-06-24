@@ -16,6 +16,12 @@ python
 apiaudio.Mastering().create(scriptId=script_id, callback_url='call-based callback url')
 ```
 
+We also have some awesome security features such as verifying signatures. We'll add more to the docs about this soon. 
+```
+python
+apiaudio.Webhooks.verify(event_body, x-aflr-secret, clients_webhook_secret, tolerance = defaults to 300 seconds)
+```
+
 ## SuperOrgs added to the console
 - We're going to add to the console the SuperOrg functionality enabling users to administer functionality for the companies that are using their accounts. 
 - There's a lot more fine grained control coming as well, but this is an *enterprise ready* feature and requested by numerous customers. If you want a demo feel free to reach out.
