@@ -16,12 +16,16 @@ python
 apiaudio.Mastering().create(scriptId=script_id, callback_url='call-based callback url')
 ```
 
+## SuperOrgs added to the console
+- We're going to add to the console the SuperOrg functionality enabling users to administer functionality for the companies that are using their accounts. 
+- There's a lot more fine grained control coming as well, but this is an *enterprise ready* feature and requested by numerous customers. If you want a demo feel free to reach out.
+![Mockup of SuperOrg](images/console_superorg_screenshot_1_1st_july_2022.png)
 ## Coming soon new partnerships
 - We have new partnerships for our beta customers please reach out to us to learn more to try out new voices. 
 - Friday 24th June 2022
 v.0.16.3 
 ## SuperOrg
-- Listing superorgs - the ability to list these organisations. `list_org_id` 
+- Listing superorgs - the ability to list these organisations.
 - Billing integration so each superorg and child org is charged correctly. 
 
 ## Voice Cloner
