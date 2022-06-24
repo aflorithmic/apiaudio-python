@@ -47,20 +47,11 @@ It's our best voice ever created by our internal TTS research team - it's called
 ```python
 # script text
 text = text = """
-<<soundSegment::main>><<sectionName::MAIN>>
-<<soundEffect::effect1>>
-Durch die heftigen Angriffe auf die ukrainische Stadt Irpin nahe Kiew, trifft die junge Pferdewirtin Julia eine schwere Entscheidung. Sie lässt ihre geliebten Tiere frei, um sie vor Explosionen zu schützen. Ihr emotionaler Facebook-Post geht im Netz viral. Viele Nutzer fühlen mit der jungen Ukrainerin.
-<<soundSegment::main>><<sectionName::MAIN2>>
-<<soundEffect::effect1>>
-Tränen, Beschimpfungen, und Verzweiflung. ein privater Nachrichtendienst aus Großbritannien zeichnet die Funksprüche von russischen Soldaten auf. Sie belegen, was die Berichte erahnen lassen: Die Moral bröckelt. und Putin hat sich möglicherweise fer-kalkuliert.
+Hallo Peadar. Ich wurde am 20.06.2022 in der Softwareschmiede von Aflorithmic in Produktion eingesetzt.
 """
 # script creation
 script = apiaudio.Script.create(scriptText=text, scriptName="breaking_news")
 
-sectionProperties = {
-    'MAIN': {'endAt': 23.4, 'justify': 'flex-start'},
-    'MAIN2': {'endAt': 43.5, 'justify': 'flex-start'},
-}
 
 r = apiaudio.Speech().create(
     scriptId=script.get("scriptId"),
@@ -71,8 +62,7 @@ r = apiaudio.Speech().create(
 template = "breakingnews"
 response = apiaudio.Mastering().create(
     scriptId=script.get("scriptId"),
-    soundTemplate=template,
-    sectionProperties=sectionProperties
+    soundTemplate=template
 )
 
 print(response)
@@ -81,6 +71,7 @@ file = apiaudio.Mastering().download(
     scriptId=script.get("scriptId"), destination=".")
 print(file)
 ```
+You can listen to an example [here](audio/margareta-v1-example.wav)
 
 ## Bug fixing
 - We discovered an incorrect billing issue with some voices on our platform (only affecting IBM voices). This only impacted some customers all customers have been informed and refunded. We've added alarms and detection mechanisms and enhanced quality control to fix this going forward. We're sorry for any inconvenience. 
