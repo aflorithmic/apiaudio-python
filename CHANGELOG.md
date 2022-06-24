@@ -1,5 +1,94 @@
 # Changelog
+- Friday 1st July 2022
+## Webhooks
+- We're delighted to ship a much requested feature from customers! *Webhooks*
+- If you're looking for a good explanation of webhooks we recommend [this blog post](https://zapier.com/blog/what-are-webhooks/) but basically these are automated messages (akin to SMS) sent from APIs when something happens in an API. A common use case for us is mastering requests. Some mastering requests take some time to run, so you may want to simply set these up with webhooks and have a better customer experience :) 
+You can see some image here
+![First webhook image](images/webhook_screenshot_1_24th_june_2022.png)
+You'll receive the logs of the webhooks here
+![Second webhook image](images/webhook_screenshot_2_24th_june_2022.png)
 
+Here's some code as well. Let's say you have a long running mastering request. It might take 30s. 
+Rather than waiting for the request to run - you can simple add a callback url. 
+
+```
+python 
+apiaudio.Mastering().create(scriptId=script_id, callback_url='call-based callback url')
+```
+
+## SuperOrgs added to the console
+- We're going to add to the console the SuperOrg functionality enabling users to administer functionality for the companies that are using their accounts. 
+- There's a lot more fine grained control coming as well, but this is an *enterprise ready* feature and requested by numerous customers. If you want a demo feel free to reach out.
+![Mockup of SuperOrg](images/console_superorg_screenshot_1_1st_july_2022.png)
+## Coming soon new partnerships
+- We have new partnerships for our beta customers please reach out to us to learn more to try out new voices. 
+- Friday 24th June 2022
+v.0.16.3 
+## SuperOrg
+- Listing superorgs - the ability to list these organisations.
+- Billing integration so each superorg and child org is charged correctly. 
+
+## Voice Cloner
+Our Data Capture App used as part of our voice cloning process is now rebranded *voice cloner* 
+
+These are the top bug fixes this week which should result in a much better user experience
+* Microphone not detected on some Mobile Phones. (Fixed)
+* Play button not playing back full audio. (Fixed)
+* “Record” button wasn’t recording full sentences. (Fixed)
+* AutoGain was causing distorting in audio (Fixed)
+
+You can try it out here [Voice Cloner](https://voice-cloning.api.audio/)
+## Bug Fixes 
+- We fixed a bug that was showing hidden voices in the voice library. This was hurting the user experience. 
+
+## German Voice
+- We've shipped the following to select Beta customers. If you want access let us know and we'll give you access. 
+It's our best voice ever created by our internal TTS research team - it's called `margareta-v1`
+```python
+# script text
+text = text = """
+Hallo Peadar. Ich wurde am 20.06.2022 in der Softwareschmiede von Aflorithmic in Produktion eingesetzt.
+"""
+# script creation
+script = apiaudio.Script.create(scriptText=text, scriptName="breaking_news")
+
+
+r = apiaudio.Speech().create(
+    scriptId=script.get("scriptId"),
+    voice="margareta-v1",
+    speed=110,
+)
+
+template = "breakingnews"
+response = apiaudio.Mastering().create(
+    scriptId=script.get("scriptId"),
+    soundTemplate=template
+)
+
+print(response)
+
+file = apiaudio.Mastering().download(
+    scriptId=script.get("scriptId"), destination=".")
+print(file)
+```
+You can listen to an example here <video src="https://user-images.githubusercontent.com/983944/175528852-84d5dc2e-3780-4642-9d87-fccb8facab48.mp4
+"></video>
+
+## Bug fixing
+- We discovered an incorrect billing issue with some voices on our platform (only affecting IBM voices). This only impacted some customers all customers have been informed and refunded. We've added alarms and detection mechanisms and enhanced quality control to fix this going forward. We're sorry for any inconvenience. 
+- We're implementing changes to handle this and working on our reliability and monitoring. 
+
+
+## Console updates
+We've been working hard on our console in the recent weeks. And you can view it [here](https://console.api.audio/)
+You can see the easier view of Total api calls, Script api calls, Speech api calls and Mastering api calls
+![First console image](images/console_screenshot_1_24th_june_2022.png)
+If you click on these you'll see some other information including this *awesome* donut chart
+![Second console image](images/console_screenshot_2_24th_june_2022.png)
+And if you want to dive deep into this have a look here at the logs
+![Third console image](images/console_screenshot_3_24th_june_2022.png)
+
+These are just some highlights of the stuff we've improved based on customer feedback :) 
 - Friday 17th June 2022
   v0.16.2
 
@@ -12,44 +101,10 @@ A super organization is loosely modelled on superuser. So you can as a company A
 - *Voices* We have some great partnerships coming up with 2 new voice providers. Reach out to us if you want to know more :) 
 ## Coming soon 
 Under msnr we will soon have another german voice. We're testing this with some beta customers the `margareta-v1` voice. 
+(Updated above)
 
-```python
-# script text
-text = text = """
-<<soundSegment::main>><<sectionName::MAIN>>
-<<soundEffect::effect1>>
-Durch die heftigen Angriffe auf die ukrainische Stadt Irpin nahe Kiew, trifft die junge Pferdewirtin Julia eine schwere Entscheidung. Sie lässt ihre geliebten Tiere frei, um sie vor Explosionen zu schützen. Ihr emotionaler Facebook-Post geht im Netz viral. Viele Nutzer fühlen mit der jungen Ukrainerin.
-<<soundSegment::main>><<sectionName::MAIN2>>
-<<soundEffect::effect1>>
-Tränen, Beschimpfungen, und Verzweiflung. ein privater Nachrichtendienst aus Großbritannien zeichnet die Funksprüche von russischen Soldaten auf. Sie belegen, was die Berichte erahnen lassen: Die Moral bröckelt. und Putin hat sich möglicherweise fer-kalkuliert.
-"""
-# script creation
-script = apiaudio.Script.create(scriptText=text, scriptName="breaking_news")
 
-sectionProperties = {
-    'MAIN': {'endAt': 23.4, 'justify': 'flex-start'},
-    'MAIN2': {'endAt': 43.5, 'justify': 'flex-start'},
-}
-
-r = apiaudio.Speech().create(
-    scriptId=script.get("scriptId"),
-    voice="margareta-v1",
-    speed=110,
-)
-
-template = "breakingnews"
-response = apiaudio.Mastering().create(
-    scriptId=script.get("scriptId"),
-    soundTemplate=template,
-    sectionProperties=sectionProperties
-)
-
-print(response)
-
-file = apiaudio.Mastering().download(
-    scriptId=script.get("scriptId"), destination=".")
-print(file)
-```
+We've also improved our performance and invested more in 
 
 - Friday 20th May 2022
   v0.16.1
