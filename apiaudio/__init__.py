@@ -3,7 +3,7 @@
 
 # Configuration variables
 
-sdk_version = "0.16.3"
+sdk_version = "0.16.4"
 
 api_key = None
 assume_org_id = None

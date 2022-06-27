@@ -11,14 +11,12 @@ You'll receive the logs of the webhooks here
 Here's some code as well. Let's say you have a long running mastering request. It might take 30s. 
 Rather than waiting for the request to run - you can simple add a callback url. 
 
-```
-python 
+```python 
 apiaudio.Mastering().create(scriptId=script_id, callback_url='call-based callback url')
 ```
 
 We also have some awesome security features such as verifying signatures. We'll add more to the docs about this soon. 
-```
-python
+```python
 apiaudio.Webhooks.verify(event_body, x-aflr-secret, clients_webhook_secret, tolerance = defaults to 300 seconds)
 ```
 
