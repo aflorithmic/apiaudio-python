@@ -1,5 +1,17 @@
 # Changelog
+
+
 ## Friday 1st July 2022
+## Voice cloner update
+- UX improvements
+- Bug free :) 
+- Setup page
+- Silence detector (hands free operation)
+- AES version 2 - better UX for our customers (threshold adjustments) 
+
+How can I get started? 
+You'll be able to sign up with [https://voice-cloning.api.audio/](Voice-cloning)
+
 ### Webhooks
 - We're delighted to ship a much requested feature from customers! *Webhooks*
 - If you're looking for a good explanation of webhooks we recommend [this blog post](https://zapier.com/blog/what-are-webhooks/) but basically these are automated messages (akin to SMS) sent from APIs when something happens in an API. A common use case for us is mastering requests. Some mastering requests take some time to run, so you may want to simply set these up with webhooks and have a better customer experience :) 
@@ -19,11 +31,45 @@ We also have some awesome security features such as verifying signatures. We'll 
 ```python
 apiaudio.Webhooks.verify(event_body, x-aflr-secret, clients_webhook_secret, tolerance = defaults to 300 seconds)
 ```
+### Enhanced Watermarks
+- Our free plan has watermarks, if you want these removed you'll have to upgrade. We've added these to multiple languages. 
+Here are some examples
+```shell 
+WATER_MARKS = {
+    "default" : ". Created with API audio.",
+    "en" : ". Created with API audio.",
+    "pl" : ". Stworzone przy użyciu API audio.",
+    "ga" : ". Cruthaithe le fuaim API audio",
+    "tr" : ". api.audio ile oluşturuldu",
+    "fr" : ". créé avec API audio",
+    "ca-es" : ". creat amb API audio",
+    "ca" : ". creat amb API audio",
+    "el" : ". Δημιουργήθηκε με το api.audio",
+    "nl" : ". Gemaakt met API audio",
+    "de" : ". Erstellt mit api punkt audio.",
+    "pt-br" : ". Criado com api.audio",
+    "pt" : ". Criado com api.audio",
+    "hu" : ". Az api.audio felhasználásával készült.",
+    "et" : ". valmistaja Api audio",
+    "hi" : ". yeh aawaaz api audio se banayi gayi",
+    "zh" : ". 用Api audio製作的",
+    "ua" : "створено за допомогою API крапка аудіо",
+    "bn" : "API অডিও দিয়ে তৈরি করা |"
+}
+```
 
 ### SuperOrgs added to the console
 - We're going to add to the console the SuperOrg functionality enabling users to administer functionality for the companies that are using their accounts. 
 - There's a lot more fine grained control coming as well, but this is an *enterprise ready* feature and requested by numerous customers. If you want a demo feel free to reach out.
 ![Mockup of SuperOrg](images/console_superorg_screenshot_1_1st_july_2022.png)
+
+### Visemes 2.0
+Online (sync) Visemes 2.0: We have onboarded all of our customers' feedback, and we are now confident to launch a new version, the result of 3 months of R&D. There are substantial improvements in alignment, speed and latency. They are deployed in our custom `msnr` voices
+
+### Bug fixes
+- Some customers reported that the amplitude of some of our `msnr` voices was louder on the 
+second sentence and not the first sentence. We created a fix for this, and we hope this fixes the error. 
+
 ### Coming soon new partnerships
 - We have new partnerships for our beta customers please reach out to us to learn more to try out new voices. 
 
@@ -43,6 +89,7 @@ These are the top bug fixes this week which should result in a much better user 
 * AutoGain was causing distorting in audio (Fixed)
 
 You can try it out here [Voice Cloner](https://voice-cloning.api.audio/)
+
 
 ### Bug Fixes 
 - We fixed a bug that was showing hidden voices in the voice library. This was hurting the user experience. 
@@ -273,4 +320,3 @@ We also made various performance improvements and work in the background. Althou
 - As a developer user I want to share my audio with my team/bosses/business person so they can try and test the wonders of api.audio. We call this _virality link_ and it's available in the console soon.
 
 - We've been developing the usability of our data capture app for voice cloning (this is available in some plans). You'll see this in the next few weeks.
-ß
