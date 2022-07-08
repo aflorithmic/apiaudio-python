@@ -1,7 +1,8 @@
 # Changelog
 
-## Friday 8th July 2022
-## New Voices
+## Friday 8th July 2022
+
+### New Voices
 * We added one of our Partners [Cereproc](www.cereproc.ai) you can see the voices here [Voices](https://library.api.audio/voices?providerFullName=cerevoice)
 * You can try out a voice from Cereproc with this example
 ```python 
@@ -13,32 +14,25 @@ response = apiaudio.Mastering.create(scriptId=script.get("scriptId"), soundTempl
 file = apiaudio.Mastering.download(scriptId=script.get("scriptId"))
 ```
 
-## Console 
+### Console 
 We've been updating the console a lot. 
 You can see some images here of Get Started
 ![Get Started](images/console_screenshot_getstarted.png)
 You can see the changelog here
 ![Changelog](images/console_screenshot_changelog.png)
 
-## Voice cloner
+### Voice cloner
 * We shipped a new version of [voice cloner](https://voice-cloning.api.audio/capture)
 * This is up to a 3X faster User Experience. 
 
-## SuperOrg
+### SuperOrg
 
-Here is a full list of what went live with version 1 of superorgs:
-* Manual assignment of a child org to a super org. (Clients need to contact us and we do this for them)
-* An endpoint to return the list of child orgs, and their data.
-* Frontend connection to this endpoint, being able to see superorg details in console.
-
-* Billing of child orgs, counting as superorg usage. This means our customers dont need to buy separate plans for each child org, and can handle their own billing.
-* Logs and summary of child org usage. (This is not connected to frontend at the moment, as we are lacking the design and fe engineers)
-* Child orgs not being able to see super org details, usage or credits.
-* Blocking routes per child org, blocking their access to some resources.
+* We improved superorg and integrated billing. So child orgs API consumption now contributes to your bill. And we added metering and analytics (you'll need to contact matt@aflorithmic.ai for that) 
+![SuperOrg](images/console_screenshot_superorg.png)
 
 * SDK support for superorgs and all assuming mechanism. Both for JS and Python sdks. [See the SDK here](https://github.com/aflorithmic/apiaudio-python#super-organizations)
 
-## Billing
+### Billing
 We've optimised our pricing for usage. 
 * 250 free credits on sign up, instead of 500.
 * Monthly allowance for free plans, instead of giving them time till the end of month regardless what day 
@@ -46,7 +40,7 @@ they signed up. This way, free organisations will have 28 days to use their cred
 marketing about this as well. 
 
 ## Friday 1st July 2022
-## Voice cloner update
+### Voice cloner update
 - UX improvements
 - Bug free :) 
 - Setup page
