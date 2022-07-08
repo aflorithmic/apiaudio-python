@@ -1,8 +1,8 @@
 # Changelog
 
-## Friday 8th July 2022
+## Friday 8th July 2022
 
-### New Voices
+### New Voices
 * We added one of our Partners [Cereproc](www.cereproc.ai) you can see the voices here [Voices](https://library.api.audio/voices?providerFullName=cerevoice)
 * You can try out a voice from Cereproc with this example
 ```python 
