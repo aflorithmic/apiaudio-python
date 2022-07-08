@@ -3,7 +3,7 @@
 ## Friday 8th July 2022
 
 ### New Voices
-* We added one of our Partners [Cereproc](www.cereproc.ai) you can see the voices here [Voices](https://library.api.audio/voices?providerFullName=cerevoice)
+* We added one of our Partners [Cereproc](http://www.cereproc.com) you can see the voices [here](https://library.api.audio/voices?providerFullName=cerevoice)
 * You can try out a voice from Cereproc with this example
 ```python 
 import apiaudio 
