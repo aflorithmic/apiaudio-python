@@ -1,7 +1,8 @@
 # Changelog
 
 ## Friday 8th July 2022
-## New Voices
+
+### New Voices
 * We added one of our Partners [Cereproc](www.cereproc.ai) you can see the voices here [Voices](https://library.api.audio/voices?providerFullName=cerevoice)
 * You can try out a voice from Cereproc with this example
 ```python 
@@ -13,18 +14,18 @@ response = apiaudio.Mastering.create(scriptId=script.get("scriptId"), soundTempl
 file = apiaudio.Mastering.download(scriptId=script.get("scriptId"))
 ```
 
-## Console 
+### Console 
 We've been updating the console a lot. 
 You can see some images here of Get Started
 ![Get Started](images/console_screenshot_getstarted.png)
 You can see the changelog here
 ![Changelog](images/console_screenshot_changelog.png)
 
-## Voice cloner
+### Voice cloner
 * We shipped a new version of [voice cloner](https://voice-cloning.api.audio/capture)
 * This is up to a 3X faster User Experience. 
 
-## SuperOrg
+### SuperOrg
 
 Here is a full list of what went live with version 1 of superorgs:
 * Manual assignment of a child org to a super org. (Clients need to contact us and we do this for them)
@@ -38,7 +39,7 @@ Here is a full list of what went live with version 1 of superorgs:
 
 * SDK support for superorgs and all assuming mechanism. Both for JS and Python sdks. [See the SDK here](https://github.com/aflorithmic/apiaudio-python#super-organizations)
 
-## Billing
+### Billing
 We've optimised our pricing for usage. 
 * 250 free credits on sign up, instead of 500.
 * Monthly allowance for free plans, instead of giving them time till the end of month regardless what day 
@@ -46,7 +47,7 @@ they signed up. This way, free organisations will have 28 days to use their cred
 marketing about this as well. 
 
 ## Friday 1st July 2022
-## Voice cloner update
+### Voice cloner update
 - UX improvements
 - Bug free :) 
 - Setup page
