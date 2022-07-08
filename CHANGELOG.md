@@ -1,6 +1,62 @@
 # Changelog
-- Friday 1st July 2022
-## Webhooks
+
+## Friday 8th July 2022
+## New Voices
+* We added one of our Partners [Cereproc](www.cereproc.ai) you can see the voices here [Voices](https://library.api.audio/voices?providerFullName=cerevoice)
+* You can try out a voice from Cereproc with this example
+```python 
+import apiaudio 
+apiaudio.api_key="API-KEY"
+script = apiaudio.Script.create(scriptText="<<soundSegment::intro>><<sectionName::intro>>Hello world. Welcome to API dot audio.<<soundSegment::main>><<sectionName::main>> Create audio in a few easy steps.")
+response = apiaudio.Speech.create(scriptId=script.get("scriptId"), voice="dakota") 
+response = apiaudio.Mastering.create(scriptId=script.get("scriptId"), soundTemplate = "parisianmorning" )
+file = apiaudio.Mastering.download(scriptId=script.get("scriptId"))
+```
+
+## Console 
+We've been updating the console a lot. 
+You can see some images here of Get Started
+![Get Started](images/console_screenshot_getstarted.png)
+You can see the changelog here
+![Changelog](images/console_screenshot_changelog.png)
+
+## Voice cloner
+* We shipped a new version of [voice cloner](https://voice-cloning.api.audio/capture)
+* This is up to a 3X faster User Experience. 
+
+## SuperOrg
+
+Here is a full list of what went live with version 1 of superorgs:
+* Manual assignment of a child org to a super org. (Clients need to contact us and we do this for them)
+* An endpoint to return the list of child orgs, and their data.
+* Frontend connection to this endpoint, being able to see superorg details in console.
+
+* Billing of child orgs, counting as superorg usage. This means our customers dont need to buy separate plans for each child org, and can handle their own billing.
+* Logs and summary of child org usage. (This is not connected to frontend at the moment, as we are lacking the design and fe engineers)
+* Child orgs not being able to see super org details, usage or credits.
+* Blocking routes per child org, blocking their access to some resources.
+
+* SDK support for superorgs and all assuming mechanism. Both for JS and Python sdks. [See the SDK here](https://github.com/aflorithmic/apiaudio-python#super-organizations)
+
+## Billing
+We've optimised our pricing for usage. 
+* 250 free credits on sign up, instead of 500.
+* Monthly allowance for free plans, instead of giving them time till the end of month regardless what day 
+they signed up. This way, free organisations will have 28 days to use their credits. We will add some email 
+marketing about this as well. 
+
+## Friday 1st July 2022
+## Voice cloner update
+- UX improvements
+- Bug free :) 
+- Setup page
+- Silence detector (hands free operation)
+- AES version 2 - better UX for our customers (threshold adjustments) 
+
+How can I get started? 
+You'll be able to sign up with [https://voice-cloning.api.audio/](Voice-cloning)
+
+### Webhooks
 - We're delighted to ship a much requested feature from customers! *Webhooks*
 - If you're looking for a good explanation of webhooks we recommend [this blog post](https://zapier.com/blog/what-are-webhooks/) but basically these are automated messages (akin to SMS) sent from APIs when something happens in an API. A common use case for us is mastering requests. Some mastering requests take some time to run, so you may want to simply set these up with webhooks and have a better customer experience :) 
 You can see some image here
@@ -11,30 +67,63 @@ You'll receive the logs of the webhooks here
 Here's some code as well. Let's say you have a long running mastering request. It might take 30s. 
 Rather than waiting for the request to run - you can simple add a callback url. 
 
-```
-python 
+```python 
 apiaudio.Mastering().create(scriptId=script_id, callback_url='call-based callback url')
 ```
 
 We also have some awesome security features such as verifying signatures. We'll add more to the docs about this soon. 
-```
-python
+```python
 apiaudio.Webhooks.verify(event_body, x-aflr-secret, clients_webhook_secret, tolerance = defaults to 300 seconds)
 ```
+### Enhanced Watermarks
+- Our free plan has watermarks, if you want these removed you'll have to upgrade. We've added these to multiple languages. 
+Here are some examples
+```shell 
+WATER_MARKS = {
+    "default" : ". Created with API audio.",
+    "en" : ". Created with API audio.",
+    "pl" : ". Stworzone przy użyciu API audio.",
+    "ga" : ". Cruthaithe le fuaim API audio",
+    "tr" : ". api.audio ile oluşturuldu",
+    "fr" : ". créé avec API audio",
+    "ca-es" : ". creat amb API audio",
+    "ca" : ". creat amb API audio",
+    "el" : ". Δημιουργήθηκε με το api.audio",
+    "nl" : ". Gemaakt met API audio",
+    "de" : ". Erstellt mit api punkt audio.",
+    "pt-br" : ". Criado com api.audio",
+    "pt" : ". Criado com api.audio",
+    "hu" : ". Az api.audio felhasználásával készült.",
+    "et" : ". valmistaja Api audio",
+    "hi" : ". yeh aawaaz api audio se banayi gayi",
+    "zh" : ". 用Api audio製作的",
+    "ua" : "створено за допомогою API крапка аудіо",
+    "bn" : "API অডিও দিয়ে তৈরি করা |"
+}
+```
 
-## SuperOrgs added to the console
+### SuperOrgs added to the console
 - We're going to add to the console the SuperOrg functionality enabling users to administer functionality for the companies that are using their accounts. 
 - There's a lot more fine grained control coming as well, but this is an *enterprise ready* feature and requested by numerous customers. If you want a demo feel free to reach out.
 ![Mockup of SuperOrg](images/console_superorg_screenshot_1_1st_july_2022.png)
-## Coming soon new partnerships
+
+### Visemes 2.0
+Online (sync) Visemes 2.0: We have onboarded all of our customers' feedback, and we are now confident to launch a new version, the result of 3 months of R&D. There are substantial improvements in alignment, speed and latency. They are deployed in our custom `msnr` voices
+
+### Bug fixes
+- Some customers reported that the amplitude of some of our `msnr` voices was louder on the 
+second sentence and not the first sentence. We created a fix for this, and we hope this fixes the error. 
+
+### Coming soon new partnerships
 - We have new partnerships for our beta customers please reach out to us to learn more to try out new voices. 
-- Friday 24th June 2022
+
+## Friday 24th June 2022
 v.0.16.3 
-## SuperOrg
+### SuperOrg
 - Listing superorgs - the ability to list these organisations.
 - Billing integration so each superorg and child org is charged correctly. 
 
-## Voice Cloner
+### Voice Cloner
 Our Data Capture App used as part of our voice cloning process is now rebranded *voice cloner* 
 
 These are the top bug fixes this week which should result in a much better user experience
@@ -44,10 +133,12 @@ These are the top bug fixes this week which should result in a much better user 
 * AutoGain was causing distorting in audio (Fixed)
 
 You can try it out here [Voice Cloner](https://voice-cloning.api.audio/)
-## Bug Fixes 
+
+
+### Bug Fixes 
 - We fixed a bug that was showing hidden voices in the voice library. This was hurting the user experience. 
 
-## German Voice
+### German Voice
 - We've shipped the following to select Beta customers. If you want access let us know and we'll give you access. 
 It's our best voice ever created by our internal TTS research team - it's called `margareta-v1`
 ```python
@@ -80,12 +171,12 @@ print(file)
 You can listen to an example here <video src="https://user-images.githubusercontent.com/983944/175528852-84d5dc2e-3780-4642-9d87-fccb8facab48.mp4
 "></video>
 
-## Bug fixing
+### Bug fixing
 - We discovered an incorrect billing issue with some voices on our platform (only affecting IBM voices). This only impacted some customers all customers have been informed and refunded. We've added alarms and detection mechanisms and enhanced quality control to fix this going forward. We're sorry for any inconvenience. 
 - We're implementing changes to handle this and working on our reliability and monitoring. 
 
 
-## Console updates
+### Console updates
 We've been working hard on our console in the recent weeks. And you can view it [here](https://console.api.audio/)
 You can see the easier view of Total api calls, Script api calls, Speech api calls and Mastering api calls
 ![First console image](images/console_screenshot_1_24th_june_2022.png)
@@ -95,27 +186,27 @@ And if you want to dive deep into this have a look here at the logs
 ![Third console image](images/console_screenshot_3_24th_june_2022.png)
 
 These are just some highlights of the stuff we've improved based on customer feedback :) 
-- Friday 17th June 2022
+## Friday 17th June 2022
   v0.16.2
 
-## Enhancements
+### Enhancements
 
 - We introduced a new function called `set_assume_org_id` for incoming super organization feature. By using this method, you can assume the id of a child organization as their super organization, and make your calls on behalf of them.
 
 A super organization is loosely modelled on superuser. So you can as a company ACME have specific criteria and permissions - and then you can share these with your child organisations. This allows you fine grained control of users and their roles and permissions and the ability to share settings and voices across orgs. We were informed by IAM from AWS in our design. If you want access let us know, we're working hard on this. This is part of a whole 
 
 - *Voices* We have some great partnerships coming up with 2 new voice providers. Reach out to us if you want to know more :) 
-## Coming soon 
+### Coming soon 
 Under msnr we will soon have another german voice. We're testing this with some beta customers the `margareta-v1` voice. 
 (Updated above)
 
 
 We've also improved our performance and invested more in 
 
-- Friday 20th May 2022
+## Friday 20th May 2022
   v0.16.1
 
-## Bug fixing
+### Bug fixing
 
 - We noticed in testing some additional latency caused by our feature flag implementation - so we refactored this to make it much faster. This was mostly visible in our custom voice implementations.
 
@@ -217,17 +308,17 @@ A `query` JSON is available in POST method.
 
 There's a lot you can do with this so we hope this makes your develper experience easier.
 
-## New released features
+### New released features
 
 - Enhancements of voices. We've been testing with some users a more natural pauses to our custom voices. We contacted customers affected and some requested to not have this feature enabled please contact us if you want to use the old voices. We do feel that these voices are more natural and our beta testing was positive. These will be available soon under `msnr` voices in our API.
 
 - As a developer user I want to share my audio with my team/bosses/business person so they can try and test the wonders of api.audio. We call this _virality link_ and it's available in the console soon.
 
-- Friday 13th May 2022
+## Friday 13th May 2022
 
 v0.16.0
 
-## Features
+### Features
 
 - We added new endFormat (for making sure your audio is the correct format for a target audience) this week we added Alexa preset
 
@@ -243,7 +334,7 @@ In the future we will add other endFormats - please tell us which ones you'd lik
 
 - For our corporate plan users we've enabled `sandboxing` this allows you to test safely API requests without using up credits. Please contact your account manager for further details.
 
-## Breaking Changes
+### Breaking Changes
 
 - Our feature (pronunciation dictionary) has had some usability enhancements. The biggest change is adding `useDictionary` as a boolean.
   Here's an example
@@ -255,16 +346,16 @@ In the future we will add other endFormats - please tell us which ones you'd lik
   ```
   The addition of useDictionary and the change in behaviour is likely to present some breaking changes. We've notified any customers who are affected.
 
-## Bug Fixing
+### Bug Fixing
 
 We had some third party downtime with some voices from one provider. We notified them and fixed this issue.
 
-## Maintenance
+### Maintenance
 
 We have removed old code and streamlined other code using our Mastering engine. This will allow us to add features more easily whilst removing unnecessary complexity.
 We also made various performance improvements and work in the background. Although not all of this will be customer facing, these incremental improvements are very important.
 
-## Unreleased
+### Unreleased
 
 (These are features that aren't added yet, but will be released next week)
 
