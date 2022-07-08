@@ -41,7 +41,7 @@ Here is a full list of what went live with version 1 of superorgs:
 
 ### Billing
 We've optimised our pricing for usage. 
-* 250 free credits on sign up, instead of 500.
+* All new users will now receive 250 free credits on sign up, instead of 500. You will have 30 days to use this allowance and start experimenting with the API. 
 * Monthly allowance for free plans, instead of giving them time till the end of month regardless what day 
 they signed up. This way, free organisations will have 28 days to use their credits. We will add some email 
 marketing about this as well. 
