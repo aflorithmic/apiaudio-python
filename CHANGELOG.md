@@ -1,5 +1,25 @@
 # Changelog
 
+## Wednesday 13th July 2022
+* We added two features to `syncTTS` resource:
+  * Retrieve URL to audio instead of raw data (Note: size limits don't apply in this case!):
+  ```python
+    dictionary = apiaudio.SyncTTS.create(
+        text="Hello, how are you?",
+        voice="joanna",
+        url=True
+    )
+    url = d["url"]
+  ```
+  * Specify format of audio (currently supported formats are: "mp3", "wav", "pcm"):
+  ```python
+    mp3_bytes = apiaudio.SyncTTS.create(
+        text="Hello, how are you?",
+        voice="joanna",
+        format="mp3"
+    )
+  ```
+
 ## Friday 8th July 2022
 
 ### New Voices
