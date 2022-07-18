@@ -19,7 +19,7 @@ This allows you to see usage of your child organisations :) Have a look below. I
 * When you use syncTTS with `metadata=True` there will also be a url generated
 
 ```python 
-response = apiaudio.SyncTTS.create(text="Hello", voice="eth-einstein-v2", metadata=True)
+response = apiaudio.SyncTTS.create(text="Hello", voice="shelly", metadata=True)
 ```
 
 ```python
