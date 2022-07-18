@@ -42,10 +42,10 @@ response = apiaudio.SyncTTS.create(text="Hello", voice="eth-einstein-v2", metada
 
 * **Breaking Change** Since 4th of July, when using certain sound templates in conjunction with mastering section properties, resulted in sections that were in-fact to long. We've fixed these errors and this is already shipped. This will improve your experience, but you may notice some differences with behaviour of our mastering engine.
 
-## Friday 8th July 2022
+## Friday 8th July 2022
 
-### New Voices
-* We added one of our Partners [Cereproc](http://www.cereproc.com) you can see the voices here [Voices](https://library.api.audio/voices?providerFullName=cerevoice)
+### New Voices
+* We added one of our Partners [Cereproc](http://www.cereproc.com) you can see the voices [here](https://library.api.audio/voices?providerFullName=cerevoice)
 * You can try out a voice from Cereproc with this example
 ```python 
 import apiaudio 
