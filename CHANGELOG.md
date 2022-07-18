@@ -1,9 +1,11 @@
 # Changelog
-
-## Friday 15th July 2022
-### Billing enhancements
-
+## Friday 22nd July 2022
 ### Normaliser
+We're working on our normaliser and we'll be rolling out some changes next week. This will allow the likes of `cm` to be pronounced correctly and also will work for dates and some times. 
+
+### Billing enhancements
+We've made some billing enhancements and improving to our billing systems.
+## Friday 15th July 2022
 
 ### OpenAPI
 * We launched [OpenAPI](https://aflorithmic.github.io/openapi/) so you can see in [Swagger](https://swagger.io/) style our endpoints. If you're used to this workflow let us know we'd love to talk some more about it. Feel free to reach out to peadar[at]aflorithmic[dot]ai
