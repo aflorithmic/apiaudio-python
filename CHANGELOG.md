@@ -1,4 +1,46 @@
 # Changelog
+## Friday 22nd July 2022
+### Normaliser
+We're working on our normaliser and we'll be rolling out some changes next week. This will allow the likes of `cm` to be pronounced correctly and also will work for dates and some times. 
+
+### Billing enhancements
+We've made some billing enhancements and improving to our billing systems.
+## Friday 15th July 2022
+
+### OpenAPI
+* We launched [OpenAPI](https://aflorithmic.github.io/openapi/) so you can see in [Swagger](https://swagger.io/) style our endpoints. If you're used to this workflow let us know we'd love to talk some more about it. Feel free to reach out to peadar[at]aflorithmic[dot]ai
+
+### SuperOrg
+A common customer request was - I want to understand what my customers usage is. For example if you're a distribution partner or agency you'll encounter this workflow. 
+
+This allows you to see usage of your child organisations :) Have a look below. It's in production so you can 
+![SuperOrg](images/superorg_with_childorgs_usage.png) 
+### SyncTTS
+* When you use syncTTS with `metadata=True` there will also be a url generated
+
+```python 
+response = apiaudio.SyncTTS.create(text="Hello", voice="shelly", metadata=True)
+```
+
+```python
+{
+    "audio_data": string, # base64 encoded
+    "url": string,
+    "sampling_rate": string,
+    "event_data": [
+        {
+            "phoneme": string,
+            "viseme": string,
+            "offset": float,
+            "duration": float
+        }
+    ]
+}
+```
+### Bug fixes
+* One customer reported some unicode issues with non-latin based alphabets. We're sorry for this error and we've fixed it for a range of languages including Arabic, Telugu and Greek. If you find any issues like this let us know. 
+
+* **Breaking Change** Since 4th of July, when using certain sound templates in conjunction with mastering section properties, resulted in sections that were in-fact to long. We've fixed these errors and this is already shipped. This will improve your experience, but you may notice some differences with behaviour of our mastering engine.
 
 ## Friday 8th July 2022
 
