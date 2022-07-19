@@ -9,7 +9,7 @@
         voice="joanna",
         url=True
     )
-    url = d["url"]
+    url = dictionary["url"]
   ```
   * Specify format of audio (currently supported formats are: "mp3", "wav", "pcm"):
   ```python
