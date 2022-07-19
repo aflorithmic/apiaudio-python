@@ -43,10 +43,11 @@ class APIRequest:
         }
 
     @classmethod
-    def _post_request(cls, json, url=None):
+    def _post_request(cls, json, url=None, headers=None):
+        headers = headers or {}
         loop_status_code = cls.__dict__.get("loop_status_code")
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
-        headers = cls._build_header()
+        headers.update(cls._build_header())
         r = requests.post(url=url, headers=headers, json=json)
 
         if loop_status_code:
@@ -58,20 +59,9 @@ class APIRequest:
 
         cls._expanded_raise_for_status(r)
 
+        if r.headers["Content-Type"] != "application/json":
+            return r.content
         return r.json()
-
-    @classmethod
-    def _post_request_raw(cls, json, url=None, istype="wav"):
-        url = url or cls.resource_path
-        url = f"{apiaudio.api_base}{url}"
-        headers = cls._build_header()
-        if istype == "wav":
-            headers["Accept"] = "audio/wav"
-        r = requests.post(url=url, headers=headers, json=json)
-
-        cls._expanded_raise_for_status(r)
-
-        return r.content
 
     @classmethod
     def _delete_request(cls, url=None, path_param=None, request_params=None):

@@ -42,6 +42,26 @@ response = apiaudio.SyncTTS.create(text="Hello", voice="shelly", metadata=True)
 
 * **Breaking Change** Since 4th of July, when using certain sound templates in conjunction with mastering section properties, resulted in sections that were in-fact to long. We've fixed these errors and this is already shipped. This will improve your experience, but you may notice some differences with behaviour of our mastering engine.
 
+## Wednesday 13th July 2022
+* We added two features to `syncTTS` resource:
+  * Retrieve URL to audio instead of raw data (Note: size limits don't apply in this case!):
+  ```python
+    dictionary = apiaudio.SyncTTS.create(
+        text="Hello, how are you?",
+        voice="joanna",
+        url=True
+    )
+    url = dictionary["url"]
+  ```
+  * Specify format of audio (currently supported formats are: "mp3", "wav", "pcm"):
+  ```python
+    mp3_bytes = apiaudio.SyncTTS.create(
+        text="Hello, how are you?",
+        voice="joanna",
+        format="mp3"
+    )
+  ```
+
 ## Friday 8th July 2022
 
 ### New Voices
