@@ -18,8 +18,8 @@ apiaudio.Speech.download(scriptId=script["scriptId"])
     os.rename("default__section~1of1.wav", f"{VOICE}_with_norm.wav")
 ```
 And the various acronymns and currencies and dates will all be correctly pronounced. This improves the user experience big time in our tests. 
-### Billing enhancements
-We've made some billing enhancements and improving to our billing systems.
+### Billing enhancements - coming next week
+We've made some billing enhancements and improving to our billing systems. We'll ship this next week.
 ## Friday 15th July 2022
 
 ### OpenAPI
