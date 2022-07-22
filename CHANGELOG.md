@@ -3,6 +3,21 @@
 ### Normaliser
 We're working on our normaliser and we'll be rolling out some changes next week. This will allow the likes of `cm` to be pronounced correctly and also will work for dates and some times. 
 
+This only works with German, so we're sorry if you don't read that. But we're a big believer in supporting many languages :) In fact we have over 50 languages supported. 
+```python
+import os
+import apiaudio
+apiaudio.api_key = os.environ["API_KEY"]
+some_text = "Die Größe des Täters wurde mit 2 cm angegeben. Im August wurde es über 2 °C warm. Die Strecke ist 234 km lang. Meine Schuhe wiegen nur 300 gr. Mit über 18,1 Kg ist der Fernseher ein echtes Schwergewicht. Die neuen LCD Bildschirme arbeiten mit 100 hz. All diese Geräte arbeiten mit 110 V. Der Heizstrahler hat eine Leistung von 300 W. Um circa 14:43 Uhr ereignete sich der Vorfall. Das ganze fing schon um 3:22 an. Ab 9.00 Uhr ist angezapft. Mit nur 30 min ist das Meeting eher kurz. Putin hat sich in einer Rede in die Tradition von Zar Peter dem Großen (1988-2002) gestellt. Am 31.10.1982 fand das Event statt. Das war am 02.04.2021. In der Umfrage sagten 1/3 der Befragten das Gleiche. Sie brauchen ¼ Tasse Wasser. Das Glas Bier kostet 3,30€. Der Meter Fichtenholz kostet 0,46€. Das Glas Fanta kostet 1,95 EUR. Das Glas Cola kostet 1,40 EURO. Und ein Kasten 12,00 euro. Alles Weitere kommt mit 0,03 euro noch hinzu. Davon zog er noch 4,03 eur ab. Apple berechnet dafür in den USA 1290$. Microsoft jedoch nur 34,43 USD. Den Deal zahlte er demnach pro Gramm – soll er jedenfalls. Es handelte sich um 5.550 Männer und 5550 Frauen. jetzt bei scout24.com. Es gab 200 Lieferanten. Und 900 Liefer,- Anten. Peugeot. Drogendealer."
+VOICE="lena"
+#you can change this to another German voice such as 'erika','bernd' or'greta'
+script = apiaudio.Script.create(scriptText=some_text)
+r = apiaudio.Speech.create(scriptId=script["scriptId"], voice=VOICE)
+print(r)
+apiaudio.Speech.download(scriptId=script["scriptId"])
+    os.rename("default__section~1of1.wav", f"{VOICE}_with_norm.wav")
+```
+And the various acronymns and currencies and dates will all be correctly pronounced. This improves the user experience big time in our tests. 
 ### Billing enhancements
 We've made some billing enhancements and improving to our billing systems.
 ## Friday 15th July 2022
@@ -13,7 +28,7 @@ We've made some billing enhancements and improving to our billing systems.
 ### SuperOrg
 A common customer request was - I want to understand what my customers usage is. For example if you're a distribution partner or agency you'll encounter this workflow. 
 
-This allows you to see usage of your child organisations :) Have a look below. It's in production so you can 
+This allows you to see usage of your child organisations :) Have a look below. It's in production so you can try it out!
 ![SuperOrg](images/superorg_with_childorgs_usage.png) 
 ### SyncTTS
 * When you use syncTTS with `metadata=True` there will also be a url generated
