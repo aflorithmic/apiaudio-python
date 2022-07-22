@@ -325,7 +325,7 @@ Speech methods are:
     - `sync` (boolean) - Allow sync or async speech creation. Default is `True`. If `sync=False`, speech create call will return a success message when the speech creation is triggered. To retrieve the files, check `Speech.retrieve()` method.
     - `sections` (dict) - Specify parameters for specific sections in the script. The key is a section name, and the value is another dictionary with the section configuration ( valid parameters are: voice, speed, effect, silence_padding). If a section is not found here, the section will automatically inherit the voice, speed, effect and silence_padding values you defined above (or the default ones if you don't provide them). See an example below with 2 sections and different configuration parameters being used.
     - `useDictionary` (bool) - Applies pronunciation dictionary to the script text.
-
+    - `useTextNormalizer` (bool) - Applies text normalization, which can help resolve grammatical errors with TTS pronunciations, for example 11:12 Uhr -> 11 Uhr 12. Note - this only works for german voices at present.
       ```python
       sections={
           "firstsection": {
