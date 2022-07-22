@@ -1,8 +1,3 @@
-
-
-
-
-
 <p align="center">
 <a href="https://www.api.audio/" rel="noopener">
  <img src="https://uploads-ssl.webflow.com/60b89b300a9c71a64936aafd/60c1d07f4fd2c92916129788_logoAudio.svg" alt="api.audio logo"></a>
@@ -18,14 +13,17 @@
 
 ## 📝 Table of Contents
 
+- [Changelog](CHANGELOG.md)
 - [About](#about)
 - [Changelog](#changelog)
+- [Quickstarts](#quickstarts)
 - [Getting Started](#getting_started)
 - [Hello World](#hello_world)
 - [Documentation](#documentation)
   - [Import](#import)
   - [Authentication](#authentication)
   - [Authentication with environment variable](#authentication_env)
+  - [Super Organizations](#super-organizations)
   - [Resource usage](#resource)
   - [Script](#script)
   - [Speech](#speech)
@@ -35,9 +33,10 @@
   - [Media](#media)
   - [SyncTTS](#synctts)
   - [Birdcache](#birdcache)
-  - [Lexi](#lexi)
+  - [Pronunciation Dictionary](#pronunciationdictionary)
   - [Connector](#connector)
   - [Orchestrator](#orchestrator)
+  - [Webhooks](#webhooks)
   - [Logging](#logging)
 - [Maintainers](#maintainers)
 - [License](#license)
@@ -49,7 +48,12 @@ This repository is actively maintained by [Aflorithmic Labs](https://www.aflorit
 To publish a new version, please run `bash publish.sh`.
 
 ## Changelog
-You can view [here](CHANGELOG.md) our updated Changelog. 
+
+You can view [here](CHANGELOG.md) our updated Changelog.
+
+## Quickstarts <a name = "quickstarts"></a>
+
+Get started with our [quickstart recipes](https://github.com/aflorithmic/examples).
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
@@ -182,6 +186,21 @@ export apiaudio_key=<your-key>
 
 If you provide both environment variable and `apiaudio.api_key` authentication, the `apiaudio.api_key` will be used.
 
+### Super Organizations
+
+In order to control a child organization of yours, please use the following method to assume that organization id.
+
+Set your child organization id to `None` to stop assuming an organization.
+
+```python
+import apiaudio
+
+apiaudio.set_assume_org_id('child_org_id')
+
+# Stop using
+apiaudio.set_assume_org_id(None)
+```
+
 ### Resource Usage <a name = "resource"> </a>
 
 There are two approaches to use the resources.
@@ -293,18 +312,19 @@ Speech allows you to do Text-To-Speech (TTS) with our API using all the voices a
 Speech methods are:
 
 - `create()` Send a Text-To-Speech request to our Text-To-Speech service.
+
   - Parameters:
+
     - `scriptId` \* [Required] (string) - The script ID
     - `version` (string) - The version of the script to be produced. Default is "".
     - `voice` (string) - Voice name. See the list of available voices using [Voice resource](#voice). Default voice is "Joanna".
     - `speed` (string) - Voice speed. Default speed is 100.
-    - `effect` (string) - Put a funny effect in your voice. You can try the following ones: `dark_father`, `chewie`, `88b`, `2r2d`, `volume_boost_low` `volume_boost_middle` `volume_boost_high` (Volume boost allows you to adjust the volume of speech. NOTE! Volume boost effect only applies to speech creation and will be overwritten by the mastering process)
+    - `effect` (string) - Put a funny effect in your voice. You can try the following ones: `dark_father`, `chewie`, `88b`, `2r2d`,
     - `silencePadding` (integer) - Add a silence padding to your speech tracks (in milliseconds). Default is 0 (no padding)
     - `audience` (dict) - Specify the values of parameters in your script. For instance, if in the script resource you have `scriptText="Hello {{name}} {{lastname}}, welcome to {{location}}"`, the audience should be: `{"name": "Elon", "lastname": "Musk", "location": "Istanbul"}`. If not provided, the fallback track will be created.
     - `sync` (boolean) - Allow sync or async speech creation. Default is `True`. If `sync=False`, speech create call will return a success message when the speech creation is triggered. To retrieve the files, check `Speech.retrieve()` method.
     - `sections` (dict) - Specify parameters for specific sections in the script. The key is a section name, and the value is another dictionary with the section configuration ( valid parameters are: voice, speed, effect, silence_padding). If a section is not found here, the section will automatically inherit the voice, speed, effect and silence_padding values you defined above (or the default ones if you don't provide them). See an example below with 2 sections and different configuration parameters being used.
     - `useDictionary` (bool) - Applies pronunciation dictionary to the script text.
-
 
       ```python
       sections={
@@ -319,6 +339,7 @@ Speech methods are:
           }
       }
       ```
+
   - Simple example:
     ```python
     response = apiaudio.Speech.create(
@@ -349,6 +370,7 @@ Speech methods are:
         }
     )
     ```
+
 - `retrieve()` Retrieve the speech file urls.
 
   - Parameters:
@@ -452,7 +474,7 @@ Mastering allows you to create and retrieve a mastered audio file of your script
 
 Mastering methods are:
 
-- `create()` Creates a mastered version of your script.
+- `create()` Create a mastered version of your script and choose the audio format.
 
   - Parameters:
 
@@ -461,13 +483,14 @@ Mastering methods are:
     - `soundTemplate` (string) - The sound template name. For the list of available sound templates check `apiaudio.Sound.list_sound_templates()` call.
     - `public` (boolean) - Boolean flag that allows to store the mastered file in a public s3 folder. Default value is `False`. Warning - This will cause your mastered files to be public to anyone in the internet. Use this at your own risk.
     - `vast` (boolean) - Boolean flag that allows to create a VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
-    - `endFormat` (list) - List of audio formats to be produced. Valid formats are: `["wav", "mp3" (default), "flac", "ogg", "mp3_very_low", "mp3_low", "mp3_medium", "mp3_high", "mp3_very_high"]`
+    - `endFormat` (list) - List of audio formats to be produced. Valid formats are: `["wav", "mp3" (default), "flac", "ogg", "mp3_very_low", "mp3_low", "mp3_medium", "mp3_high", "mp3_very_high", "mp3_alexa"]`
     - `forceLength` (int) - force the audio length of the mastered track (in seconds).
     - `audience` (dict) - Dictionary containing the personalisation parameters. This parameter depends on the number of parameters you used in your [script](#script) resource. In the script documentation example above, we used 2 parameters: `username` and `location`, and in the following example below we want to produce the script for username `salih` with location `Barcelona`. If audience is not provided, the fallback track will be created.
     - `mediaFiles` (list) - List of dicts containing the media files. This parameter depends on the media file tags used in the [script](#script) resource and the media files you have in your account. For example, if the script contains `<<media::myrecording>>` plus `<<media::mysong>>`, and you want to attach myrecording to mediaId = "12345", and mysong to mediaId = "67890" then `mediaFiles = [{"myrecording":"12345", "mysong":"67890"}]`.
     - `mediaVolumeTrim` (float) - Floating point varible that allows you to trim the volume of uploaded media files (in dB). This attribute has a valid range of -12 to 12 dB and applies to all media files included in a single mastering call. Clipping protection is not provided so only make incremental adjustments.
     - `connectors` (list) - List of dicts specifying configuration for particular 3rd party connection. For guidelines in context of supported 3rd party application, see [connectors documentation](https://docs.api.audio/docs/what-are-connectors).
     - `masteringPreset` (string) - The mastering preset to use, this enables features such as sidechain compression 'i.e. ducking' See `apiaudio.Mastering.list_presets()` for a list of presets and their descriptions.
+    - `share` (boolean) - If you would like to have a sharable link created with your audio file, use this flag. If you put `share: True` the response will have `shareUrl` parameter returned. (Note: If you put this flag, your private files will be converted to public files.)
 
   - Example:
     ```python
@@ -487,7 +510,7 @@ Mastering methods are:
     - `parameters` (dict) - Dictionary containing the audience item you want to retrieve. If parameters are not provided, the fallback track will be retrieved.
     - `public` (boolean) - Boolean flag that allows to retrieve the mastered file from the public bucket. Use this if you want to retrieve a mastered file created using `public=True`. Default value is `False`.
     - `vast` (boolean) - Boolean flag that allows to retrieve the VAST file of your mastered file. The `vast` flag only works if `public` is `True`. Default value is `False`.
-    - `endFormat` (list) - List of audio formats to be retrieved. Valid formats are:`["wav", "mp3" (default), "flac", "ogg", "mp3_very_low", "mp3_low", "mp3_medium", "mp3_high", "mp3_very_high"]`
+    - `endFormat` (list) - List of audio formats to be retrieved. Valid formats are:`["wav", "mp3" (default), "flac", "ogg", "mp3_very_low", "mp3_low", "mp3_medium", "mp3_high", "mp3_very_high", "mp3_alexa"]`
 
   - Example:
     ```python
@@ -498,6 +521,7 @@ Mastering methods are:
     ```
 
 - `download()` Download the mastered files in your preferred folder.
+
   - Parameters:
     - `scriptId` \* [Required] (string) - The [script](#script) resource ID.
     - `version` (string) - The version of the script to be downloaded. Default is "".
@@ -514,6 +538,7 @@ Mastering methods are:
     )
     ```
   - `list_presets()` List the available mastering presets.
+
     - Parameters:
       - No parameters required.
 
@@ -654,9 +679,9 @@ Birdcache methods are:
     )
     ```
 
-### `Lexi` resource <a name = "lexi"> </a>
+### `Pronunciation Dictionary` resource <a name = "pronunciationdictionary"> </a>
 
-Lexi is an engine for enhancing the pronunciation of troublesome words. For example, ensuring the city name `reading` is pronounced correctly. Dictionaries are split into languages and types. For example, the city `reading` would be of type `location` with language `en-gb` and in this case in the `UkCities` dictionary.
+Pronunciation Dictionary is a feature for enhancing the pronunciation of troublesome words. For example, ensuring the city name `reading` is pronounced correctly. Dictionaries are split into languages and types. For example, the city `reading` would be of type `location` with language `en-gb` and in this case in the `UkCities` dictionary.
 
 To use this feature words in the script should be marked up with the `<!'type'>` flag, whereby type is the type of dictionary to use. The dictionary flag that precedes the word should contain the type, and the one following should be empty `<!>`. In the example shown below, the second occurrence of the word **reading** will be pronounced as the city name.
 
@@ -664,12 +689,12 @@ To use the pronunciation dictionary end-to-end ensure that you supply a voice wh
 
 Example:
 
-  ```python
-  scriptText = """Hello I am reading a book in the city of <!location>reading<!> today"""
-  script = apiaudio.Script.create(scriptText=scriptText)
-  speech = apiaudio.Speech.create(scriptId=script["scriptId"], voice="Ryan", useDictionary=True)
-  print(speech)
-  ```
+```python
+scriptText = """Hello I am reading a book in the city of <!location>reading<!> today"""
+script = apiaudio.Script.create(scriptText=scriptText)
+speech = apiaudio.Speech.create(scriptId=script["scriptId"], voice="Ryan", useDictionary=True)
+print(speech)
+```
 
 Prononciation dictionary methods are:
 
@@ -728,7 +753,7 @@ Prononciation dictionary methods are:
 
 #### Preview
 
-The effect of applying Lexi can be seen with the `script.preview()` method. See [Script](#script) documentation for more details.
+The effect of applying Pronunciation Dictionary can be seen with the `script.preview()` method. See [Script](#script) documentation for more details.
 
 - Example:
 
@@ -750,7 +775,7 @@ The effect of applying Lexi can be seen with the `script.preview()` method. See 
   ```python
   {"preview" : "The author of this repo has lived in two places in the UK, bude and [<!>bristol<!>]". "wordsNotInDict" : ["bude"]}
   ```
-  In this example Bristol is in a location dictionary, but Bude is not. Lexi will ensure words marked between `[<!>....<!>]` will be pronounced correctly.
+  In this example Bristol is in a location dictionary, but Bude is not. Pronunciation Dictionary will ensure words marked between `[<!>....<!>]` will be pronounced correctly.
 
 ### `Connector` resource <a name = "connector"> </a>
 
@@ -795,13 +820,11 @@ Orchestrator methods are:
 
 - `create_audio()` Creates a simple TTS speech request and adds a sound template to it through mastering.
 
-	- Parameters:
+  - Parameters:
 
-		- `scriptText` \* [Required] (str) - Text to synthesize (TTS).
-		- `soundTemplate` (str) - Sound template to use.
-		- `voice` \* [Required] (str) - Name of voice to use.
-
-
+    - `scriptText` \* [Required] (str) - Text to synthesize (TTS).
+    - `soundTemplate` (str) - Sound template to use.
+    - `voice` \* [Required] (str) - Name of voice to use.
 
 - `create_three_sections()` Creates a TTS speech request with 3 sections and adds a sound template to it through mastering.
 
@@ -813,17 +836,25 @@ Orchestrator methods are:
     - `soundTemplate` (str) - Sound template to use.
     - `voice` \* [Required] (str) - Name of voice to use.
 
-
 - `media_with_sound()` Combines a pre-existing media file (i.e. pre-recorded voice) with a sound template
 
-	- Parameters:
+  - Parameters:
 
-		- `mediaId` \* [Required] (str) - MediaId of the media file to use as input.
-		- `soundTemplate` \* [Required] (str) - Sound template to use.
+    - `mediaId` \* [Required] (str) - MediaId of the media file to use as input.
+    - `soundTemplate` \* [Required] (str) - Sound template to use.
 
+### Webhooks
 
+This SDK provides an easy way of verifying apiaudio webhook call security headers. It is highly recommended for you to verify the headers in order to protect your server from any malicious attack.
 
+The method is:
 
+```python
+apiaudio.Webhooks.verify(payload, sig_header, secret, tolerance)
+```
+
+It will return true if the header is valid, otherwise it will raise an error.
+The parameters to pass are; `payload` being the body object sent by apiaudio, `sig_header` being `X-Aflr-Secret` in the request headers sent by apiaudio, `secret` being your webhook secret (you can get it in apiaudio console) and `tolerance` being the tolerance in seconds for the header checks, which defaults to 300 seconds.
 
 ### Logging <a name = "logging"></a>
 

@@ -7,6 +7,7 @@ class SyncTTS(CreatableResource):
 
     @classmethod
     def create(cls, **params):
-        return cls._post_request_raw(
-            json=params, url=f"{cls.resource_path}", istype="wav"
-        )
+        headers = {"Accept": "audio/wav"}
+        if params.get("format"):
+            headers = {"Accept": f"audio/{params.pop('format')}"}
+        return cls._post_request(json=params, headers=headers)
