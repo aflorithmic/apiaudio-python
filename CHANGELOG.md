@@ -18,6 +18,18 @@ apiaudio.Speech.download(scriptId=script["scriptId"])
     os.rename("default__section~1of1.wav", f"{VOICE}_with_norm.wav")
 ```
 And the various acronymns and currencies and dates will all be correctly pronounced. This improves the user experience big time in our tests. 
+
+### Improved customer experience
+At Aflorithmic we try every day to "delight our customers" and so we've been investing in our monitoring, bug tracking and understanding the workflows of our users. We want to mention just one improvement - and there's many others in the background. 
+* We've been working on better monitoring and understanding bugs for our users, so we recently launched a new system for better monitoring and reproducing errors. This will help us respond better to you and your queries. 
+
+### Bug fixes
+* We've fixed a few performance bugs in mastering builder, these are incremental changes and you might not notice the difference, but the journey to a world-class product is built upon incremental customer centric change :) 
+
+* One customer reported an issue with our [https://console.api.audio/voice-cloner](Voice Cloner Tab) it turned out that this wasn't loading if you have lots of scripts stored, we improved the performance and fixed this issue. This only affects some plans - Corporate in particular. 
+
+* We fixed some bugs with `Tax Collection Id` was not being accepted for some users when signing up with stripe. We're very sorry for this problem and any issues it caused with your signup flow. 
+
 ### Billing enhancements - coming next week
 We've made some billing enhancements and improving to our billing systems. We'll ship this next week.
 ## Friday 15th July 2022
