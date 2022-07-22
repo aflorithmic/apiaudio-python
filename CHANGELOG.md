@@ -28,7 +28,7 @@ At Aflorithmic we try every day to "delight our customers" and so we've been inv
 
 * One customer reported an issue with our [https://console.api.audio/voice-cloner](Voice Cloner Tab) it turned out that this wasn't loading if you have lots of scripts stored, we improved the performance and fixed this issue. This only affects some plans - Corporate in particular. 
 
-* We fixed some bugs with `Tax Collection Id` was not being accepted for some users when signing up with stripe. We're very sorry for this problem and any issues it caused with your signup flow. 
+* We fixed some bugs with `Tax Collection Id` was not being accepted for some users when signing up with stripe. We're very sorry for this problem and any issues it caused with your upgrading accounts. 
 
 ### Billing enhancements - coming next week
 We've made some billing enhancements and improving to our billing systems. We'll ship this next week.
