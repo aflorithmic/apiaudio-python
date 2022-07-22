@@ -12,7 +12,7 @@ some_text = "Die Größe des Täters wurde mit 2 cm angegeben. Im August wurde e
 VOICE="lena"
 #you can change this to another German voice such as 'erika','bernd' or'greta'
 script = apiaudio.Script.create(scriptText=some_text)
-r = apiaudio.Speech.create(scriptId=script["scriptId"], voice=VOICE)
+r = apiaudio.Speech.create(scriptId=script["scriptId"], useTextNormaliser=True, voice=VOICE)
 print(r)
 apiaudio.Speech.download(scriptId=script["scriptId"])
     os.rename("default__section~1of1.wav", f"{VOICE}_with_norm.wav")
