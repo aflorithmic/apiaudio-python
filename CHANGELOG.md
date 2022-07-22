@@ -18,6 +18,8 @@ apiaudio.Speech.download(scriptId=script["scriptId"])
     os.rename("default__section~1of1.wav", f"{VOICE}_with_norm.wav")
 ```
 And the various acronymns and currencies and dates will all be correctly pronounced. This improves the user experience big time in our tests. 
+### German voice caputre and voice deployment
+We've been working hard on our German voice capture through our *Voice cloner* app and also improving our ML pipelines. Our beta customers love our new voices - they score highest in our tests that we've ever built. If you're interested in cloning your voice in German please reach out to bjoern[at]aflorithmic.ai to discuss cloning your voice for your brand. 
 
 ### Improved customer experience
 At Aflorithmic we try every day to "delight our customers" and so we've been investing in our monitoring, bug tracking and understanding the workflows of our users. We want to mention just one improvement - and there's many others in the background. 
