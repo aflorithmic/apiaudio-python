@@ -1,4 +1,11 @@
 # Changelog
+## Friday 29th July 2022
+## Billing improvements
+## Sound Templates upload
+Users often want the ability to handle and upload sound templates themselves - especially if you've got the creative ability. This feature allows you to manage and upload sound templates. 
+(Needs more explanations)
+## Bug fixes 
+
 ## Friday 22nd July 2022
 ### Normaliser
 We're working on our normaliser and we'll be rolling out some changes next week. This will allow the likes of `cm` to be pronounced correctly and also will work for dates and some times. 
@@ -12,7 +19,7 @@ some_text = "Die Größe des Täters wurde mit 2 cm angegeben. Im August wurde e
 VOICE="lena"
 #you can change this to another German voice such as 'erika','bernd' or'greta'
 script = apiaudio.Script.create(scriptText=some_text)
-r = apiaudio.Speech.create(scriptId=script["scriptId"], useTextNormaliser=True, voice=VOICE)
+r = apiaudio.Speech.create(scriptId=script["scriptId"], useTextNormaliser=True,   voice=VOICE)
 print(r)
 apiaudio.Speech.download(scriptId=script["scriptId"])
     os.rename("default__section~1of1.wav", f"{VOICE}_with_norm.wav")
