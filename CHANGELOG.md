@@ -1,6 +1,20 @@
 # Changelog
 ## Friday 29th July 2022
-## Billing improvements
+## Updated pricing policy
+We recently after careful discussion with our wonderful customers decided to update our pricing policy. We did this to make things *simpler* and we also connected price more to value. 
+
+WHAT HAS CHANGED?
+* Instead of 5 tiers we now only have 4. The enterprise plan is now a fully managed service and can be found on Aflorithmic.ai.
+* FREE plan - This is a free trial period of 30 days, granting you 250 production credits to get your feet wet.
+
+* INDIE plan - At just $39 per month you can start building your own audio production environment without a watermark and including 1,100 production credits per month.
+
+* PRODUCTION plan - If you are a developer with a commercial project in mind, this is the plan for you. With 8,000 production credits and at a lower additional cost per credit it’s designed to build a lot.
+
+* PROFESSIONAL plan - This plan is for organizations with a lot of tech muscle who still want to stay in full control of their product, but don’t want to move to an enterprise plan yet. Literally anything can be customized.
+
+You can read more here in the [Pricing email](https://mailchi.mp/aflorithmic/filter-400-ai-voices-meet-us-on-our-roadshow-5857331?e=0acb1efcc4)
+
 ## Sound Templates upload
 Users often want the ability to handle and upload sound templates themselves - especially if you've got the creative ability. This feature allows you to manage and upload sound templates. 
 (Needs more explanations)
