@@ -34,6 +34,8 @@ This is on top of Google Pay, Apple Pay and Card that we already had.
 
 You can even see the payment method in your local currency
 ![BACS](images/checkout_bacs_gbp.png)
+And if you're in some parts of the Eurozone you'll see 
+![SEPA](images/checkout_sepa.png)
 ## New voice category
 * We now have a 3rd gender in our library.  It is called Character.  it is mainly gaming voices/effected voices. Please have a listen [Character link](https://library.api.audio/voices?gender=character) and let us know what you think
 ## Sound Templates upload
