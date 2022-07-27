@@ -22,12 +22,10 @@ You can read more here in the [Pricing email](https://mailchi.mp/aflorithmic/fil
 Some of our customers remarked to us that they wanted to Pay in their existing method. So we this week we added thanks to our partners at [Stripe](www.stripe.com) a whole range of new payment methods. 
 These include
 * SEPA Direct Debit
-* Klarna
 * iDEAL
 * EPS 
 * Giropay
 * Bancontact
-* Clearpay
 
 This is on top of Google Pay, Apple Pay and Card that we already had. 
 
