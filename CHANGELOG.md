@@ -22,6 +22,7 @@ You can read more here in the [Pricing email](https://mailchi.mp/aflorithmic/fil
 Some of our customers remarked to us that they wanted to Pay in their existing method. So we this week we added thanks to our partners at [Stripe](www.stripe.com) a whole range of new payment methods. 
 These include
 * SEPA Direct Debit
+* BACS Direct Debit
 * iDEAL
 * EPS 
 * Giropay
@@ -30,6 +31,9 @@ These include
 This is on top of Google Pay, Apple Pay and Card that we already had. 
 
 ![New Payment Methods](images/checkout_alternativ_methods.png) 
+
+You can even see the payment method in your local currency
+![BACS](images/checkout_bacs_gbp.png)
 ## New voice category
 * We now have a 3rd gender in our library.  It is called Character.  it is mainly gaming voices/effected voices. Please have a listen [Character link](https://library.api.audio/voices?gender=character) and let us know what you think
 ## Sound Templates upload
