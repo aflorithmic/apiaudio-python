@@ -17,12 +17,28 @@ You can read more here in the [Pricing email](https://mailchi.mp/aflorithmic/fil
 
 ## Documentation improvements
 * We've been working hard on our docs lately. One improvement we're proud of is the new [Quickstart](https://docs.api.audio/docs/quickstart) which will help you produce beautiful audio in minutes.
+
+## New payment methods
+Some of our customers remarked to us that they wanted to Pay in their existing method. So we this week we added thanks to our partners at [Stripe](www.stripe.com) a whole range of new payment methods. 
+These include
+* SEPA Direct Debit
+* Klarna
+* iDEAL
+* EPS 
+* Giropay
+* Bancontact
+* Clearpay
+
+This is on top of Google Pay, Apple Pay and Card that we already had. 
+
+![New Payment Methods](images/checkout_alternativ_methods.png) 
 ## New voice category
 * We now have a 3rd gender in our library.  It is called Character.  it is mainly gaming voices/effected voices. Please have a listen [Character link](https://library.api.audio/voices?gender=character) and let us know what you think
 ## Sound Templates upload
 Users often want the ability to handle and upload sound templates themselves - especially if you've got the creative ability. This feature allows you to manage and upload sound templates. 
 (Needs more explanations)
 ## Bug fixes 
+* We fixed a bug in our urls for sharing audio, so your shared content now works for up to 7 days. Thanks to those who helped discover and fix that bug!
 
 ## Friday 22nd July 2022
 ### Normaliser
