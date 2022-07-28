@@ -11,7 +11,7 @@ WHAT HAS CHANGED?
 
 * PRODUCTION plan - If you are a developer with a commercial project in mind, this is the plan for you. With 8,000 production credits and at a lower additional cost per credit it’s designed to build a lot.
 
-* ENTERPRISE plan - This plan is for organizations with a lot of tech muscle who still want to stay in full control of their product, but don’t want to move to an enterprise plan yet. Literally anything can be customized.
+* PROFESSIONAL plan - This plan is for organizations with a lot of tech muscle who still want to stay in full control of their product, but don’t want to move to an enterprise plan yet. Literally anything can be customized.
 
 You can read more here in the [Pricing email](https://mailchi.mp/aflorithmic/filter-400-ai-voices-meet-us-on-our-roadshow-5857331?e=0acb1efcc4)
 
