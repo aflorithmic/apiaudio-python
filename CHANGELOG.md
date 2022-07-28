@@ -1,4 +1,51 @@
 # Changelog
+## Friday 29th July 2022
+## Updated pricing policy
+We recently after careful discussion with our wonderful customers decided to update our pricing policy. We did this to make things *simpler* and we also connected price more to value. 
+
+WHAT HAS CHANGED?
+* Instead of 5 tiers we now only have 4. The enterprise plan is now a fully managed service and can be found on Aflorithmic.ai.
+* FREE plan - This is a free trial period of 30 days, granting you 250 production credits to get your feet wet.
+
+* INDIE plan - At just $39 per month you can start building your own audio production environment without a watermark and including 1,100 production credits per month.
+
+* PRODUCTION plan - If you are a developer with a commercial project in mind, this is the plan for you. With 8,000 production credits and at a lower additional cost per credit it’s designed to build a lot.
+
+* ENTERPRISE plan - This plan is for organizations with a lot of tech muscle who still want to stay in full control of their product, but don’t want to move to an enterprise plan yet. Literally anything can be customized.
+
+You can read more here in the [Pricing email](https://mailchi.mp/aflorithmic/filter-400-ai-voices-meet-us-on-our-roadshow-5857331?e=0acb1efcc4)
+
+## Documentation improvements
+* We've been working hard on our docs lately. One improvement we're proud of is the new [Quickstart](https://docs.api.audio/docs/quickstart) which will help you produce beautiful audio in minutes.
+
+## New payment methods
+Some of our customers remarked to us that they wanted to Pay in their existing method. So we this week we added thanks to our partners at [Stripe](www.stripe.com) a whole range of new payment methods. 
+These include
+* SEPA Direct Debit
+* BACS Direct Debit
+* iDEAL
+* EPS 
+* Giropay
+* Bancontact
+* Carte Bancaire 
+
+This is on top of Google Pay, Apple Pay and Card that we already had. 
+
+![New Payment Methods](images/checkout_alternativ_methods.png) 
+
+You can even see the payment method in your local currency
+![BACS](images/checkout_bacs_gbp.png)
+And if you're in some parts of the Eurozone you'll see 
+![SEPA](images/checkout_sepa.png)
+We hope this helps you pay us the way that you want. And helps us add more value to our customers. 
+## New voice category
+* We now have a 3rd gender in our library.  It is called Character.  it is mainly gaming voices/effected voices. Please have a listen [Character link](https://library.api.audio/voices?gender=character) and let us know what you think
+## Sound Templates upload
+Users often want the ability to handle and upload sound templates themselves - especially if you've got the creative ability. This feature allows you to manage and upload sound templates. 
+(Needs more explanations)
+## Bug fixes 
+* We fixed a bug in our urls for sharing audio, so your shared content now works for up to 7 days. Thanks to those who helped discover and fix that bug!
+
 ## Friday 22nd July 2022
 ### Normaliser
 We're working on our normaliser and we'll be rolling out some changes next week. This will allow the likes of `cm` to be pronounced correctly and also will work for dates and some times. 
@@ -18,7 +65,7 @@ Der Heizstrahler hat eine Leistung von 300 W. Um circa 14:43 Uhr ereignete sich 
 VOICE="lena"
 #you can change this to another German voice such as 'erika','bernd' or'greta'
 script = apiaudio.Script.create(scriptText=some_text)
-r = apiaudio.Speech.create(scriptId=script["scriptId"], useTextNormaliser=True, voice=VOICE)
+r = apiaudio.Speech.create(scriptId=script["scriptId"], useTextNormaliser=True,   voice=VOICE)
 print(r)
 apiaudio.Speech.download(scriptId=script["scriptId"])
     os.rename("default__section~1of1.wav", f"{VOICE}_with_norm.wav")
