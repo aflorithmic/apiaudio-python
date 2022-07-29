@@ -11,12 +11,15 @@ WHAT HAS CHANGED?
 
 * PRODUCTION plan - If you are a developer with a commercial project in mind, this is the plan for you. With 8,000 production credits and at a lower additional cost per credit it’s designed to build a lot.
 
-* ENTERPRISE plan - This plan is for organizations with a lot of tech muscle who still want to stay in full control of their product, but don’t want to move to an enterprise plan yet. Literally anything can be customized.
+* PROFESSIONAL plan - This plan is for organizations with a lot of tech muscle who still want to stay in full control of their product, but don’t want to move to an enterprise plan yet. Literally anything can be customized.
 
 You can read more here in the [Pricing email](https://mailchi.mp/aflorithmic/filter-400-ai-voices-meet-us-on-our-roadshow-5857331?e=0acb1efcc4)
 
 ## Documentation improvements
 * We've been working hard on our docs lately. One improvement we're proud of is the new [Quickstart](https://docs.api.audio/docs/quickstart) which will help you produce beautiful audio in minutes.
+
+## Voice enhancements
+* Some customer voices reported issues with loudness, we've deployed these to some of our `messner` voices (available on some of our plans) and will continue to deploy these changes. This enhances the quality of the voices and these voices sound more human like! 
 
 ## New payment methods
 Some of our customers remarked to us that they wanted to Pay in their existing method. So we this week we added thanks to our partners at [Stripe](www.stripe.com) a whole range of new payment methods. 
