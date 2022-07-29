@@ -18,6 +18,9 @@ You can read more here in the [Pricing email](https://mailchi.mp/aflorithmic/fil
 ## Documentation improvements
 * We've been working hard on our docs lately. One improvement we're proud of is the new [Quickstart](https://docs.api.audio/docs/quickstart) which will help you produce beautiful audio in minutes.
 
+## Voice enhancements
+* Some customer voices reported issues with loudness, we've deployed these to some of our `messner` voices (available on some of our plans) and will continue to deploy these changes. This enhances the quality of the voices and these voices sound more human like! 
+
 ## New payment methods
 Some of our customers remarked to us that they wanted to Pay in their existing method. So we this week we added thanks to our partners at [Stripe](www.stripe.com) a whole range of new payment methods. 
 These include
