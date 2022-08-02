@@ -6,6 +6,9 @@ We've been listening to our user feedback about our docs and we've made some cha
 * [Dynamic Versioning](https://docs.api.audio/docs/one-script-several-different-versions-of-speech) We made our example easier to learn and adopt
 * [Roles and Permissions](https://docs.api.audio/docs/super-organisation) We launched a NEW page with an explanation of our Roles and Permissions functionality. 
 
+## Performance enhancements
+* We optimised our Voice Intelligence feature to be 3x faster. Have fun using it :) 
+
 ## Friday 29th July 2022
 ## Updated pricing policy
 We recently after careful discussion with our wonderful customers decided to update our pricing policy. We did this to make things *simpler* and we also connected price more to value. 
