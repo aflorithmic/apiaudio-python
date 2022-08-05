@@ -1,4 +1,20 @@
 # Changelog
+## Friday 5th August 2022
+## Docs updates
+We've been listening to our user feedback about our docs and we've made some changes
+* [Welcome](https://docs.api.audio/docs/welcome) Our welcome page is clearer and more benefits driven
+* [Dynamic Versioning](https://docs.api.audio/docs/one-script-several-different-versions-of-speech) We made our example easier to learn and adopt
+* [Roles and Permissions](https://docs.api.audio/docs/super-organisation) We launched a NEW page with an explanation of our Roles and Permissions functionality. 
+* [Webhooks](https://docs.api.audio/docs/webhooks) We use webhooks to notify your application when an event happens in your organization. Webhooks are particularly useful for asynchronous events like when producing audio files that take a long time to process. This was requested by customers as well :) 
+
+## Voice capture app
+* Our Voice Capture App, we've invested in improving the performance of our backend processes - enhancing the customer experience. It's available to select users here[Voice Cloning](https://voice-cloning.api.audio/)
+
+## Bug fixes
+* We fixed some bugs in Visemes - it wasn't working with all text- reach out if you're doing Avatar use cases you can get beta access
+## Performance enhancements
+* We optimised our Voice Intelligence feature to be 3x faster. Have fun using it :) 
+
 ## Friday 29th July 2022
 ## Updated pricing policy
 We recently after careful discussion with our wonderful customers decided to update our pricing policy. We did this to make things *simpler* and we also connected price more to value. 
