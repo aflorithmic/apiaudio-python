@@ -1,17 +1,22 @@
-from apiaudio.helper_classes import ListableResource, RetrievableResource
+from apiaudio.helper_classes import CreatableResource, ListableResource, RetrievableResource
 
+
+class LexiItem(CreatableResource, RetrievableResource):
+    OBJECT_NAME = "diction/custom/item"
+    resource_path = "/diction/custom/item"
+    
 
 class Lexi(ListableResource):
     OBJECT_NAME = "diction"
     resource_path = "/diction"
 
-    list_words_path = resource_path + "/list/"
-    list_types_path = resource_path + "/list_types"
-    search_for_word_path = resource_path + "/search/"
+    custom_word_path = resource_path + "/custom/item"
+    list_words = resource_path + "/custom"
+    
 
     @classmethod
-    def list_types(cls):
-        return cls._get_request(path_param=cls.list_types_path)
+    def register_word(cls, **params):
+        return cls._put_request(data=params, url=obj)
 
     @classmethod
     def list_words(cls, dictId):
