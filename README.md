@@ -722,12 +722,19 @@ Prononciation dictionary methods are:
   -  `replacement` [required] (string) - The replacement token. Can be either a plain string or a IPA token.
   -  `contentType` [optional] (string) - The content type of the supplied replacement, can be either `basic` (default) or `ipa` for phonetic replacements.
   -  `specialization` [optional] (string) - by default the supplied replacement will apply regardless of the supplied voice, language code or provider. However edge cases can be supplied, these can be either a valid; provider name, language code (i.e. en-gb) or voice name.
+  -  
   - Example:
     ```python
       # correct the word sapiens
       r = apiaudio.Lexi.register_custom_word(word="sapiens", replacement="saypeeoons", lang="en")
       print(r)
     ```
+  
+  For each language, only a single word entry is permitted. However, each word can have multiple `specializations`. When a word is first registered a `default` `specialization` is always created, which will match what is passed in. Subsequent calls with different specializations will only update the given specialization. The exact repacement that will be used is determined by the following order of preference:
+
+    ``` voice name > language dialect > provider name > default```
+
+  For example, a replacement specified for voice name `sara` will be picked over a replacement specified for provider `azure`.
 
 - `list_custom_words()` Lists all the words contained in a custom dictionary.
 

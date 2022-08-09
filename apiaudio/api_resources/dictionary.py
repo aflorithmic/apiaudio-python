@@ -1,7 +1,7 @@
-from apiaudio.helper_classes import UpdatableResource, ListableResource, RetrievableResource
+from apiaudio.helper_classes import UpdatableResource, ListableResource, DeletableResource
 
 
-class LexiItem(UpdatableResource, ListableResource):
+class LexiItem(UpdatableResource, ListableResource, DeletableResource):
     OBJECT_NAME = "diction/custom/item"
     resource_path = "/diction/custom/item"
 
@@ -18,7 +18,6 @@ class Lexi(ListableResource):
     
     @classmethod
     def register_custom_word(cls, word, replacement, lang, specialization="default", contentType="basic"):
-        
         return LexiItem.update(
             **{
                 "word" : word, 
@@ -36,4 +35,8 @@ class Lexi(ListableResource):
     @classmethod
     def list_custom_dicts(cls, **args):
         return CustomDict.list(**args)
+    
+    @classmethod
+    def delete_custom_word(cls, **args):
+        return LexiItem.delete(**args)
 
