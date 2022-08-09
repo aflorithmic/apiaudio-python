@@ -1,10 +1,13 @@
-from apiaudio.helper_classes import CreatableResource, ListableResource, RetrievableResource
+from apiaudio.helper_classes import UpdatableResource, ListableResource, RetrievableResource
 
 
-class LexiItem(CreatableResource, RetrievableResource):
+class LexiItem(UpdatableResource, ListableResource):
     OBJECT_NAME = "diction/custom/item"
     resource_path = "/diction/custom/item"
-    
+
+class CustomDict(ListableResource):
+    OBJECT_NAME = "diction/custom"
+    resource_path = "/diction/custom"
 
 class Lexi(ListableResource):
     OBJECT_NAME = "diction"
@@ -13,15 +16,24 @@ class Lexi(ListableResource):
     custom_word_path = resource_path + "/custom/item"
     list_words = resource_path + "/custom"
     
+    @classmethod
+    def register_custom_word(cls, word, replacement, lang, specialization="default", contentType="basic"):
+        
+        return LexiItem.update(
+            **{
+                "word" : word, 
+                "replacement" : replacement, 
+                "lang" : lang,
+                "specialization" : specialization,
+                "contentType" : contentType
+            }
+        )
 
     @classmethod
-    def register_word(cls, **params):
-        return cls._put_request(data=params, url=obj)
-
+    def list_custom_words(cls, **args):
+        return LexiItem.list(**args)
+    
     @classmethod
-    def list_words(cls, dictId):
-        return cls._get_request(path_param=cls.list_words_path + dictId)
+    def list_custom_dicts(cls, **args):
+        return CustomDict.list(**args)
 
-    @classmethod
-    def search_for_word(cls, word, lang):
-        return cls._get_request(path_param=cls.search_for_word_path + f"{word}/{lang}")
