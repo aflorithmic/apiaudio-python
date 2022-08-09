@@ -261,7 +261,7 @@ Script methods are:
   - Parameters:
 
     - `scriptId` \* [Required] (string) - The script ID you want to use.
-    - `lang` \* [Required] (string) Determines which dictionary language should be used. The format should be compliant with ISO Language Code standard (e.g. en-GB)
+    - `voice` \* [Required] (string) - The voice that will be used to render speech. This is required as the output can be dependent on voice, language code, or provider.
 
   - Example:
 
@@ -757,7 +757,7 @@ The effect of applying the Pronunciation Dictionary can be seen with the `script
   scriptId = r["scriptId"]
 
   # preview the script in en-gb
-  preview = apiaudio.Script.preview(scriptId=scriptId, language="en-gb")
+  preview = apiaudio.Script.preview(scriptId=scriptId, voice="Joanna")
   print(preview)
   ```
 
