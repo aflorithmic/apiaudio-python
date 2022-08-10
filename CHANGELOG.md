@@ -8,16 +8,16 @@ We've been listening to our user feedback about our docs and we've made some cha
 * [Webhooks](https://docs.api.audio/docs/webhooks) We use webhooks to notify your application when an event happens in your organization. Webhooks are particularly useful for asynchronous events like when producing audio files that take a long time to process. This was requested by customers as well :) 
 
 ## Voice capture app
-* Our Voice Capture App, we've invested in improving the performance of our backend processes - enhancing the customer experience. It's available to select users here[Voice Cloning](https://voice-cloning.api.audio/)
+* Within our Voice Capture App, we have invested into improving the performance of our backend processes, particularly enhancing the customer experience. It's available to select users here[Voice Cloning](https://voice-cloning.api.audio/)
 
 ## Bug fixes
-* We fixed some bugs in Visemes - it wasn't working with all text- reach out if you're doing Avatar use cases you can get beta access
+* We fixed a phoneme compatibility bug in Visemes - it wasn't working with all inputted phonemes- If you want to access this feature and you are in the avatar business, please get in touch to discuss!
 ## Performance enhancements
 * We optimised our Voice Intelligence feature to be 3x faster. Have fun using it :) 
 
 ## Friday 29th July 2022
 ## Updated pricing policy
-We recently after careful discussion with our wonderful customers decided to update our pricing policy. We did this to make things *simpler* and we also connected price more to value. 
+After careful discussion with our wonderful customers, we decided to update our pricing policy. We did this to make things *simpler* and we also connected price more to value. 
 
 WHAT HAS CHANGED?
 * Instead of 5 tiers we now only have 4. The enterprise plan is now a fully managed service and can be found on Aflorithmic.ai.
@@ -35,7 +35,7 @@ You can read more here in the [Pricing email](https://mailchi.mp/aflorithmic/fil
 * We've been working hard on our docs lately. One improvement we're proud of is the new [Quickstart](https://docs.api.audio/docs/quickstart) which will help you produce beautiful audio in minutes.
 
 ## Voice enhancements
-* Some customer voices reported issues with loudness, we've deployed these to some of our `messner` voices (available on some of our plans) and will continue to deploy these changes. This enhances the quality of the voices and these voices sound more human like! 
+* Some customer voices reported issues with loudness, we've deployed these to some of our `messner` voices (available on some of our plans) and will continue to deploy these changes. This enhances the acoustic quality of the voices and improve their naturalness to almost human-like! 
 
 ## New payment methods
 Some of our customers remarked to us that they wanted to Pay in their existing method. So we this week we added thanks to our partners at [Stripe](www.stripe.com) a whole range of new payment methods. 
@@ -48,7 +48,7 @@ These include
 * Bancontact
 * Carte Bancaire 
 
-This is on top of Google Pay, Apple Pay and Card that we already had. 
+This is on top of Google Pay, Apple Pay and Card that we already offer. 
 
 ![New Payment Methods](images/checkout_alternativ_methods.png) 
 
@@ -58,7 +58,7 @@ And if you're in some parts of the Eurozone you'll see
 ![SEPA](images/checkout_sepa.png)
 We hope this helps you pay us the way that you want. And helps us add more value to our customers. 
 ## New voice category
-* We now have a 3rd gender in our library.  It is called Character.  it is mainly gaming voices/effected voices. Please have a listen [Character link](https://library.api.audio/voices?gender=character) and let us know what you think
+* We now have a new category in our library, and it's called Character.  it is mainly gaming voices/effected voices. Please have a listen [Character link](https://library.api.audio/voices?gender=character) and let us know what you think!
 ## Sound Templates upload
 Users often want the ability to handle and upload sound templates themselves - especially if you've got the creative ability. This feature allows you to manage and upload sound templates. 
 (Needs more explanations)
