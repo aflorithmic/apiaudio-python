@@ -261,7 +261,7 @@ Script methods are:
   - Parameters:
 
     - `scriptId` \* [Required] (string) - The script ID you want to use.
-    - `lang` \* [Required] (string) Determines which dictionary language should be used. The format should be compliant with ISO Language Code standard (e.g. en-GB)
+    - `voice` \* [Required] (string) - The voice that will be used to render speech. This is required as the output can be dependent on voice, language code, or provider.
 
   - Example:
 
@@ -681,101 +681,91 @@ Birdcache methods are:
 
 ### `Pronunciation Dictionary` resource <a name = "pronunciationdictionary"> </a>
 
-Pronunciation Dictionary is a feature for enhancing the pronunciation of troublesome words. For example, ensuring the city name `reading` is pronounced correctly. Dictionaries are split into languages and types. For example, the city `reading` would be of type `location` with language `en-gb` and in this case in the `UkCities` dictionary.
+Often when working with TTS, the models can fail to accurately pronounce specific words, for example brands, names and locations are commonly mis-pronounced. As a first attempt to fix this we have introduced our lexi flag, which works in a similar way to SSML. For example, adding <!peadar> instead of Peadar (who is one of our founders) to your script will cause the model to produce an alternative pronunciation of this name. This is particularly useful in cases where words can have multiple pronunciations, for example the cities ‘reading’ and ‘nice’. In this instance placing <!reading> and <!nice> will ensure that these are pronounced correctly, given the script:
 
-To use this feature words in the script should be marked up with the `<!'type'>` flag, whereby type is the type of dictionary to use. The dictionary flag that precedes the word should contain the type, and the one following should be empty `<!>`. In the example shown below, the second occurrence of the word **reading** will be pronounced as the city name.
+```" The city of <!nice> is a really nice place in the south of france."```
 
-To use the pronunciation dictionary end-to-end ensure that you supply a voice whose language matches that of the language of the dictionary you wish to use, and then supply `useDictionary=true` to the speech create call (see the example below). See the [Voice](#voice) resource to get a list of voices and their corresponding language code, or browse our available voices [here](#https://library.api.audio/voices)
+ If this solution does not work for you, you can instead make use of our custom (self-serve) lexi feature.
 
-Example:
+This can be used to achieve one of two things, correcting single words, or expanding acronyms. For example, you can replace all occurrences of the word Aflorithmic with “af low rhythmic” or occurrences of the word ‘BMW’ with “Bayerische Motoren Werke”. Replacement words can be supplied as plain text or an IPA phonemisation. 
 
-```python
-scriptText = """Hello I am reading a book in the city of <!location>reading<!> today"""
-script = apiaudio.Script.create(scriptText=scriptText)
-speech = apiaudio.Speech.create(scriptId=script["scriptId"], voice="Ryan", useDictionary=True)
-print(speech)
-```
 
 Prononciation dictionary methods are:
 
-- `list()` List the available dictionaries
+- `list()` Lists the publicly available dictionaries and their words
 
   - Parameters:
-
-    - `lang` [Optional] (string) - Filter by language code, e.g. `en-gb` or `es`.
-    - `type` [Optional] (string) - Filter by type e.g. `location`.
+    - `none`
 
   - Example:
 
     ```python
-    # returns all english gb dictionaries of type name
-    dictionaries = apiaudio.Lexi.list(lang="en-gb", type="name")
+    # returns a list of public dictionaries
+    dictionaries = apiaudio.Lexi.list()
 
     ```
 
-- `list_types()` List the available types
+- `list_custom_dicts()` Lists the custom dictionaries and their respective words
 
   - Parameters:
     - `none`
   - Example:
 
     ```python
-    # returns the valid flag types, i.e location, name, brand
-    types = apiaudio.Lexi.list_types()
+    # returns a list of custom dictionaries
+    types = apiaudio.Lexi.list_custom_dicts()
 
     ```
+- `register_custom_word` Adds a new word to a custom dictionary.
+  - `lang` [required] (string) - Language family, e.g. `en` or `es`.dictionary - use `global` to register a word globally.
+  -  `word` [required] (string) - The word that will be replaced
+  -  `replacement` [required] (string) - The replacement token. Can be either a plain string or a IPA token.
+  -  `contentType` [optional] (string) - The content type of the supplied replacement, can be either `basic` (default) or `ipa` for phonetic replacements.
+  -  `specialization` [optional] (string) - by default the supplied replacement will apply regardless of the supplied voice, language code or provider. However edge cases can be supplied, these can be either a valid; provider name, language code (i.e. en-gb) or voice name.
+  - Example:
+    ```python
+      # correct the word sapiens
+      r = apiaudio.Lexi.register_custom_word(word="sapiens", replacement="saypeeoons", lang="en")
+      print(r)
+    ```
 
-- `list_words()` Lists all the words contained in a dictionary.
+- `list_custom_words()` Lists all the words contained in a custom dictionary.
 
   - Parameters:
 
-  - `dictId` \* [Required] (string) - The id of the dictionary.
+  - `lang` [required] (string) - Language family, e.g. `en` or `es` - use `global` to list language agnostic words.
   - Example:
     ```python
-    # lists all words in the dictionary
-    words = apiaudio.Lexi.list_words(dictId="uk_cities")
+    # lists all words in the dictionary along with their replacements
+    words = apiaudio.Lexi.list_custom_words(lang="en")
     ```
 
-- `search_for_word()` Searches to see if a word is in any of the dictionaries.
-
-  - Parameters:
-
-    - `word` \* [Required] (string) - Word to look for.
-    - `language` \* [Required] (string) - language code to use e.g. `en-gb`.
-
-  - Example:
-
-    ```python
-    # Checks if the word bristol exists
-    result = apiaudio.Lexi.search_for_word(word="bristol", lang="en-gb")
-
-    ```
 
 #### Preview
 
-The effect of applying Pronunciation Dictionary can be seen with the `script.preview()` method. See [Script](#script) documentation for more details.
+The effect of applying the Pronunciation Dictionary can be seen with the `script.preview()` method. See [Script](#script) documentation for more details.
 
 - Example:
 
   ```python
     text = """
       The author of this repo has lived in two places in the
-      UK, <!location>Bude<!> and <!location>Bristol<!>.
+      UK, <!Bude> and <!Bristol>
     """
 
   r = apiaudio.Script.create(scriptText=text)
   scriptId = r["scriptId"]
 
   # preview the script in en-gb
-  preview = apiaudio.Script.preview(scriptId=scriptId, language="en-gb")
+  preview = apiaudio.Script.preview(scriptId=scriptId, voice="Joanna")
   print(preview)
   ```
 
 - Response:
   ```python
-  {"preview" : "The author of this repo has lived in two places in the UK, bude and [<!>bristol<!>]". "wordsNotInDict" : ["bude"]}
+  {"preview" : "The author of this repo has lived in two places in the UK, bude and <phoneme alphabet=\"ipa\" ph=\"###\"> bristol </phoneme>"}
   ```
-  In this example Bristol is in a location dictionary, but Bude is not. Pronunciation Dictionary will ensure words marked between `[<!>....<!>]` will be pronounced correctly.
+  In this example `Bristol` will be phonemised to ensure it is correctly pronouced, but as `Bude` is not in our a dictionaires it is left as is. The exact IPA tokens for words in our internal dictionaires are obsfucated. 
 
 ### `Connector` resource <a name = "connector"> </a>
 
