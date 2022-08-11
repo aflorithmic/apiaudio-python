@@ -1,7 +1,7 @@
 # Changelog
 ## Friday 12th August 2022
 ## Docs updates 
-We launched a [Discussion](https://docs.api.audio/discuss) page so you can ask us your questions. And a [FAQs](https://docs.api.audio/discuss?isFAQ=true) page. Check this out!
+We launched a [Discussion](https://docs.api.audio/discuss) so as you can ask us your questions directly. In addition to that, we have also launched an updated FAQ Page [FAQs](https://docs.api.audio/discuss?isFAQ=true) 
 
 ## Pronunciation Dictionary (Lexi)
 We updated our Dictionary feature - to make it even more user friendly. 
@@ -41,8 +41,9 @@ print(r)
 # we can delete words also!
 r = apiaudio.Lexi.delete_custom_word(word="sam", lang="en")
 print(r)
-````
+```
 
+We love hearing what you'll build. 
 ## Friday 5th August 2022
 ## Docs updates
 We've been listening to our user feedback about our docs and we've made some changes
