@@ -1,4 +1,49 @@
 # Changelog
+## Friday 12th August 2022
+## Docs updates 
+We launched a [Discussion](https://docs.api.audio/discuss) so as you can ask us your questions directly. In addition to that, we have also launched an updated FAQ Page [FAQs](https://docs.api.audio/discuss?isFAQ=true) 
+
+## Pronunciation Dictionary (Lexi)
+We updated our Dictionary feature - to make it even more user friendly. 
+We call our Dictionary feature - Lexi.
+```python
+# correct the word sapiens
+r = apiaudio.Lexi.register_custom_word(word="sapiens", replacement="saypeeoons", lang="en")
+print(r)
+```
+
+You can also look at this longer example below
+```python
+text = "hello I am in the city of <!reading> today. My name is Sam - and lexi is live in production. Try it out at aflorithmic."
+
+# register two words in our custom dicts
+r = apiaudio.Lexi.register_custom_word(word="Sam", replacement="hackerman", lang="en")
+print(r)
+r = apiaudio.Lexi.register_custom_word(word="lexi", replacement="lexi a k a the awesome word replacement machine", lang="en")
+print(r)
+
+# list all our dicts
+r = apiaudio.Lexi.list_custom_dicts()
+print(r)
+
+# list words in our en dict
+r = apiaudio.Lexi.list_custom_words(lang="en")
+print(r)
+
+# usual api stuff
+script = apiaudio.Script.create(scriptText=text)
+print(r)
+r = apiaudio.Speech.create(scriptId=script["scriptId"], voice="sara", useDictionary=True)
+print(r)
+r = apiaudio.Speech.download(scriptId=script["scriptId"])
+print(r)
+
+# we can delete words also!
+r = apiaudio.Lexi.delete_custom_word(word="sam", lang="en")
+print(r)
+```
+
+We love hearing what you'll build. 
 ## Friday 5th August 2022
 ## Docs updates
 We've been listening to our user feedback about our docs and we've made some changes
