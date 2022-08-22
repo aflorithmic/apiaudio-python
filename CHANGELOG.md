@@ -1,13 +1,15 @@
 # Changelog
 ## Friday 19th August 2022
 ## SuperOrg update 
-* We've been working on improvements such as showing you the child orgs in your super org, and allowing you to click through to the child org from your console. (On staging)
+* We've been working on improvements such as showing you the child orgs in your super org, 
+and allowing you to click through to the child org from your console.
 
 ## Voice Cloner
 * We shipped a new alpha release of Voice Cloner, a much more improved process and faster time to your first voice.  
 
 ## Docs
 * [Getting started](https://docs.api.audio/reference/getting-started-with-the-api) we revamped the reference part of the API docs. 
+
 
 ## Friday 12th August 2022
 ## Docs updates 

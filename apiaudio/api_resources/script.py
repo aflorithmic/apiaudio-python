@@ -20,8 +20,8 @@ class Script(
         )
 
     @classmethod
-    def preview(cls, scriptId, language):
-        params = {"preview": True, "lang": language}
+    def preview(cls, scriptId, voice):
+        params = {"preview": True, "voice": voice}
         r = cls._get_request(
             path_param=cls.resource_path + f"/{scriptId}", request_params=params
         )

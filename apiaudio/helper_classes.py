@@ -23,6 +23,11 @@ class CreatableResource(APIRequest):
     def create(cls, **params):
         return cls._post_request(json=params)
 
+class UpdatableResource(APIRequest):
+    @classmethod
+    def update(cls, **params):
+        return cls._put_request(json=params)
+
 
 class DeletableResource(APIRequest):
     @classmethod
@@ -164,7 +169,7 @@ class UploadableResource(APIRequest):
         mediaId = url["mediaId"]
         fileUploadUrl = url["fileUploadUrl"]
 
-        response = cls._put_request(url=fileUploadUrl, headers=headers, data=payload)
+        response = cls._put_request_s3(url=fileUploadUrl, headers=headers, data=payload)
 
         payload.close()
 
