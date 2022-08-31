@@ -72,7 +72,7 @@ jobs:
           command: |
             pip3 install twine wheel
             python3 setup.py sdist bdist_wheel
-            python3 -m twine upload --username $PIPY_USERNAME --password $PIPY_PASSWORD dist/*
+            python3 -m twine upload --username $PIPY_USERNAME --password $PIPY_PASSWORD dist/* --verbose
       - <<: *slack_basic_fail
       - <<: *slack_success_deploy
 
@@ -87,9 +87,9 @@ jobs:
           name: update SSM parameter with latest SDK version
           command: |
             aws ssm get-parameter --name /sdk/latest_versions > ssm.json
-            NEW_VALUE=$(cat ssm.json | python3 -c 'import json,sys,os;obj=json.loads(sys.stdin.read());obj=json.loads(obj["Parameter"]["Value"]);obj["python"]=os.environ["TRIGGER_TAG"];print(obj)')
+            NEW_VALUE=$(cat ssm.json | python3 -c 'import json,sys,os;obj=json.loads(sys.stdin.read());obj=json.loads(obj["Parameter"]["Value"]);obj["python"]=os.environ["TRIGGER_TAG"][1:];print(json.dumps(obj))')
             echo $NEW_VALUE
-            aws ssm put-parameter --name /sdk/latest_versions --type "String" --value $NEW_VALUE --overwrite
+            aws ssm put-parameter --name /sdk/latest_versions --type "String" --value "'$NEW_VALUE'" --overwrite
       - <<: *slack_basic_fail
       - <<: *slack_success_deploy
 

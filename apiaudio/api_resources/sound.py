@@ -1,13 +1,10 @@
 from apiaudio.helper_classes import (
-    CreatableResource,
-    DownloadableResource,
-    ListableResource,
-    RetrievableResource,
+    ListableResource
 )
 
 
 class Sound(
-    CreatableResource, DownloadableResource, RetrievableResource, ListableResource
+    ListableResource
 ):
     OBJECT_NAME = "sound"
     resource_path = "/sound"

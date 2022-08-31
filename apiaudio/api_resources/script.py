@@ -21,12 +21,17 @@ class Script(
         )
 
     @classmethod
-    def preview(cls, scriptId, language):
-        params = {"preview": True, "lang": language}
+    def preview(cls, scriptId, voice):
+        params = {"preview": True, "voice": voice}
         r = cls._get_request(
             path_param=cls.resource_path + f"/{scriptId}", request_params=params
         )
+
         if "scriptText" in r:
-            return "Script Text Preview: " + r["scriptText"]
+            res = {"preview": r["scriptText"]}
+            if "wordsNotInDict" in r:
+                res["wordsNotInDict"] = r["wordsNotInDict"]
+
+            return res
         else:  # in practice this won't happen as _get_request raises an exception
             return "PREVIEW FAILED"

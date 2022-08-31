@@ -42,17 +42,25 @@ class APIRequest:
         apiaudio.api_key = api_key
         return
 
+    def set_assume_org_id(org_id):
+        apiaudio.assume_org_id = org_id
+
     @classmethod
     def _build_header(cls):
         cls._api_key_checker(apiaudio.api_key)
-        return {"x-api-key": apiaudio.api_key, "x-python-sdk-version": sdk_version}
+        return {
+            "x-api-key": apiaudio.api_key,
+            "x-python-sdk-version": sdk_version,
+            "x-assume-org": apiaudio.assume_org_id,
+        }
 
     @classmethod
     @custom_redirects
-    def _post_request(cls, json, url=None):
+    def _post_request(cls, json, url=None, headers=None):
+        headers = headers or {}
         loop_status_code = cls.__dict__.get("loop_status_code")
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
-        headers = cls._build_header()
+        headers.update(cls._build_header())
         r = requests.post(url=url, headers=headers, json=json)
 
         if loop_status_code:
@@ -64,9 +72,12 @@ class APIRequest:
 
         cls._expanded_raise_for_status(r)
 
+        if r.headers["Content-Type"] != "application/json":
+            return r.content
         return r.json()
 
     @classmethod
+    @custom_redirects
     def _post_request_raw(cls, json, url=None, istype="wav"):
         url = url or cls.resource_path
         url = f"{apiaudio.api_base}{url}"
@@ -99,7 +110,7 @@ class APIRequest:
 
     @classmethod
     @custom_redirects
-    def _put_request(cls, data, url=None, headers=None):
+    def _put_request_s3(cls, data, url=None, headers=None):
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
 
         r = requests.put(url=url, headers=headers, data=data)
@@ -112,6 +123,21 @@ class APIRequest:
         # since aws s3 does not return a body on PUT requests,
         # r.json() does not work here
         return r
+    
+    @classmethod
+    @custom_redirects
+    def _put_request(cls, json, url=None, headers=None):
+        headers = headers or {}
+        url = url or f"{apiaudio.api_base}{cls.resource_path}"
+        headers.update(cls._build_header())
+        
+        r = requests.put(url=url, headers=headers, json=json)
+
+        cls._expanded_raise_for_status(r)
+
+        if r.headers["Content-Type"] != "application/json":
+            return r.content
+        return r.json()
 
     @classmethod
     @custom_redirects
