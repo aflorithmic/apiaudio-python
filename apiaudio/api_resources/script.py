@@ -1,3 +1,4 @@
+from ast import arg
 from apiaudio.helper_classes import (
     CreatableResource,
     DeletableResource,
@@ -6,6 +7,18 @@ from apiaudio.helper_classes import (
 )
 
 
+class Project(ListableResource):
+    OBJECT_NAME = "script/list_projects"
+    resource_path = "/script/list_projects"
+
+class Module(ListableResource):
+    OBJECT_NAME = "script/list_modules"
+    resource_path = "/script/list_modules"
+
+class ScriptName(ListableResource):
+    OBJECT_NAME = "script/list_script_name"
+    resource_path = "/script/list_script_name"
+
 class Script(
     ListableResource, CreatableResource, RetrievableResource, DeletableResource
 ):
@@ -13,6 +26,19 @@ class Script(
     resource_path = "/script"
     random_url = "/script/random"
 
+    class Directory():
+        @classmethod 
+        def list_projects(cls, **args):
+            return Project.list(**args)
+
+        @classmethod 
+        def list_modules(cls, **args):
+            return Module.list(**args)
+        
+        @classmethod 
+        def list_script_names(cls, **args):
+            return Script.list(**args)
+    
     @classmethod
     def get_random_text(cls, category=None):
         return cls._get_request(
@@ -34,3 +60,17 @@ class Script(
             return res
         else:  # in practice this won't happen as _get_request raises an exception
             return "PREVIEW FAILED"
+
+    @classmethod
+    def delete_multiple(cls, projectName, moduleName="", scriptName=""):
+        
+        params = {
+            "projectName" : projectName,
+            "moduleName" : moduleName,
+            "scriptName" : scriptName
+        }
+        
+        return cls._delete_request(
+            path_param=cls.resource_path + "s",
+            request_params=params
+            )
