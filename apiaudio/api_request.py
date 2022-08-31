@@ -72,7 +72,7 @@ class APIRequest:
 
         cls._expanded_raise_for_status(r)
 
-        if r.headers["Content-Type"] != "application/json":
+        if "application/json" not in r.headers["Content-Type"]:
             return r.content
         return r.json()
 
