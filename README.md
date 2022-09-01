@@ -300,6 +300,7 @@ Script methods are:
     - `moduleName` (string) - Return any scripts with this moduleName, note `projectName` also needs to be supplied.
     - `scriptName` (string) - Return any scripts with this scriptName, not both `projectName` and `moduleName` need to be supplied.
     - `scriptId` (string) - Return any scripts with this scriptId.
+    - `verbose` (bool) - List scripts in verbose mode (`True` by default). Set this to `False` to return only the `projectName`, `moduleName`, `scriptName` and `scriptId` fields.
   - Example:
     ```python
     scripts = apiaudio.Script.list()
