@@ -1,4 +1,52 @@
 # Changelog
+## Friday 2nd September 2022
+## Voice builder
+We improved our voice creation capabilities so we did automatic voice preview. We have automatic preview of files, as soon as the model finished training, and proper status updates. This enhances the customer experience in our ability to deliver great voices. 
+## Script enhancements
+### BREAKING CHANGES
+
+### Script.list()
+
+**-> must supply project name to list by module**
+**-> must supply project name, and module name to list by script name**
+**-> cannot give a project name, module name, or script name a name beginning with _**
+
+
+
+## NEW features
+
+### list methods
+```apiaudio.script.list_projects() OR (GET) /script/list_projects```
+
+Will list all the projects within your organization 
+
+```apiaudio.script.list_modules() OR (GET) /script/list_modules```
+
+Will list all the modules within your organization. The values returned will be in the format `<project_name>/<module_name>`
+
+```apiaudio.script.list_script_names() OR (GET) /script/list_script_names```
+
+Will list all the scripts within your organization. The values returned will be in the format `<project_name>/<module_name>/<script_name>`
+
+### delete methods
+
+```apiaudio.script.delete_multiple() OR (DELETE) /script/scripts```
+
+Deletes multiple scripts from a project/module/script. Must supply project name to delete by module (etc)
+
+### verbose list
+
+You can now supply verbose=false to script list ```resB = apiaudio.Script.list(projectName="x", verbose=False)``` this will only supply scriptId's and PMS names in the response
+
+### TODO next time
+listing all scripts returns a pagination token (limited to a 1000 at a time) 
+
+## Connectors
+Our connectors functionality, got a redesign. This redesign means adding new connectors will be much faster! 
+
+## Next week
+We've got some awesome voice improvements coming, and a much better voice cloning experience. 
+
 ## Friday 19th August 2022
 ## SuperOrg update 
 * We've been working on improvements such as showing you the child orgs in your super org, 
