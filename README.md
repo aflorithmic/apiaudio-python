@@ -7,7 +7,7 @@
 
 ---
 
-<p align="center"> apiaudio is the official <a href="https://www.api.audio/" rel="noopener">api.audio</a> Python 3 SDK. This SDK provides easy access to the api.audio API from applications written in python.
+<p align="center"> apiaudio is the official <a href="https://www.api.audio/" rel="noopener">api.audio</a> Python 3 SDK. This SDK provides easy access to the api.audio API for applications written in python.
     <br>
 </p>
 
@@ -26,6 +26,7 @@
   - [Super Organizations](#super-organizations)
   - [Resource usage](#resource)
   - [Script](#script)
+    - [Directory](#directory)
   - [Speech](#speech)
   - [Voice](#voice)
   - [Sound](#sound)
@@ -43,15 +44,13 @@
 
 ## 🧐 About <a name = "about"></a>
 
-This repository is actively maintained by [Aflorithmic Labs](https://www.aflorithmic.ai/). For examples, recipes and api reference see the [api.audio docs](https://docs.api.audio/reference).
+This repository is actively maintained by [Aflorithmic Labs](https://www.aflorithmic.ai/). For examples, recipes and api reference see the [api.audio docs](https://docs.api.audio/reference). Feel free to get in touch with any questions or feedback!
 
-To publish a new version, please run `bash publish.sh`.
-
-## Changelog
+## :book:  Changelog
 
 You can view [here](CHANGELOG.md) our updated Changelog.
 
-## Quickstarts <a name = "quickstarts"></a>
+## :speedboat:  Quickstarts <a name = "quickstarts"></a>
 
 Get started with our [quickstart recipes](https://github.com/aflorithmic/examples).
 
@@ -63,12 +62,16 @@ You don't need this source code unless you want to modify it. If you want to use
 
 ```sh
 pip install apiaudio -U
+#or
+pip3 install apiaudio -U
 ```
 
 Install from source with:
 
 ```sh
 python setup.py install
+#or
+python3 setup.py install
 ```
 
 ### Prerequisites <a name = "requirements"></a>
@@ -85,32 +88,33 @@ touch hello.py
 
 ### Authentication
 
-The library needs to be configured with your account's secret key which is available in your [api.audio Console](https://console.api.audio). Import the apiaudio package and set `apiaudio.api_key` with the api-key you got from the console:
+This library needs to be configured with your account's api-key which is available in your [api.audio Console](https://console.api.audio). Import the apiaudio package and set `apiaudio.api_key` with the api-key you got from the console:
 
 ```python
 import apiaudio
 apiaudio.api_key = "your-key"
 ```
 
+
 ### Create Text to audio in 4 steps
 
-Let's create our first audio from text.
+Let's create our first audio asset.
 
-✍️ Create a new script:
+✍️ Create a new script, our `scriptText` will be the text that is later synthesized.
 
 ```python
-script = apiaudio.Script.create(scriptText="Hello world", scriptName="hello")
+script = apiaudio.Script.create(scriptText="Hello world")
 print(script)
 ```
 
-🎤 Create a speech audio file from the script using Aria's voice:
+🎤 Render the scriptText that was created in the previous step. Lets use voice Aria.
 
 ```python
 response = apiaudio.Speech.create(scriptId=script["scriptId"], voice="Aria")
 print(response)
 ```
 
-🎧 Now let's master the speech file with high quality and a nice soundtemplate.
+🎧 Now let's join the speech we just created with a sound template.
 
 ```python
 response = apiaudio.Mastering.create(
@@ -120,34 +124,34 @@ response = apiaudio.Mastering.create(
 print(response)
 ```
 
-Download the files in your current folder:
+Download the final asset to your current working directory:
 
 ```python
 filepath = apiaudio.Mastering.download(scriptId=script["scriptId"], destination=".")
 print(filepath)
 ```
 
-Easy right? 🔮 This is the `hello.py` final picture:
+Easy right? 🔮 This is the final `hello.py` file.
 
 ```python
 import apiaudio
 apiaudio.api_key = "your-key"
 
 # script creation
-script = apiaudio.Script.create(scriptText="Hello world", scriptName="hello")
+script = apiaudio.Script.create(scriptText="Hello world")
 
 # speech creation
-response = apiaudio.Speech.create(scriptId=script["scriptId"], voice="Joanna")
+response = apiaudio.Speech.create(scriptId=script["scriptId"], voice="Aria")
 print(response)
 
 # mastering process
 response = apiaudio.Mastering.create(
 	scriptId=script.get("scriptId"),
-	soundTemplate="parisianmorning"
+	soundTemplate="jakarta"
 	)
 print(response)
 
-# or download
+# download
 filepath = apiaudio.Mastering.download(scriptId=script["scriptId"], destination=".")
 print(filepath)
 ```
@@ -156,9 +160,11 @@ Now let's run the code:
 
 ```sh
 python hello.py
+#or
+python3 hello.py
 ```
 
-Once completed, check the files in the `hello.py` root folder - you will see a new audio file. Play it!
+Once this has completed, find the downloaded audio asset and play it! :sound: :sound: :sound: 
 
 ## 📑 Documentation <a name = "documentation"></a>
 
@@ -184,13 +190,13 @@ You can also authenticate using `apiaudio_key` environment variable and the apia
 export apiaudio_key=<your-key>
 ```
 
-If you provide both environment variable and `apiaudio.api_key` authentication, the `apiaudio.api_key` will be used.
+If you provide both an environment variable and `apiaudio.api_key` authentication value, the `apiaudio.api_key` value will be used instead.
 
 ### Super Organizations
 
-In order to control a child organization of yours, please use the following method to assume that organization id.
+In order to control a child organization of yours, please use the following method to *assume* that organization id.
 
-Set your child organization id to `None` to stop assuming an organization.
+Set your child organization id to `None` to stop assuming an organization. Subsequent calls to the api will use your own organization id.
 
 ```python
 import apiaudio
@@ -204,19 +210,22 @@ apiaudio.set_assume_org_id(None)
 ### Resource Usage <a name = "resource"> </a>
 
 There are two approaches to use the resources.
-First approach is to import the resource classes you want to use first, then use resource methods. For example, to use `Script`, we could do:
+
+The recommended approach is to import all resources directly from apiaudio:
+
+```python
+import apiaudio
+apiaudio.Script.create()
+```
+
+
+Alternatively, you can import the resource classes you want to use first, and then use the resource methods. For example, to use `Script`, we could do:
 
 ```python
 from apiaudio import Script
 Script.create()
 ```
 
-The second approach is to use it directly from apiaudio:
-
-```python
-import apiaudio
-apiaudio.Script.create()
-```
 
 Same logic applies for other resources (`Speech`, `Voice`, `Sound`...)
 
@@ -229,20 +238,28 @@ Script methods are:
 - `create()` - Create a new script.
   - Parameters:
     - `scriptText` \* [Required] (string) - Text for your script. A script can contain multiple sections and SSML tags. Learn more about scriptText details [here](https://docs.api.audio/docs/script-2)
-    - `projectName` (string) - The name of your project. Default value is "default"
-    - `moduleName` (string) - The name of your module. Default value is "default"
+    - `projectName` (string) - The name of your project. Default value is "default" (max 60 characters)
+    - `moduleName` (string) - The name of your module. Default value is "default" (max 60 characters)
     - `scriptName` (string) - The name of your script. Default value is "default" (max 60 characters)
-    - `scriptId` (string) - Custom identifier for your script. If scriptId parameter is used, then projectName, moduleName and scriptName are required parameters.
+    - `scriptId` (string) - Custom identifier for your script. If scriptId parameter is provided, then projectName, moduleName and scriptName are set to the same value as scriptId
     - `versions` (dictionary) - A dictionary containing different versions of your script text, whereby the key is the version name, and its value is the associated `scriptText`. Version name `v0` is reserved as the default `scriptText`. Default value is "{}"
+    - `metadata` (dictionary) - Metadata for your script. This is limited to 2kb in size.
   - Example:
     ```python
+    text = """
+      <<sectionName::hello>> Hello {{username|buddy}} 
+      <<sectionName::bye>> Good bye from {{location|barcelona}}
+    """
+    
     script = apiaudio.Script.create(
-        scriptText="<<sectionName::hello>> Hello {{username|buddy}} <<sectionName::bye>> Good bye from {{location|barcelona}}",
+        scriptText=text,
         projectName="myProject",
         moduleName="myModule",
         scriptName="myScript",
-        scriptId="id-1234"
+        scriptId="id-1234",
+        metadata={"author" : "sam", "tags" : ["demo", "intro"]}
         )
+    # example 2 with versions
     script = apiaudio.Script.create(
         scriptText="Default text",
         versions={"es" : "Hola", "en" : "hello"}
@@ -280,8 +297,8 @@ Script methods are:
 - `list()` - List all scripts available in your organization. This method supports filtering.
   - Parameters:
     - `projectName` (string) - Return any scripts with this projectName.
-    - `moduleName` (string) - Return any scripts with this moduleName.
-    - `scriptName` (string) - Return any scripts with this scriptName.
+    - `moduleName` (string) - Return any scripts with this moduleName, note `projectName` also needs to be supplied.
+    - `scriptName` (string) - Return any scripts with this scriptName, not both `projectName` and `moduleName` need to be supplied.
     - `scriptId` (string) - Return any scripts with this scriptId.
   - Example:
     ```python
@@ -296,6 +313,18 @@ Script methods are:
     #deletes version 'en' from scriptId 'myworkout'
     scripts = apiaudio.Script.delete(scriptId="myworkout", version="en")
     ```
+- `delete_multiple()` - Delete multiple scripts.
+  - Parameters:
+    - `projectName` \* [Required] (string) - Deletes all scripts within this projectName.
+    - `moduleName` (string) - Deletes all scripts within this moduleName, note `projectName` also needs to be supplied.
+    - `scriptName` (string) - Deletes all scripts within this scriptName, note both `projectName` and `moduleName` need to be supplied.
+
+  - Example:
+    ```python
+    #deletes all scripts within the project 'awesome_demos'
+    scripts = apiaudio.Script.delete_multiple(projectName="awesome_demos")
+    ```
+
 - `get_random_text()` - Retrieve random text from a list of categories.
   - Parameters:
     - `category` (string) - The category from which the random text is retrieved. If no category is specified, the function defaults to `"FunFact"`
@@ -304,6 +333,51 @@ Script methods are:
     text = apiaudio.Script.get_random_text(category="BibleVerse")
     ```
     - Categories currently available: `"BibleVerse"`, `"FunFact"`, `"InspirationalQuote"`, `"Joke"`, `"MovieSynopsis"`, `"Poem"`, `"PhilosophicalQuestion"`, `"Recipe"`, `"TriviaQuestion"`.
+  #### `Script.Directory` resource <a name = "directory"> </a>
+
+  Lists the directory structure of your scripts, i.e. projectName/moduleName/scriptName
+
+  Script.Directory methods are:
+
+  - `list_projects()` - Lists all projects.
+  - Parameters:
+    - none
+
+  - Example:
+    ```python
+    #Lists all project names
+    projects = apiaudio.Script.Directory.list_projects()
+    print(projects)
+    # example output: ["projectX", "projectY"]
+    ```
+
+  - `list_modules()` - Lists all modules within a projectPrefix.
+  - Parameters:
+    - `projectPrefix` \* [Required] - will list modules starting with this projectPrefix.
+
+  - Example:
+    ```python
+    #Lists all module names
+    modules = apiaudio.Script.Directory.list_modules(projectPrefix="workout")
+
+    print(modules)
+    # example output: ["workout_1/over60s", "workout_2/morning_routine"]
+    ```
+
+  - `list_script_names()` - Lists all modules within a projectPrefix.
+  - Parameters:
+    - `projectPrefix` \* [Required] - will list scriptNames starting with this projectPrefix.
+    - `modulePrefix` \* [Required] - will list scriptNames starting with this modulePrefix.
+
+  - Example:
+    ```python
+    #Lists all script names
+    scriptNames = apiaudio.Script.Directory.list_script_names(projectPrefix="workout_1", modulePrefix="over60s")
+
+    print(scriptNames)
+    # example output: ["workout_1/over60s/routine_1", "workout_1/over60s/routine_2", "workout_1/over60s/routine_3"]
+    ```
+
 
 ### `Speech` resource <a name = "speech"> </a>
 

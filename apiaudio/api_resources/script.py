@@ -16,8 +16,8 @@ class Module(ListableResource):
     resource_path = "/script/list_modules"
 
 class ScriptName(ListableResource):
-    OBJECT_NAME = "script/list_script_name"
-    resource_path = "/script/list_script_name"
+    OBJECT_NAME = "script/list_script_names"
+    resource_path = "/script/list_script_names"
 
 class Script(
     ListableResource, CreatableResource, RetrievableResource, DeletableResource
@@ -37,7 +37,7 @@ class Script(
         
         @classmethod 
         def list_script_names(cls, **args):
-            return Script.list(**args)
+            return ScriptName.list(**args)
     
     @classmethod
     def get_random_text(cls, category=None):
@@ -69,6 +69,8 @@ class Script(
             "moduleName" : moduleName,
             "scriptName" : scriptName
         }
+        params = dict( [(k,v) for k,v in params.items() if v])
+
         
         return cls._delete_request(
             path_param=cls.resource_path + "s",
