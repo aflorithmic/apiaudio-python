@@ -39,6 +39,7 @@ class UsersManager(APIRequest):
             metadata: Optional[dict],
             voiceCloningEnabled: Optional[bool],
             createdAt: str,
+            **kwargs,
         ):
             self.id = id
             self.name = name
