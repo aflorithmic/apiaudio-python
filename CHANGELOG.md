@@ -1,8 +1,17 @@
 # Changelog
+## Friday 9th September 2022
+## Voice Cloner SDK
+* [https://github.com/aflorithmic/apiaudio-python/pull/121](Voice Cloner SDK) - 
+* SDK's readability and the accuracy of API's representations (object members annotations in IDEs!),
+* testability (proper client tests, increased probability of catching breaking changes),
+* simplicity of version-specific changes (e.g. SDK-side transformations, API-side version-specific feature flags, extra keys ignored in previous versions etc.) 
+
+
 ## Friday 2nd September 2022
 ## Voice builder
 We improved our voice creation capabilities so we did automatic voice preview. We have automatic preview of files, as soon as the model finished training, and proper status updates. This enhances the customer experience in our ability to deliver great voices. 
 ## Script enhancements
+(Coming next week)
 ### BREAKING CHANGES
 
 ### Script.list()
