@@ -59,7 +59,7 @@ class APIRequest:
 
         cls._expanded_raise_for_status(r)
 
-        if r.headers["Content-Type"] != "application/json":
+        if "application/json" not in r.headers["Content-Type"]:
             return r.content
         return r.json()
 
@@ -94,19 +94,37 @@ class APIRequest:
         # since aws s3 does not return a body on PUT requests,
         # r.json() does not work here
         return r
-    
+
     @classmethod
     def _put_request(cls, json, url=None, headers=None):
         headers = headers or {}
         url = url or f"{apiaudio.api_base}{cls.resource_path}"
         headers.update(cls._build_header())
-        
+
         r = requests.put(url=url, headers=headers, json=json)
 
         cls._expanded_raise_for_status(r)
 
-        if r.headers["Content-Type"] != "application/json":
+        if "application/json" not in r.headers["Content-Type"]:
             return r.content
+        return r.json()
+
+    @classmethod
+    def _patch_request(cls, json, url=None, headers=None, path_param=None):
+        headers = headers or {}
+        url = url or f"{apiaudio.api_base}{cls.resource_path}"
+        if path_param:
+            url = f"{url}/{path_param}"
+
+        headers.update(cls._build_header())
+
+        r = requests.patch(url=url, headers=headers, json=json)
+
+        cls._expanded_raise_for_status(r)
+
+        if "application/json" not in r.headers["Content-Type"]:
+            return r.content
+
         return r.json()
 
     @classmethod
@@ -192,6 +210,8 @@ class APIRequest:
                 ):  # get all messages in between ""
                     apiaudio._logger.warning(f"{self.OBJECT_NAME.upper()}: {warn}")
 
+            apiaudio._logger.info(f"{self.resource_path} - {res.status_code}")
+            apiaudio._logger.debug(res.text)
             res.raise_for_status()
         except HTTPError as e:
             if res.json():
