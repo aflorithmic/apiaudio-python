@@ -2,10 +2,6 @@ from typing import Literal, Optional, List, Union
 
 from apiaudio.api_request import APIRequest
 
-from apiaudio.logging import SDKLogger
-
-_logger = SDKLogger(level="INFO")
-
 
 class UsersManager(APIRequest):
     """
