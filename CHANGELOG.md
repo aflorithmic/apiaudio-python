@@ -6,6 +6,10 @@
 * testability (proper client tests, increased probability of catching breaking changes),
 * simplicity of version-specific changes (e.g. SDK-side transformations, API-side version-specific feature flags, extra keys ignored in previous versions etc.) 
 
+## New voices
+* We now have over 600 voices! Improving our customer experience.
+* We introduced a new partner [DeepZen](https://www.aflorithmic.ai/post/welcoming-new-deepzen-voices-into-api-audio-by-aflorithmic) which have amazing emotive voices. Give them a try :) 
+* You can listen to them [here in the library](https://library.api.audio/voices?providerFullName=deepzen)
 
 ## Friday 2nd September 2022
 ## Voice builder
