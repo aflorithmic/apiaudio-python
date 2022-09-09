@@ -1,15 +1,29 @@
 # Changelog
 ## Friday 9th September 2022
-## Voice Cloner SDK
+### Voice Cloner SDK
 * [https://github.com/aflorithmic/apiaudio-python/pull/121](Voice Cloner SDK) - 
 * SDK's readability and the accuracy of API's representations (object members annotations in IDEs!),
 * testability (proper client tests, increased probability of catching breaking changes),
 * simplicity of version-specific changes (e.g. SDK-side transformations, API-side version-specific feature flags, extra keys ignored in previous versions etc.) 
 
-## New voices
+### New voices
 * We now have over 600 voices! Improving our customer experience.
 * We introduced a new partner [DeepZen](https://www.aflorithmic.ai/post/welcoming-new-deepzen-voices-into-api-audio-by-aflorithmic) which have amazing emotive voices. Give them a try :) 
 * You can listen to them [here in the library](https://library.api.audio/voices?providerFullName=deepzen)
+
+### Better voices
+We recently migrated our ML platform from an old platform to a new platform. (Older version of kubeflow to newer version of kubeflow)
+We've rolled the out to all customers. 
+
+This has a bunch of advantages 
+* Running on a well-maintained distribution (by AWS) so easier to developer - enabling faster feature delivery
+* AWS Services better integrated - more reliable
+* Fixed our security vulnerabilities - because we care about customer trust (this also addresses Log4J issues [we had](https://logging.apache.org/log4j/2.x/security.html))
+* New inference API, faster inference - faster voices
+* We’re able to roll out faster, more reliable, and do more frequent updates. Enabling us to develop better features, faster
+* The deployment is way easier (we created a python package) 
+* Our ML team is able to access logs from the dashboard, so able to fix bugs faster :)
+
 
 ## Friday 2nd September 2022
 ## Voice builder
