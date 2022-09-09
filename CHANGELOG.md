@@ -1,4 +1,79 @@
 # Changelog
+## Friday 9th September 2022
+### Voice Cloner SDK
+* [https://github.com/aflorithmic/apiaudio-python/pull/121](Voice Cloner SDK) - 
+* SDK's readability and the accuracy of API's representations (object members annotations in IDEs!),
+* testability (proper client tests, increased probability of catching breaking changes),
+* simplicity of version-specific changes (e.g. SDK-side transformations, API-side version-specific feature flags, extra keys ignored in previous versions etc.) 
+
+### New voices
+* We now have over 600 voices! Improving our customer experience.
+* We introduced a new partner [DeepZen](https://www.aflorithmic.ai/post/welcoming-new-deepzen-voices-into-api-audio-by-aflorithmic) which have amazing emotive voices. Give them a try :) 
+* You can listen to them [here in the library](https://library.api.audio/voices?providerFullName=deepzen)
+
+### Better voices
+We recently migrated our ML platform from an old platform to a new platform. (Older version of kubeflow to newer version of kubeflow)
+We've rolled the out to all customers. 
+
+This has a bunch of advantages 
+* Running on a well-maintained distribution (by AWS) so easier to developer - enabling faster feature delivery
+* AWS Services better integrated - more reliable
+* Fixed our security vulnerabilities - because we care about customer trust (this also addresses Log4J issues [we had](https://logging.apache.org/log4j/2.x/security.html))
+* New inference API, faster inference - faster voices
+* We’re able to roll out faster, more reliable, and do more frequent updates. Enabling us to develop better features, faster
+* The deployment is way easier (we created a python package) 
+* Our ML team is able to access logs from the dashboard, so able to fix bugs faster :)
+
+
+## Friday 2nd September 2022
+## Voice builder
+We improved our voice creation capabilities so we did automatic voice preview. We have automatic preview of files, as soon as the model finished training, and proper status updates. This enhances the customer experience in our ability to deliver great voices. 
+## Script enhancements
+(Coming next week)
+### BREAKING CHANGES
+
+### Script.list()
+
+**-> must supply project name to list by module**
+**-> must supply project name, and module name to list by script name**
+**-> cannot give a project name, module name, or script name a name beginning with _**
+
+
+
+## NEW features
+
+### list methods
+```apiaudio.script.list_projects() OR (GET) /script/list_projects```
+
+Will list all the projects within your organization 
+
+```apiaudio.script.list_modules() OR (GET) /script/list_modules```
+
+Will list all the modules within your organization. The values returned will be in the format `<project_name>/<module_name>`
+
+```apiaudio.script.list_script_names() OR (GET) /script/list_script_names```
+
+Will list all the scripts within your organization. The values returned will be in the format `<project_name>/<module_name>/<script_name>`
+
+### delete methods
+
+```apiaudio.script.delete_multiple() OR (DELETE) /script/scripts```
+
+Deletes multiple scripts from a project/module/script. Must supply project name to delete by module (etc)
+
+### verbose list
+
+You can now supply verbose=false to script list ```resB = apiaudio.Script.list(projectName="x", verbose=False)``` this will only supply scriptId's and PMS names in the response
+
+### TODO next time
+listing all scripts returns a pagination token (limited to a 1000 at a time) 
+
+## Connectors
+Our connectors functionality, got a redesign. This redesign means adding new connectors will be much faster! 
+
+## Next week
+We've got some awesome voice improvements coming, and a much better voice cloning experience. 
+
 ## Friday 19th August 2022
 ## SuperOrg update 
 * We've been working on improvements such as showing you the child orgs in your super org, 
