@@ -227,7 +227,7 @@ Same logic applies for other resources (`Speech`, `Voice`, `Sound`...)
 
 The Organization resource/class allows you to perform some data retrieval about your organization and your child organizations.
 
-Script methods are:
+Organization methods are:
 
 - `get_org_data()` - Get organizations data, including orgId, orgName etc.
 - `list_child_orgs()` - List your child organizations
