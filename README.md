@@ -138,13 +138,13 @@ apiaudio.api_key = "your-key"
 script = apiaudio.Script.create(scriptText="Hello world", scriptName="hello")
 
 # speech creation
-response = apiaudio.Speech.create(scriptId=script["scriptId"], voice="Joanna")
+response = apiaudio.Speech.create(scriptId=script["scriptId"], voice="Linda")
 print(response)
 
 # mastering process
 response = apiaudio.Mastering.create(
 	scriptId=script.get("scriptId"),
-	soundTemplate="parisianmorning"
+	soundTemplate="jakarta"
 	)
 print(response)
 
