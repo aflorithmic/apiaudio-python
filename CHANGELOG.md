@@ -39,6 +39,16 @@ You can now supply verbose=false to script list ```resB = apiaudio.Script.list(p
 ### TODO next time
 listing all scripts returns a pagination token (limited to a 1000 at a time)
 
+## Bug fixing 
+### Some unicode errors in some voice providers
+One of our customers provided a bug report for some unicode characters. We fixed this with specific voices. So now you should be able to use all voices with unicode.
+The example is shown below the ellipsis. 
+```python
+text = """Just being transparent… """
+```
+### Pricing
+We updated some of our pricing to be more in line with the api pricing page. You can see it here [https://docs.api.audio/docs/api-pricing](https://docs.api.audio/docs/api-pricing)
+
 ## Friday 9th September 2022
 ### Voice Cloner SDK
 * [https://github.com/aflorithmic/apiaudio-python/pull/121](Voice Cloner SDK) - 
