@@ -10,3 +10,4 @@ from apiaudio.api_resources.connector import Connector
 from apiaudio.api_resources.dictionary import Lexi
 from apiaudio.api_resources.orchestrator import Orchestrator
 from apiaudio.api_resources.webhooks import Webhooks
+from apiaudio.api_resources.organization import Organization

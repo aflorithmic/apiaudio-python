@@ -23,6 +23,7 @@ class CreatableResource(APIRequest):
     def create(cls, **params):
         return cls._post_request(json=params)
 
+
 class UpdatableResource(APIRequest):
     @classmethod
     def update(cls, **params):

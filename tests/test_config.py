@@ -6,7 +6,7 @@ import logging
 from time import time
 
 apiaudio.api_key = os.environ["AFLR_API_KEY"]
-#apiaudio.api_base = "https://staging-v1.api.audio"
+# apiaudio.api_base = "https://staging-v1.api.audio"
 
 
 def test_level_setting():
@@ -75,28 +75,20 @@ def test_script_versions():
 
 
 def test_synctts():
-    audio = apiaudio.SyncTTS.create(
-        text="Hello, test 123!",
-        voice="joanna"
-    )
+    audio = apiaudio.SyncTTS.create(text="Hello, test 123!", voice="joanna")
     assert isinstance(audio, bytes)
     assert b"RIFF" in audio
 
-    d = apiaudio.SyncTTS.create(
-        text="Hello, test 123.",
-        voice="joanna",
-        url=True
-    )
+    d = apiaudio.SyncTTS.create(text="Hello, test 123.", voice="joanna", url=True)
     assert isinstance(d, dict)
     assert "api.audio" in d.get("url", [])
 
     mp3_audio = apiaudio.SyncTTS.create(
-        text="Hello, test 123.",
-        voice="joanna",
-        format="mp3"
+        text="Hello, test 123.", voice="joanna", format="mp3"
     )
     assert isinstance(mp3_audio, bytes)
     assert not b"RIFF" in mp3_audio
+
 
 def test_processing_loop_speech():
     t0 = time()
