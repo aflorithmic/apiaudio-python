@@ -25,6 +25,7 @@
   - [Authentication with environment variable](#authentication_env)
   - [Super Organizations](#super-organizations)
   - [Resource usage](#resource)
+  - [Organization](#organization)
   - [Script](#script)
     - [Directory](#directory)
   - [Speech](#speech)
@@ -142,6 +143,7 @@ script = apiaudio.Script.create(scriptText="Hello world")
 
 # speech creation
 response = apiaudio.Speech.create(scriptId=script["scriptId"], voice="Aria")
+
 print(response)
 
 # mastering process
@@ -207,6 +209,8 @@ apiaudio.set_assume_org_id('child_org_id')
 apiaudio.set_assume_org_id(None)
 ```
 
+See [organization](#organization) resource for more operations you can perform about your organization.
+
 ### Resource Usage <a name = "resource"> </a>
 
 There are two approaches to use the resources.
@@ -228,6 +232,34 @@ Script.create()
 
 
 Same logic applies for other resources (`Speech`, `Voice`, `Sound`...)
+
+### `Organization` resource <a name = "organization"> </a>
+
+The Organization resource/class allows you to perform some data retrieval about your organization and your child organizations.
+
+Organization methods are:
+
+- `get_org_data()` - Get organizations data, including orgId, orgName etc.
+  - Parameters:
+    - None.
+  - Example:
+    ```python
+    org_data = apiaudio.Organization.get_org_data()
+    ```
+- `list_child_orgs()` - List your child organizations.
+  - Parameters:
+    - None.
+  - Example:
+    ```python
+    child_orgs = apiaudio.Organization.list_child_orgs()
+    ```
+- `get_secrets()` - Get your api key, webhook url and webhook secret.
+  - Parameters:
+    - None.
+  - Example:
+    ```python
+    secrets = apiaudio.Organization.get_secrets()
+    ```
 
 ### `Script` resource <a name = "script"> </a>
 
@@ -758,18 +790,18 @@ Birdcache methods are:
 
 Often when working with TTS, the models can fail to accurately pronounce specific words, for example brands, names and locations are commonly mis-pronounced. As a first attempt to fix this we have introduced our lexi flag, which works in a similar way to SSML. For example, adding <!peadar> instead of Peadar (who is one of our founders) to your script will cause the model to produce an alternative pronunciation of this name. This is particularly useful in cases where words can have multiple pronunciations, for example the cities ‘reading’ and ‘nice’. In this instance placing <!reading> and <!nice> will ensure that these are pronounced correctly, given the script:
 
-```" The city of <!nice> is a really nice place in the south of france."```
+`" The city of <!nice> is a really nice place in the south of france."`
 
- If this solution does not work for you, you can instead make use of our custom (self-serve) lexi feature.
+If this solution does not work for you, you can instead make use of our custom (self-serve) lexi feature.
 
-This can be used to achieve one of two things, correcting single words, or expanding acronyms. For example, you can replace all occurrences of the word Aflorithmic with “af low rhythmic” or occurrences of the word ‘BMW’ with “Bayerische Motoren Werke”. Replacement words can be supplied as plain text or an IPA phonemisation. 
-
+This can be used to achieve one of two things, correcting single words, or expanding acronyms. For example, you can replace all occurrences of the word Aflorithmic with “af low rhythmic” or occurrences of the word ‘BMW’ with “Bayerische Motoren Werke”. Replacement words can be supplied as plain text or an IPA phonemisation.
 
 Prononciation dictionary methods are:
 
 - `list()` Lists the publicly available dictionaries and their words
 
   - Parameters:
+
     - `none`
 
   - Example:
@@ -791,23 +823,25 @@ Prononciation dictionary methods are:
     types = apiaudio.Lexi.list_custom_dicts()
 
     ```
+
 - `register_custom_word` Adds a new word to a custom dictionary.
+
   - `lang` [required] (string) - Language family, e.g. `en` or `es`.dictionary - use `global` to register a word globally.
-  -  `word` [required] (string) - The word that will be replaced
-  -  `replacement` [required] (string) - The replacement token. Can be either a plain string or a IPA token.
-  -  `contentType` [optional] (string) - The content type of the supplied replacement, can be either `basic` (default) or `ipa` for phonetic replacements.
-  -  `specialization` [optional] (string) - by default the supplied replacement will apply regardless of the supplied voice, language code or provider. However edge cases can be supplied, these can be either a valid; provider name, language code (i.e. en-gb) or voice name.
-  -  
+  - `word` [required] (string) - The word that will be replaced
+  - `replacement` [required] (string) - The replacement token. Can be either a plain string or a IPA token.
+  - `contentType` [optional] (string) - The content type of the supplied replacement, can be either `basic` (default) or `ipa` for phonetic replacements.
+  - `specialization` [optional] (string) - by default the supplied replacement will apply regardless of the supplied voice, language code or provider. However edge cases can be supplied, these can be either a valid; provider name, language code (i.e. en-gb) or voice name.
+  -
   - Example:
     ```python
       # correct the word sapiens
       r = apiaudio.Lexi.register_custom_word(word="sapiens", replacement="saypeeoons", lang="en")
       print(r)
     ```
-  
+
   For each language, only a single word entry is permitted. However, each word can have multiple `specializations`. When a word is first registered a `default` `specialization` is always created, which will match what is passed in. Subsequent calls with different specializations will only update the given specialization. The exact repacement that will be used is determined by the following order of preference:
 
-    ``` voice name > language dialect > provider name > default```
+  ` voice name > language dialect > provider name > default`
 
   For example, a replacement specified for voice name `sara` will be picked over a replacement specified for provider `azure`.
 
@@ -821,7 +855,6 @@ Prononciation dictionary methods are:
     # lists all words in the dictionary along with their replacements
     words = apiaudio.Lexi.list_custom_words(lang="en")
     ```
-
 
 #### Preview
 
@@ -847,7 +880,7 @@ The effect of applying the Pronunciation Dictionary can be seen with the `script
   ```python
   {"preview" : "The author of this repo has lived in two places in the UK, bude and <phoneme alphabet=\"ipa\" ph=\"###\"> bristol </phoneme>"}
   ```
-  In this example `Bristol` will be phonemised to ensure it is correctly pronouced, but as `Bude` is not in our a dictionaires it is left as is. The exact IPA tokens for words in our internal dictionaires are obsfucated. 
+  In this example `Bristol` will be phonemised to ensure it is correctly pronouced, but as `Bude` is not in our a dictionaires it is left as is. The exact IPA tokens for words in our internal dictionaires are obsfucated.
 
 ### `Connector` resource <a name = "connector"> </a>
 

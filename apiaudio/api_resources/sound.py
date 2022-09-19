@@ -1,11 +1,7 @@
-from apiaudio.helper_classes import (
-    ListableResource
-)
+from apiaudio.helper_classes import ListableResource
 
 
-class Sound(
-    ListableResource
-):
+class Sound(ListableResource):
     OBJECT_NAME = "sound"
     resource_path = "/sound"
     list_path = "/sound/template"
