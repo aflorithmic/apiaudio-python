@@ -39,6 +39,7 @@
   - [Connector](#connector)
   - [Orchestrator](#orchestrator)
   - [Webhooks](#webhooks)
+  - [Pipeline](#pipeline)
   - [Logging](#logging)
 - [Maintainers](#maintainers)
 - [License](#license)
@@ -166,7 +167,7 @@ python hello.py
 python3 hello.py
 ```
 
-Once this has completed, find the downloaded audio asset and play it! :sound: :sound: :sound: 
+Once this has completed, find the downloaded audio asset and play it! :sound: :sound: :sound:
 
 ## 📑 Documentation <a name = "documentation"></a>
 
@@ -279,10 +280,10 @@ Script methods are:
   - Example:
     ```python
     text = """
-      <<sectionName::hello>> Hello {{username|buddy}} 
+      <<sectionName::hello>> Hello {{username|buddy}}
       <<sectionName::bye>> Good bye from {{location|barcelona}}
     """
-    
+
     script = apiaudio.Script.create(
         scriptText=text,
         projectName="myProject",
@@ -961,6 +962,33 @@ apiaudio.Webhooks.verify(payload, sig_header, secret, tolerance)
 It will return true if the header is valid, otherwise it will raise an error.
 The parameters to pass are; `payload` being the body object sent by apiaudio, `sig_header` being `X-Aflr-Secret` in the request headers sent by apiaudio, `secret` being your webhook secret (you can get it in apiaudio console) and `tolerance` being the tolerance in seconds for the header checks, which defaults to 300 seconds.
 
+### `Pipeline` resource <a name = "pipeline"> </a>
+
+Pipeline is a caching and bulk production service provided by API.audio that provides the caching layer for the customer by storing data in API.audio servers for future use. This allows you to retrieve your speech files on the fly.
+
+**Note**: Only available in API.audio v2.
+
+Pipeline methods are:
+
+- `create()` Create a production file.
+
+  - Parameters:
+
+    - `type` \* [Required] (string) - Type of the event. Supported types are `mastering` and `speech`.
+    - `scripts` \* [Required] (list of string) - The script ids you want to do speech/mastering with.
+    - `voice` \* [Required] (string or list of strings) - The voice or voices for speech creation.
+    - `soundTemplate` [Optional] (string or list of strings) - The sound template or templates for mastering creation. Only needed when the type is mastering.
+
+  - Example:
+    ```python
+    pipeline = apiaudio.Pipeline.create(
+      type="mastering",
+      voice=["linda", "liam"],
+      scripts=["scriptId1", "scriptId2"],
+      soundTemplate=["electronic", "openup"]
+    )
+    ```
+
 ### Logging <a name = "logging"></a>
 
 By default, warnings issued by the API are logged in the console output. Additionally, some behaviors are logged on the informational level (e.g. "In progress..." indicators during longer processing times).
@@ -974,7 +1002,6 @@ The level of logging can be controlled by choosing from the standard levels in P
 
 # Maintainers <a name = "maintainers"> </a>
 
-- https://github.com/zeritte
 - https://github.com/Sjhunt93
 - https://github.com/martinezpl
 
