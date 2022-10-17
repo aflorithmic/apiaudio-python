@@ -974,7 +974,6 @@ The level of logging can be controlled by choosing from the standard levels in P
 
 # Maintainers <a name = "maintainers"> </a>
 
-- https://github.com/zeritte
 - https://github.com/Sjhunt93
 - https://github.com/martinezpl
 
