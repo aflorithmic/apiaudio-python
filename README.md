@@ -125,7 +125,7 @@ response = apiaudio.Mastering.create(
 print(response)
 ```
 
-Download the final asset to your current working directory:
+Download the final audio asset to your current working directory:
 
 ```python
 filepath = apiaudio.Mastering.download(scriptId=script["scriptId"], destination=".")
