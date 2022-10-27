@@ -62,7 +62,7 @@ jobs:
 
   pip-publish:
     docker:
-      - image: cimg/python:3.8
+      - image: cimg/python:3.11
     environment:
       TRIGGER_TAG: << pipeline.git.tag >>
     steps:
