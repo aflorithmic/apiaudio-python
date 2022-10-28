@@ -9,7 +9,8 @@ account manager.
 ![signup_starter](images/new_signup_starter.png)
 
 And here you can see the Enterprise sign up 
-![signup_enterprise](images/new_signup_entreprise.png)
+
+![signup_enterprise](images/new_signup_enterprise.png)
 
 We are doing this to allow easiness for the user to sign up and companies and also because Enterprise plans vary in their prices depending on your expected usage. 
 ## Script
