@@ -2,6 +2,17 @@
 ## Friday 28th October 2022
 ## Billing
 
+We updated our billing functionality. Some of the improvements are backend and reliability improvements however we also wanted to share the following. 
+We're introducing **starter** and **enterprise** plans. For access to Enterprise you'll need an **access code** from your 
+account manager. 
+
+![signup_starter](images/new_signup_starter.png)
+
+And here you can see the Enterprise sign up 
+![signup_enterprise](images/new_signup_entreprise.png)
+
+We are doing this to allow easiness for the user to sign up and companies and also because Enterprise plans vary in their prices depending on your expected usage. 
+
 ## Bug fixes
 ### Mastering
 We had a bug in our `shareUrl` setup. Which meant that users weren't able to easily share audio. 
