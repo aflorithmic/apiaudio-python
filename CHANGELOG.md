@@ -27,7 +27,8 @@ Where the key url for the share functionality is `https://console.api.audio/shar
 You can see how it looks here
 ![ShareUrlFunctionality](images/shareUrl_functionality.png)
 
-
+### JS SDK
+* We updated the Javascript SDK 
 ## Friday 16th Sept 2022
 ## Organisation methods
 - `get_org_data()` - Get organizations data, including orgId, orgName etc.
