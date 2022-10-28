@@ -3,6 +3,7 @@
 ## Billing
 
 ## Bug fixes
+### Mastering
 We had a bug in our `shareUrl` setup. Which meant that users weren't able to easily share audio. 
 We've fixed this bug.
 ```python    
@@ -26,7 +27,8 @@ Where the key url for the share functionality is `https://console.api.audio/shar
 You can see how it looks here
 ![ShareUrlFunctionality](images/shareUrl_functionality.png)
 
-
+### JS SDK
+* We fixed some bugs in our Javascript SDK. Try it out and let us know if you like it. 
 
 ## Friday 16th Sept 2022
 ## Organisation methods
