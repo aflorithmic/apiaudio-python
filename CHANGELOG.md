@@ -1,4 +1,47 @@
 # Changelog
+## Friday 28th October 2022
+## Billing
+
+We updated our billing functionality. Some of the improvements are backend and reliability improvements however we also wanted to share the following. 
+We're introducing **starter** and **enterprise** plans. For access to Enterprise you'll need an **access code** from your 
+account manager. 
+
+![signup_starter](images/new_signup_starter.png)
+
+And here you can see the Enterprise sign up 
+![signup_enterprise](images/new_signup_entreprise.png)
+
+We are doing this to allow easiness for the user to sign up and companies and also because Enterprise plans vary in their prices depending on your expected usage. 
+## Script
+Performance improvements in `script-get()`, better response times when fetching large quantities of script(s).
+
+## Bug fixes
+### Mastering
+We had a bug in our `shareUrl` setup. Which meant that users weren't able to easily share audio. 
+We've fixed this bug.
+```python    
+mastering = apiaudio.Mastering.create(
+scriptId="concert-ad",
+soundTemplate="house",
+share=True
+)
+# Check the response
+print('Response from mastering', mastering)
+
+# Listen and share your audio file 
+print('Listen to your audio here', mastering['shareUrl'])
+```
+This will get a response like
+```shell
+Response from mastering {'shareUrl': 'https://console.api.audio/share?id=e3b91a92', 'message': 'Mastering completed successfully', 'url': 'https://v1.api.audio/url/aaecb3/concert-ad__band~nickelback__city~berlin.mp3', 'warnings': ''}
+Listen to your audio here https://console.api.audio/share?id=e3b91a92
+```
+Where the key url for the share functionality is `https://console.api.audio/share?id=id_1`
+You can see how it looks here
+![ShareUrlFunctionality](images/shareUrl_functionality.png)
+
+### JS SDK
+* We updated the Javascript SDK 
 ## Friday 16th Sept 2022
 ## Organisation methods
 - `get_org_data()` - Get organizations data, including orgId, orgName etc.
