@@ -1,4 +1,33 @@
 # Changelog
+## Friday 28th October 2022
+## Billing
+
+## Bug fixes
+We had a bug in our `shareUrl` setup. Which meant that users weren't able to easily share audio. 
+We've fixed this bug.
+```python    
+mastering = apiaudio.Mastering.create(
+scriptId="concert-ad",
+soundTemplate="house",
+share=True
+)
+# Check the response
+print('Response from mastering', mastering)
+
+# Listen and share your audio file 
+print('Listen to your audio here', mastering['shareUrl'])
+```
+This will get a response like
+```shell
+Response from mastering {'shareUrl': 'https://console.api.audio/share?id=e3b91a92', 'message': 'Mastering completed successfully', 'url': 'https://v1.api.audio/url/aaecb3/concert-ad__band~nickelback__city~berlin.mp3', 'warnings': ''}
+Listen to your audio here https://console.api.audio/share?id=e3b91a92
+```
+Where the key url for the share functionality is `https://console.api.audio/share?id=id_1`
+You can see how it looks here
+![ShareUrlFunctionality](images/shareUrl_functionality.png)
+
+
+
 ## Friday 16th Sept 2022
 ## Organisation methods
 - `get_org_data()` - Get organizations data, including orgId, orgName etc.
