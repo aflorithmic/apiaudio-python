@@ -39,7 +39,7 @@ Listen to your audio here https://console.api.audio/share?id=e3b91a92
 ```
 Where the key url for the share functionality is `https://console.api.audio/share?id=id_1`
 You can see how it looks here
-![ShareUrlFunctionality](images/shareUrl_functionality.png)
+![ShareUrlFunctionality](images/shareUrl_functionality.png|width=100)
 
 ### JS SDK
 * We updated the Javascript SDK 
