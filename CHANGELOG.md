@@ -1,4 +1,23 @@
 # Changelog
+## Friday 4th Nov 2022
+
+### Version 1 - New Billing & Analytics in Console 
+![new_billing](images/new_billing.png)
+We shipped new billing analytics. We also made improvements in the backend to improve the user experience.
+
+### De-esser !
+De-essing is the process of attenuating or reducing sibilance, or harsh high-frequency sounds that come from dialogue or vocals using the letters S, F, X, SH, and soft Cs. 
+
+It’s often a necessary process when mixing audio, but it’s rarely easy—especially when you’re just getting started. Many factors contribute to the complex nature of de-essing, from the way split-band processors can impact the character of a sound, to the manner in which the human voice can change from sibilance to sibilance.
+
+### SMS authentication 
+We shipped SMS based authentication, some of our users reported issues with Email based authentication. We hope this improves your customer experience
+![new_sms](images/adding_sms.png)
+![sending_sms](images/sms_sending.png)
+### Bug fixing
+We had a bug in our billing for updating your credit card details. This is now fixed. Sorry for any inconvenience! 
+
+
 ## Friday 28th October 2022
 ## Billing
 
