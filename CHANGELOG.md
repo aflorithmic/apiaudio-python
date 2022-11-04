@@ -1,4 +1,53 @@
 # Changelog
+## Friday 4th Nov 2022
+
+### Version 1 - New Billing & Analytics in Console 
+![new_billing](images/new_billing.png)
+We shipped new billing analytics. We also made improvements in the backend to improve the user experience.
+
+### De-esser !
+De-essing is the process of attenuating or reducing sibilance, or harsh high-frequency sounds that come from dialogue or vocals using the letters S, F, X, SH, and soft Cs. 
+
+It’s often a necessary process when mixing audio, but it’s rarely easy—especially when you’re just getting started. Many factors contribute to the complex nature of de-essing, from the way split-band processors can impact the character of a sound, to the manner in which the human voice can change from sibilance to sibilance.
+
+Here's an example
+```python
+import apiaudio
+import os
+apiaudio.api_base = "https://v1.api.audio"
+apiaudio.api_key = os.environ["API_KEY"]
+# Make sure to have your API key in your configuration file
+
+preset_list = ["default", "deesserfemale"]   # try male voice ex. ->  ["default", "deessermale"]   
+name = "vicki"                               # try male voice ex. ->  ["brandon"]
+
+text = f"""Hi I am {name} and this is the result of applying de-essing to my voice, she sells seashells on the seashore. Sand, sent, sink, sonar, sun"""
+
+
+response = apiaudio.Script.create(scriptText=text, scriptName=f"testing-{name}-{preset}", projectName = "testing")
+script_id = response["scriptId"]
+response = apiaudio.Speech.create(scriptId=script_id, voice=name)
+
+
+for preset in preset_list:
+    try:
+        r = apiaudio.Mastering.create(scriptId=script_id, soundTemplate="", masteringPreset = preset) 
+        print(r)
+        
+        r = apiaudio.Mastering.download(scriptId=script_id)
+
+    except Exception as e:
+        print(e)
+```
+We look forwarding to shipping more **audio quality** improvements like this.  
+### SMS authentication 
+We shipped SMS based authentication, some of our users reported issues with Email based authentication. We hope this improves your customer experience
+![new_sms](images/adding_sms.png)
+![sending_sms](images/sms_sending.png)
+### Bug fixing
+We had a bug in our billing for updating your credit card details. This is now fixed. Sorry for any inconvenience! 
+
+
 ## Friday 28th October 2022
 ## Billing
 
