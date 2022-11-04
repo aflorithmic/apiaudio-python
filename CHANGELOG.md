@@ -16,8 +16,8 @@ import apiaudio
 import os
 apiaudio.api_base = "https://v1.api.audio"
 apiaudio.api_key = os.environ["API_KEY"]
-# Make sure to have your API key in your configuration file
 
+# generate female voice with and without desser for A/B test
 preset_list = ["default", "deesserfemale"]   # try male voice ex. ->  ["default", "deessermale"]   
 name = "vicki"                               # try male voice ex. ->  ["brandon"]
 
