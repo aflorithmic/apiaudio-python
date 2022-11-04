@@ -23,15 +23,17 @@ name = "vicki"                               # try male voice ex. ->  ["brandon"
 
 text = f"""Hi I am {name} and this is the result of applying de-essing to my voice, she sells seashells on the seashore. Sand, sent, sink, sonar, sun"""
 
+
+response = apiaudio.Script.create(scriptText=text, scriptName=f"testing-{name}-{preset}", projectName = "testing")
+script_id = response["scriptId"]
+response = apiaudio.Speech.create(scriptId=script_id, voice=name)
+
+
 for preset in preset_list:
     try:
-        response = apiaudio.Script.create(scriptText=text, scriptName=f"testing-{name}-{preset}", projectName = "testing")
-        script_id = response["scriptId"]
-        response = apiaudio.Speech.create(scriptId=script_id, voice=name)
-
         r = apiaudio.Mastering.create(scriptId=script_id, soundTemplate="", masteringPreset = preset) 
         print(r)
-
+        
         r = apiaudio.Mastering.download(scriptId=script_id)
 
     except Exception as e:
