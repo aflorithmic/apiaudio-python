@@ -11,6 +11,9 @@ We're working on multiple languages and support for various European Languages.
 We just shipped the Italian Script. In the future we'll have our first Italian voice for a customer. 
 
 We're excited to continually invest in more languages!
+
+### Bug Fixes
+We fixed some bugs in unexpected behaviour in the SDK about media files and script and the interaction of them. This should improve your user experience. Thanks to our users for reporting these bugs, we’re happy to make our product even better!
 ## Friday 4th Nov 2022
 
 ### Version 1 - New Billing & Analytics in Console 
