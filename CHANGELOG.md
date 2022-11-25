@@ -1,6 +1,6 @@
 # Changelog
 ## Friday 25th Nov 2022
-###Speech 
+### Speech 
 [https://aflorithmic.github.io/voice-cloning-api/](Voice Cloning) 
 * We shipped an update of the voice cloning API to production - and used by users
 ### Bug fixes
