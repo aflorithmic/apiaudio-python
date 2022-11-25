@@ -1,7 +1,7 @@
 # Changelog
 ## Friday 25th Nov 2022
 ### Speech 
-[https://aflorithmic.github.io/voice-cloning-api/](Voice Cloning) 
+[https://aflorithmic.github.io/voice-cloning-api](Voice Cloning) 
 * We shipped an update of the voice cloning API to production - and used by users
 ### Bug fixes
 * We enhanced our normaliser and voice intelligence functionality -  Better pronunciation of digits and telephone numbers, telephone numbers (German)
