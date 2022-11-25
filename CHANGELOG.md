@@ -1,4 +1,11 @@
 # Changelog
+## Friday 25th Nov 2022
+###Speech 
+[https://aflorithmic.github.io/voice-cloning-api/](Voice Cloning) 
+* We shipped an update of the voice cloning API to production - and used by users
+### Bug fixes
+* We enhanced our normaliser and voice intelligence functionality -  Better pronunciation of digits and telephone numbers, telephone numbers (German)
+* Media files with zero bytes were corrupted. We now report an error in the mastering endpoints. Thanks to our customers who told us about this 
 
 ## Friday 11th Nov 2022
 ### Speedcloning
