@@ -1,4 +1,8 @@
 # Changelog
+## Friday 9th Dec 2022
+### Speech 
+* We have cloned our 1st Italian voice (and our customers love it), please contact us if you are thinking of cloning your voice in a different language. 
+
 ## Friday 25th Nov 2022
 ### Speech 
 [Voice Cloning](https://aflorithmic.github.io/voice-cloning-api)
