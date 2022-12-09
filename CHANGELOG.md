@@ -1,4 +1,117 @@
 # Changelog
+## Friday 25th Nov 2022
+### Speech 
+[Voice Cloning](https://aflorithmic.github.io/voice-cloning-api)
+* We shipped an update of the voice cloning API to production - and used by users. Allowing you to integrate Voice Cloning into your services.
+### Bug fixes
+* We enhanced our normaliser and voice intelligence functionality -  Better pronunciation of digits and telephone numbers, telephone numbers (German)
+* Media files with zero bytes were corrupted. We now report an error in the mastering endpoints. Thanks to our customers who told us about this 
+
+## Friday 11th Nov 2022
+### Speedcloning
+In order to make Voice Cloning a time efficient process, we’ve developed the world’s first *Speed Cloning* feature. Where in, users can clone their voices with just 30 minutes of recording time, compared to the industry standard of 6 hours.
+
+![speedcloning](images/speedcloning.png)
+### Italian script :it:
+We're working on multiple languages and support for various European Languages. 
+
+We just shipped the Italian Script. In the future we'll have our first Italian voice for a customer. 
+
+We're excited to continually invest in more languages!
+
+### Bug Fixes
+We fixed some bugs in unexpected behaviour in the SDK about media files and script and the interaction of them. This should improve your user experience. Thanks to our users for reporting these bugs, we’re happy to make our product even better!
+## Friday 4th Nov 2022
+
+### Version 1 - New Billing & Analytics in Console 
+![new_billing](images/new_billing.png)
+We shipped new billing analytics. We also made improvements in the backend to improve the user experience.
+
+### De-esser !
+De-essing is the process of attenuating or reducing sibilance, or harsh high-frequency sounds that come from dialogue or vocals using the letters S, F, X, SH, and soft Cs. 
+
+It’s often a necessary process when mixing audio, but it’s rarely easy—especially when you’re just getting started. Many factors contribute to the complex nature of de-essing, from the way split-band processors can impact the character of a sound, to the manner in which the human voice can change from sibilance to sibilance.
+
+Here's an example
+```python
+import apiaudio
+import os
+apiaudio.api_base = "https://v1.api.audio"
+apiaudio.api_key = os.environ["API_KEY"]
+
+# generate female voice with and without desser for A/B test
+preset_list = ["default", "deesserfemale"]   # try male voice ex. ->  ["default", "deessermale"]   
+name = "vicki"                               # try male voice ex. ->  ["brandon"]
+
+text = f"""Hi I am {name} and this is the result of applying de-essing to my voice, she sells seashells on the seashore. Sand, sent, sink, sonar, sun"""
+
+for preset in preset_list:
+    try:
+        response = apiaudio.Script.create(scriptText=text, scriptName=f"testing-{name}-{preset}", projectName = "testing")
+        script_id = response["scriptId"]
+        response = apiaudio.Speech.create(scriptId=script_id, voice=name)
+
+        r = apiaudio.Mastering.create(scriptId=script_id, soundTemplate="", masteringPreset = preset) 
+        print(r)
+
+        r = apiaudio.Mastering.download(scriptId=script_id)
+
+    except Exception as e:
+        print(e)
+```
+We look forwarding to shipping more **audio quality** improvements like this.  
+### SMS authentication 
+We shipped SMS based authentication, some of our users reported issues with Email based authentication. We hope this improves your customer experience
+![new_sms](images/adding_sms.png)
+![sending_sms](images/sms_sending.png)
+### Bug fixing
+We had a bug in our billing for updating your credit card details. This is now fixed. Sorry for any inconvenience! 
+
+
+## Friday 28th October 2022
+## Billing
+
+We updated our billing functionality. Some of the improvements are backend and reliability improvements however we also wanted to share the following. 
+We're introducing **starter** and **enterprise** plans. For access to Enterprise you'll need an **access code** from your 
+account manager. 
+
+![signup_starter](images/new_signup_starter.png)
+
+And here you can see the Enterprise sign up 
+
+![signup_enterprise](images/new_signup_enterprise.png)
+
+We are doing this to allow easiness for the user to sign up and companies and also because Enterprise plans vary in their prices depending on your expected usage. 
+## Script
+Performance improvements in `script-get()`, better response times when fetching large quantities of script(s).
+
+## Bug fixes
+### Mastering
+We had a bug in our `shareUrl` setup. Which meant that users weren't able to easily share audio. 
+We've fixed this bug.
+```python    
+mastering = apiaudio.Mastering.create(
+scriptId="concert-ad",
+soundTemplate="house",
+share=True
+)
+# Check the response
+print('Response from mastering', mastering)
+
+# Listen and share your audio file 
+print('Listen to your audio here', mastering['shareUrl'])
+```
+This will get a response like
+```shell
+Response from mastering {'shareUrl': 'https://console.api.audio/share?id=e3b91a92', 'message': 'Mastering completed successfully', 'url': 'https://v1.api.audio/url/aaecb3/concert-ad__band~nickelback__city~berlin.mp3', 'warnings': ''}
+Listen to your audio here https://console.api.audio/share?id=e3b91a92
+```
+Where the key url for the share functionality is `https://console.api.audio/share?id=id_1`
+You can see how it looks here
+![ShareUrlFunctionality](images/shareUrl_functionality.png)
+
+### JS SDK
+* We updated the Javascript SDK 
 ## Friday 16th Sept 2022
 ## Organisation methods
 - `get_org_data()` - Get organizations data, including orgId, orgName etc.

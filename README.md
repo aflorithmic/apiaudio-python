@@ -125,7 +125,7 @@ response = apiaudio.Mastering.create(
 print(response)
 ```
 
-Download the final asset to your current working directory:
+Download the final audio asset to your current working directory:
 
 ```python
 filepath = apiaudio.Mastering.download(scriptId=script["scriptId"], destination=".")
@@ -974,7 +974,6 @@ The level of logging can be controlled by choosing from the standard levels in P
 
 # Maintainers <a name = "maintainers"> </a>
 
-- https://github.com/zeritte
 - https://github.com/Sjhunt93
 - https://github.com/martinezpl
 
