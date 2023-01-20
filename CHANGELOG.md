@@ -2,7 +2,7 @@
 ### Friday 20th January 2023
 Firstly happy new year from everyone here at Aflorithmic! 
 
-We're constantly improving Api,audio and taking care of small issues and annoyances that we find (or you send us!). We wanted to start telling you about these fixes, so from now on we'll update you every few months about the bug fixes and other small tasks we take care of in between our larger feature projects.
+We're constantly improving *Api.audio* and taking care of small issues and annoyances that we find (or you send us!). We wanted to start telling you about these fixes, so from now on we'll update you every few months about the bug fixes and other small tasks we take care of in between our larger feature projects.
 
 ### Bug fixes 
 * Transactional emails - We had some issues with our transactional emails. For example some weren't sent correctly, some had some errors. We've fixed these 
