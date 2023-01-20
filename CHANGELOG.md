@@ -1,4 +1,17 @@
 # Changelog
+### Friday 20th January 2023
+Firstly happy new year from everyone here at Aflorithmic! 
+
+We're constantly improving Api,audio and taking care of small issues and annoyances that we find (or you send us!). We wanted to start telling you about these fixes, so from now on we'll update you every few months about the bug fixes and other small tasks we take care of in between our larger feature projects.
+
+### Bug fixes 
+* Transactional emails - We had some issues with our transactional emails. For example some weren't sent correctly, some had some errors. We've fixed these 
+and you'll get reliable transactional emails telling you when your credits are being used up. We're going to rebuild these in the future based on customer 
+feedback as well. 
+* Console Sign up - We fixed some issues with validation in the console sign up, for example it sometimes accepted incorrectly formatted emails, or didn't 
+give feedback if unaccepted characters were included. This should be a much better user experience. 
+* Enterprise sign up - we also had some issues with our access code, sometimes outdated access codes would be accepted. 
+
 ## Friday 25th Nov 2022
 ### Speech 
 [Voice Cloning](https://aflorithmic.github.io/voice-cloning-api)
