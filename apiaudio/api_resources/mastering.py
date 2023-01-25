@@ -5,6 +5,10 @@ from apiaudio.helper_classes import (
 )
 
 
+class CreateMediaTimeline(CreatableResource):
+    OBJECT_NAME = "mastering"
+    resource_path = "/media-timeline"
+
 class Mastering(CreatableResource, RetrievableResource, DownloadableResource):
     OBJECT_NAME = "mastering"
     resource_path = "/mastering"
@@ -15,3 +19,8 @@ class Mastering(CreatableResource, RetrievableResource, DownloadableResource):
     @classmethod
     def list_presets(cls):
         return cls._get_request(path_param=cls.mastering_preset_list_path)
+
+    @classmethod
+    def create_media_timeline(cls, **args):
+        return CreateMediaTimeline.create(**args)
+    
