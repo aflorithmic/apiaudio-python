@@ -608,6 +608,55 @@ Mastering methods are:
     )
     ```
 
+- `create_media_timeline()` Creates a mastering request based purely on uploaded media files. Media files will need to be uploaded before calling this function. See [media](#media).
+
+  - Parameters:
+
+    - `timeline` \* [Required] (list) - The timeline object. A timeline object is a list of dictionaries, whereby each represents a track of audio files. Each track must have the following two keys `files` and `contentType`. 
+      - `files` \* [Required] (list) Files is a list of dictionaries, whereby each entry must have the following 3 keys, `mediaId`, `startAt` and `endAt`
+        - `files` \* [Required] (str) the mediaId of the file that has been uploaded.
+        - `startAt` \* [Required] (float) the time that this media file should start at in seconds.
+        - `endAt` \* [Required] (float) the time that this media file should end at in seconds.
+        
+       - `contentType` \* [Required] (string) - The type of content that this track contains, should be either `sound` or `speech`
+    
+    - `endFormat` (list) - List of audio formats to be produced. Valid formats are: `["wav", "mp3" (default), "flac", "ogg", "mp3_very_low", "mp3_low", "mp3_medium", "mp3_high", "mp3_very_high", "mp3_alexa"]`
+    
+    - `masteringPreset` (string) - The mastering preset to use, this enables features such as sidechain compression 'i.e. ducking' See `apiaudio.Mastering.list_presets()` for a list of presets and their descriptions.
+    
+  - Example:
+    ```python
+
+    backgroundId = apiaudio.Media.upload(file_path="background.wav")["mediaId"]
+    speechId = apiaudio.Media.upload(file_path="speech1.wav")["mediaId"]
+
+    timeline = [
+      {
+          "files" : [
+              {
+                  "mediaId" : speechId,
+                  "startAt" : 2,
+                  "endAt" : 14,
+              }
+          ],
+          "contentType" : "speech"
+      },
+      {
+
+          "files" : [
+              {
+                  "mediaId" : backgroundId,
+                  "startAt" : 0,
+                  "endAt" : 45,
+              }
+          ],
+          "contentType" : "sound"
+      }
+    ]
+    response = apiaudio.Mastering.create_media_timeline(timeline=timeline, masteringPreset="lightducking")
+
+    ```
+
 - `retrieve()` Retrieves the mastered file urls.
 
   - Parameters:
