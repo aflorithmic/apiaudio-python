@@ -1,4 +1,73 @@
 # Changelog
+### Friday 27th January 2023
+
+### Production (Mastering)
+We introduced a new feature. Which we're very excited about!
+
+An often requested feature was "I want to enhance my existing audio files with your mastering chain" or "I want to use FFMpeg in the cloud".
+Well now you can!
+
+Here's a simple example. Where I've uploaded some recorded speech (say from a voice note) plus a backing track. 
+```
+python 
+backgroundId = apiaudio.Media.upload(file_path="background.wav")["mediaId"]
+speechId = apiaudio.Media.upload(file_path="speech1.wav")["mediaId"]
+
+timeline = [
+  {
+      "files" : [
+          {
+              "mediaId" : speechId,
+              "startAt" : 2,
+              "endAt" : 14,
+          }
+      ],
+      "contentType" : "speech"
+  },
+  {
+
+      "files" : [
+          {
+              "mediaId" : backgroundId,
+              "startAt" : 0,
+              "endAt" : 45,
+          }
+      ],
+      "contentType" : "sound"
+  }
+]
+response = apiaudio.Mastering.create_media_timeline(timeline=timeline, masteringPreset="lightducking")
+```
+
+### Audio filters
+One problem that you have with sound is making your sound super good. 
+
+We've been working hard on leveraging digital signal processing and machine learning to produce beautiful-audio-as-a-service. 
+Have a listen to the demo below. 
+```python
+import apiaudio
+
+apiaudio.api_base = "https://v1.api.audio"
+apiaudio.api_key = ""
+
+template = "3am"   
+
+preset = "excitermaster" 
+name = "gabriel"            
+text = f"""Hi I am {name} using the preset {preset} and the {template} sound template, presenting our new exciter plug-in, to enhance the clarity of our mixes"""
+
+response = apiaudio.Script.create(scriptText=text, scriptName=f"demo-{name}-{preset}", projectName = "demo")
+script_id = response["scriptId"]
+response = apiaudio.Speech.create(scriptId=script_id, voice=name)
+
+r = apiaudio.Mastering.create(scriptId=script_id, soundTemplate=template, masteringPreset = preset) 
+print(r)
+
+r = apiaudio.Mastering.download(scriptId=script_id)
+```
+
+
+
 ### Friday 20th January 2023
 Firstly happy new year from everyone here at Aflorithmic! 
 
