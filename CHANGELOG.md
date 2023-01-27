@@ -1,5 +1,6 @@
 # Changelog
 ### Friday 27th January 2023
+
 ### Production (Mastering)
 We introduced a new feature. Which we're very excited about!
 
@@ -38,6 +39,32 @@ timeline = [
 response = apiaudio.Mastering.create_media_timeline(timeline=timeline, masteringPreset="lightducking")
 ```
 
+### Audio filters
+One problem that you have with sound is making your sound super good. 
+
+We've been working hard on leveraging digital signal processing and machine learning to produce beautiful-audio-as-a-service. 
+Have a listen to the demo below. 
+```python
+import apiaudio
+
+apiaudio.api_base = "https://v1.api.audio"
+apiaudio.api_key = ""
+
+template = "3am"   
+
+preset = "excitermaster" 
+name = "gabriel"            
+text = f"""Hi I am {name} using the preset {preset} and the {template} sound template, presenting our new exciter plug-in, to enhance the clarity of our mixes"""
+
+response = apiaudio.Script.create(scriptText=text, scriptName=f"demo-{name}-{preset}", projectName = "demo")
+script_id = response["scriptId"]
+response = apiaudio.Speech.create(scriptId=script_id, voice=name)
+
+r = apiaudio.Mastering.create(scriptId=script_id, soundTemplate=template, masteringPreset = preset) 
+print(r)
+
+r = apiaudio.Mastering.download(scriptId=script_id)
+```
 
 
 
