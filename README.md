@@ -1,3 +1,5 @@
+## This repo is no longer in activate development, please use the [audiostack SDK](https://pypi.org/project/audiostack/) to continue using api.audio.
+
 <p align="center">
 <a href="https://www.api.audio/" rel="noopener">
  <img src="https://uploads-ssl.webflow.com/60b89b300a9c71a64936aafd/60c1d07f4fd2c92916129788_logoAudio.svg" alt="api.audio logo"></a>
