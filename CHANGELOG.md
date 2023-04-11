@@ -67,7 +67,7 @@ r = apiaudio.Mastering.download(scriptId=script_id)
 
 
 
-### Friday 20th January 2023
+## Friday 20th January 2023
 Firstly happy new year from everyone here at Aflorithmic! 
 
 We're constantly improving *Api.audio* and taking care of small issues and annoyances that we find (or you send us!). We wanted to start telling you about these fixes, so from now on we'll update you every few months about the bug fixes and other small tasks we take care of in between our larger feature projects.
@@ -150,7 +150,7 @@ We had a bug in our billing for updating your credit card details. This is now f
 
 
 ## Friday 28th October 2022
-## Billing
+### Billing
 
 We updated our billing functionality. Some of the improvements are backend and reliability improvements however we also wanted to share the following. 
 We're introducing **starter** and **enterprise** plans. For access to Enterprise you'll need an **access code** from your 
