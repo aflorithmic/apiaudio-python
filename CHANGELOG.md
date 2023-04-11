@@ -1,6 +1,7 @@
+## Changelog
 # Friday 27th January 2023
 
-### Production (Mastering)
+- Production (Mastering)
 We introduced a new feature. Which we're very excited about!
 
 An often requested feature was "I want to enhance my existing audio files with your mastering chain" or "I want to use FFMpeg in the cloud".
@@ -38,7 +39,7 @@ timeline = [
 response = apiaudio.Mastering.create_media_timeline(timeline=timeline, masteringPreset="lightducking")
 ```
 
-### Audio filters
+- Audio filters
 One problem that you have with sound is making your sound super good. 
 
 We've been working hard on leveraging digital signal processing and machine learning to produce beautiful-audio-as-a-service. 
@@ -67,12 +68,12 @@ r = apiaudio.Mastering.download(scriptId=script_id)
 
 
 
-## Friday 20th January 2023
+# Friday 20th January 2023
 Firstly happy new year from everyone here at Aflorithmic! 
 
 We're constantly improving *Api.audio* and taking care of small issues and annoyances that we find (or you send us!). We wanted to start telling you about these fixes, so from now on we'll update you every few months about the bug fixes and other small tasks we take care of in between our larger feature projects.
 
-### Bug fixes 
+- Bug fixes 
 * Transactional emails - We had some issues with our transactional emails. For example some weren't sent correctly, some had some errors. We've fixed these 
 and you'll get reliable transactional emails telling you when your credits are being used up. We're going to rebuild these in the future based on customer 
 feedback as well. 
