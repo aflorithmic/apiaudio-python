@@ -1,8 +1,7 @@
-# Changelog
 ### Friday 27th January 2023
 
-### Production (Mastering)
-We introduced a new feature. Which we're very excited about!
+- Production (Mastering)
+    - We introduced a new feature. Which we're very excited about!
 
 An often requested feature was "I want to enhance my existing audio files with your mastering chain" or "I want to use FFMpeg in the cloud".
 Well now you can!
@@ -39,8 +38,8 @@ timeline = [
 response = apiaudio.Mastering.create_media_timeline(timeline=timeline, masteringPreset="lightducking")
 ```
 
-### Audio filters
-One problem that you have with sound is making your sound super good. 
+- Audio filters
+    - One problem that you have with sound is making your sound super good. 
 
 We've been working hard on leveraging digital signal processing and machine learning to produce beautiful-audio-as-a-service. 
 Have a listen to the demo below. 
@@ -69,48 +68,49 @@ r = apiaudio.Mastering.download(scriptId=script_id)
 
 
 ### Friday 20th January 2023
-Firstly happy new year from everyone here at Aflorithmic! 
+- Firstly happy new year from everyone here at Aflorithmic! 
 
-We're constantly improving *Api.audio* and taking care of small issues and annoyances that we find (or you send us!). We wanted to start telling you about these fixes, so from now on we'll update you every few months about the bug fixes and other small tasks we take care of in between our larger feature projects.
+    - We're constantly improving *Api.audio* and taking care of small issues and annoyances that we find (or you send us!). We wanted to start telling you about these fixes, so from now on we'll update you every few months about the bug fixes and other small tasks we take care of in between our larger feature projects.
 
 - Bug fixes 
-* Transactional emails - We had some issues with our transactional emails. For example some weren't sent correctly, some had some errors. We've fixed these 
+    - Transactional emails. We had some issues with our transactional emails. For example some weren't sent correctly, some had some errors. We've fixed these 
 and you'll get reliable transactional emails telling you when your credits are being used up. We're going to rebuild these in the future based on customer 
 feedback as well. 
-* Console Sign up - We fixed some issues with validation in the console sign up, for example it sometimes accepted incorrectly formatted emails, or didn't 
+    - Console Sign up. We fixed some issues with validation in the console sign up, for example it sometimes accepted incorrectly formatted emails, or didn't 
 give feedback if unaccepted characters were included. This should be a much better user experience. 
-* Enterprise sign up - we also had some issues with our access code, sometimes outdated access codes would be accepted. 
+    - Enterprise sign up, we also had some issues with our access code, sometimes outdated access codes would be accepted. 
 
-## Friday 25th Nov 2022
-### Speech 
-[Voice Cloning](https://aflorithmic.github.io/voice-cloning-api)
-* We shipped an update of the voice cloning API to production - and used by users. Allowing you to integrate Voice Cloning into your services.
-### Bug fixes
-* We enhanced our normaliser and voice intelligence functionality -  Better pronunciation of digits and telephone numbers, telephone numbers (German)
-* Media files with zero bytes were corrupted. We now report an error in the mastering endpoints. Thanks to our customers who told us about this 
+### Friday 25th Nov 2022
+- Speech 
+    - [Voice Cloning](https://aflorithmic.github.io/voice-cloning-api)
+    - We shipped an update of the voice cloning API to production - and used by users. Allowing you to integrate Voice Cloning into your services.
+- Bug fixes
+    - We enhanced our normaliser and voice intelligence functionality
+    - Better pronunciation of digits and telephone numbers, telephone numbers (German)
+    - Media files with zero bytes were corrupted. We now report an error in the mastering endpoints. Thanks to our customers who told us about this 
 
-## Friday 11th Nov 2022
-### Speedcloning
+### Friday 11th Nov 2022
+- Speedcloning
 In order to make Voice Cloning a time efficient process, we’ve developed the world’s first *Speed Cloning* feature. Where in, users can clone their voices with just 30 minutes of recording time, compared to the industry standard of 6 hours.
 
 ![speedcloning](images/speedcloning.png)
-### Italian script :it:
-We're working on multiple languages and support for various European Languages. 
+- Italian script :it:
+    - We're working on multiple languages and support for various European Languages. 
 
 We just shipped the Italian Script. In the future we'll have our first Italian voice for a customer. 
 
 We're excited to continually invest in more languages!
 
-### Bug Fixes
+- Bug Fixes
 We fixed some bugs in unexpected behaviour in the SDK about media files and script and the interaction of them. This should improve your user experience. Thanks to our users for reporting these bugs, we’re happy to make our product even better!
-## Friday 4th Nov 2022
+### Friday 4th Nov 2022
 
-### Version 1 - New Billing & Analytics in Console 
-![new_billing](images/new_billing.png)
-We shipped new billing analytics. We also made improvements in the backend to improve the user experience.
+- Version 1 - New Billing & Analytics in Console 
+   - ![new_billing](images/new_billing.png)
+   - We shipped new billing analytics. We also made improvements in the backend to improve the user experience.
 
-### De-esser !
-De-essing is the process of attenuating or reducing sibilance, or harsh high-frequency sounds that come from dialogue or vocals using the letters S, F, X, SH, and soft Cs. 
+- De-esser !
+    - De-essing is the process of attenuating or reducing sibilance, or harsh high-frequency sounds that come from dialogue or vocals using the letters S, F, X, SH, and soft Cs. 
 
 It’s often a necessary process when mixing audio, but it’s rarely easy—especially when you’re just getting started. Many factors contribute to the complex nature of de-essing, from the way split-band processors can impact the character of a sound, to the manner in which the human voice can change from sibilance to sibilance.
 
